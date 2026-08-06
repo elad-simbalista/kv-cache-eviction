@@ -1,0 +1,33 @@
+[21:58:19] ===== stage=fertility_llama31-8b ts=20260725_215819 ctx=32768 attn=sdpa seed_default=42 =====
+[21:58:23] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_fertility_llama31-8b_20260725_215819.txt
+[21:58:34] en: FLORES+ 1012 sentences (eng_Latn)
+[21:58:35] en: eval-text fertility from 24 generated inputs (tokens/byte=0.23115)
+[21:58:35] [##......................] 1/10 (10.0%) | ETA   0.4m  {'lang': 'en', 'flores': 'eng_Latn', 'tokens_per_byte': 0.20569, 'tokens_per_char': 0.20589, 'n_sentences': 1012, 'tokens_per_byte_eval': 0.23115, 'tokens_per_char_eval': 0.23721, 'n_eval_docs': 24}
+[21:58:36] pl: FLORES+ 1012 sentences (pol_Latn)
+[21:58:37] pl: eval-text fertility from 24 generated inputs (tokens/byte=0.35734)
+[21:58:37] [####....................] 2/10 (20.0%) | ETA   0.3m  {'lang': 'pl', 'flores': 'pol_Latn', 'tokens_per_byte': 0.34651, 'tokens_per_char': 0.3683, 'n_sentences': 1012, 'tokens_per_byte_eval': 0.35734, 'tokens_per_char_eval': 0.39048, 'n_eval_docs': 24}
+[21:58:38] ru: FLORES+ 1012 sentences (rus_Cyrl)
+[21:58:39] ru: eval-text fertility from 24 generated inputs (tokens/byte=0.19007)
+[21:58:39] [#######.................] 3/10 (30.0%) | ETA   0.3m  {'lang': 'ru', 'flores': 'rus_Cyrl', 'tokens_per_byte': 0.16869, 'tokens_per_char': 0.30906, 'n_sentences': 1012, 'tokens_per_byte_eval': 0.19007, 'tokens_per_char_eval': 0.33252, 'n_eval_docs': 24}
+[21:58:41] zh: FLORES+ 1012 sentences (cmn_Hans)
+[21:58:41] zh: eval-text fertility from 24 generated inputs (tokens/byte=0.30283)
+[21:58:41] [#########...............] 4/10 (40.0%) | ETA   0.2m  {'lang': 'zh', 'flores': 'cmn_Hans', 'tokens_per_byte': 0.28814, 'tokens_per_char': 0.80485, 'n_sentences': 1012, 'tokens_per_byte_eval': 0.30283, 'tokens_per_char_eval': 0.89674, 'n_eval_docs': 24}
+[21:58:43] ja: FLORES+ 1012 sentences (jpn_Jpan)
+[21:58:43] ja: eval-text fertility from 24 generated inputs (tokens/byte=0.23632)
+[21:58:43] [############............] 5/10 (50.0%) | ETA   0.2m  {'lang': 'ja', 'flores': 'jpn_Jpan', 'tokens_per_byte': 0.24565, 'tokens_per_char': 0.72091, 'n_sentences': 1012, 'tokens_per_byte_eval': 0.23632, 'tokens_per_char_eval': 0.70584, 'n_eval_docs': 24}
+[21:58:44] ko: FLORES+ 1012 sentences (kor_Hang)
+[21:58:44] ko: eval-text fertility from 24 generated inputs (tokens/byte=0.26574)
+[21:58:44] [##############..........] 6/10 (60.0%) | ETA   0.1m  {'lang': 'ko', 'flores': 'kor_Hang', 'tokens_per_byte': 0.25627, 'tokens_per_char': 0.61304, 'n_sentences': 1012, 'tokens_per_byte_eval': 0.26574, 'tokens_per_char_eval': 0.63753, 'n_eval_docs': 24}
+[21:58:46] vi: FLORES+ 1012 sentences (vie_Latn)
+[21:58:46] vi: eval-text fertility from 24 generated inputs (tokens/byte=0.22564)
+[21:58:46] [################........] 7/10 (70.0%) | ETA   0.1m  {'lang': 'vi', 'flores': 'vie_Latn', 'tokens_per_byte': 0.20592, 'tokens_per_char': 0.2728, 'n_sentences': 1012, 'tokens_per_byte_eval': 0.22564, 'tokens_per_char_eval': 0.29732, 'n_eval_docs': 24}
+[21:58:48] hi: FLORES+ 1012 sentences (hin_Deva)
+[21:58:48] hi: eval-text fertility from 24 generated inputs (tokens/byte=0.20898)
+[21:58:48] [###################.....] 8/10 (80.0%) | ETA   0.1m  {'lang': 'hi', 'flores': 'hin_Deva', 'tokens_per_byte': 0.20326, 'tokens_per_char': 0.52276, 'n_sentences': 1012, 'tokens_per_byte_eval': 0.20898, 'tokens_per_char_eval': 0.5295, 'n_eval_docs': 24}
+[21:58:50] sw: FLORES+ 1012 sentences (swh_Latn)
+[21:58:50] sw: eval-text fertility from 24 generated inputs (tokens/byte=0.39783)
+[21:58:50] [#####################...] 9/10 (90.0%) | ETA   0.0m  {'lang': 'sw', 'flores': 'swh_Latn', 'tokens_per_byte': 0.3793, 'tokens_per_char': 0.37986, 'n_sentences': 1012, 'tokens_per_byte_eval': 0.39783, 'tokens_per_char_eval': 0.39787, 'n_eval_docs': 24}
+[21:58:51] ta: FLORES+ 1012 sentences (tam_Taml)
+[21:58:52] ta: eval-text fertility from 24 generated inputs (tokens/byte=0.49287)
+[21:58:52] [########################] 10/10 (100.0%) | ETA   0.0m  {'lang': 'ta', 'flores': 'tam_Taml', 'tokens_per_byte': 0.49277, 'tokens_per_char': 1.348, 'n_sentences': 1012, 'tokens_per_byte_eval': 0.49287, 'tokens_per_char_eval': 1.35147, 'n_eval_docs': 24}
+[21:58:53] wrote /vol/results/fertility_llama31-8b.csv (10 languages total)

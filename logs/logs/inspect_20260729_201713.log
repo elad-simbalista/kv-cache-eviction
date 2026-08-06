@@ -1,0 +1,50 @@
+[20:17:13] ===== stage=inspect ts=20260729_201713 ctx=32768 attn=sdpa seed_default=42 =====
+[20:17:17] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_inspect_20260729_201713.txt
+[20:17:17] cell e2834afdbfe81bfb | qwen25-7b-1m/qa/niah_single sw press=none kept=1.0 | acc=0.480 n=100 | pred_chars min/mean/max = 43/124/172
+[20:17:17] showing up to 15 of 52 INCORRECT samples
+[20:17:17] ----------------------------------------------------------------------
+[20:17:17]   gold=['2867825'] | correct=False | depth=0.0301 | pred_chars=157 | input_tokens=33082 | ctx_tok=33462 comp_len=33462
+[20:17:17]   pred='<Jibu> Hakuna nambari kama hizo katika maandishi yaliyotolewa. Jina langu lilikuwa "Nambari maalum ya maajabu ya \'simu\'". Kwa hivyo, jibu zilizowekwa hapa ni'
+[20:17:17] ----------------------------------------------------------------------
+[20:17:17]   gold=['4744854'] | correct=False | depth=0.1878 | pred_chars=109 | input_tokens=33080 | ctx_tok=33461 comp_len=33461
+[20:17:17]   pred='<Jibu> Hakuna nambari kama hizo katika maandishi yaliyotolewa. Ikiwa hakuna, tafadhali jibu "hakuna". </Jibu>'
+[20:17:17] ----------------------------------------------------------------------
+[20:17:17]   gold=['2458591'] | correct=False | depth=0.9324 | pred_chars=162 | input_tokens=33082 | ctx_tok=33462 comp_len=33462
+[20:17:17]   pred='<Jibu> Hakuna nambari kama hizo zilizotajwa katika maandishi yaliyotolewa. Maandishi ilikuwa zingine zilikuwa zingine zilikuwa zingine zilikuwa zingine zilikuwa z'
+[20:17:17] ----------------------------------------------------------------------
+[20:17:17]   gold=['4335942'] | correct=False | depth=0.8271 | pred_chars=109 | input_tokens=33082 | ctx_tok=33462 comp_len=33462
+[20:17:17]   pred='<Jibu> Hakuna nambari kama hizo zinazohusiana na "usiku" katika maandishi yaliyotolewa. Jibu: Hakuna. </Jibu>'
+[20:17:17] ----------------------------------------------------------------------
+[20:17:17]   gold=['2556017'] | correct=False | depth=0.5649 | pred_chars=158 | input_tokens=33082 | ctx_tok=33462 comp_len=33462
+[20:17:17]   pred='<Jibu> Hakuna nambari kama hizo zilizotajwa katika maandishi yaliyotolewa. Jina lake la "kahawa" zilizotajwa zilikuwa zinazohusiana na kazi ya mkataba kama "2'
+[20:17:17] ----------------------------------------------------------------------
+[20:17:17]   gold=['6770619'] | correct=False | depth=0.9521 | pred_chars=143 | input_tokens=33082 | ctx_tok=33462 comp_len=33462
+[20:17:17]   pred='<Jibu> Hakuna nambari kama hizo zinazohusiana na "jaketi" zilizotajwa katika maandishi yaliyotolewa. Tafadhali jibu "hakuna" kama hiyo. </Jibu>'
+[20:17:17] ----------------------------------------------------------------------
+[20:17:17]   gold=['8707870'] | correct=False | depth=0.8271 | pred_chars=109 | input_tokens=33082 | ctx_tok=33462 comp_len=33462
+[20:17:17]   pred='<Jibu> Hakuna nambari kama hizo zinazohusiana na "kitanda" zilizotajwa katika maandishi yaliyotolewa. </Jibu>'
+[20:17:17] ----------------------------------------------------------------------
+[20:17:17]   gold=['2322047'] | correct=False | depth=0.8673 | pred_chars=155 | input_tokens=33084 | ctx_tok=33463 comp_len=33463
+[20:17:17]   pred='<Jibu> Hakuna nambari kama hizo zinazohusiana na "ufunguo" zilizotajwa katika maandishi yaliyotolewa. Jibu: Hakuna. </Jibu>\n\n**Raisoni:**  \nIjumla ya maand'
+[20:17:17] ----------------------------------------------------------------------
+[20:17:17]   gold=['7067228'] | correct=False | depth=0.899 | pred_chars=109 | input_tokens=33084 | ctx_tok=33463 comp_len=33463
+[20:17:17]   pred='<Jibu> Hakuna nambari kama hizo zinazohusiana na "penseli" zilizotajwa katika maandishi yaliyotolewa. </Jibu>'
+[20:17:17] ----------------------------------------------------------------------
+[20:17:17]   gold=['4514944'] | correct=False | depth=0.3861 | pred_chars=157 | input_tokens=33082 | ctx_tok=33462 comp_len=33462
+[20:17:17]   pred='<Jibu> Hakuna nambari kama hizo. </Jibu>\n\n**Raisoni:**  \nKwamba katika maandishi yaliyotolewa, ilifungua kwa ajili ya kusimamizi na kusafiri. Ilikuwa nambari'
+[20:17:17] ----------------------------------------------------------------------
+[20:17:17]   gold=['3871230'] | correct=False | depth=0.8271 | pred_chars=158 | input_tokens=33084 | ctx_tok=33463 comp_len=33463
+[20:17:17]   pred='<Jibu> Hakuna nambari kama hizo. </Jibu>\n\n**Raisoni:**  \nKwamba katika maandishi yaliyotolewa, hakuna mrefu ya maalum za maajabu zinazohusiana na "karatasi" z'
+[20:17:17] ----------------------------------------------------------------------
+[20:17:17]   gold=['8755439'] | correct=False | depth=0.5649 | pred_chars=159 | input_tokens=33082 | ctx_tok=33462 comp_len=33462
+[20:17:17]   pred='<Jibu> Hakuna nambari kama hizo. </Jibu>\n\n**Raisoni:**  \nKwamba katika maandishi yaliyotolewa, hakuna mawazo mali ya "ndoto" zilizotajwa kuhusu nambari za maal'
+[20:17:17] ----------------------------------------------------------------------
+[20:17:17]   gold=['2110460'] | correct=False | depth=0.2922 | pred_chars=118 | input_tokens=33084 | ctx_tok=33463 comp_len=33463
+[20:17:17]   pred='<Jibu> Hakuna nambari kama hizo zinazohusika katika maandishi yaliyotolewa. Tafadhali jibu "hakuna" kama hiyo. </Jibu>'
+[20:17:17] ----------------------------------------------------------------------
+[20:17:17]   gold=['9375710'] | correct=False | depth=0.5815 | pred_chars=88 | input_tokens=33084 | ctx_tok=33463 comp_len=33463
+[20:17:17]   pred='<Kujibu> Hakuna nambari kama hizo katika maandishi yaliyotolewa. Jibu: Hakuna. </Kujibu>'
+[20:17:17] ----------------------------------------------------------------------
+[20:17:17]   gold=['7700828'] | correct=False | depth=0.537 | pred_chars=123 | input_tokens=33084 | ctx_tok=33463 comp_len=33463
+[20:17:17]   pred='<Jibu> Hakuna nambari kama hizo zinazohusiana na "chungwa" zilizotajwa katika maandishi yaliyotolewa. Jibu: Hakuna. </Jibu>'
+[20:17:17] ----------------------------------------------------------------------

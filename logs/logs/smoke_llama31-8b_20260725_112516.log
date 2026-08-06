@@ -1,0 +1,31 @@
+[11:25:16] ===== stage=smoke_llama31-8b ts=20260725_112516 ctx=32768 attn=sdpa seed_default=42 =====
+[11:25:19] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_smoke_llama31-8b_20260725_112516.txt
+[11:25:33] model loaded: llama31-8b (meta-llama/Llama-3.1-8B-Instruct) rev=0e9e39f249a16976918f6564b8830bc894c89659 (11s)
+[11:25:36] [1] snapkv: requested kept=0.50 measured kept=0.500
+[11:25:36] [1] streaming_llm: requested kept=0.50 measured kept=0.500
+[11:25:37] [1] knorm: requested kept=0.50 measured kept=0.500
+[11:25:37] [2] joint full-cache answer: '<Answer> 4744854 </Answer>' | score=True
+[11:25:38] en: key-check substring 'led the masts and children counted the boats. ' is common in the haystack (62x) — eyeball split-audit
+[11:25:38] en: key-check substring 'led the masts and children counted the boats. ' is common in the haystack (62x) — eyeball split-audit
+[11:25:38] en: key-check substring 'led the masts and children counted the boats. ' is common in the haystack (62x) — eyeball split-audit
+[11:25:38] en: key-check substring 'led the masts and children counted the boats. ' is common in the haystack (62x) — eyeball split-audit
+[11:25:38] en: key-check substring 'led the masts and children counted the boats. ' is common in the haystack (63x) — eyeball split-audit
+[11:25:38] split[en/niah_single]: marker#191d3454 'xt>\n\n<Question> What special magic numbers associated with "' question chars min/med/max = 1531/1531/1531
+[11:25:38] split[en/niah_none]: marker#2398e8d6 'xt>\n\n<Question> What special magic numbers associated with "' question chars min/med/max = 6486/6486/6487
+[11:25:38] [3] toy markers OK: ' special magic numbers associated with "' / ' special magic numbers associated with "'
+[11:25:38] [4] qa(None) == joint EXACTLY (k=2396 q=327)
+[11:25:47] [5] chunked == stepwise under streaming@0.5 (c=1198/2396)
+[11:25:48] [6] qa streaming@0.5 depth=0.9: pred='<Answer> 8078673 </Answer>' correct=True (expect True)
+[11:25:48] [6] qa streaming@0.5 depth=0.1: pred='<Answer> none </Answer>' correct=False (expect False)
+[11:25:49] [7] qa snapkv@0.5 answer: '<Answer> 47484854 </Answer>' | score=False
+[11:25:49] [8] niah_none baseline joint='<Answer> none </Answer>' qa='<Answer> none </Answer>'
+[11:25:50] [9] diagnose toy (qa replay): keep ctx=0.500 value=0.971 question=1.000 haystack=0.496
+[11:25:50] [10] tokcheck en: 33095 tokens under llama31-8b (limit 131072)
+[11:25:51] [10] tokcheck pl: 32866 tokens under llama31-8b (limit 131072)
+[11:25:51] [10] tokcheck zh: 32562 tokens under llama31-8b (limit 131072)
+[11:25:52] [11] joint decode continues at original position 2723 under compression (cache_position carried incrementally)
+[11:25:52] joint press check: prompt kept 0.500 (want 0.5)
+[11:25:52] [12] joint streaming@0.5 depth=0.9: pred='<Answer> 8078673 </Answer>' correct=True (expect True)
+[11:25:53] joint press check: prompt kept 0.500 (want 0.5)
+[11:25:53] [12] joint streaming@0.5 depth=0.1: pred='<Answer> 1 </Answer>' correct=False (expect False)
+[11:25:54] SMOKE PASS (llama31-8b) — if this model was unpinned, paste the logged revision into MODELS and record in DECISIONS.md

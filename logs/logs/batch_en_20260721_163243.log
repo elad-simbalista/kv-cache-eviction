@@ -1,0 +1,30 @@
+[16:32:43] ===== stage=batch_en ts=20260721_163243 model=meta-llama/Llama-3.1-8B-Instruct task=niah_single ctx=32768 attn=sdpa seed_default=42 =====
+[16:32:46] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_batch_en_20260721_163243.txt
+[16:33:05] model loaded: meta-llama/Llama-3.1-8B-Instruct rev=0e9e39f249a16976918f6564b8830bc894c89659 (15s)
+[16:33:05] === cell 1/7 [179a4f0858ea106a] {'lang': 'en', 'ctx_len': 4096, 'press': 'none', 'kept': 1.0, 'task': 'niah_single', 'seed': 42, 'toy': True} n=10 | resume: 0 done, 10 to run
+[16:33:17] [########################] 10/10 (100.0%) | ETA   0.0m | sess-acc 1.00 | 1.1s/sample
+[16:33:20] CELL DONE [179a4f0858ea106a] acc=1.000 n=10
+[16:33:22] press check: want kept=0.5 measured=0.500
+[16:33:22] === cell 2/7 [708a03e9a0494ddb] {'lang': 'en', 'ctx_len': 4096, 'press': 'snapkv', 'kept': 0.5, 'task': 'niah_single', 'seed': 42, 'toy': True} n=10 | resume: 0 done, 10 to run
+[16:33:32] [########################] 10/10 (100.0%) | ETA   0.0m | sess-acc 1.00 | 0.9s/sample
+[16:33:35] CELL DONE [708a03e9a0494ddb] acc=1.000 n=10
+[16:33:36] press check: want kept=0.25 measured=0.250
+[16:33:36] === cell 3/7 [83a6d36b7c11fb91] {'lang': 'en', 'ctx_len': 4096, 'press': 'snapkv', 'kept': 0.25, 'task': 'niah_single', 'seed': 42, 'toy': True} n=10 | resume: 0 done, 10 to run
+[16:33:47] [########################] 10/10 (100.0%) | ETA   0.0m | sess-acc 1.00 | 1.1s/sample
+[16:33:50] CELL DONE [83a6d36b7c11fb91] acc=1.000 n=10
+[16:33:50] press check: want kept=0.5 measured=0.500
+[16:33:50] === cell 4/7 [9a5447de4ba2273f] {'lang': 'en', 'ctx_len': 4096, 'press': 'streaming_llm', 'kept': 0.5, 'task': 'niah_single', 'seed': 42, 'toy': True} n=10 | resume: 0 done, 10 to run
+[16:34:00] [########################] 10/10 (100.0%) | ETA   0.0m | sess-acc 0.40 | 1.0s/sample
+[16:34:04] CELL DONE [9a5447de4ba2273f] acc=0.400 n=10
+[16:34:04] press check: want kept=0.25 measured=0.250
+[16:34:04] === cell 5/7 [3628376c041f3d82] {'lang': 'en', 'ctx_len': 4096, 'press': 'streaming_llm', 'kept': 0.25, 'task': 'niah_single', 'seed': 42, 'toy': True} n=10 | resume: 0 done, 10 to run
+[16:34:14] [########################] 10/10 (100.0%) | ETA   0.0m | sess-acc 0.20 | 1.0s/sample
+[16:34:18] CELL DONE [3628376c041f3d82] acc=0.200 n=10
+[16:34:18] press check: want kept=0.5 measured=0.500
+[16:34:18] === cell 6/7 [e463a40f389776f3] {'lang': 'en', 'ctx_len': 4096, 'press': 'knorm', 'kept': 0.5, 'task': 'niah_single', 'seed': 42, 'toy': True} n=10 | resume: 0 done, 10 to run
+[16:34:27] [########################] 10/10 (100.0%) | ETA   0.0m | sess-acc 1.00 | 0.9s/sample
+[16:34:31] CELL DONE [e463a40f389776f3] acc=1.000 n=10
+[16:34:31] press check: want kept=0.25 measured=0.250
+[16:34:31] === cell 7/7 [3723909bf1938c1b] {'lang': 'en', 'ctx_len': 4096, 'press': 'knorm', 'kept': 0.25, 'task': 'niah_single', 'seed': 42, 'toy': True} n=10 | resume: 0 done, 10 to run
+[16:34:41] [########################] 10/10 (100.0%) | ETA   0.0m | sess-acc 1.00 | 0.9s/sample
+[16:34:44] CELL DONE [3723909bf1938c1b] acc=1.000 n=10

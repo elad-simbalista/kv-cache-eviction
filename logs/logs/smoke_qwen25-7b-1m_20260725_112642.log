@@ -1,0 +1,31 @@
+[11:26:42] ===== stage=smoke_qwen25-7b-1m ts=20260725_112642 ctx=32768 attn=sdpa seed_default=42 =====
+[11:26:44] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_smoke_qwen25-7b-1m_20260725_112642.txt
+[11:27:57] model loaded: qwen25-7b-1m (Qwen/Qwen2.5-7B-Instruct-1M) rev=e28526f7bb80e2a9c8af03b831a9af3812f18fba (70s)  <-- UNPINNED: paste rev=e28526f7bb80e2a9c8af03b831a9af3812f18fba into MODELS['qwen25-7b-1m']
+[11:28:01] [1] snapkv: requested kept=0.50 measured kept=0.500
+[11:28:01] [1] streaming_llm: requested kept=0.50 measured kept=0.500
+[11:28:01] [1] knorm: requested kept=0.50 measured kept=0.500
+[11:28:02] [2] joint full-cache answer: '<Answer> 4744854 </Answer>' | score=True
+[11:28:03] en: key-check substring 'led the masts and children counted the boats. ' is common in the haystack (63x) — eyeball split-audit
+[11:28:03] en: key-check substring 'led the masts and children counted the boats. ' is common in the haystack (63x) — eyeball split-audit
+[11:28:03] en: key-check substring 'led the masts and children counted the boats. ' is common in the haystack (63x) — eyeball split-audit
+[11:28:03] en: key-check substring 'led the masts and children counted the boats. ' is common in the haystack (63x) — eyeball split-audit
+[11:28:03] en: key-check substring 'led the masts and children counted the boats. ' is common in the haystack (64x) — eyeball split-audit
+[11:28:03] split[en/niah_single]: marker#cafd57be 'xt>\n\n<Question> What special magic numbers associated with "' question chars min/med/max = 1708/1708/1708
+[11:28:03] split[en/niah_none]: marker#5aace3e5 'xt>\n\n<Question> What special magic numbers associated with "' question chars min/med/max = 6663/6663/6664
+[11:28:03] [3] toy markers OK: ' special magic numbers associated with "' / ' special magic numbers associated with "'
+[11:28:03] [4] qa(None) == joint EXACTLY (k=2421 q=364)
+[11:28:12] [5] chunked == stepwise under streaming@0.5 (c=1210/2421)
+[11:28:13] [6] qa streaming@0.5 depth=0.9: pred='<Answer> 8078673 </Answer>' correct=True (expect True)
+[11:28:13] [6] qa streaming@0.5 depth=0.1: pred='<Answer> none </Answer>' correct=False (expect False)
+[11:28:14] [7] qa snapkv@0.5 answer: '<Answer> 4745854 </Answer>' | score=False
+[11:28:15] [8] niah_none baseline joint='<Answer> none </Answer>' qa='<Answer> none </Answer>'
+[11:28:15] [9] diagnose toy (qa replay): keep ctx=0.500 value=0.912 question=1.000 haystack=0.495
+[11:28:15] [10] tokcheck en: 33089 tokens under qwen25-7b-1m (limit 1010000)
+[11:28:15] [10] tokcheck pl: 31244 tokens under qwen25-7b-1m (limit 1010000)
+[11:28:15] [10] tokcheck zh: 27605 tokens under qwen25-7b-1m (limit 1010000)
+[11:28:15] [11] joint decode continues at original position 2785 under compression (cache_position carried incrementally)
+[11:28:16] joint press check: prompt kept 0.500 (want 0.5)
+[11:28:16] [12] joint streaming@0.5 depth=0.9: pred='<Answer> 8078673 </Answer>' correct=True (expect True)
+[11:28:16] joint press check: prompt kept 0.500 (want 0.5)
+[11:28:16] [12] joint streaming@0.5 depth=0.1: pred='<Answer> 12345 </Answer>' correct=False (expect False)
+[11:28:17] SMOKE PASS (qwen25-7b-1m) — if this model was unpinned, paste the logged revision into MODELS and record in DECISIONS.md

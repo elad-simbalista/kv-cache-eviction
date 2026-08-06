@@ -1,0 +1,14 @@
+[09:29:36] ===== stage=batch_vi_llama31-8b_qa_niah_single ts=20260727_092936 ctx=32768 attn=sdpa seed_default=42 =====
+[09:29:42] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_batch_vi_llama31-8b_qa_niah_single_20260727_092936.txt
+[09:29:59] model loaded: llama31-8b (meta-llama/Llama-3.1-8B-Instruct) rev=0e9e39f249a16976918f6564b8830bc894c89659 (11s)
+[09:29:59] vi: depth recovered for 100 samples (0 with multiple gold occurrences — first used)
+[09:29:59] split[vi/niah_single]: marker#3ee0b36a '<Câu hỏi> Những con số ma thuật đặc biệt nào liên quan đến "' question chars min/med/max = 326/331/334
+[09:29:59] === cell 1/7 [dfac7be14942fda9] {'model': 'llama31-8b', 'arm': 'qa', 'lang': 'vi', 'ctx_len': 32768, 'press': 'none', 'kept': 1.0, 'task': 'niah_single', 'seed': 42, 'toy': False} n=100 | resume: 0 done, 100 to run
+[09:30:57] [##......................] 10/100 (10.0%) | ETA   8.7m | sess-acc 0.80 | 5.8s/sample
+[09:31:54] [####....................] 20/100 (20.0%) | ETA   7.6m | sess-acc 0.80 | 5.7s/sample
+[09:32:52] [#######.................] 30/100 (30.0%) | ETA   6.7m | sess-acc 0.83 | 5.8s/sample
+[09:33:49] [#########...............] 40/100 (40.0%) | ETA   5.7m | sess-acc 0.85 | 5.7s/sample
+[09:34:46] [############............] 50/100 (50.0%) | ETA   4.8m | sess-acc 0.84 | 5.7s/sample
+[09:35:42] [##############..........] 60/100 (60.0%) | ETA   3.8m | sess-acc 0.87 | 5.7s/sample
+[09:36:39] [################........] 70/100 (70.0%) | ETA   2.9m | sess-acc 0.89 | 5.7s/sample
+[09:37:36] [###################.....] 80/100 (80.0%) | ETA   1.9m | sess-acc 0.89 | 5.7s/sample

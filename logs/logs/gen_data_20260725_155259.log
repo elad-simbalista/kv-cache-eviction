@@ -1,0 +1,10 @@
+[15:52:59] ===== stage=gen_data ts=20260725_155259 ctx=32768 attn=sdpa seed_default=42 =====
+[15:53:03] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_gen_data_20260725_155259.txt
+[15:53:03] [###.....................] 1/7 (14.3%) | ETA   0.0m  en: exists for seed=42, skip
+[15:53:03] [######..................] 2/7 (28.6%) | ETA   0.0m  pl: exists for seed=42, skip
+[15:53:03] [##########..............] 3/7 (42.9%) | ETA   0.0m  zh: exists for seed=42, skip
+[15:53:04] [#############...........] 4/7 (57.1%) | ETA   0.0m  ja: exists for seed=42, skip
+[15:53:04] [#################.......] 5/7 (71.4%) | ETA   0.0m  ko: exists for seed=42, skip
+[15:53:04] [####################....] 6/7 (85.7%) | ETA   0.0m  vi: exists for seed=42, skip
+[15:53:04] [########################] 7/7 (100.0%) | ETA   0.0m  sw: exists for seed=42, skip
+[15:53:04] gen-data DONE (niah_single) for all languages

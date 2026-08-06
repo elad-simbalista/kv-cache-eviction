@@ -1,0 +1,4 @@
+[15:43:37] ===== stage=wipe_results ts=20260725_154337 ctx=32768 attn=sdpa seed_default=42 =====
+[15:43:41] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_wipe_results_20260725_154337.txt
+[15:43:41] removed /vol/results (11 entries)
+[15:43:42] results wiped. Preserved: /vol/data, /vol/oneruler_repo, /vol/hf_cache, /vol/logs. Re-run fertility for each model.

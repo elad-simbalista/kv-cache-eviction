@@ -1,0 +1,20 @@
+[22:01:58] ===== stage=inspect ts=20260721_220158 model=meta-llama/Llama-3.1-8B-Instruct task=niah_single ctx=32768 attn=sdpa seed_default=42 =====
+[22:02:02] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_inspect_20260721_220158.txt
+[22:02:02] cell f200cafff854b8b1 | ru press=none kept=1.0 | acc=0.300 n=30 | pred_chars min/mean/max = 20/21/24
+[22:02:02] ----------------------------------------------------------------------
+[22:02:02]   gold=['2867825'] | correct=True | depth=0.0355 | pred_chars=24 | input_tokens=32812
+[22:02:02]   pred='<Ответ> 2867825 </Ответ>'
+[22:02:02] ----------------------------------------------------------------------
+[22:02:02]   gold=['4744854'] | correct=False | depth=0.2334 | pred_chars=20 | input_tokens=32812
+[22:02:02]   pred='<Ответ> нет </Ответ>'
+[22:02:02] ----------------------------------------------------------------------
+[22:02:02]   gold=['2458591'] | correct=False | depth=0.9541 | pred_chars=20 | input_tokens=32814
+[22:02:02]   pred='<Ответ> нет </Ответ>'
+[22:02:02] ----------------------------------------------------------------------
+[22:02:02]   gold=['1499914'] | correct=False | depth=0.1201 | pred_chars=20 | input_tokens=32812
+[22:02:02]   pred='<Ответ> нет </Ответ>'
+[22:02:02] ----------------------------------------------------------------------
+[22:02:02]   gold=['9478454'] | correct=False | depth=0.9705 | pred_chars=20 | input_tokens=32812
+[22:02:02]   pred='<Ответ> нет </Ответ>'
+[22:02:02] ----------------------------------------------------------------------
+[22:02:02] truncation check: if pred_chars sits at the cap and text ends mid-thought with no digits, raise MAX_NEW_TOKENS (and wipe results/raw before re-running — MAX_NEW_TOKENS is not in the cell hash).

@@ -1,0 +1,50 @@
+[20:15:54] ===== stage=inspect ts=20260729_201554 ctx=32768 attn=sdpa seed_default=42 =====
+[20:15:59] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_inspect_20260729_201554.txt
+[20:15:59] cell a71ba9a816ad66e7 | llama31-8b/qa/niah_none sw press=none kept=1.0 | acc=0.210 n=100 | pred_chars min/mean/max = 75/115/153
+[20:15:59] showing up to 15 of 79 INCORRECT samples
+[20:15:59] ----------------------------------------------------------------------
+[20:15:59]   gold=['hakuna'] | correct=False | depth=-1.0 | pred_chars=141 | input_tokens=33153 | ctx_tok=33021 comp_len=33021
+[20:15:59]   pred='<Jibu> Orodhesha nambari zote hapa\n\nNambari maalum ya maajabu ya "mtaa" ni: 4335942.\nNambari maalum ya maajabu ya "moto" ni: 8038374.\nNambari'
+[20:15:59] ----------------------------------------------------------------------
+[20:15:59]   gold=['hakuna'] | correct=False | depth=-1.0 | pred_chars=88 | input_tokens=33153 | ctx_tok=33020 comp_len=33020
+[20:15:59]   pred='<Jibu> Orodhesha nambari zote hapa\n\nNambari maalum ya maajabu ya "karatasi" ni: 4612365.'
+[20:15:59] ----------------------------------------------------------------------
+[20:15:59]   gold=['hakuna'] | correct=False | depth=-1.0 | pred_chars=113 | input_tokens=33152 | ctx_tok=33020 comp_len=33020
+[20:15:59]   pred='<Jibu> Orodhesha nambari zote hapa\n\n1. 3094235\n2. 7350753\n3. 2322047\n4. 9996414\n5. 3094235\n6. 7350753\n7. 2322047\n'
+[20:15:59] ----------------------------------------------------------------------
+[20:15:59]   gold=['hakuna'] | correct=False | depth=-1.0 | pred_chars=88 | input_tokens=33151 | ctx_tok=33019 comp_len=33019
+[20:15:59]   pred='< Jibu > Orodhesha nambari zote hapa\n\nNambari maalum ya maajabu ya "safari" ni: 2338687.'
+[20:15:59] ----------------------------------------------------------------------
+[20:15:59]   gold=['hakuna'] | correct=False | depth=-1.0 | pred_chars=86 | input_tokens=33152 | ctx_tok=33019 comp_len=33019
+[20:15:59]   pred='<Jibu> Orodhesha nambari zote hapa\n\nNambari maalum ya maajabu ya "unyoya" ni: 6292423.'
+[20:15:59] ----------------------------------------------------------------------
+[20:15:59]   gold=['hakuna'] | correct=False | depth=-1.0 | pred_chars=87 | input_tokens=33153 | ctx_tok=33020 comp_len=33020
+[20:15:59]   pred='<Jibu> Orodhesha nambari zote hapa\n\nNambari maalum ya maajabu ya "chungwa" ni: 5443951.'
+[20:15:59] ----------------------------------------------------------------------
+[20:15:59]   gold=['hakuna'] | correct=False | depth=-1.0 | pred_chars=144 | input_tokens=33153 | ctx_tok=33020 comp_len=33020
+[20:15:59]   pred='< Jibu > Orodhesha nambari zote hapa\n\nNambari maalum ya maajabu ya "shamba" ni: 2525206.\nNambari maalum ya maajabu ya "kazi" ni: 9279821.\nNambar'
+[20:15:59] ----------------------------------------------------------------------
+[20:15:59]   gold=['hakuna'] | correct=False | depth=-1.0 | pred_chars=128 | input_tokens=33154 | ctx_tok=33022 comp_len=33022
+[20:15:59]   pred='<Jibu> Orodhesha nambari zote hapa\n\n1. 2921859 (mlima)\n2. 1192619 (mchoro)\n3. 5476583 (mlima)\n4. 5218028 (ufunguo)\n5. 800 (shaba'
+[20:15:59] ----------------------------------------------------------------------
+[20:15:59]   gold=['hakuna'] | correct=False | depth=-1.0 | pred_chars=143 | input_tokens=33153 | ctx_tok=33021 comp_len=33021
+[20:15:59]   pred='<Jibu> Orodhesha nambari zote hapa\n\nNambari maalum ya maajabu ya "mtaa" ni: 2785277.\nNambari maalum ya maajabu ya "chumba" ni: 9517485.\nNambari'
+[20:15:59] ----------------------------------------------------------------------
+[20:15:59]   gold=['hakuna'] | correct=False | depth=-1.0 | pred_chars=88 | input_tokens=33151 | ctx_tok=33019 comp_len=33019
+[20:15:59]   pred='< Jibu > Orodhesha nambari zote hapa\n\nNambari maalum ya maajabu ya "samaki" ni: 9197443.'
+[20:15:59] ----------------------------------------------------------------------
+[20:15:59]   gold=['hakuna'] | correct=False | depth=-1.0 | pred_chars=110 | input_tokens=33153 | ctx_tok=33020 comp_len=33020
+[20:15:59]   pred='<Jibu> Orodhesha nambari zote hapa\n\n1. 3109911 (shule)\n2. 9937326 (jiji)\n3. 3154051 (kioo)\n4. 2161193 (bahari)'
+[20:15:59] ----------------------------------------------------------------------
+[20:15:59]   gold=['hakuna'] | correct=False | depth=-1.0 | pred_chars=135 | input_tokens=33156 | ctx_tok=33022 comp_len=33022
+[20:15:59]   pred='<Jibu> Orodhesha nambari zote hapa\n\n4860684\n1120642\n4694634\n2191066\n4860684\n4860684\n4860684\n4860684\n4860684\n4860684\n4860684\n4860684\n486'
+[20:15:59] ----------------------------------------------------------------------
+[20:15:59]   gold=['hakuna'] | correct=False | depth=-1.0 | pred_chars=85 | input_tokens=33154 | ctx_tok=33022 comp_len=33022
+[20:15:59]   pred='<Jibu> Orodhesha nambari zote hapa\n\nNambari maalum ya maajabu ya "wingu" ni: 3219824.'
+[20:15:59] ----------------------------------------------------------------------
+[20:15:59]   gold=['hakuna'] | correct=False | depth=-1.0 | pred_chars=86 | input_tokens=33153 | ctx_tok=33020 comp_len=33020
+[20:15:59]   pred='<Jibu> Orodhesha nambari zote hapa\n\nNambari maalum ya maajabu ya "injini" ni: 2651177.'
+[20:15:59] ----------------------------------------------------------------------
+[20:15:59]   gold=['hakuna'] | correct=False | depth=-1.0 | pred_chars=86 | input_tokens=33152 | ctx_tok=33020 comp_len=33020
+[20:15:59]   pred='< Jibu > Orodhesha nambari zote hapa\n\nNambari maalum ya maajabu ya "gari" ni: 8761611.'
+[20:15:59] ----------------------------------------------------------------------

@@ -1,0 +1,13 @@
+[22:19:09] ===== stage=batch_en ts=20260721_221909 model=meta-llama/Llama-3.1-8B-Instruct task=niah_single ctx=32768 attn=sdpa seed_default=42 =====
+[22:19:12] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_batch_en_20260721_221909.txt
+[22:19:22] model loaded: meta-llama/Llama-3.1-8B-Instruct rev=0e9e39f249a16976918f6564b8830bc894c89659 (7s)
+[22:19:23] en: depth recovered for 100 samples (0 with multiple gold occurrences — first used)
+[22:19:23] === cell 1/1 [675760ba086a3672] {'lang': 'en', 'ctx_len': 32768, 'press': 'none', 'kept': 1.0, 'task': 'niah_single', 'seed': 42, 'toy': False} n=100 | resume: 30 done, 70 to run
+[22:20:15] [###.....................] 10/70 (14.3%) | ETA   5.2m | sess-acc 1.00 | 5.2s/sample
+[22:21:05] [######..................] 20/70 (28.6%) | ETA   4.3m | sess-acc 1.00 | 5.1s/sample
+[22:21:56] [##########..............] 30/70 (42.9%) | ETA   3.4m | sess-acc 1.00 | 5.1s/sample
+[22:22:48] [#############...........] 40/70 (57.1%) | ETA   2.6m | sess-acc 1.00 | 5.1s/sample
+[22:23:40] [#################.......] 50/70 (71.4%) | ETA   1.7m | sess-acc 1.00 | 5.1s/sample
+[22:24:31] [####################....] 60/70 (85.7%) | ETA   0.9m | sess-acc 0.98 | 5.1s/sample
+[22:25:23] [########################] 70/70 (100.0%) | ETA   0.0m | sess-acc 0.97 | 5.2s/sample
+[22:25:24] CELL DONE [675760ba086a3672] acc=0.980 n=100

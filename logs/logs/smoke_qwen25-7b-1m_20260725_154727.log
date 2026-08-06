@@ -1,0 +1,26 @@
+[15:47:27] ===== stage=smoke_qwen25-7b-1m ts=20260725_154727 ctx=32768 attn=sdpa seed_default=42 =====
+[15:47:30] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_smoke_qwen25-7b-1m_20260725_154727.txt
+[15:48:06] model loaded: qwen25-7b-1m (Qwen/Qwen2.5-7B-Instruct-1M) rev=e28526f7bb80e2a9c8af03b831a9af3812f18fba (33s)
+[15:48:10] [1] snapkv: requested kept=0.50 measured kept=0.500
+[15:48:10] [1] streaming_llm: requested kept=0.50 measured kept=0.500
+[15:48:10] [1] knorm: requested kept=0.50 measured kept=0.500
+[15:48:11] [2] joint full-cache answer: '<Answer> 4744854 </Answer>' | score=True
+[15:48:11] split[en/niah_single]: marker#893a79b9 'xt>\n\n<Question> What special magic numbers associated with "' question chars min/med/max = 289/289/289
+[15:48:11] split[en/niah_none]: marker#893a79b9 'xt>\n\n<Question> What special magic numbers associated with "' question chars min/med/max = 288/288/289
+[15:48:11] [3] toy markers OK: ' special magic numbers associated with "' / ' special magic numbers associated with "'
+[15:48:12] [4] qa(None) == joint EXACTLY (k=2719 q=66)
+[15:48:14] [5] chunked == stepwise under streaming@0.5 (c=1359/2719)
+[15:48:15] [6] qa streaming@0.5 depth=0.9: pred='<Answer> 8078673 </Answer>' correct=True (expect True)
+[15:48:15] [6] qa streaming@0.5 depth=0.1: pred='<Answer> none </Answer>' correct=False (expect False)
+[15:48:16] [7] qa snapkv@0.5 answer: '<Answer> 4745784 </Answer>' | score=False
+[15:48:17] [8] niah_none baseline joint='<Answer> none </Answer>' qa='<Answer> none </Answer>'
+[15:48:17] [9] diagnose toy (qa replay): keep ctx=0.500 value=0.907 question=1.000 haystack=0.496
+[15:48:17] [10] tokcheck en: 33089 tokens under qwen25-7b-1m (limit 1010000)
+[15:48:17] [10] tokcheck pl: 31244 tokens under qwen25-7b-1m (limit 1010000)
+[15:48:17] [10] tokcheck zh: 27605 tokens under qwen25-7b-1m (limit 1010000)
+[15:48:17] [11] joint decode continues at original position 2785 under compression (cache_position carried incrementally)
+[15:48:18] joint press check: prompt kept 0.500 (want 0.5)
+[15:48:18] [12] joint streaming@0.5 depth=0.9: pred='<Answer> 8078673 </Answer>' correct=True (expect True)
+[15:48:18] joint press check: prompt kept 0.500 (want 0.5)
+[15:48:18] [12] joint streaming@0.5 depth=0.1: pred='<Answer> 12345 </Answer>' correct=False (expect False)
+[15:48:19] SMOKE PASS (qwen25-7b-1m) — if this model was unpinned, paste the logged revision into MODELS and record in DECISIONS.md

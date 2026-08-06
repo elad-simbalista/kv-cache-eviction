@@ -1,0 +1,9 @@
+[18:39:33] ===== stage=batch_zh ts=20260721_183933 model=meta-llama/Llama-3.1-8B-Instruct task=niah_single ctx=32768 attn=sdpa seed_default=42 =====
+[18:39:36] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_batch_zh_20260721_183933.txt
+[18:39:46] model loaded: meta-llama/Llama-3.1-8B-Instruct rev=0e9e39f249a16976918f6564b8830bc894c89659 (7s)
+[18:39:47] zh: depth recovered for 30 samples (0 with multiple gold occurrences — first used)
+[18:39:47] === cell 1/1 [b9fbee2bb7f38b01] {'lang': 'zh', 'ctx_len': 32768, 'press': 'none', 'kept': 1.0, 'task': 'niah_single', 'seed': 42, 'toy': False} n=30 | resume: 0 done, 30 to run
+[18:40:38] [########................] 10/30 (33.3%) | ETA   1.7m | sess-acc 1.00 | 5.1s/sample
+[18:41:28] [################........] 20/30 (66.7%) | ETA   0.8m | sess-acc 1.00 | 5.1s/sample
+[18:42:18] [########################] 30/30 (100.0%) | ETA   0.0m | sess-acc 1.00 | 5.1s/sample
+[18:42:20] CELL DONE [b9fbee2bb7f38b01] acc=1.000 n=30

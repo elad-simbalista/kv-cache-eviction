@@ -1,0 +1,725 @@
+[18:17:01] ===== stage=gen_data ts=20260721_181701 model=meta-llama/Llama-3.1-8B-Instruct task=niah_single ctx=32768 attn=sdpa seed_default=42 =====
+[18:17:06] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_gen_data_20260721_181701.txt
+[18:17:06] --- en: generating n=100 ctx=32768 seed=42
+[18:17:06]     cmd: python /vol/oneruler_repo/OneRuler/synthetic/niah.py --save_dir /vol/data/oneruler/en/32768 --save_name niah_single --subset validation --lang en --tokenizer_path meta-llama/Llama-3.1-8B-Instruct --tokenizer_type hf --max_seq_length 32768 --tokens_to_generate 30 --num_samples 100 --random_seed 42 --type_haystack book --type_needle_k words --type_needle_v numbers --num_needle_k 1 --num_needle_v 1 --num_needle_q 1
+[18:18:22]     [niah.py] stanza directory ------------> /vol/stanza
+[18:18:22]     [niah.py] len of haystack is 8942
+[18:18:22]     [niah.py] Num haystack: 1360
+[18:18:22]     [niah.py] /usr/local/lib/python3.11/site-packages/huggingface_hub/constants.py:298: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as '
+[18:18:22]     [niah.py]   warnings.warn(
+[18:18:22]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json:   0%|          | 0.00/56.4k [00:00<?, ?B/s]
+[18:18:22]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json: 457kB [00:00, 83.0MB/s]                    
+[18:18:22]     [niah.py] 2026-07-21 18:17:15 INFO: Downloaded file to /vol/stanza/resources.json
+[18:18:22]     [niah.py] 2026-07-21 18:17:15 INFO: Downloading default packages for language: en (English) ...
+[18:18:22]     [niah.py] 2026-07-21 18:17:24 INFO: Downloaded file to /vol/stanza/en/default.zip
+[18:18:22]     [niah.py] 2026-07-21 18:17:32 INFO: Finished downloading models and saved to /vol/stanza
+[18:18:22]     [niah.py] 2026-07-21 18:17:40 INFO: Checking for updates to resources.json in case models have been updated.  Note: this behavior can be turned off with download_method=N
+[18:18:22]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json:   0%|          | 0.00/56.4k [00:00<?, ?B/s]
+[18:18:22]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json: 457kB [00:00, 25.5MB/s]                    
+[18:18:22]     [niah.py] 2026-07-21 18:17:40 INFO: Downloaded file to /vol/stanza/resources.json
+[18:18:22]     [niah.py] 2026-07-21 18:17:40 WARNING: Language en package default expects mwt, which has been added
+[18:18:22]     [niah.py] 2026-07-21 18:17:40 INFO: Loading these models for language: en (English):
+[18:18:22]     [niah.py] =================================
+[18:18:22]     [niah.py] | Processor | Package           |
+[18:18:22]     [niah.py] ---------------------------------
+[18:18:22]     [niah.py] | tokenize  | combined_nocharlm |
+[18:18:22]     [niah.py] | mwt       | combined          |
+[18:18:22]     [niah.py] =================================
+[18:18:22]     [niah.py] 2026-07-21 18:17:40 INFO: Using device: cpu
+[18:18:22]     [niah.py] 2026-07-21 18:17:40 INFO: Loading: tokenize
+[18:18:22]     [niah.py] 2026-07-21 18:17:40 INFO: Loading: mwt
+[18:18:22]     [niah.py] 2026-07-21 18:17:40 INFO: Done loading processors!
+[18:18:22]     [niah.py]   0%|          | 0/100 [00:00<?, ?it/s]
+[18:18:22]     [niah.py]   2%|▏         | 2/100 [00:00<00:08, 11.81it/s]
+[18:18:22]     [niah.py]   4%|▍         | 4/100 [00:00<00:08, 11.77it/s]
+[18:18:22]     [niah.py]   6%|▌         | 6/100 [00:00<00:07, 12.19it/s]
+[18:18:22]     [niah.py]   8%|▊         | 8/100 [00:00<00:07, 12.60it/s]
+[18:18:22]     [niah.py]  10%|█         | 10/100 [00:00<00:06, 13.04it/s]
+[18:18:22]     [niah.py]  12%|█▏        | 12/100 [00:00<00:06, 13.48it/s]
+[18:18:22]     [niah.py]  14%|█▍        | 14/100 [00:01<00:06, 13.73it/s]
+[18:18:22]     [niah.py]  16%|█▌        | 16/100 [00:01<00:06, 13.90it/s]
+[18:18:22]     [niah.py]  18%|█▊        | 18/100 [00:01<00:05, 13.85it/s]
+[18:18:22]     [niah.py]  20%|██        | 20/100 [00:01<00:05, 13.92it/s]
+[18:18:22]     [niah.py]  22%|██▏       | 22/100 [00:01<00:05, 13.07it/s]
+[18:18:22]     [niah.py]  24%|██▍       | 24/100 [00:01<00:05, 13.33it/s]
+[18:18:22]     [niah.py]  26%|██▌       | 26/100 [00:01<00:05, 13.41it/s]
+[18:18:22]     [niah.py]  28%|██▊       | 28/100 [00:02<00:05, 13.21it/s]
+[18:18:22]     [niah.py]  30%|███       | 30/100 [00:02<00:05, 12.38it/s]
+[18:18:22]     [niah.py]  32%|███▏      | 32/100 [00:02<00:05, 11.64it/s]
+[18:18:22]     [niah.py]  34%|███▍      | 34/100 [00:02<00:06, 10.95it/s]
+[18:18:22]     [niah.py]  36%|███▌      | 36/100 [00:02<00:05, 10.85it/s]
+[18:18:22]     [niah.py]  38%|███▊      | 38/100 [00:03<00:05, 10.59it/s]
+[18:18:22]     [niah.py]  40%|████      | 40/100 [00:03<00:05, 10.70it/s]
+[18:18:22]     [niah.py]  42%|████▏     | 42/100 [00:03<00:05, 11.21it/s]
+[18:18:22]     [niah.py]  44%|████▍     | 44/100 [00:03<00:04, 11.85it/s]
+[18:18:22]     [niah.py]  46%|████▌     | 46/100 [00:03<00:04, 12.45it/s]
+[18:18:22]     [niah.py]  48%|████▊     | 48/100 [00:03<00:04, 12.81it/s]
+[18:18:22]     [niah.py]  50%|█████     | 50/100 [00:04<00:04, 11.95it/s]
+[18:18:22]     [niah.py]  52%|█████▏    | 52/100 [00:04<00:03, 12.11it/s]
+[18:18:22]     [niah.py]  54%|█████▍    | 54/100 [00:04<00:03, 12.29it/s]
+[18:18:22]     [niah.py]  56%|█████▌    | 56/100 [00:04<00:03, 11.72it/s]
+[18:18:22]     [niah.py]  58%|█████▊    | 58/100 [00:04<00:03, 12.04it/s]
+[18:18:22]     [niah.py]  60%|██████    | 60/100 [00:04<00:03, 12.07it/s]
+[18:18:22]     [niah.py]  62%|██████▏   | 62/100 [00:05<00:03, 12.36it/s]
+[18:18:22]     [niah.py]  64%|██████▍   | 64/100 [00:05<00:02, 12.74it/s]
+[18:18:22]     [niah.py]  66%|██████▌   | 66/100 [00:05<00:02, 13.09it/s]
+[18:18:22]     [niah.py]  68%|██████▊   | 68/100 [00:05<00:02, 13.01it/s]
+[18:18:22]     [niah.py]  70%|███████   | 70/100 [00:05<00:02, 12.84it/s]
+[18:18:22]     [niah.py]  72%|███████▏  | 72/100 [00:05<00:02, 13.20it/s]
+[18:18:22]     [niah.py]  74%|███████▍  | 74/100 [00:05<00:01, 13.59it/s]
+[18:18:22]     [niah.py]  76%|███████▌  | 76/100 [00:06<00:01, 13.80it/s]
+[18:18:22]     [niah.py]  78%|███████▊  | 78/100 [00:06<00:01, 13.81it/s]
+[18:18:22]     [niah.py]  80%|████████  | 80/100 [00:06<00:01, 13.98it/s]
+[18:18:22]     [niah.py]  82%|████████▏ | 82/100 [00:06<00:01, 14.03it/s]
+[18:18:22]     [niah.py]  84%|████████▍ | 84/100 [00:06<00:01, 14.13it/s]
+[18:18:22]     [niah.py]  86%|████████▌ | 86/100 [00:06<00:00, 14.21it/s]
+[18:18:22]     [niah.py]  88%|████████▊ | 88/100 [00:06<00:00, 12.70it/s]
+[18:18:22]     [niah.py]  90%|█████████ | 90/100 [00:07<00:00, 12.61it/s]
+[18:18:22]     [niah.py]  92%|█████████▏| 92/100 [00:07<00:00, 12.50it/s]
+[18:18:22]     [niah.py]  94%|█████████▍| 94/100 [00:07<00:00, 11.78it/s]
+[18:18:22]     [niah.py]  96%|█████████▌| 96/100 [00:07<00:00, 12.13it/s]
+[18:18:22]     [niah.py]  98%|█████████▊| 98/100 [00:07<00:00, 12.06it/s]
+[18:18:22]     [niah.py] 100%|██████████| 100/100 [00:07<00:00, 12.58it/s]
+[18:18:22]     [niah.py] 100%|██████████| 100/100 [00:07<00:00, 12.58it/s]
+[18:18:22] [##......................] 1/10 (10.0%) | ETA  11.5m  en: 100 samples, token length min/mean/max = 33090/33090/33094
+[18:18:25] --- pl: generating n=100 ctx=32768 seed=42
+[18:18:25]     cmd: python /vol/oneruler_repo/OneRuler/synthetic/niah.py --save_dir /vol/data/oneruler/pl/32768 --save_name niah_single --subset validation --lang pl --tokenizer_path meta-llama/Llama-3.1-8B-Instruct --tokenizer_type hf --max_seq_length 32768 --tokens_to_generate 30 --num_samples 100 --random_seed 42 --type_haystack book --type_needle_k words --type_needle_v numbers --num_needle_k 1 --num_needle_v 1 --num_needle_q 1
+[18:19:29]     [niah.py] stanza directory ------------> /vol/stanza
+[18:19:29]     [niah.py] len of haystack is 15545
+[18:19:29]     [niah.py] Num haystack: 1169
+[18:19:29]     [niah.py] /usr/local/lib/python3.11/site-packages/huggingface_hub/constants.py:298: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as '
+[18:19:29]     [niah.py]   warnings.warn(
+[18:19:29]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json:   0%|          | 0.00/56.4k [00:00<?, ?B/s]
+[18:19:29]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json: 457kB [00:00, 31.9MB/s]                    
+[18:19:29]     [niah.py] 2026-07-21 18:18:33 INFO: Downloaded file to /vol/stanza/resources.json
+[18:19:29]     [niah.py] 2026-07-21 18:18:33 INFO: Downloading default packages for language: pl (Polish) ...
+[18:19:29]     [niah.py] 2026-07-21 18:18:41 INFO: Downloaded file to /vol/stanza/pl/default.zip
+[18:19:29]     [niah.py] 2026-07-21 18:18:46 INFO: Finished downloading models and saved to /vol/stanza
+[18:19:29]     [niah.py] 2026-07-21 18:18:50 INFO: Checking for updates to resources.json in case models have been updated.  Note: this behavior can be turned off with download_method=N
+[18:19:29]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json:   0%|          | 0.00/56.4k [00:00<?, ?B/s]
+[18:19:29]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json: 457kB [00:00, 24.4MB/s]                    
+[18:19:29]     [niah.py] 2026-07-21 18:18:51 INFO: Downloaded file to /vol/stanza/resources.json
+[18:19:29]     [niah.py] 2026-07-21 18:18:51 WARNING: Language pl package default expects mwt, which has been added
+[18:19:29]     [niah.py] 2026-07-21 18:18:51 INFO: Loading these models for language: pl (Polish):
+[18:19:29]     [niah.py] =======================
+[18:19:29]     [niah.py] | Processor | Package |
+[18:19:29]     [niah.py] -----------------------
+[18:19:29]     [niah.py] | tokenize  | pdb     |
+[18:19:29]     [niah.py] | mwt       | pdb     |
+[18:19:29]     [niah.py] =======================
+[18:19:29]     [niah.py] 2026-07-21 18:18:51 INFO: Using device: cpu
+[18:19:29]     [niah.py] 2026-07-21 18:18:51 INFO: Loading: tokenize
+[18:19:29]     [niah.py] 2026-07-21 18:18:51 INFO: Loading: mwt
+[18:19:29]     [niah.py] 2026-07-21 18:18:51 INFO: Done loading processors!
+[18:19:29]     [niah.py]   0%|          | 0/100 [00:00<?, ?it/s]
+[18:19:29]     [niah.py]   2%|▏         | 2/100 [00:00<00:05, 16.40it/s]
+[18:19:29]     [niah.py]   4%|▍         | 4/100 [00:00<00:05, 17.41it/s]
+[18:19:29]     [niah.py]   6%|▌         | 6/100 [00:00<00:06, 15.06it/s]
+[18:19:29]     [niah.py]   8%|▊         | 8/100 [00:00<00:06, 15.19it/s]
+[18:19:29]     [niah.py]  10%|█         | 10/100 [00:00<00:05, 16.15it/s]
+[18:19:29]     [niah.py]  12%|█▏        | 12/100 [00:00<00:05, 17.27it/s]
+[18:19:29]     [niah.py]  14%|█▍        | 14/100 [00:00<00:04, 17.49it/s]
+[18:19:29]     [niah.py]  17%|█▋        | 17/100 [00:00<00:04, 18.50it/s]
+[18:19:29]     [niah.py]  20%|██        | 20/100 [00:01<00:04, 19.36it/s]
+[18:19:29]     [niah.py]  22%|██▏       | 22/100 [00:01<00:04, 19.41it/s]
+[18:19:29]     [niah.py]  25%|██▌       | 25/100 [00:01<00:03, 20.02it/s]
+[18:19:29]     [niah.py]  28%|██▊       | 28/100 [00:01<00:03, 20.47it/s]
+[18:19:29]     [niah.py]  31%|███       | 31/100 [00:01<00:03, 20.40it/s]
+[18:19:29]     [niah.py]  34%|███▍      | 34/100 [00:01<00:03, 20.44it/s]
+[18:19:29]     [niah.py]  37%|███▋      | 37/100 [00:01<00:03, 19.62it/s]
+[18:19:29]     [niah.py]  39%|███▉      | 39/100 [00:02<00:03, 19.55it/s]
+[18:19:29]     [niah.py]  42%|████▏     | 42/100 [00:02<00:02, 20.04it/s]
+[18:19:29]     [niah.py]  45%|████▌     | 45/100 [00:02<00:02, 19.35it/s]
+[18:19:29]     [niah.py]  48%|████▊     | 48/100 [00:02<00:02, 19.69it/s]
+[18:19:29]     [niah.py]  51%|█████     | 51/100 [00:02<00:02, 20.29it/s]
+[18:19:29]     [niah.py]  54%|█████▍    | 54/100 [00:02<00:02, 20.61it/s]
+[18:19:29]     [niah.py]  57%|█████▋    | 57/100 [00:02<00:02, 19.30it/s]
+[18:19:29]     [niah.py]  59%|█████▉    | 59/100 [00:03<00:02, 17.33it/s]
+[18:19:29]     [niah.py]  61%|██████    | 61/100 [00:03<00:02, 17.51it/s]
+[18:19:29]     [niah.py]  63%|██████▎   | 63/100 [00:03<00:02, 16.75it/s]
+[18:19:29]     [niah.py]  65%|██████▌   | 65/100 [00:03<00:02, 17.28it/s]
+[18:19:29]     [niah.py]  67%|██████▋   | 67/100 [00:03<00:01, 17.39it/s]
+[18:19:29]     [niah.py]  70%|███████   | 70/100 [00:03<00:01, 18.80it/s]
+[18:19:29]     [niah.py]  73%|███████▎  | 73/100 [00:03<00:01, 19.74it/s]
+[18:19:29]     [niah.py]  76%|███████▌  | 76/100 [00:04<00:01, 20.21it/s]
+[18:19:29]     [niah.py]  79%|███████▉  | 79/100 [00:04<00:01, 20.75it/s]
+[18:19:29]     [niah.py]  82%|████████▏ | 82/100 [00:04<00:00, 21.20it/s]
+[18:19:29]     [niah.py]  85%|████████▌ | 85/100 [00:04<00:00, 21.20it/s]
+[18:19:29]     [niah.py]  88%|████████▊ | 88/100 [00:04<00:00, 21.24it/s]
+[18:19:29]     [niah.py]  91%|█████████ | 91/100 [00:04<00:00, 21.49it/s]
+[18:19:29]     [niah.py]  94%|█████████▍| 94/100 [00:04<00:00, 21.22it/s]
+[18:19:29]     [niah.py]  97%|█████████▋| 97/100 [00:05<00:00, 19.11it/s]
+[18:19:29]     [niah.py]  99%|█████████▉| 99/100 [00:05<00:00, 17.92it/s]
+[18:19:29]     [niah.py] 100%|██████████| 100/100 [00:05<00:00, 19.07it/s]
+[18:19:29] [####....................] 2/10 (20.0%) | ETA   9.6m  pl: 100 samples, token length min/mean/max = 32858/32862/32867
+[18:19:32] --- ru: generating n=100 ctx=32768 seed=42
+[18:19:32]     cmd: python /vol/oneruler_repo/OneRuler/synthetic/niah.py --save_dir /vol/data/oneruler/ru/32768 --save_name niah_single --subset validation --lang ru --tokenizer_path meta-llama/Llama-3.1-8B-Instruct --tokenizer_type hf --max_seq_length 32768 --tokens_to_generate 30 --num_samples 100 --random_seed 42 --type_haystack book --type_needle_k words --type_needle_v numbers --num_needle_k 1 --num_needle_v 1 --num_needle_q 1
+[18:22:23]     [niah.py] stanza directory ------------> /vol/stanza
+[18:22:23]     [niah.py] len of haystack is 23758
+[18:22:23]     [niah.py] Num haystack: 1123
+[18:22:23]     [niah.py] /usr/local/lib/python3.11/site-packages/huggingface_hub/constants.py:298: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as '
+[18:22:23]     [niah.py]   warnings.warn(
+[18:22:23]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json:   0%|          | 0.00/56.4k [00:00<?, ?B/s]
+[18:22:23]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json: 457kB [00:00, 51.6MB/s]                    
+[18:22:23]     [niah.py] 2026-07-21 18:19:42 INFO: Downloaded file to /vol/stanza/resources.json
+[18:22:23]     [niah.py] 2026-07-21 18:19:42 INFO: Downloading default packages for language: ru (Russian) ...
+[18:22:23]     [niah.py] 2026-07-21 18:19:52 INFO: Downloaded file to /vol/stanza/ru/default.zip
+[18:22:23]     [niah.py] 2026-07-21 18:20:03 INFO: Finished downloading models and saved to /vol/stanza
+[18:22:23]     [niah.py] 2026-07-21 18:20:09 INFO: Checking for updates to resources.json in case models have been updated.  Note: this behavior can be turned off with download_method=N
+[18:22:23]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json:   0%|          | 0.00/56.4k [00:00<?, ?B/s]
+[18:22:23]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json: 457kB [00:00, 18.3MB/s]                    
+[18:22:23]     [niah.py] 2026-07-21 18:20:09 INFO: Downloaded file to /vol/stanza/resources.json
+[18:22:23]     [niah.py] 2026-07-21 18:20:09 INFO: Loading these models for language: ru (Russian):
+[18:22:23]     [niah.py] =========================
+[18:22:23]     [niah.py] | Processor | Package   |
+[18:22:23]     [niah.py] -------------------------
+[18:22:23]     [niah.py] | tokenize  | syntagrus |
+[18:22:23]     [niah.py] =========================
+[18:22:23]     [niah.py] 2026-07-21 18:20:09 INFO: Using device: cpu
+[18:22:23]     [niah.py] 2026-07-21 18:20:09 INFO: Loading: tokenize
+[18:22:23]     [niah.py] 2026-07-21 18:20:09 INFO: Done loading processors!
+[18:22:23]     [niah.py]   0%|          | 0/100 [00:00<?, ?it/s]
+[18:22:23]     [niah.py]   2%|▏         | 2/100 [00:00<00:07, 12.79it/s]
+[18:22:23]     [niah.py]   4%|▍         | 4/100 [00:00<00:08, 11.79it/s]
+[18:22:23]     [niah.py]   6%|▌         | 6/100 [00:00<00:07, 12.37it/s]
+[18:22:23]     [niah.py]   8%|▊         | 8/100 [00:00<00:07, 13.05it/s]
+[18:22:23]     [niah.py]  10%|█         | 10/100 [00:00<00:06, 13.64it/s]
+[18:22:23]     [niah.py]  12%|█▏        | 12/100 [00:00<00:06, 13.37it/s]
+[18:22:23]     [niah.py]  14%|█▍        | 14/100 [00:01<00:06, 13.56it/s]
+[18:22:23]     [niah.py]  16%|█▌        | 16/100 [00:01<00:06, 13.21it/s]
+[18:22:23]     [niah.py]  18%|█▊        | 18/100 [00:01<00:06, 13.23it/s]
+[18:22:23]     [niah.py]  20%|██        | 20/100 [00:01<00:06, 13.31it/s]
+[18:22:23]     [niah.py]  22%|██▏       | 22/100 [00:01<00:05, 13.79it/s]
+[18:22:23]     [niah.py]  24%|██▍       | 24/100 [00:01<00:05, 13.94it/s]
+[18:22:23]     [niah.py]  26%|██▌       | 26/100 [00:01<00:05, 13.62it/s]
+[18:22:23]     [niah.py]  28%|██▊       | 28/100 [00:02<00:05, 13.73it/s]
+[18:22:23]     [niah.py]  30%|███       | 30/100 [00:02<00:05, 12.64it/s]
+[18:22:23]     [niah.py]  32%|███▏      | 32/100 [00:02<00:05, 11.38it/s]
+[18:22:23]     [niah.py]  34%|███▍      | 34/100 [00:02<00:06, 10.86it/s]
+[18:22:23]     [niah.py]  36%|███▌      | 36/100 [00:02<00:06, 10.52it/s]
+[18:22:23]     [niah.py]  38%|███▊      | 38/100 [00:03<00:06,  9.44it/s]
+[18:22:23]     [niah.py]  39%|███▉      | 39/100 [00:03<00:06,  9.29it/s]
+[18:22:23]     [niah.py]  41%|████      | 41/100 [00:03<00:05, 10.37it/s]
+[18:22:23]     [niah.py]  43%|████▎     | 43/100 [00:03<00:05, 10.22it/s]
+[18:22:23]     [niah.py]  45%|████▌     | 45/100 [00:03<00:05, 10.87it/s]
+[18:22:23]     [niah.py]  47%|████▋     | 47/100 [00:03<00:04, 10.75it/s]
+[18:22:23]     [niah.py]  49%|████▉     | 49/100 [00:04<00:04, 11.22it/s]
+[18:22:23]     [niah.py]  51%|█████     | 51/100 [00:04<00:04, 11.64it/s]
+[18:22:23]     [niah.py]  53%|█████▎    | 53/100 [00:04<00:03, 11.87it/s]
+[18:22:23]     [niah.py]  55%|█████▌    | 55/100 [00:04<00:03, 12.64it/s]
+[18:22:23]     [niah.py]  57%|█████▋    | 57/100 [00:04<00:03, 13.24it/s]
+[18:22:23]     [niah.py]  59%|█████▉    | 59/100 [00:04<00:02, 13.80it/s]
+[18:22:23]     [niah.py]  61%|██████    | 61/100 [00:04<00:02, 14.21it/s]
+[18:22:23]     [niah.py]  63%|██████▎   | 63/100 [00:05<00:02, 14.52it/s]
+[18:22:23]     [niah.py]  65%|██████▌   | 65/100 [00:05<00:02, 14.55it/s]
+[18:22:23]     [niah.py]  67%|██████▋   | 67/100 [00:05<00:02, 14.73it/s]
+[18:22:23]     [niah.py]  69%|██████▉   | 69/100 [00:05<00:02, 14.73it/s]
+[18:22:23]     [niah.py]  71%|███████   | 71/100 [00:05<00:01, 14.98it/s]
+[18:22:23]     [niah.py]  73%|███████▎  | 73/100 [00:05<00:01, 15.06it/s]
+[18:22:23]     [niah.py]  75%|███████▌  | 75/100 [00:05<00:01, 15.10it/s]
+[18:22:23]     [niah.py]  77%|███████▋  | 77/100 [00:06<00:01, 15.05it/s]
+[18:22:23]     [niah.py]  79%|███████▉  | 79/100 [00:06<00:01, 15.03it/s]
+[18:22:23]     [niah.py]  81%|████████  | 81/100 [00:06<00:01, 14.82it/s]
+[18:22:23]     [niah.py]  83%|████████▎ | 83/100 [00:06<00:01, 14.93it/s]
+[18:22:23]     [niah.py]  85%|████████▌ | 85/100 [00:06<00:01, 14.91it/s]
+[18:22:23]     [niah.py]  87%|████████▋ | 87/100 [00:06<00:00, 14.48it/s]
+[18:22:23]     [niah.py]  89%|████████▉ | 89/100 [00:06<00:00, 14.68it/s]
+[18:22:23]     [niah.py]  91%|█████████ | 91/100 [00:06<00:00, 14.90it/s]
+[18:22:23]     [niah.py]  93%|█████████▎| 93/100 [00:07<00:00, 15.04it/s]
+[18:22:23]     [niah.py]  95%|█████████▌| 95/100 [00:07<00:00, 15.14it/s]
+[18:22:23]     [niah.py]  97%|█████████▋| 97/100 [00:07<00:00, 14.77it/s]
+[18:22:23]     [niah.py]  99%|█████████▉| 99/100 [00:07<00:00, 15.13it/s]
+[18:22:23]     [niah.py] 100%|██████████| 100/100 [00:07<00:00, 13.14it/s]
+[18:22:24] [#######.................] 3/10 (30.0%) | ETA  12.4m  ru: 100 samples, token length min/mean/max = 32810/32813/32818
+[18:22:26] --- zh: generating n=100 ctx=32768 seed=42
+[18:22:26]     cmd: python /vol/oneruler_repo/OneRuler/synthetic/niah.py --save_dir /vol/data/oneruler/zh/32768 --save_name niah_single --subset validation --lang zh --tokenizer_path meta-llama/Llama-3.1-8B-Instruct --tokenizer_type hf --max_seq_length 32768 --tokens_to_generate 30 --num_samples 100 --random_seed 42 --type_haystack book --type_needle_k words --type_needle_v numbers --num_needle_k 1 --num_needle_v 1 --num_needle_q 1
+[18:23:10]     [niah.py] stanza directory ------------> /vol/stanza
+[18:23:10]     [niah.py] len of haystack is 1777
+[18:23:10]     [niah.py] Num haystack: 992
+[18:23:10]     [niah.py] /usr/local/lib/python3.11/site-packages/huggingface_hub/constants.py:298: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as '
+[18:23:10]     [niah.py]   warnings.warn(
+[18:23:10]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json:   0%|          | 0.00/56.4k [00:00<?, ?B/s]
+[18:23:10]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json: 457kB [00:00, 38.9MB/s]                    
+[18:23:10]     [niah.py] 2026-07-21 18:22:33 INFO: Downloaded file to /vol/stanza/resources.json
+[18:23:10]     [niah.py] 2026-07-21 18:22:33 INFO: "zh" is an alias for "zh-hans"
+[18:23:10]     [niah.py] 2026-07-21 18:22:33 INFO: Downloading default packages for language: zh-hans (Simplified_Chinese) ...
+[18:23:10]     [niah.py] 2026-07-21 18:22:46 INFO: Downloaded file to /vol/stanza/zh-hans/default.zip
+[18:23:10]     [niah.py] 2026-07-21 18:22:58 INFO: Finished downloading models and saved to /vol/stanza
+[18:23:10]     [niah.py] 2026-07-21 18:23:03 INFO: Checking for updates to resources.json in case models have been updated.  Note: this behavior can be turned off with download_method=N
+[18:23:10]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json:   0%|          | 0.00/56.4k [00:00<?, ?B/s]
+[18:23:10]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json: 457kB [00:00, 22.2MB/s]                    
+[18:23:10]     [niah.py] 2026-07-21 18:23:03 INFO: Downloaded file to /vol/stanza/resources.json
+[18:23:10]     [niah.py] 2026-07-21 18:23:03 INFO: "zh" is an alias for "zh-hans"
+[18:23:10]     [niah.py] 2026-07-21 18:23:03 INFO: Loading these models for language: zh-hans (Simplified_Chinese):
+[18:23:10]     [niah.py] =======================
+[18:23:10]     [niah.py] | Processor | Package |
+[18:23:10]     [niah.py] -----------------------
+[18:23:10]     [niah.py] | tokenize  | gsdsimp |
+[18:23:10]     [niah.py] =======================
+[18:23:10]     [niah.py] 2026-07-21 18:23:03 INFO: Using device: cpu
+[18:23:10]     [niah.py] 2026-07-21 18:23:03 INFO: Loading: tokenize
+[18:23:10]     [niah.py] 2026-07-21 18:23:03 INFO: Done loading processors!
+[18:23:10]     [niah.py]   0%|          | 0/100 [00:00<?, ?it/s]
+[18:23:10]     [niah.py]   3%|▎         | 3/100 [00:00<00:03, 27.91it/s]
+[18:23:10]     [niah.py]   6%|▌         | 6/100 [00:00<00:03, 27.88it/s]
+[18:23:10]     [niah.py]   9%|▉         | 9/100 [00:00<00:03, 25.60it/s]
+[18:23:10]     [niah.py]  12%|█▏        | 12/100 [00:00<00:03, 26.03it/s]
+[18:23:10]     [niah.py]  15%|█▌        | 15/100 [00:00<00:03, 27.19it/s]
+[18:23:10]     [niah.py]  18%|█▊        | 18/100 [00:00<00:02, 27.62it/s]
+[18:23:10]     [niah.py]  21%|██        | 21/100 [00:00<00:02, 27.50it/s]
+[18:23:10]     [niah.py]  24%|██▍       | 24/100 [00:00<00:02, 25.39it/s]
+[18:23:10]     [niah.py]  27%|██▋       | 27/100 [00:01<00:02, 25.68it/s]
+[18:23:10]     [niah.py]  30%|███       | 30/100 [00:01<00:02, 25.21it/s]
+[18:23:10]     [niah.py]  33%|███▎      | 33/100 [00:01<00:02, 25.83it/s]
+[18:23:10]     [niah.py]  36%|███▌      | 36/100 [00:01<00:02, 25.14it/s]
+[18:23:10]     [niah.py]  39%|███▉      | 39/100 [00:01<00:02, 25.89it/s]
+[18:23:10]     [niah.py]  42%|████▏     | 42/100 [00:01<00:02, 25.80it/s]
+[18:23:10]     [niah.py]  45%|████▌     | 45/100 [00:01<00:02, 24.93it/s]
+[18:23:10]     [niah.py]  48%|████▊     | 48/100 [00:01<00:02, 25.33it/s]
+[18:23:10]     [niah.py]  51%|█████     | 51/100 [00:01<00:01, 25.03it/s]
+[18:23:10]     [niah.py]  54%|█████▍    | 54/100 [00:02<00:01, 24.87it/s]
+[18:23:10]     [niah.py]  57%|█████▋    | 57/100 [00:02<00:01, 26.07it/s]
+[18:23:10]     [niah.py]  60%|██████    | 60/100 [00:02<00:01, 27.02it/s]
+[18:23:10]     [niah.py]  63%|██████▎   | 63/100 [00:02<00:01, 27.79it/s]
+[18:23:10]     [niah.py]  66%|██████▌   | 66/100 [00:02<00:01, 28.28it/s]
+[18:23:10]     [niah.py]  70%|███████   | 70/100 [00:02<00:01, 28.95it/s]
+[18:23:10]     [niah.py]  73%|███████▎  | 73/100 [00:02<00:00, 29.06it/s]
+[18:23:10]     [niah.py]  76%|███████▌  | 76/100 [00:02<00:00, 29.23it/s]
+[18:23:10]     [niah.py]  80%|████████  | 80/100 [00:02<00:00, 29.60it/s]
+[18:23:10]     [niah.py]  83%|████████▎ | 83/100 [00:03<00:00, 29.53it/s]
+[18:23:10]     [niah.py]  86%|████████▌ | 86/100 [00:03<00:00, 29.31it/s]
+[18:23:10]     [niah.py]  89%|████████▉ | 89/100 [00:03<00:00, 28.12it/s]
+[18:23:10]     [niah.py]  92%|█████████▏| 92/100 [00:03<00:00, 28.18it/s]
+[18:23:10]     [niah.py]  95%|█████████▌| 95/100 [00:03<00:00, 27.51it/s]
+[18:23:10]     [niah.py]  98%|█████████▊| 98/100 [00:03<00:00, 26.57it/s]
+[18:23:10]     [niah.py] 100%|██████████| 100/100 [00:03<00:00, 26.89it/s]
+[18:23:10] [#########...............] 4/10 (40.0%) | ETA   9.1m  zh: 100 samples, token length min/mean/max = 32557/32558/32563
+[18:23:13] --- ja: generating n=100 ctx=32768 seed=42
+[18:23:13]     cmd: python /vol/oneruler_repo/OneRuler/synthetic/niah.py --save_dir /vol/data/oneruler/ja/32768 --save_name niah_single --subset validation --lang ja --tokenizer_path meta-llama/Llama-3.1-8B-Instruct --tokenizer_type hf --max_seq_length 32768 --tokens_to_generate 30 --num_samples 100 --random_seed 42 --type_haystack book --type_needle_k words --type_needle_v numbers --num_needle_k 1 --num_needle_v 1 --num_needle_q 1
+[18:23:53]     [niah.py] stanza directory ------------> /vol/stanza
+[18:23:53]     [niah.py] len of haystack is 4685
+[18:23:53]     [niah.py] Num haystack: 1274
+[18:23:53]     [niah.py] /usr/local/lib/python3.11/site-packages/huggingface_hub/constants.py:298: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as '
+[18:23:53]     [niah.py]   warnings.warn(
+[18:23:53]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json:   0%|          | 0.00/56.4k [00:00<?, ?B/s]
+[18:23:53]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json: 457kB [00:00, 44.1MB/s]                    
+[18:23:53]     [niah.py] 2026-07-21 18:23:19 INFO: Downloaded file to /vol/stanza/resources.json
+[18:23:53]     [niah.py] 2026-07-21 18:23:19 INFO: Downloading default packages for language: ja (Japanese) ...
+[18:23:53]     [niah.py] 2026-07-21 18:23:29 INFO: Downloaded file to /vol/stanza/ja/default.zip
+[18:23:53]     [niah.py] 2026-07-21 18:23:36 INFO: Finished downloading models and saved to /vol/stanza
+[18:23:53]     [niah.py] 2026-07-21 18:23:42 INFO: Checking for updates to resources.json in case models have been updated.  Note: this behavior can be turned off with download_method=N
+[18:23:53]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json:   0%|          | 0.00/56.4k [00:00<?, ?B/s]
+[18:23:53]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json: 457kB [00:00, 26.6MB/s]                    
+[18:23:53]     [niah.py] 2026-07-21 18:23:42 INFO: Downloaded file to /vol/stanza/resources.json
+[18:23:53]     [niah.py] 2026-07-21 18:23:42 INFO: Loading these models for language: ja (Japanese):
+[18:23:53]     [niah.py] =================================
+[18:23:53]     [niah.py] | Processor | Package           |
+[18:23:53]     [niah.py] ---------------------------------
+[18:23:53]     [niah.py] | tokenize  | combined_nocharlm |
+[18:23:53]     [niah.py] =================================
+[18:23:53]     [niah.py] 2026-07-21 18:23:42 INFO: Using device: cpu
+[18:23:53]     [niah.py] 2026-07-21 18:23:42 INFO: Loading: tokenize
+[18:23:53]     [niah.py] 2026-07-21 18:23:42 INFO: Done loading processors!
+[18:23:53]     [niah.py]   0%|          | 0/100 [00:00<?, ?it/s]
+[18:23:53]     [niah.py]   3%|▎         | 3/100 [00:00<00:03, 24.70it/s]
+[18:23:53]     [niah.py]   6%|▌         | 6/100 [00:00<00:03, 25.12it/s]
+[18:23:53]     [niah.py]   9%|▉         | 9/100 [00:00<00:03, 25.19it/s]
+[18:23:53]     [niah.py]  12%|█▏        | 12/100 [00:00<00:03, 24.34it/s]
+[18:23:53]     [niah.py]  15%|█▌        | 15/100 [00:00<00:03, 24.53it/s]
+[18:23:53]     [niah.py]  18%|█▊        | 18/100 [00:00<00:03, 24.34it/s]
+[18:23:53]     [niah.py]  21%|██        | 21/100 [00:00<00:03, 24.83it/s]
+[18:23:53]     [niah.py]  24%|██▍       | 24/100 [00:00<00:03, 25.09it/s]
+[18:23:53]     [niah.py]  27%|██▋       | 27/100 [00:01<00:02, 24.84it/s]
+[18:23:53]     [niah.py]  30%|███       | 30/100 [00:01<00:02, 25.06it/s]
+[18:23:53]     [niah.py]  33%|███▎      | 33/100 [00:01<00:02, 25.00it/s]
+[18:23:53]     [niah.py]  36%|███▌      | 36/100 [00:01<00:02, 24.67it/s]
+[18:23:53]     [niah.py]  39%|███▉      | 39/100 [00:01<00:02, 25.22it/s]
+[18:23:53]     [niah.py]  42%|████▏     | 42/100 [00:01<00:02, 25.64it/s]
+[18:23:53]     [niah.py]  45%|████▌     | 45/100 [00:01<00:02, 26.06it/s]
+[18:23:53]     [niah.py]  48%|████▊     | 48/100 [00:01<00:01, 26.43it/s]
+[18:23:53]     [niah.py]  51%|█████     | 51/100 [00:02<00:01, 26.81it/s]
+[18:23:53]     [niah.py]  54%|█████▍    | 54/100 [00:02<00:01, 26.81it/s]
+[18:23:53]     [niah.py]  57%|█████▋    | 57/100 [00:02<00:01, 26.89it/s]
+[18:23:53]     [niah.py]  60%|██████    | 60/100 [00:02<00:01, 26.85it/s]
+[18:23:53]     [niah.py]  63%|██████▎   | 63/100 [00:02<00:01, 24.01it/s]
+[18:23:53]     [niah.py]  66%|██████▌   | 66/100 [00:02<00:01, 23.46it/s]
+[18:23:53]     [niah.py]  69%|██████▉   | 69/100 [00:02<00:01, 23.48it/s]
+[18:23:53]     [niah.py]  72%|███████▏  | 72/100 [00:02<00:01, 22.97it/s]
+[18:23:53]     [niah.py]  75%|███████▌  | 75/100 [00:03<00:01, 22.30it/s]
+[18:23:53]     [niah.py]  78%|███████▊  | 78/100 [00:03<00:00, 22.07it/s]
+[18:23:53]     [niah.py]  81%|████████  | 81/100 [00:03<00:00, 21.03it/s]
+[18:23:53]     [niah.py]  84%|████████▍ | 84/100 [00:03<00:00, 20.98it/s]
+[18:23:53]     [niah.py]  87%|████████▋ | 87/100 [00:03<00:00, 21.53it/s]
+[18:23:53]     [niah.py]  90%|█████████ | 90/100 [00:03<00:00, 21.76it/s]
+[18:23:53]     [niah.py]  93%|█████████▎| 93/100 [00:03<00:00, 22.15it/s]
+[18:23:53]     [niah.py]  96%|█████████▌| 96/100 [00:03<00:00, 22.86it/s]
+[18:23:53]     [niah.py]  99%|█████████▉| 99/100 [00:04<00:00, 23.41it/s]
+[18:23:53]     [niah.py] 100%|██████████| 100/100 [00:04<00:00, 24.04it/s]
+[18:23:53] [############............] 5/10 (50.0%) | ETA   6.8m  ja: 100 samples, token length min/mean/max = 32569/32570/32575
+[18:23:57] --- ko: generating n=100 ctx=32768 seed=42
+[18:23:57]     cmd: python /vol/oneruler_repo/OneRuler/synthetic/niah.py --save_dir /vol/data/oneruler/ko/32768 --save_name niah_single --subset validation --lang ko --tokenizer_path meta-llama/Llama-3.1-8B-Instruct --tokenizer_type hf --max_seq_length 32768 --tokens_to_generate 30 --num_samples 100 --random_seed 42 --type_haystack book --type_needle_k words --type_needle_v numbers --num_needle_k 1 --num_needle_v 1 --num_needle_q 1
+[18:24:28]     [niah.py] stanza directory ------------> /vol/stanza
+[18:24:28]     [niah.py] len of haystack is 304
+[18:24:28]     [niah.py] Num haystack: 1231
+[18:24:28]     [niah.py] /usr/local/lib/python3.11/site-packages/huggingface_hub/constants.py:298: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as '
+[18:24:28]     [niah.py]   warnings.warn(
+[18:24:28]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json:   0%|          | 0.00/56.4k [00:00<?, ?B/s]
+[18:24:28]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json: 457kB [00:00, 45.7MB/s]                    
+[18:24:28]     [niah.py] 2026-07-21 18:24:05 INFO: Downloaded file to /vol/stanza/resources.json
+[18:24:28]     [niah.py] 2026-07-21 18:24:05 INFO: Downloading default packages for language: ko (Korean) ...
+[18:24:28]     [niah.py] 2026-07-21 18:24:12 INFO: Downloaded file to /vol/stanza/ko/default.zip
+[18:24:28]     [niah.py] 2026-07-21 18:24:15 INFO: Finished downloading models and saved to /vol/stanza
+[18:24:28]     [niah.py] 2026-07-21 18:24:20 INFO: Checking for updates to resources.json in case models have been updated.  Note: this behavior can be turned off with download_method=N
+[18:24:28]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json:   0%|          | 0.00/56.4k [00:00<?, ?B/s]
+[18:24:28]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json: 457kB [00:00, 20.6MB/s]                    
+[18:24:28]     [niah.py] 2026-07-21 18:24:21 INFO: Downloaded file to /vol/stanza/resources.json
+[18:24:28]     [niah.py] 2026-07-21 18:24:21 INFO: Loading these models for language: ko (Korean):
+[18:24:28]     [niah.py] =======================
+[18:24:28]     [niah.py] | Processor | Package |
+[18:24:28]     [niah.py] -----------------------
+[18:24:28]     [niah.py] | tokenize  | kaist   |
+[18:24:28]     [niah.py] =======================
+[18:24:28]     [niah.py] 2026-07-21 18:24:21 INFO: Using device: cpu
+[18:24:28]     [niah.py] 2026-07-21 18:24:21 INFO: Loading: tokenize
+[18:24:28]     [niah.py] 2026-07-21 18:24:21 INFO: Done loading processors!
+[18:24:28]     [niah.py]   0%|          | 0/100 [00:00<?, ?it/s]
+[18:24:28]     [niah.py]   2%|▏         | 2/100 [00:00<00:06, 16.07it/s]
+[18:24:28]     [niah.py]   4%|▍         | 4/100 [00:00<00:05, 17.24it/s]
+[18:24:28]     [niah.py]   6%|▌         | 6/100 [00:00<00:05, 17.38it/s]
+[18:24:28]     [niah.py]   8%|▊         | 8/100 [00:00<00:05, 17.88it/s]
+[18:24:28]     [niah.py]  10%|█         | 10/100 [00:00<00:05, 17.52it/s]
+[18:24:28]     [niah.py]  12%|█▏        | 12/100 [00:00<00:04, 17.88it/s]
+[18:24:28]     [niah.py]  14%|█▍        | 14/100 [00:00<00:04, 18.10it/s]
+[18:24:28]     [niah.py]  16%|█▌        | 16/100 [00:00<00:04, 18.05it/s]
+[18:24:28]     [niah.py]  18%|█▊        | 18/100 [00:01<00:04, 18.37it/s]
+[18:24:28]     [niah.py]  20%|██        | 20/100 [00:01<00:04, 18.21it/s]
+[18:24:28]     [niah.py]  23%|██▎       | 23/100 [00:01<00:04, 18.73it/s]
+[18:24:28]     [niah.py]  25%|██▌       | 25/100 [00:01<00:03, 18.86it/s]
+[18:24:28]     [niah.py]  27%|██▋       | 27/100 [00:01<00:03, 18.33it/s]
+[18:24:28]     [niah.py]  29%|██▉       | 29/100 [00:01<00:03, 18.12it/s]
+[18:24:28]     [niah.py]  31%|███       | 31/100 [00:01<00:03, 17.64it/s]
+[18:24:28]     [niah.py]  33%|███▎      | 33/100 [00:01<00:03, 17.15it/s]
+[18:24:28]     [niah.py]  35%|███▌      | 35/100 [00:01<00:03, 17.31it/s]
+[18:24:28]     [niah.py]  37%|███▋      | 37/100 [00:02<00:03, 17.42it/s]
+[18:24:28]     [niah.py]  39%|███▉      | 39/100 [00:02<00:03, 16.55it/s]
+[18:24:28]     [niah.py]  41%|████      | 41/100 [00:02<00:03, 16.70it/s]
+[18:24:28]     [niah.py]  43%|████▎     | 43/100 [00:02<00:03, 16.46it/s]
+[18:24:28]     [niah.py]  45%|████▌     | 45/100 [00:02<00:03, 16.91it/s]
+[18:24:28]     [niah.py]  47%|████▋     | 47/100 [00:02<00:03, 17.44it/s]
+[18:24:28]     [niah.py]  49%|████▉     | 49/100 [00:02<00:02, 17.79it/s]
+[18:24:28]     [niah.py]  52%|█████▏    | 52/100 [00:02<00:02, 18.41it/s]
+[18:24:28]     [niah.py]  54%|█████▍    | 54/100 [00:03<00:02, 17.95it/s]
+[18:24:28]     [niah.py]  56%|█████▌    | 56/100 [00:03<00:02, 17.86it/s]
+[18:24:28]     [niah.py]  58%|█████▊    | 58/100 [00:03<00:02, 18.16it/s]
+[18:24:28]     [niah.py]  60%|██████    | 60/100 [00:03<00:02, 17.89it/s]
+[18:24:28]     [niah.py]  62%|██████▏   | 62/100 [00:03<00:02, 17.79it/s]
+[18:24:28]     [niah.py]  64%|██████▍   | 64/100 [00:03<00:02, 17.48it/s]
+[18:24:28]     [niah.py]  66%|██████▌   | 66/100 [00:03<00:01, 17.67it/s]
+[18:24:28]     [niah.py]  68%|██████▊   | 68/100 [00:03<00:01, 17.34it/s]
+[18:24:28]     [niah.py]  70%|███████   | 70/100 [00:03<00:01, 17.33it/s]
+[18:24:28]     [niah.py]  72%|███████▏  | 72/100 [00:04<00:01, 17.39it/s]
+[18:24:28]     [niah.py]  75%|███████▌  | 75/100 [00:04<00:01, 18.32it/s]
+[18:24:28]     [niah.py]  77%|███████▋  | 77/100 [00:04<00:01, 18.18it/s]
+[18:24:28]     [niah.py]  79%|███████▉  | 79/100 [00:04<00:01, 17.79it/s]
+[18:24:28]     [niah.py]  81%|████████  | 81/100 [00:04<00:01, 17.53it/s]
+[18:24:28]     [niah.py]  83%|████████▎ | 83/100 [00:04<00:00, 17.50it/s]
+[18:24:28]     [niah.py]  85%|████████▌ | 85/100 [00:04<00:00, 17.78it/s]
+[18:24:28]     [niah.py]  87%|████████▋ | 87/100 [00:04<00:00, 17.64it/s]
+[18:24:28]     [niah.py]  89%|████████▉ | 89/100 [00:05<00:00, 17.68it/s]
+[18:24:28]     [niah.py]  92%|█████████▏| 92/100 [00:05<00:00, 19.05it/s]
+[18:24:28]     [niah.py]  94%|█████████▍| 94/100 [00:05<00:00, 18.59it/s]
+[18:24:28]     [niah.py]  96%|█████████▌| 96/100 [00:05<00:00, 18.35it/s]
+[18:24:28]     [niah.py]  98%|█████████▊| 98/100 [00:05<00:00, 18.17it/s]
+[18:24:28]     [niah.py] 100%|██████████| 100/100 [00:05<00:00, 17.85it/s]
+[18:24:28]     [niah.py] 100%|██████████| 100/100 [00:05<00:00, 17.78it/s]
+[18:24:28] [##############..........] 6/10 (60.0%) | ETA   4.9m  ko: 100 samples, token length min/mean/max = 32693/32695/32699
+[18:24:30] --- vi: generating n=100 ctx=32768 seed=42
+[18:24:30]     cmd: python /vol/oneruler_repo/OneRuler/synthetic/niah.py --save_dir /vol/data/oneruler/vi/32768 --save_name niah_single --subset validation --lang vi --tokenizer_path meta-llama/Llama-3.1-8B-Instruct --tokenizer_type hf --max_seq_length 32768 --tokens_to_generate 30 --num_samples 100 --random_seed 42 --type_haystack book --type_needle_k words --type_needle_v numbers --num_needle_k 1 --num_needle_v 1 --num_needle_q 1
+[18:25:17]     [niah.py] stanza directory ------------> /vol/stanza
+[18:25:17]     [niah.py] len of haystack is 1081
+[18:25:17]     [niah.py] Num haystack: 796
+[18:25:17]     [niah.py] /usr/local/lib/python3.11/site-packages/huggingface_hub/constants.py:298: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as '
+[18:25:17]     [niah.py]   warnings.warn(
+[18:25:17]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json:   0%|          | 0.00/56.4k [00:00<?, ?B/s]
+[18:25:17]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json: 457kB [00:00, 42.6MB/s]                    
+[18:25:17]     [niah.py] 2026-07-21 18:24:39 INFO: Downloaded file to /vol/stanza/resources.json
+[18:25:17]     [niah.py] 2026-07-21 18:24:39 INFO: Downloading default packages for language: vi (Vietnamese) ...
+[18:25:17]     [niah.py] 2026-07-21 18:24:49 INFO: Downloaded file to /vol/stanza/vi/default.zip
+[18:25:17]     [niah.py] 2026-07-21 18:24:58 INFO: Finished downloading models and saved to /vol/stanza
+[18:25:17]     [niah.py] 2026-07-21 18:25:03 INFO: Checking for updates to resources.json in case models have been updated.  Note: this behavior can be turned off with download_method=N
+[18:25:17]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json:   0%|          | 0.00/56.4k [00:00<?, ?B/s]
+[18:25:17]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json: 457kB [00:00, 21.0MB/s]                    
+[18:25:17]     [niah.py] 2026-07-21 18:25:03 INFO: Downloaded file to /vol/stanza/resources.json
+[18:25:17]     [niah.py] 2026-07-21 18:25:03 INFO: Loading these models for language: vi (Vietnamese):
+[18:25:17]     [niah.py] =======================
+[18:25:17]     [niah.py] | Processor | Package |
+[18:25:17]     [niah.py] -----------------------
+[18:25:17]     [niah.py] | tokenize  | vtb     |
+[18:25:17]     [niah.py] =======================
+[18:25:17]     [niah.py] 2026-07-21 18:25:03 INFO: Using device: cpu
+[18:25:17]     [niah.py] 2026-07-21 18:25:03 INFO: Loading: tokenize
+[18:25:17]     [niah.py] 2026-07-21 18:25:03 INFO: Done loading processors!
+[18:25:17]     [niah.py]   0%|          | 0/100 [00:00<?, ?it/s]
+[18:25:17]     [niah.py]   2%|▏         | 2/100 [00:00<00:06, 14.18it/s]
+[18:25:17]     [niah.py]   4%|▍         | 4/100 [00:00<00:07, 12.73it/s]
+[18:25:17]     [niah.py]   6%|▌         | 6/100 [00:00<00:07, 12.60it/s]
+[18:25:17]     [niah.py]   8%|▊         | 8/100 [00:00<00:07, 12.31it/s]
+[18:25:17]     [niah.py]  10%|█         | 10/100 [00:00<00:07, 12.55it/s]
+[18:25:17]     [niah.py]  12%|█▏        | 12/100 [00:00<00:06, 12.70it/s]
+[18:25:17]     [niah.py]  14%|█▍        | 14/100 [00:01<00:06, 12.45it/s]
+[18:25:17]     [niah.py]  16%|█▌        | 16/100 [00:01<00:06, 12.58it/s]
+[18:25:17]     [niah.py]  18%|█▊        | 18/100 [00:01<00:06, 12.58it/s]
+[18:25:17]     [niah.py]  20%|██        | 20/100 [00:01<00:06, 12.83it/s]
+[18:25:17]     [niah.py]  22%|██▏       | 22/100 [00:01<00:06, 12.44it/s]
+[18:25:17]     [niah.py]  24%|██▍       | 24/100 [00:01<00:05, 12.99it/s]
+[18:25:17]     [niah.py]  26%|██▌       | 26/100 [00:02<00:05, 12.61it/s]
+[18:25:17]     [niah.py]  28%|██▊       | 28/100 [00:02<00:05, 12.99it/s]
+[18:25:17]     [niah.py]  30%|███       | 30/100 [00:02<00:05, 13.16it/s]
+[18:25:17]     [niah.py]  32%|███▏      | 32/100 [00:02<00:05, 13.33it/s]
+[18:25:17]     [niah.py]  34%|███▍      | 34/100 [00:02<00:04, 13.48it/s]
+[18:25:17]     [niah.py]  36%|███▌      | 36/100 [00:02<00:04, 13.39it/s]
+[18:25:17]     [niah.py]  38%|███▊      | 38/100 [00:02<00:04, 13.61it/s]
+[18:25:17]     [niah.py]  40%|████      | 40/100 [00:03<00:04, 13.73it/s]
+[18:25:17]     [niah.py]  42%|████▏     | 42/100 [00:03<00:04, 13.25it/s]
+[18:25:17]     [niah.py]  44%|████▍     | 44/100 [00:03<00:04, 12.52it/s]
+[18:25:17]     [niah.py]  46%|████▌     | 46/100 [00:03<00:04, 12.74it/s]
+[18:25:17]     [niah.py]  48%|████▊     | 48/100 [00:03<00:04, 12.34it/s]
+[18:25:17]     [niah.py]  50%|█████     | 50/100 [00:03<00:03, 12.73it/s]
+[18:25:17]     [niah.py]  52%|█████▏    | 52/100 [00:04<00:03, 12.45it/s]
+[18:25:17]     [niah.py]  54%|█████▍    | 54/100 [00:04<00:03, 12.21it/s]
+[18:25:17]     [niah.py]  56%|█████▌    | 56/100 [00:04<00:03, 12.46it/s]
+[18:25:17]     [niah.py]  58%|█████▊    | 58/100 [00:04<00:03, 12.84it/s]
+[18:25:17]     [niah.py]  60%|██████    | 60/100 [00:04<00:03, 12.89it/s]
+[18:25:17]     [niah.py]  62%|██████▏   | 62/100 [00:04<00:02, 12.84it/s]
+[18:25:17]     [niah.py]  64%|██████▍   | 64/100 [00:04<00:02, 12.94it/s]
+[18:25:17]     [niah.py]  66%|██████▌   | 66/100 [00:05<00:02, 12.78it/s]
+[18:25:17]     [niah.py]  68%|██████▊   | 68/100 [00:05<00:02, 12.86it/s]
+[18:25:17]     [niah.py]  70%|███████   | 70/100 [00:05<00:02, 12.63it/s]
+[18:25:17]     [niah.py]  72%|███████▏  | 72/100 [00:05<00:02, 12.85it/s]
+[18:25:17]     [niah.py]  74%|███████▍  | 74/100 [00:05<00:01, 13.08it/s]
+[18:25:17]     [niah.py]  76%|███████▌  | 76/100 [00:05<00:01, 13.07it/s]
+[18:25:17]     [niah.py]  78%|███████▊  | 78/100 [00:06<00:01, 13.17it/s]
+[18:25:17]     [niah.py]  80%|████████  | 80/100 [00:06<00:01, 12.89it/s]
+[18:25:17]     [niah.py]  82%|████████▏ | 82/100 [00:06<00:01, 12.67it/s]
+[18:25:17]     [niah.py]  84%|████████▍ | 84/100 [00:06<00:01, 12.11it/s]
+[18:25:17]     [niah.py]  86%|████████▌ | 86/100 [00:06<00:01, 12.10it/s]
+[18:25:17]     [niah.py]  88%|████████▊ | 88/100 [00:06<00:01, 11.93it/s]
+[18:25:17]     [niah.py]  90%|█████████ | 90/100 [00:07<00:00, 12.02it/s]
+[18:25:17]     [niah.py]  92%|█████████▏| 92/100 [00:07<00:00, 12.27it/s]
+[18:25:17]     [niah.py]  94%|█████████▍| 94/100 [00:07<00:00, 12.32it/s]
+[18:25:17]     [niah.py]  96%|█████████▌| 96/100 [00:07<00:00, 11.88it/s]
+[18:25:17]     [niah.py]  98%|█████████▊| 98/100 [00:07<00:00, 11.80it/s]
+[18:25:17]     [niah.py] 100%|██████████| 100/100 [00:07<00:00, 11.78it/s]
+[18:25:17]     [niah.py] 100%|██████████| 100/100 [00:07<00:00, 12.63it/s]
+[18:25:17] [################........] 7/10 (70.0%) | ETA   3.5m  vi: 100 samples, token length min/mean/max = 32748/32751/32756
+[18:25:19] --- hi: generating n=100 ctx=32768 seed=42
+[18:25:19]     cmd: python /vol/oneruler_repo/OneRuler/synthetic/niah.py --save_dir /vol/data/oneruler/hi/32768 --save_name niah_single --subset validation --lang hi --tokenizer_path meta-llama/Llama-3.1-8B-Instruct --tokenizer_type hf --max_seq_length 32768 --tokens_to_generate 30 --num_samples 100 --random_seed 42 --type_haystack book --type_needle_k words --type_needle_v numbers --num_needle_k 1 --num_needle_v 1 --num_needle_q 1
+[18:26:24]     [niah.py] stanza directory ------------> /vol/stanza
+[18:26:24]     [niah.py] len of haystack is 9347
+[18:26:24]     [niah.py] Num haystack: 712
+[18:26:24]     [niah.py] /usr/local/lib/python3.11/site-packages/huggingface_hub/constants.py:298: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as '
+[18:26:24]     [niah.py]   warnings.warn(
+[18:26:24]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json:   0%|          | 0.00/56.4k [00:00<?, ?B/s]
+[18:26:24]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json: 457kB [00:00, 28.9MB/s]                    
+[18:26:24]     [niah.py] 2026-07-21 18:25:30 INFO: Downloaded file to /vol/stanza/resources.json
+[18:26:24]     [niah.py] 2026-07-21 18:25:30 INFO: Downloading default packages for language: hi (Hindi) ...
+[18:26:24]     [niah.py] 2026-07-21 18:25:36 INFO: Downloaded file to /vol/stanza/hi/default.zip
+[18:26:24]     [niah.py] 2026-07-21 18:25:42 INFO: Finished downloading models and saved to /vol/stanza
+[18:26:24]     [niah.py] 2026-07-21 18:25:49 INFO: Checking for updates to resources.json in case models have been updated.  Note: this behavior can be turned off with download_method=N
+[18:26:24]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json:   0%|          | 0.00/56.4k [00:00<?, ?B/s]
+[18:26:24]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json: 457kB [00:00, 15.2MB/s]                    
+[18:26:24]     [niah.py] 2026-07-21 18:25:49 INFO: Downloaded file to /vol/stanza/resources.json
+[18:26:24]     [niah.py] 2026-07-21 18:25:49 INFO: Loading these models for language: hi (Hindi):
+[18:26:24]     [niah.py] =======================
+[18:26:24]     [niah.py] | Processor | Package |
+[18:26:24]     [niah.py] -----------------------
+[18:26:24]     [niah.py] | tokenize  | hdtb    |
+[18:26:24]     [niah.py] =======================
+[18:26:24]     [niah.py] 2026-07-21 18:25:49 INFO: Using device: cpu
+[18:26:24]     [niah.py] 2026-07-21 18:25:49 INFO: Loading: tokenize
+[18:26:24]     [niah.py] 2026-07-21 18:25:49 INFO: Done loading processors!
+[18:26:24]     [niah.py]   0%|          | 0/100 [00:00<?, ?it/s]
+[18:26:24]     [niah.py]   2%|▏         | 2/100 [00:00<00:08, 11.65it/s]
+[18:26:24]     [niah.py]   4%|▍         | 4/100 [00:00<00:07, 12.04it/s]
+[18:26:24]     [niah.py]   6%|▌         | 6/100 [00:00<00:07, 11.98it/s]
+[18:26:24]     [niah.py]   8%|▊         | 8/100 [00:00<00:07, 11.61it/s]
+[18:26:24]     [niah.py]  10%|█         | 10/100 [00:00<00:07, 11.66it/s]
+[18:26:24]     [niah.py]  12%|█▏        | 12/100 [00:01<00:07, 11.60it/s]
+[18:26:24]     [niah.py]  14%|█▍        | 14/100 [00:01<00:07, 12.20it/s]
+[18:26:24]     [niah.py]  16%|█▌        | 16/100 [00:01<00:06, 12.18it/s]
+[18:26:24]     [niah.py]  18%|█▊        | 18/100 [00:01<00:06, 12.29it/s]
+[18:26:24]     [niah.py]  20%|██        | 20/100 [00:01<00:06, 12.27it/s]
+[18:26:24]     [niah.py]  22%|██▏       | 22/100 [00:01<00:06, 12.59it/s]
+[18:26:24]     [niah.py]  24%|██▍       | 24/100 [00:01<00:06, 12.25it/s]
+[18:26:24]     [niah.py]  26%|██▌       | 26/100 [00:02<00:06, 12.06it/s]
+[18:26:24]     [niah.py]  28%|██▊       | 28/100 [00:02<00:05, 12.14it/s]
+[18:26:24]     [niah.py]  30%|███       | 30/100 [00:02<00:05, 12.30it/s]
+[18:26:24]     [niah.py]  32%|███▏      | 32/100 [00:02<00:05, 12.32it/s]
+[18:26:24]     [niah.py]  34%|███▍      | 34/100 [00:02<00:05, 12.46it/s]
+[18:26:24]     [niah.py]  36%|███▌      | 36/100 [00:02<00:05, 12.27it/s]
+[18:26:24]     [niah.py]  38%|███▊      | 38/100 [00:03<00:05, 12.26it/s]
+[18:26:24]     [niah.py]  40%|████      | 40/100 [00:03<00:05, 12.00it/s]
+[18:26:24]     [niah.py]  42%|████▏     | 42/100 [00:03<00:04, 11.70it/s]
+[18:26:24]     [niah.py]  44%|████▍     | 44/100 [00:03<00:04, 12.16it/s]
+[18:26:24]     [niah.py]  46%|████▌     | 46/100 [00:03<00:04, 12.19it/s]
+[18:26:24]     [niah.py]  48%|████▊     | 48/100 [00:03<00:04, 11.77it/s]
+[18:26:24]     [niah.py]  50%|█████     | 50/100 [00:04<00:04, 10.42it/s]
+[18:26:24]     [niah.py]  52%|█████▏    | 52/100 [00:04<00:04, 10.36it/s]
+[18:26:24]     [niah.py]  54%|█████▍    | 54/100 [00:04<00:04, 10.86it/s]
+[18:26:24]     [niah.py]  56%|█████▌    | 56/100 [00:04<00:03, 11.22it/s]
+[18:26:24]     [niah.py]  58%|█████▊    | 58/100 [00:04<00:03, 11.29it/s]
+[18:26:24]     [niah.py]  60%|██████    | 60/100 [00:05<00:03, 11.35it/s]
+[18:26:24]     [niah.py]  62%|██████▏   | 62/100 [00:05<00:03, 11.39it/s]
+[18:26:24]     [niah.py]  64%|██████▍   | 64/100 [00:05<00:03, 11.30it/s]
+[18:26:24]     [niah.py]  66%|██████▌   | 66/100 [00:05<00:03, 10.69it/s]
+[18:26:24]     [niah.py]  68%|██████▊   | 68/100 [00:05<00:03, 10.02it/s]
+[18:26:24]     [niah.py]  70%|███████   | 70/100 [00:06<00:03,  9.63it/s]
+[18:26:24]     [niah.py]  71%|███████   | 71/100 [00:06<00:03,  9.46it/s]
+[18:26:24]     [niah.py]  72%|███████▏  | 72/100 [00:06<00:02,  9.34it/s]
+[18:26:24]     [niah.py]  74%|███████▍  | 74/100 [00:06<00:02,  9.92it/s]
+[18:26:24]     [niah.py]  76%|███████▌  | 76/100 [00:06<00:02, 10.75it/s]
+[18:26:24]     [niah.py]  78%|███████▊  | 78/100 [00:06<00:01, 11.03it/s]
+[18:26:24]     [niah.py]  80%|████████  | 80/100 [00:07<00:01, 11.21it/s]
+[18:26:24]     [niah.py]  82%|████████▏ | 82/100 [00:07<00:01, 11.40it/s]
+[18:26:24]     [niah.py]  84%|████████▍ | 84/100 [00:07<00:01, 11.48it/s]
+[18:26:24]     [niah.py]  86%|████████▌ | 86/100 [00:07<00:01, 11.69it/s]
+[18:26:24]     [niah.py]  88%|████████▊ | 88/100 [00:07<00:01, 11.92it/s]
+[18:26:24]     [niah.py]  90%|█████████ | 90/100 [00:07<00:00, 11.73it/s]
+[18:26:24]     [niah.py]  92%|█████████▏| 92/100 [00:08<00:00, 10.47it/s]
+[18:26:24]     [niah.py]  94%|█████████▍| 94/100 [00:08<00:00, 10.58it/s]
+[18:26:24]     [niah.py]  96%|█████████▌| 96/100 [00:08<00:00, 11.00it/s]
+[18:26:24]     [niah.py]  98%|█████████▊| 98/100 [00:08<00:00, 11.14it/s]
+[18:26:24]     [niah.py] 100%|██████████| 100/100 [00:08<00:00, 11.63it/s]
+[18:26:24]     [niah.py] 100%|██████████| 100/100 [00:08<00:00, 11.39it/s]
+[18:26:25] [###################.....] 8/10 (80.0%) | ETA   2.3m  hi: 100 samples, token length min/mean/max = 32894/32896/32900
+[18:26:27] --- sw: generating n=100 ctx=32768 seed=42
+[18:26:27]     cmd: python /vol/oneruler_repo/OneRuler/synthetic/niah.py --save_dir /vol/data/oneruler/sw/32768 --save_name niah_single --subset validation --lang sw --tokenizer_path meta-llama/Llama-3.1-8B-Instruct --tokenizer_type hf --max_seq_length 32768 --tokens_to_generate 30 --num_samples 100 --random_seed 42 --type_haystack book --type_needle_k words --type_needle_v numbers --num_needle_k 1 --num_needle_v 1 --num_needle_q 1
+[18:26:49]     [niah.py] stanza directory ------------> /vol/stanza
+[18:26:49]     [niah.py] Error: Unknown language requested: sw
+[18:26:49]     [niah.py] len of haystack is 1254
+[18:26:49]     [niah.py] Num haystack: 835
+[18:26:49]     [niah.py] /usr/local/lib/python3.11/site-packages/huggingface_hub/constants.py:298: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as '
+[18:26:49]     [niah.py]   warnings.warn(
+[18:26:49]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json:   0%|          | 0.00/56.4k [00:00<?, ?B/s]
+[18:26:49]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json: 457kB [00:00, 46.6MB/s]                    
+[18:26:49]     [niah.py] 2026-07-21 18:26:36 INFO: Downloaded file to /vol/stanza/resources.json
+[18:26:49]     [niah.py]   0%|          | 0/100 [00:00<?, ?it/s]
+[18:26:49]     [niah.py]   2%|▏         | 2/100 [00:00<00:06, 14.03it/s]
+[18:26:49]     [niah.py]   4%|▍         | 4/100 [00:00<00:07, 13.59it/s]
+[18:26:49]     [niah.py]   6%|▌         | 6/100 [00:00<00:07, 12.98it/s]
+[18:26:49]     [niah.py]   8%|▊         | 8/100 [00:00<00:06, 13.20it/s]
+[18:26:49]     [niah.py]  10%|█         | 10/100 [00:00<00:06, 13.14it/s]
+[18:26:49]     [niah.py]  12%|█▏        | 12/100 [00:00<00:06, 13.41it/s]
+[18:26:49]     [niah.py]  14%|█▍        | 14/100 [00:01<00:06, 13.54it/s]
+[18:26:49]     [niah.py]  16%|█▌        | 16/100 [00:01<00:06, 13.70it/s]
+[18:26:49]     [niah.py]  18%|█▊        | 18/100 [00:01<00:05, 13.90it/s]
+[18:26:49]     [niah.py]  20%|██        | 20/100 [00:01<00:05, 13.88it/s]
+[18:26:49]     [niah.py]  22%|██▏       | 22/100 [00:01<00:05, 14.07it/s]
+[18:26:49]     [niah.py]  24%|██▍       | 24/100 [00:01<00:05, 14.25it/s]
+[18:26:49]     [niah.py]  26%|██▌       | 26/100 [00:01<00:05, 14.76it/s]
+[18:26:49]     [niah.py]  28%|██▊       | 28/100 [00:01<00:04, 14.93it/s]
+[18:26:49]     [niah.py]  30%|███       | 30/100 [00:02<00:04, 14.30it/s]
+[18:26:49]     [niah.py]  32%|███▏      | 32/100 [00:02<00:04, 14.02it/s]
+[18:26:49]     [niah.py]  34%|███▍      | 34/100 [00:02<00:04, 13.67it/s]
+[18:26:49]     [niah.py]  36%|███▌      | 36/100 [00:02<00:04, 14.30it/s]
+[18:26:49]     [niah.py]  38%|███▊      | 38/100 [00:02<00:04, 14.30it/s]
+[18:26:49]     [niah.py]  40%|████      | 40/100 [00:02<00:04, 14.52it/s]
+[18:26:49]     [niah.py]  42%|████▏     | 42/100 [00:02<00:04, 14.47it/s]
+[18:26:49]     [niah.py]  44%|████▍     | 44/100 [00:03<00:03, 14.77it/s]
+[18:26:49]     [niah.py]  46%|████▌     | 46/100 [00:03<00:03, 13.65it/s]
+[18:26:49]     [niah.py]  48%|████▊     | 48/100 [00:03<00:03, 14.08it/s]
+[18:26:49]     [niah.py]  50%|█████     | 50/100 [00:03<00:03, 13.78it/s]
+[18:26:49]     [niah.py]  52%|█████▏    | 52/100 [00:03<00:03, 13.87it/s]
+[18:26:49]     [niah.py]  54%|█████▍    | 54/100 [00:03<00:03, 13.52it/s]
+[18:26:49]     [niah.py]  56%|█████▌    | 56/100 [00:04<00:03, 13.59it/s]
+[18:26:49]     [niah.py]  58%|█████▊    | 58/100 [00:04<00:03, 13.59it/s]
+[18:26:49]     [niah.py]  60%|██████    | 60/100 [00:04<00:02, 14.02it/s]
+[18:26:49]     [niah.py]  62%|██████▏   | 62/100 [00:04<00:02, 14.12it/s]
+[18:26:49]     [niah.py]  64%|██████▍   | 64/100 [00:04<00:02, 13.84it/s]
+[18:26:49]     [niah.py]  66%|██████▌   | 66/100 [00:04<00:02, 13.66it/s]
+[18:26:49]     [niah.py]  68%|██████▊   | 68/100 [00:04<00:02, 13.56it/s]
+[18:26:49]     [niah.py]  70%|███████   | 70/100 [00:05<00:02, 13.53it/s]
+[18:26:49]     [niah.py]  72%|███████▏  | 72/100 [00:05<00:02, 13.08it/s]
+[18:26:49]     [niah.py]  74%|███████▍  | 74/100 [00:05<00:01, 13.22it/s]
+[18:26:49]     [niah.py]  76%|███████▌  | 76/100 [00:05<00:01, 13.42it/s]
+[18:26:49]     [niah.py]  78%|███████▊  | 78/100 [00:05<00:01, 13.24it/s]
+[18:26:49]     [niah.py]  80%|████████  | 80/100 [00:05<00:01, 13.66it/s]
+[18:26:49]     [niah.py]  82%|████████▏ | 82/100 [00:05<00:01, 13.74it/s]
+[18:26:49]     [niah.py]  84%|████████▍ | 84/100 [00:06<00:01, 13.41it/s]
+[18:26:49]     [niah.py]  86%|████████▌ | 86/100 [00:06<00:01, 13.33it/s]
+[18:26:49]     [niah.py]  88%|████████▊ | 88/100 [00:06<00:00, 13.45it/s]
+[18:26:49]     [niah.py]  90%|█████████ | 90/100 [00:06<00:00, 13.61it/s]
+[18:26:49]     [niah.py]  92%|█████████▏| 92/100 [00:06<00:00, 13.41it/s]
+[18:26:49]     [niah.py]  94%|█████████▍| 94/100 [00:06<00:00, 13.73it/s]
+[18:26:49]     [niah.py]  96%|█████████▌| 96/100 [00:06<00:00, 13.79it/s]
+[18:26:49]     [niah.py]  98%|█████████▊| 98/100 [00:07<00:00, 13.24it/s]
+[18:26:49]     [niah.py] 100%|██████████| 100/100 [00:07<00:00, 13.35it/s]
+[18:26:49]     [niah.py] 100%|██████████| 100/100 [00:07<00:00, 13.74it/s]
+[18:26:49] [#####################...] 9/10 (90.0%) | ETA   1.1m  sw: 100 samples, token length min/mean/max = 33080/33083/33086
+[18:26:52] --- ta: generating n=100 ctx=32768 seed=42
+[18:26:52]     cmd: python /vol/oneruler_repo/OneRuler/synthetic/niah.py --save_dir /vol/data/oneruler/ta/32768 --save_name niah_single --subset validation --lang ta --tokenizer_path meta-llama/Llama-3.1-8B-Instruct --tokenizer_type hf --max_seq_length 32768 --tokens_to_generate 30 --num_samples 100 --random_seed 42 --type_haystack book --type_needle_k words --type_needle_v numbers --num_needle_k 1 --num_needle_v 1 --num_needle_q 1
+[18:28:06]     [niah.py] stanza directory ------------> /vol/stanza
+[18:28:06]     [niah.py] len of haystack is 7330
+[18:28:06]     [niah.py] Num haystack: 212
+[18:28:06]     [niah.py] /usr/local/lib/python3.11/site-packages/huggingface_hub/constants.py:298: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as '
+[18:28:06]     [niah.py]   warnings.warn(
+[18:28:06]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json:   0%|          | 0.00/56.4k [00:00<?, ?B/s]
+[18:28:06]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json: 457kB [00:00, 32.8MB/s]                    
+[18:28:06]     [niah.py] 2026-07-21 18:26:59 INFO: Downloaded file to /vol/stanza/resources.json
+[18:28:06]     [niah.py] 2026-07-21 18:26:59 INFO: Downloading default packages for language: ta (Tamil) ...
+[18:28:06]     [niah.py] 2026-07-21 18:27:08 INFO: Downloaded file to /vol/stanza/ta/default.zip
+[18:28:06]     [niah.py] 2026-07-21 18:27:14 INFO: Finished downloading models and saved to /vol/stanza
+[18:28:06]     [niah.py] 2026-07-21 18:27:19 INFO: Checking for updates to resources.json in case models have been updated.  Note: this behavior can be turned off with download_method=N
+[18:28:06]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json:   0%|          | 0.00/56.4k [00:00<?, ?B/s]
+[18:28:06]     [niah.py] Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.14.0.json: 457kB [00:00, 15.8MB/s]                    
+[18:28:06]     [niah.py] 2026-07-21 18:27:20 INFO: Downloaded file to /vol/stanza/resources.json
+[18:28:06]     [niah.py] 2026-07-21 18:27:20 WARNING: Language ta package default expects mwt, which has been added
+[18:28:06]     [niah.py] 2026-07-21 18:27:20 INFO: Loading these models for language: ta (Tamil):
+[18:28:06]     [niah.py] =======================
+[18:28:06]     [niah.py] | Processor | Package |
+[18:28:06]     [niah.py] -----------------------
+[18:28:06]     [niah.py] | tokenize  | ttb     |
+[18:28:06]     [niah.py] | mwt       | ttb     |
+[18:28:06]     [niah.py] =======================
+[18:28:06]     [niah.py] 2026-07-21 18:27:20 INFO: Using device: cpu
+[18:28:06]     [niah.py] 2026-07-21 18:27:20 INFO: Loading: tokenize
+[18:28:06]     [niah.py] 2026-07-21 18:27:20 INFO: Loading: mwt
+[18:28:06]     [niah.py] 2026-07-21 18:27:20 INFO: Done loading processors!
+[18:28:06]     [niah.py]   0%|          | 0/100 [00:00<?, ?it/s]
+[18:28:06]     [niah.py]   3%|▎         | 3/100 [00:00<00:04, 21.43it/s]
+[18:28:06]     [niah.py]   6%|▌         | 6/100 [00:00<00:04, 19.37it/s]
+[18:28:06]     [niah.py]   8%|▊         | 8/100 [00:00<00:04, 18.65it/s]
+[18:28:06]     [niah.py]  10%|█         | 10/100 [00:00<00:04, 18.31it/s]
+[18:28:06]     [niah.py]  13%|█▎        | 13/100 [00:00<00:04, 20.49it/s]
+[18:28:06]     [niah.py]  16%|█▌        | 16/100 [00:00<00:03, 21.62it/s]
+[18:28:06]     [niah.py]  19%|█▉        | 19/100 [00:00<00:03, 21.28it/s]
+[18:28:06]     [niah.py]  22%|██▏       | 22/100 [00:01<00:03, 20.81it/s]
+[18:28:06]     [niah.py]  25%|██▌       | 25/100 [00:01<00:03, 20.90it/s]
+[18:28:06]     [niah.py]  28%|██▊       | 28/100 [00:01<00:03, 21.24it/s]
+[18:28:06]     [niah.py]  31%|███       | 31/100 [00:01<00:03, 22.26it/s]
+[18:28:06]     [niah.py]  34%|███▍      | 34/100 [00:01<00:02, 23.10it/s]
+[18:28:06]     [niah.py]  37%|███▋      | 37/100 [00:01<00:02, 23.11it/s]
+[18:28:06]     [niah.py]  40%|████      | 40/100 [00:01<00:02, 23.35it/s]
+[18:28:06]     [niah.py]  43%|████▎     | 43/100 [00:01<00:02, 23.51it/s]
+[18:28:06]     [niah.py]  46%|████▌     | 46/100 [00:02<00:02, 23.21it/s]
+[18:28:06]     [niah.py]  49%|████▉     | 49/100 [00:02<00:02, 22.91it/s]
+[18:28:06]     [niah.py]  52%|█████▏    | 52/100 [00:02<00:02, 23.44it/s]
+[18:28:06]     [niah.py]  55%|█████▌    | 55/100 [00:02<00:01, 23.61it/s]
+[18:28:06]     [niah.py]  58%|█████▊    | 58/100 [00:02<00:01, 23.77it/s]
+[18:28:06]     [niah.py]  61%|██████    | 61/100 [00:02<00:01, 24.22it/s]
+[18:28:06]     [niah.py]  64%|██████▍   | 64/100 [00:02<00:01, 24.06it/s]
+[18:28:06]     [niah.py]  67%|██████▋   | 67/100 [00:02<00:01, 23.62it/s]
+[18:28:06]     [niah.py]  70%|███████   | 70/100 [00:03<00:01, 23.11it/s]
+[18:28:06]     [niah.py]  73%|███████▎  | 73/100 [00:03<00:01, 22.52it/s]
+[18:28:06]     [niah.py]  76%|███████▌  | 76/100 [00:03<00:01, 20.66it/s]
+[18:28:06]     [niah.py]  79%|███████▉  | 79/100 [00:03<00:01, 20.67it/s]
+[18:28:06]     [niah.py]  82%|████████▏ | 82/100 [00:03<00:00, 21.23it/s]
+[18:28:06]     [niah.py]  85%|████████▌ | 85/100 [00:03<00:00, 21.76it/s]
+[18:28:06]     [niah.py]  88%|████████▊ | 88/100 [00:03<00:00, 22.35it/s]
+[18:28:06]     [niah.py]  91%|█████████ | 91/100 [00:04<00:00, 20.58it/s]
+[18:28:06]     [niah.py]  94%|█████████▍| 94/100 [00:04<00:00, 20.80it/s]
+[18:28:06]     [niah.py]  97%|█████████▋| 97/100 [00:04<00:00, 20.02it/s]
+[18:28:06]     [niah.py] 100%|██████████| 100/100 [00:04<00:00, 20.45it/s]
+[18:28:06]     [niah.py] 100%|██████████| 100/100 [00:04<00:00, 21.78it/s]
+[18:28:06] [########################] 10/10 (100.0%) | ETA   0.0m  ta: 100 samples, token length min/mean/max = 33356/33366/33382
+[18:28:08] gen-data DONE for all languages

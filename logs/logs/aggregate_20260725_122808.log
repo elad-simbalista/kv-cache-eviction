@@ -1,0 +1,4 @@
+[12:28:08] ===== stage=aggregate ts=20260725_122808 ctx=32768 attn=sdpa seed_default=42 =====
+[12:28:11] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_aggregate_20260725_122808.txt
+[12:28:13] excluding 42 toy selftest rows from aggregation
+[12:28:13] no real (non-toy) results yet

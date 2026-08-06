@@ -1,0 +1,49 @@
+[14:05:19] ===== stage=split_audit ts=20260725_140519 ctx=32768 attn=sdpa seed_default=42 =====
+[14:05:23] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_split_audit_20260725_140519.txt
+[14:05:23] en: depth recovered for 40 samples (0 with multiple gold occurrences — first used)
+[14:05:27] split[en/niah_single]: marker#31de5302 'xt>\n\n<Question> What special magic numbers associated with "' question chars min/med/max = 5603/5605/5608
+[14:05:27] --- en/niah_single PASS
+[14:05:27]     marker(repr, last 80): 'sually nervous.\n</text>\n\n<Question> What special magic numbers associated with "'
+[14:05:27]     example question (first 300 chars): ' At the stern order the buzz ceased, and fifty pairs of blue, black, gray, and brown eyes were obediently fixed upon his awful countenance. “Miss March, come to the desk.” Amy rose to comply with outward composure, but a secret fear oppressed her, for the limes weighed upon her conscience. “Bring wi'
+[14:05:27]     example context tail (last 120): 's desk with an energy which made Jenny skip to her seat with unusual rapidity. “Young ladies, attention, if you please!”'
+[14:05:27] pl: depth recovered for 40 samples (0 with multiple gold occurrences — first used)
+[14:05:29] split[pl/niah_single]: marker#a4b55827 'ytanie> Jakie specjalne magiczne liczby powiązane z hasłem „' question chars min/med/max = 4255/4257/4262
+[14:05:29] --- pl/niah_single PASS
+[14:05:29]     marker(repr, last 80): 'adkach.\n</tekst>\n\n<pytanie> Jakie specjalne magiczne liczby powiązane z hasłem „'
+[14:05:29]     example question (first 300 chars): '. Szczególniej, kiedy się po pięciu latach służby jego pieniędzmi zapomógł[20], co mu pozwoliło myśleć, że ma się nieźle i że mógłby może sam już dać sobie radę na świecie. Cóż się z nim stało takiego, że jak przestała być mowa o dalszych gratyfikacjach, jak dziedzic zaczął go wyraźnie z daleka omij'
+[14:05:29]     example context tail (last 120): 'rkował, co we dworskich pokojach przystoi, a co nie. Wyszło stąd, że mu zmowa z paryskim panem zaczęła trochę doskwierać'
+[14:05:30] zh: depth recovered for 40 samples (0 with multiple gold occurrences — first used)
+[14:05:31] split[zh/niah_single]: marker#dc04947e '关于什么勾当的话来。哦，这也是女人可恶之一节：伊们全都要装“假正经”的。\n</文本>\n\n<问题> 在所提供的文本中，与“' question chars min/med/max = 1417/1418/1419
+[14:05:31] --- zh/niah_single PASS
+[14:05:31]     marker(repr, last 80): '话的女人，也时常留心听，然而伊又并不提起关于什么勾当的话来。哦，这也是女人可恶之一节：伊们全都要装“假正经”的。\n</文本>\n\n<问题> 在所提供的文本中，与“'
+[14:05:31]     example question (first 300 chars): '。阿Q更得意，而且为满足那些赏鉴家起见，再用力的一拧，才放手。他这一战，早忘却了王胡，也忘却了假洋鬼子，似乎对于今天的一切“晦气”都报了仇；而且奇怪，又仿佛全身比拍拍的响了之后更轻松，飘飘然的似乎要飞去了。“这断子绝孙的阿Q！”远远地听得小尼姑的带哭的声音。“哈哈哈！”阿Q十分得意的笑。“哈哈哈！”酒店里的人也九分得意的笑。第四章 恋爱的悲剧 有人说：有些胜利者，愿意敌手如虎，如鹰，他才感得胜利的欢喜；假使如羊，如小鸡，他便反觉得胜利的无聊。又有些胜利者，当克服一切之后，看见死的死了，降的降了，“臣诚惶诚恐死罪死罪”，他于是没有了敌人，没有了对手，没有了朋友，只有自己在上，一个，孤另另，凄凉，'
+[14:05:31]     example context tail (last 120): '着伊新剃的头皮，呆笑着，说： “秃儿！快回去，和尚等着你……” “你怎么动手动脚……”尼姑满脸通红的说，一面赶快走。酒店里的人大笑了。阿Q看见自己的勋业得了赏识，便愈加兴高采烈起来： “和尚动得，我动不得？”他扭住伊的面颊。酒店里的人大笑了'
+[14:05:31] ja: depth recovered for 40 samples (0 with multiple gold occurrences — first used)
+[14:05:33] split[ja/niah_single]: marker#d451f8f7 'ちゃ話さないんだから」 私は下宿へ帰ってからも一種の圧迫を感じた。\n</テキスト>\n\n<質問> 上記のテキストの中で、「' question chars min/med/max = 1313/1314/1317
+[14:05:33] --- ja/niah_single PASS
+[14:05:33]     marker(repr, last 80): 'つもりでいて下さい。適当の時機が来なくっちゃ話さないんだから」 私は下宿へ帰ってからも一種の圧迫を感じた。\n</テキスト>\n\n<質問> 上記のテキストの中で、「'
+[14:05:33]     example question (first 300 chars): '。私は思想上の問題について、大いなる利益を先生から受けた事を自白する。しかし同じ問題について、利益を受けようとしても、受けられない事が間々ままあったといわなければならない。先生の談話は時として不得要領ふとくようりょうに終った。その日二人の間に起った郊外の談話も、この不得要領の一例として私の胸の裏うちに残った。無遠慮な私は、ある時ついにそれを先生の前に打ち明けた。先生は笑っていた。私はこういった。「頭が鈍くて要領を得ないのは構いませんが、ちゃんと解わかってるくせに、はっきりいってくれないのは困ります」 「私は何にも隠してやしません」 「隠していらっしゃいます」 「あなたは私の思想とか意見とかいう'
+[14:05:33]     example context tail (last 120): '気楽かも知れない。精出して遊びたまえ」といった。私は笑って帽子を脱とった。その時私は先生の顔を見て、先生ははたして心のどこで、一般の人間を憎んでいるのだろうかと疑うたぐった。その眼、その口、どこにも厭世的えんせいてきの影は射さしていなかった'
+[14:05:33] ko: depth recovered for 40 samples (0 with multiple gold occurrences — first used)
+[14:05:34] split[ko/niah_single]: marker#6e366d81 '먹거려 혹, " 어디까지 왔더냐? " " 저 고개턱까지 왔더냐?\n</글>\n\n<질문> 주어진 글에서 언급된 "' question chars min/med/max = 1900/1901/1902
+[14:05:34] --- ko/niah_single PASS
+[14:05:34]     marker(repr, last 80): ' 일동은 갑자기 희색이 나고 몸이 들먹거려 혹, " 어디까지 왔더냐? " " 저 고개턱까지 왔더냐?\n</글>\n\n<질문> 주어진 글에서 언급된 "'
+[14:05:34]     example question (first 300 chars): '. 문호는 방에 들어가 이전 앉던 자리에 앉았다. 그러고 처녀들도 이전 모양으로 문호를 중심으로 하고 문호를 중심으로 하고 둘러앉는다. 그 어머니는 여전히 닭을 잡고 떡을 만들어 문호와 문해와 들러앉은 처녀들을 먹인다. 그러나 삼 년 전에 있던 즐거움은 영원히 스러지고말았다. 문호는 울고 싶었다. 그러나 삼 년 전과 같이 눈물이 흐르지 아니한다. 문호는 마주 앉은 문해의 까맣게 난 수염을 본다. 그러고 손으로 자기의 턱을 쓸며, " 문해야, 우리 턱에도 수염이 났구나. " 하며 턱 아래 한치나 자란 외대 수명을 툭툭 잡아채며 웃는다'
+[14:05:34]     example context tail (last 120): '이 없고 대문 밖에는 웃고 맞아 주던 자매들이 보인다. 문호가 동경 갈 때에 십여 세 되던 자매들이 지금은 십이삼 세의 커다란 처녀가 되어 역시 반갑게 문호를 맞는다. 그러나 그 처녀들은 결코 문호의 친구가 아니리라'
+[14:05:34] vi: depth recovered for 40 samples (0 with multiple gold occurrences — first used)
+[14:05:37] split[vi/niah_single]: marker#94da194f '<Câu hỏi> Những con số ma thuật đặc biệt nào liên quan đến "' question chars min/med/max = 2557/2560/2564
+[14:05:37] --- vi/niah_single PASS
+[14:05:37]     marker(repr, last 80): ' thích.\n</Văn bản>\n\n<Câu hỏi> Những con số ma thuật đặc biệt nào liên quan đến "'
+[14:05:37]     example question (first 300 chars): '. Tôi định để hỏi dần về sau. Lúc tôi về, ra đến cửa thì cậu Tân đưa cho một gói mà nói rằng: - Em vâng nhời chị em giối lại mà đưa cho anh cái gói này. Tôi cầm cái gói, cảm ơn cậu em, hẹn thứ năm sẽ ra. Hai người cùng ứa nước mắt. Tôi về mở gói ra xem thì thấy một hộp nhật bản, chính là hộp này đây'
+[14:05:37]     example context tail (last 120): 'ông nói năng gì cả, mà cũng không hỏi gì đến tình trạng Tố Tâm, một là sợ gợi phiền, hai là lúc đó khó mà biết ngay được'
+[14:05:37] sw: depth recovered for 40 samples (0 with multiple gold occurrences — first used)
+[14:05:40] sw: key-check substring ' lilikuwa ' is common in the haystack (24x) — eyeball split-audit
+[14:05:40] sw: key-check substring 'na Baada ya Miaka Hamsini ' is common in the haystack (40x) — eyeball split-audit
+[14:05:40] sw: key-check substring ' katika wakati w' is common in the haystack (9x) — eyeball split-audit
+[14:05:40] split[sw/niah_single]: marker#a86896bc '<Swali> Ni nambari gani maalum za maajabu zinazohusiana na "' question chars min/med/max = 3968/3972/3974
+[14:05:40] --- sw/niah_single PASS
+[14:05:40]     marker(repr, last 80): 'duka!\n</Maandishi>\n\n<Swali> Ni nambari gani maalum za maajabu zinazohusiana na "'
+[14:05:40]     example question (first 300 chars): '. Niliandika mchana na usiku, na kati ya kulala na kuamka siku zote. H a p a n a shaka niliandika m n o - lakini hapana aliyejua hilo sana kuliko nilivyolijua mimi mwenyewe - lakini sikuweza kujizuia. Kama Kirama - mwandishi wa dhambi na t h a w a b u - niliandika mara kwa mara juu ya m a m b o mbal'
+[14:05:40]     example context tail (last 120): 'hiari kwangu. Haikunichosha wala sikuisinzilia. Nilijiona ilinipasa kuandika tu! Ilinilazimu kuandika katika wakati wote'
+[14:05:40] split-audit: PASS=['en', 'pl', 'zh', 'ja', 'ko', 'vi', 'sw'] FAIL=[]
+[14:05:40] EYEBALL the printed question sections (they must contain the interrogative + queried key + answer-format tail) before sweeping.

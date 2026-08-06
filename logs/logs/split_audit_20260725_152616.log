@@ -1,0 +1,46 @@
+[15:26:16] ===== stage=split_audit ts=20260725_152616 ctx=32768 attn=sdpa seed_default=42 =====
+[15:26:19] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_split_audit_20260725_152616.txt
+[15:26:20] en: depth recovered for 40 samples (0 with multiple gold occurrences — first used)
+[15:26:20] split[en/niah_single]: marker#893a79b9 'xt>\n\n<Question> What special magic numbers associated with "' question chars min/med/max = 287/289/292
+[15:26:20] --- en/niah_single PASS
+[15:26:20]     marker(repr, last 80): '</text>\n\n<Question> What special magic numbers associated with "'
+[15:26:20]     example question (first 289 chars): '</text>\n\n<Question> What special magic numbers associated with "phone" are mentioned in the provided text? Please list all that apply. If no such numbers exist, please answer "none".</Question>\n\n\nPlease provide your answer in the following format:\n <Answer> List all numbers here </Answer>'
+[15:26:20]     example context tail (last 120): ' but the sharp-eyed demoiselles discovered that Mr. Davis was quite benignant in the afternoon, also unusually nervous.\n'
+[15:26:20] pl: depth recovered for 40 samples (0 with multiple gold occurrences — first used)
+[15:26:20] split[pl/niah_single]: marker#3502917a 'ytanie> Jakie specjalne magiczne liczby powiązane z hasłem „' question chars min/med/max = 337/339/344
+[15:26:20] --- pl/niah_single PASS
+[15:26:20]     marker(repr, last 80): '</tekst>\n\n<pytanie> Jakie specjalne magiczne liczby powiązane z hasłem „'
+[15:26:20]     example question (first 341 chars): '</tekst>\n\n<pytanie> Jakie specjalne magiczne liczby powiązane z hasłem „telefon” są wspomniane w podanym tekście? Wymień wszystkie, które się pojawiają. Jeśli takie liczby nie istnieją, odpowiedz „brak”.</pytanie>\n\n\nPodaj swoją odpowiedź w następującej formie:\n <odpowiedź> Wszystkie prawidłowe liczby powinny się znaleźć tutaj. </odpowiedź>'
+[15:26:20]     example context tail (last 120): 'ziła, by mu wszystko podano gorące i świeże. Czekała na niego, gdyż łaknęła jakiegoś udziału w toczących się wypadkach.\n'
+[15:26:20] zh: depth recovered for 40 samples (0 with multiple gold occurrences — first used)
+[15:26:20] split[zh/niah_single]: marker#3add590c '</文本>\n\n<问题> 在所提供的文本中，与“' question chars min/med/max = 104/105/106
+[15:26:20] --- zh/niah_single PASS
+[15:26:20]     marker(repr, last 80): '</文本>\n\n<问题> 在所提供的文本中，与“'
+[15:26:20]     example question (first 105 chars): '</文本>\n\n<问题> 在所提供的文本中，与“电话”有关的魔法数字有哪些？请列举所有适用项。若这样的数字不存在，请回答“无”。</问题>\n\n\n请用以下格式提供你的答案：\n<答案> 在此处列出所有数字 </答案>'
+[15:26:20]     example context tail (last 120): '并不然，这也足见异端之可恶。“女……”阿Q想。他对于以为“一定想引诱野男人”的女人，时常留心看，然而伊并不对他笑。他对于和他讲话的女人，也时常留心听，然而伊又并不提起关于什么勾当的话来。哦，这也是女人可恶之一节：伊们全都要装“假正经”的。\n'
+[15:26:20] ja: depth recovered for 40 samples (0 with multiple gold occurrences — first used)
+[15:26:20] split[ja/niah_single]: marker#06d32094 '</テキスト>\n\n<質問> 上記のテキストの中で、「' question chars min/med/max = 139/140/143
+[15:26:20] --- ja/niah_single PASS
+[15:26:20]     marker(repr, last 80): '</テキスト>\n\n<質問> 上記のテキストの中で、「'
+[15:26:20]     example question (first 140 chars): '</テキスト>\n\n<質問> 上記のテキストの中で、「電話」に関連する特別な魔法の数字は何ですか？該当するものをすべて挙げてください。該当する数字はない場合、「なし」と答えてください。</質問>\n\n\n以下の形式で答えてください。\n<答え> すべて該当する数字をここに列挙 </答え>'
+[15:26:20]     example context tail (last 120): '過去はあなたに取ってそれほど有益でないかも知れませんよ。聞かない方が増ましかも知れませんよ。それから、――今は話せないんだから、そのつもりでいて下さい。適当の時機が来なくっちゃ話さないんだから」 私は下宿へ帰ってからも一種の圧迫を感じた。\n'
+[15:26:20] ko: depth recovered for 40 samples (0 with multiple gold occurrences — first used)
+[15:26:20] split[ko/niah_single]: marker#f11c534b '</글>\n\n<질문> 주어진 글에서 언급된 "' question chars min/med/max = 160/161/162
+[15:26:20] --- ko/niah_single PASS
+[15:26:20]     marker(repr, last 80): '</글>\n\n<질문> 주어진 글에서 언급된 "'
+[15:26:20]     example question (first 161 chars): '</글>\n\n<질문> 주어진 글에서 언급된 "전화"에 대한 특별한 마법의 숫자들은 무엇인가요? 해당되는 모든 것을 나열하세요. 해당되는 숫자가 존재하지 않는다면 "없음"이라고 대답하세요. </질문>\n\n\n답변을 다음 형식으로 제공해주세요:\n <답변> 모든 숫자를 여기에 나열하세요. </답변>'
+[15:26:20]     example context tail (last 120): ' 너무 기뻐서 돌에 발부리를 채며 뛰어 내려와 일동에게 문호가 저 고개 너머 오더라는 소식을 전한다. 그러면 회집한 일동은 갑자기 희색이 나고 몸이 들먹거려 혹, " 어디까지 왔더냐? " " 저 고개턱까지 왔더냐?\n'
+[15:26:20] vi: depth recovered for 40 samples (0 with multiple gold occurrences — first used)
+[15:26:20] split[vi/niah_single]: marker#3ee0b36a '<Câu hỏi> Những con số ma thuật đặc biệt nào liên quan đến "' question chars min/med/max = 327/330/334
+[15:26:20] --- vi/niah_single PASS
+[15:26:20]     marker(repr, last 80): '</Văn bản>\n\n<Câu hỏi> Những con số ma thuật đặc biệt nào liên quan đến "'
+[15:26:20]     example question (first 334 chars): '</Văn bản>\n\n<Câu hỏi> Những con số ma thuật đặc biệt nào liên quan đến "điện thoại" được đề cập trong văn bản được cung cấp? Hãy liệt kê tất cả các phương án đúng. Nếu không có con số nào như vậy, hãy trả lời "Không có".</Câu hỏi>\n\n\nHãy cho câu trả lời theo hình thức như sau:\n <Câu trả lời> Liệt kê tất cả các số ở đây </Câu trả lời>'
+[15:26:20]     example context tail (last 120): 'họ tinh quái nghịch ngợm lắm, anh ạ. Các cô cứ lấy những chăn màn gối đệm mới mà giễu cợt em; các cô lấy thế làm thích.\n'
+[15:26:20] sw: depth recovered for 40 samples (0 with multiple gold occurrences — first used)
+[15:26:20] split[sw/niah_single]: marker#70208f20 '<Swali> Ni nambari gani maalum za maajabu zinazohusiana na "' question chars min/med/max = 317/321/323
+[15:26:20] --- sw/niah_single PASS
+[15:26:20]     marker(repr, last 80): '</Maandishi>\n\n<Swali> Ni nambari gani maalum za maajabu zinazohusiana na "'
+[15:26:20]     example question (first 319 chars): '</Maandishi>\n\n<Swali> Ni nambari gani maalum za maajabu zinazohusiana na "simu" zilizotajwa katika maandishi yaliyotolewa? Tafadhali orodhesha yote yanayohusika. Ikiwa hakuna nambari kama hizo, tafadhali jibu "hakuna".</Swali>\n\n\nTafadhali toa jibu lako katika muundo ufuatao:\n <Jibu> Orodhesha nambari zote hapa </Jibu>'
+[15:26:20]     example context tail (last 120): 'aida katika miaka mitano ilikuwa Shilingi 800/- kwa kitabu kilichofikia thamani ya Shilingi zaidi ya 61- katika maduka!\n'
+[15:26:20] split-audit: PASS=['en', 'pl', 'zh', 'ja', 'ko', 'vi', 'sw'] FAIL=[]
+[15:26:20] EYEBALL the printed question sections (they must contain the interrogative + queried key + answer-format tail) before sweeping.

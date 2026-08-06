@@ -1,0 +1,93 @@
+[07:10:19] ===== stage=batch_zh_llama31-8b_qa_niah_none ts=20260729_071019 ctx=32768 attn=sdpa seed_default=42 =====
+[07:10:22] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_batch_zh_llama31-8b_qa_niah_none_20260729_071019.txt
+[07:10:34] model loaded: llama31-8b (meta-llama/Llama-3.1-8B-Instruct) rev=0e9e39f249a16976918f6564b8830bc894c89659 (8s)
+[07:10:34] split[zh/niah_none]: marker#3add590c '</文本>\n\n<问题> 在所提供的文本中，与“' question chars min/med/max = 104/105/106
+[07:10:34] === cell 1/7 [7035f8bdbd4fae94] {'model': 'llama31-8b', 'arm': 'qa', 'lang': 'zh', 'ctx_len': 32768, 'press': 'none', 'kept': 1.0, 'task': 'niah_none', 'seed': 42, 'toy': False} n=100 | resume: 71 done, 29 to run
+[07:11:29] [########................] 10/29 (34.5%) | ETA   1.7m | sess-acc 0.40 | 5.5s/sample
+[07:12:25] [################........] 20/29 (69.0%) | ETA   0.8m | sess-acc 0.35 | 5.6s/sample
+[07:13:18] [########################] 29/29 (100.0%) | ETA   0.0m | sess-acc 0.41 | 5.6s/sample
+[07:13:18] CELL DONE [7035f8bdbd4fae94] acc=0.240 n=100
+[07:13:20] press check: want kept=0.5 measured=0.500
+[07:13:20] === cell 2/7 [a901a8cb8d2829d1] {'model': 'llama31-8b', 'arm': 'qa', 'lang': 'zh', 'ctx_len': 32768, 'press': 'snapkv', 'kept': 0.5, 'task': 'niah_none', 'seed': 42, 'toy': False} n=100 | resume: 0 done, 100 to run
+[07:13:27] qa press check: context kept 0.500 (want 0.5)
+[07:14:25] [##......................] 10/100 (10.0%) | ETA   9.7m | sess-acc 0.20 | 6.4s/sample
+[07:15:32] [####....................] 20/100 (20.0%) | ETA   8.8m | sess-acc 0.10 | 6.6s/sample
+[07:16:36] [#######.................] 30/100 (30.0%) | ETA   7.6m | sess-acc 0.17 | 6.5s/sample
+[07:17:40] [#########...............] 40/100 (40.0%) | ETA   6.5m | sess-acc 0.12 | 6.5s/sample
+[07:18:45] [############............] 50/100 (50.0%) | ETA   5.4m | sess-acc 0.12 | 6.5s/sample
+[07:19:48] [##############..........] 60/100 (60.0%) | ETA   4.3m | sess-acc 0.12 | 6.5s/sample
+[07:20:54] [################........] 70/100 (70.0%) | ETA   3.2m | sess-acc 0.11 | 6.5s/sample
+[07:21:53] [###################.....] 80/100 (80.0%) | ETA   2.1m | sess-acc 0.16 | 6.4s/sample
+[07:22:57] [#####################...] 90/100 (90.0%) | ETA   1.1m | sess-acc 0.17 | 6.4s/sample
+[07:23:58] [########################] 100/100 (100.0%) | ETA   0.0m | sess-acc 0.17 | 6.4s/sample
+[07:23:59] CELL DONE [a901a8cb8d2829d1] acc=0.170 n=100
+[07:23:59] press check: want kept=0.25 measured=0.250
+[07:23:59] === cell 3/7 [628f5a245602dc19] {'model': 'llama31-8b', 'arm': 'qa', 'lang': 'zh', 'ctx_len': 32768, 'press': 'snapkv', 'kept': 0.25, 'task': 'niah_none', 'seed': 42, 'toy': False} n=100 | resume: 0 done, 100 to run
+[07:24:06] qa press check: context kept 0.250 (want 0.25)
+[07:24:59] [##......................] 10/100 (10.0%) | ETA   9.0m | sess-acc 0.20 | 6.0s/sample
+[07:25:53] [####....................] 20/100 (20.0%) | ETA   7.6m | sess-acc 0.45 | 5.7s/sample
+[07:26:52] [#######.................] 30/100 (30.0%) | ETA   6.7m | sess-acc 0.43 | 5.8s/sample
+[07:27:53] [#########...............] 40/100 (40.0%) | ETA   5.8m | sess-acc 0.38 | 5.8s/sample
+[07:28:51] [############............] 50/100 (50.0%) | ETA   4.9m | sess-acc 0.34 | 5.8s/sample
+[07:29:53] [##############..........] 60/100 (60.0%) | ETA   3.9m | sess-acc 0.30 | 5.9s/sample
+[07:30:49] [################........] 70/100 (70.0%) | ETA   2.9m | sess-acc 0.34 | 5.9s/sample
+[07:31:41] [###################.....] 80/100 (80.0%) | ETA   1.9m | sess-acc 0.40 | 5.8s/sample
+[07:32:37] [#####################...] 90/100 (90.0%) | ETA   1.0m | sess-acc 0.42 | 5.8s/sample
+[07:33:34] [########################] 100/100 (100.0%) | ETA   0.0m | sess-acc 0.43 | 5.8s/sample
+[07:33:35] CELL DONE [628f5a245602dc19] acc=0.430 n=100
+[07:33:35] press check: want kept=0.5 measured=0.500
+[07:33:35] === cell 4/7 [7fd0b5bb9e9a20ae] {'model': 'llama31-8b', 'arm': 'qa', 'lang': 'zh', 'ctx_len': 32768, 'press': 'streaming_llm', 'kept': 0.5, 'task': 'niah_none', 'seed': 42, 'toy': False} n=100 | resume: 0 done, 100 to run
+[07:33:40] qa press check: context kept 0.500 (want 0.5)
+[07:34:31] [##......................] 10/100 (10.0%) | ETA   8.3m | sess-acc 0.30 | 5.5s/sample
+[07:35:23] [####....................] 20/100 (20.0%) | ETA   7.2m | sess-acc 0.40 | 5.4s/sample
+[07:36:15] [#######.................] 30/100 (30.0%) | ETA   6.2m | sess-acc 0.33 | 5.3s/sample
+[07:37:10] [#########...............] 40/100 (40.0%) | ETA   5.4m | sess-acc 0.30 | 5.4s/sample
+[07:38:04] [############............] 50/100 (50.0%) | ETA   4.5m | sess-acc 0.30 | 5.4s/sample
+[07:38:59] [##############..........] 60/100 (60.0%) | ETA   3.6m | sess-acc 0.28 | 5.4s/sample
+[07:39:54] [################........] 70/100 (70.0%) | ETA   2.7m | sess-acc 0.27 | 5.4s/sample
+[07:40:50] [###################.....] 80/100 (80.0%) | ETA   1.8m | sess-acc 0.26 | 5.4s/sample
+[07:41:44] [#####################...] 90/100 (90.0%) | ETA   0.9m | sess-acc 0.28 | 5.4s/sample
+[07:42:37] [########################] 100/100 (100.0%) | ETA   0.0m | sess-acc 0.29 | 5.4s/sample
+[07:42:37] CELL DONE [7fd0b5bb9e9a20ae] acc=0.290 n=100
+[07:42:38] press check: want kept=0.25 measured=0.250
+[07:42:38] === cell 5/7 [d9e507e110f33dc8] {'model': 'llama31-8b', 'arm': 'qa', 'lang': 'zh', 'ctx_len': 32768, 'press': 'streaming_llm', 'kept': 0.25, 'task': 'niah_none', 'seed': 42, 'toy': False} n=100 | resume: 0 done, 100 to run
+[07:42:43] qa press check: context kept 0.250 (want 0.25)
+[07:43:29] [##......................] 10/100 (10.0%) | ETA   7.6m | sess-acc 0.90 | 5.1s/sample
+[07:44:20] [####....................] 20/100 (20.0%) | ETA   6.8m | sess-acc 0.80 | 5.1s/sample
+[07:45:11] [#######.................] 30/100 (30.0%) | ETA   6.0m | sess-acc 0.73 | 5.1s/sample
+[07:46:02] [#########...............] 40/100 (40.0%) | ETA   5.1m | sess-acc 0.65 | 5.1s/sample
+[07:46:53] [############............] 50/100 (50.0%) | ETA   4.3m | sess-acc 0.68 | 5.1s/sample
+[07:47:45] [##############..........] 60/100 (60.0%) | ETA   3.4m | sess-acc 0.62 | 5.1s/sample
+[07:48:34] [################........] 70/100 (70.0%) | ETA   2.5m | sess-acc 0.63 | 5.1s/sample
+[07:49:25] [###################.....] 80/100 (80.0%) | ETA   1.7m | sess-acc 0.62 | 5.1s/sample
+[07:50:16] [#####################...] 90/100 (90.0%) | ETA   0.8m | sess-acc 0.64 | 5.1s/sample
+[07:51:07] [########################] 100/100 (100.0%) | ETA   0.0m | sess-acc 0.64 | 5.1s/sample
+[07:51:08] CELL DONE [d9e507e110f33dc8] acc=0.640 n=100
+[07:51:09] press check: want kept=0.5 measured=0.500
+[07:51:09] === cell 6/7 [430f2006bf3fb604] {'model': 'llama31-8b', 'arm': 'qa', 'lang': 'zh', 'ctx_len': 32768, 'press': 'knorm', 'kept': 0.5, 'task': 'niah_none', 'seed': 42, 'toy': False} n=100 | resume: 0 done, 100 to run
+[07:51:15] qa press check: context kept 0.500 (want 0.5)
+[07:52:14] [##......................] 10/100 (10.0%) | ETA   9.8m | sess-acc 0.10 | 6.5s/sample
+[07:53:14] [####....................] 20/100 (20.0%) | ETA   8.4m | sess-acc 0.20 | 6.3s/sample
+[07:54:18] [#######.................] 30/100 (30.0%) | ETA   7.4m | sess-acc 0.20 | 6.3s/sample
+[07:55:25] [#########...............] 40/100 (40.0%) | ETA   6.4m | sess-acc 0.15 | 6.4s/sample
+[07:56:29] [############............] 50/100 (50.0%) | ETA   5.3m | sess-acc 0.14 | 6.4s/sample
+[07:57:32] [##############..........] 60/100 (60.0%) | ETA   4.3m | sess-acc 0.12 | 6.4s/sample
+[07:58:38] [################........] 70/100 (70.0%) | ETA   3.2m | sess-acc 0.11 | 6.4s/sample
+[07:59:38] [###################.....] 80/100 (80.0%) | ETA   2.1m | sess-acc 0.14 | 6.4s/sample
+[08:00:34] [#####################...] 90/100 (90.0%) | ETA   1.0m | sess-acc 0.18 | 6.3s/sample
+[08:01:36] [########################] 100/100 (100.0%) | ETA   0.0m | sess-acc 0.18 | 6.3s/sample
+[08:01:37] CELL DONE [430f2006bf3fb604] acc=0.180 n=100
+[08:01:37] press check: want kept=0.25 measured=0.250
+[08:01:37] === cell 7/7 [9116b44121b355da] {'model': 'llama31-8b', 'arm': 'qa', 'lang': 'zh', 'ctx_len': 32768, 'press': 'knorm', 'kept': 0.25, 'task': 'niah_none', 'seed': 42, 'toy': False} n=100 | resume: 0 done, 100 to run
+[08:01:42] qa press check: context kept 0.250 (want 0.25)
+[08:02:36] [##......................] 10/100 (10.0%) | ETA   8.8m | sess-acc 0.40 | 5.9s/sample
+[08:03:34] [####....................] 20/100 (20.0%) | ETA   7.8m | sess-acc 0.40 | 5.9s/sample
+[08:04:34] [#######.................] 30/100 (30.0%) | ETA   6.9m | sess-acc 0.37 | 5.9s/sample
+[08:05:36] [#########...............] 40/100 (40.0%) | ETA   6.0m | sess-acc 0.33 | 6.0s/sample
+[08:06:34] [############............] 50/100 (50.0%) | ETA   5.0m | sess-acc 0.34 | 5.9s/sample
+[08:07:36] [##############..........] 60/100 (60.0%) | ETA   4.0m | sess-acc 0.32 | 6.0s/sample
+[08:08:37] [################........] 70/100 (70.0%) | ETA   3.0m | sess-acc 0.30 | 6.0s/sample
+[08:09:33] [###################.....] 80/100 (80.0%) | ETA   2.0m | sess-acc 0.34 | 5.9s/sample
+[08:10:30] [#####################...] 90/100 (90.0%) | ETA   1.0m | sess-acc 0.36 | 5.9s/sample
+[08:11:25] [########################] 100/100 (100.0%) | ETA   0.0m | sess-acc 0.38 | 5.9s/sample
+[08:11:26] CELL DONE [9116b44121b355da] acc=0.380 n=100

@@ -1,0 +1,608 @@
+[18:36:06] ===== stage=failure_modes ts=20260729_183606 ctx=32768 attn=sdpa seed_default=42 =====
+[18:36:11] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_failure_modes_20260729_183606.txt
+[18:36:14] scorer sensitivity (official minus strict-none/lenient-single):
+       model   arm        task lang         press  kept  acc  acc_robust   n  delta_robust
+  llama31-8b joint niah_single   ko         knorm  0.25 0.35        0.41 100         -0.06
+  llama31-8b joint niah_single   ko          none  1.00 0.77        0.83 100         -0.06
+  llama31-8b joint niah_single   ko        snapkv  0.50 0.76        0.81 100         -0.05
+  llama31-8b joint niah_single   ko streaming_llm  0.25 0.15        0.20 100         -0.05
+  llama31-8b joint niah_single   ko streaming_llm  0.50 0.32        0.38 100         -0.06
+  llama31-8b joint niah_single   vi         knorm  0.25 0.02        0.07 100         -0.05
+  llama31-8b    qa   niah_none   ja         knorm  0.25 0.42        0.37 100          0.05
+  llama31-8b    qa   niah_none   ja          none  1.00 0.51        0.44 100          0.07
+  llama31-8b    qa   niah_none   ko         knorm  0.25 0.34        0.12 100          0.22
+  llama31-8b    qa   niah_none   ko         knorm  0.50 0.71        0.08 100          0.63
+  llama31-8b    qa   niah_none   ko          none  1.00 0.83        0.12 100          0.71
+  llama31-8b    qa   niah_none   ko        snapkv  0.25 0.32        0.09 100          0.23
+  llama31-8b    qa   niah_none   ko        snapkv  0.50 0.65        0.11 100          0.54
+  llama31-8b    qa   niah_none   ko streaming_llm  0.25 0.38        0.31 100          0.07
+  llama31-8b    qa   niah_none   ko streaming_llm  0.50 0.26        0.14 100          0.12
+  llama31-8b    qa   niah_none   sw          none  1.00 0.21        0.06 100          0.15
+  llama31-8b    qa   niah_none   sw        snapkv  0.50 0.13        0.05 100          0.08
+  llama31-8b    qa niah_single   ko          none  1.00 0.77        0.83 100         -0.06
+  llama31-8b    qa niah_single   ko        snapkv  0.25 0.62        0.72 100         -0.10
+qwen25-7b-1m joint niah_single   ja          none  1.00 0.90        1.00 100         -0.10
+qwen25-7b-1m joint niah_single   ja        snapkv  0.25 0.92        0.99 100         -0.07
+qwen25-7b-1m joint niah_single   ja        snapkv  0.50 0.95        1.00 100         -0.05
+qwen25-7b-1m    qa   niah_none   sw          none  1.00 0.58        0.49 100          0.09
+[18:36:14] audit of officially-'correct' niah_none predictions (long preds / numbers present = substring-laxity risk):
+         n  pred_chars_mean  pred_chars_max  frac_with_number
+lang                                                         
+en    1183           23.439             257             0.003
+ja     952           17.108             145             0.025
+ko     732           36.036             124             0.354
+pl    1278           34.154             175             0.003
+sw     660          141.488             181             0.068
+vi    1061           37.276             220             0.003
+zh     917           12.617             107             0.009
+[18:36:14] [llama31-8b__joint__niah_single] failure-mode rates (rows sum to 1):
+     model   arm        task lang         press  kept  correct  false_absence  wrong_number  other
+llama31-8b joint niah_single   en         knorm  0.25     0.16           0.03          0.81   0.00
+llama31-8b joint niah_single   en         knorm  0.50     0.70           0.01          0.29   0.00
+llama31-8b joint niah_single   en          none  1.00     1.00           0.00          0.00   0.00
+llama31-8b joint niah_single   en        snapkv  0.25     1.00           0.00          0.00   0.00
+llama31-8b joint niah_single   en        snapkv  0.50     1.00           0.00          0.00   0.00
+llama31-8b joint niah_single   en streaming_llm  0.25     0.28           0.11          0.48   0.13
+llama31-8b joint niah_single   en streaming_llm  0.50     0.46           0.10          0.32   0.12
+llama31-8b joint niah_single   ja         knorm  0.25     0.17           0.08          0.75   0.00
+llama31-8b joint niah_single   ja         knorm  0.50     0.52           0.03          0.45   0.00
+llama31-8b joint niah_single   ja          none  1.00     0.98           0.02          0.00   0.00
+llama31-8b joint niah_single   ja        snapkv  0.25     0.98           0.02          0.00   0.00
+llama31-8b joint niah_single   ja        snapkv  0.50     0.98           0.02          0.00   0.00
+llama31-8b joint niah_single   ja streaming_llm  0.25     0.26           0.09          0.62   0.03
+llama31-8b joint niah_single   ja streaming_llm  0.50     0.44           0.07          0.47   0.02
+llama31-8b joint niah_single   ko         knorm  0.25     0.35           0.63          0.02   0.00
+llama31-8b joint niah_single   ko         knorm  0.50     0.49           0.50          0.01   0.00
+llama31-8b joint niah_single   ko          none  1.00     0.77           0.21          0.02   0.00
+llama31-8b joint niah_single   ko        snapkv  0.25     0.75           0.21          0.04   0.00
+llama31-8b joint niah_single   ko        snapkv  0.50     0.76           0.21          0.03   0.00
+llama31-8b joint niah_single   ko streaming_llm  0.25     0.15           0.79          0.04   0.02
+llama31-8b joint niah_single   ko streaming_llm  0.50     0.32           0.59          0.06   0.03
+llama31-8b joint niah_single   pl         knorm  0.25     0.03           0.57          0.39   0.01
+llama31-8b joint niah_single   pl         knorm  0.50     0.34           0.26          0.40   0.00
+llama31-8b joint niah_single   pl          none  1.00     0.84           0.16          0.00   0.00
+llama31-8b joint niah_single   pl        snapkv  0.25     0.83           0.17          0.00   0.00
+llama31-8b joint niah_single   pl        snapkv  0.50     0.83           0.17          0.00   0.00
+llama31-8b joint niah_single   pl streaming_llm  0.25     0.13           0.41          0.34   0.12
+llama31-8b joint niah_single   pl streaming_llm  0.50     0.33           0.31          0.31   0.05
+llama31-8b joint niah_single   sw         knorm  0.25     0.07           0.08          0.74   0.11
+llama31-8b joint niah_single   sw         knorm  0.50     0.62           0.03          0.23   0.12
+llama31-8b joint niah_single   sw          none  1.00     0.92           0.01          0.06   0.01
+llama31-8b joint niah_single   sw        snapkv  0.25     0.92           0.01          0.07   0.00
+llama31-8b joint niah_single   sw        snapkv  0.50     0.92           0.01          0.06   0.01
+llama31-8b joint niah_single   sw streaming_llm  0.25     0.28           0.59          0.13   0.00
+llama31-8b joint niah_single   sw streaming_llm  0.50     0.43           0.47          0.07   0.03
+llama31-8b joint niah_single   vi         knorm  0.25     0.02           0.87          0.11   0.00
+llama31-8b joint niah_single   vi         knorm  0.50     0.36           0.50          0.14   0.00
+llama31-8b joint niah_single   vi          none  1.00     0.92           0.08          0.00   0.00
+llama31-8b joint niah_single   vi        snapkv  0.25     0.93           0.07          0.00   0.00
+llama31-8b joint niah_single   vi        snapkv  0.50     0.93           0.07          0.00   0.00
+llama31-8b joint niah_single   vi streaming_llm  0.25     0.24           0.21          0.55   0.00
+llama31-8b joint niah_single   vi streaming_llm  0.50     0.44           0.25          0.29   0.02
+llama31-8b joint niah_single   zh         knorm  0.25     0.06           0.12          0.82   0.00
+llama31-8b joint niah_single   zh         knorm  0.50     0.40           0.05          0.55   0.00
+llama31-8b joint niah_single   zh          none  1.00     0.98           0.02          0.00   0.00
+llama31-8b joint niah_single   zh        snapkv  0.25     0.98           0.02          0.00   0.00
+llama31-8b joint niah_single   zh        snapkv  0.50     0.98           0.02          0.00   0.00
+llama31-8b joint niah_single   zh streaming_llm  0.25     0.27           0.30          0.24   0.19
+llama31-8b joint niah_single   zh streaming_llm  0.50     0.43           0.29          0.06   0.22
+[18:36:14] [llama31-8b__joint__niah_single] damage attribution (drop = base_acc - cell_acc):
+     model   arm        task lang         press  kept  drop  d_false_absence  d_wrong_number  d_other  share_false_absence  share_wrong_number  share_other
+llama31-8b joint niah_single   en         knorm  0.25  0.84             0.03            0.81     0.00                0.036               0.964        0.000
+llama31-8b joint niah_single   ja         knorm  0.25  0.81             0.06            0.75     0.00                0.074               0.926        0.000
+llama31-8b joint niah_single   ko         knorm  0.25  0.42             0.42            0.00     0.00                1.000               0.000        0.000
+llama31-8b joint niah_single   pl         knorm  0.25  0.81             0.41            0.39     0.01                0.506               0.481        0.012
+llama31-8b joint niah_single   sw         knorm  0.25  0.85             0.07            0.68     0.10                0.082               0.800        0.118
+llama31-8b joint niah_single   vi         knorm  0.25  0.90             0.79            0.11     0.00                0.878               0.122        0.000
+llama31-8b joint niah_single   zh         knorm  0.25  0.92             0.10            0.82     0.00                0.109               0.891        0.000
+llama31-8b joint niah_single   en         knorm  0.50  0.30             0.01            0.29     0.00                0.033               0.967        0.000
+llama31-8b joint niah_single   ja         knorm  0.50  0.46             0.01            0.45     0.00                0.022               0.978        0.000
+llama31-8b joint niah_single   ko         knorm  0.50  0.28             0.29           -0.01     0.00                1.036              -0.036        0.000
+llama31-8b joint niah_single   pl         knorm  0.50  0.50             0.10            0.40     0.00                0.200               0.800        0.000
+llama31-8b joint niah_single   sw         knorm  0.50  0.30             0.02            0.17     0.11                0.067               0.567        0.367
+llama31-8b joint niah_single   vi         knorm  0.50  0.56             0.42            0.14     0.00                0.750               0.250        0.000
+llama31-8b joint niah_single   zh         knorm  0.50  0.58             0.03            0.55     0.00                0.052               0.948        0.000
+llama31-8b joint niah_single   en        snapkv  0.25 -0.00             0.00            0.00     0.00                  NaN                 NaN          NaN
+llama31-8b joint niah_single   ja        snapkv  0.25 -0.00             0.00            0.00     0.00                  NaN                 NaN          NaN
+llama31-8b joint niah_single   ko        snapkv  0.25  0.02             0.00            0.02     0.00                0.000               1.000        0.000
+llama31-8b joint niah_single   pl        snapkv  0.25  0.01             0.01            0.00     0.00                1.000               0.000        0.000
+llama31-8b joint niah_single   sw        snapkv  0.25 -0.00             0.00            0.01    -0.01                  NaN                 NaN          NaN
+llama31-8b joint niah_single   vi        snapkv  0.25 -0.01            -0.01            0.00     0.00                  NaN                 NaN          NaN
+llama31-8b joint niah_single   zh        snapkv  0.25 -0.00             0.00            0.00     0.00                  NaN                 NaN          NaN
+llama31-8b joint niah_single   en        snapkv  0.50 -0.00             0.00            0.00     0.00                  NaN                 NaN          NaN
+llama31-8b joint niah_single   ja        snapkv  0.50 -0.00             0.00            0.00     0.00                  NaN                 NaN          NaN
+llama31-8b joint niah_single   ko        snapkv  0.50  0.01             0.00            0.01     0.00                0.000               1.000        0.000
+llama31-8b joint niah_single   pl        snapkv  0.50  0.01             0.01            0.00     0.00                1.000               0.000        0.000
+llama31-8b joint niah_single   sw        snapkv  0.50 -0.00             0.00            0.00     0.00                  NaN                 NaN          NaN
+llama31-8b joint niah_single   vi        snapkv  0.50 -0.01            -0.01            0.00     0.00                  NaN                 NaN          NaN
+llama31-8b joint niah_single   zh        snapkv  0.50 -0.00             0.00            0.00     0.00                  NaN                 NaN          NaN
+llama31-8b joint niah_single   en streaming_llm  0.25  0.72             0.11            0.48     0.13                0.153               0.667        0.181
+llama31-8b joint niah_single   ja streaming_llm  0.25  0.72             0.07            0.62     0.03                0.097               0.861        0.042
+llama31-8b joint niah_single   ko streaming_llm  0.25  0.62             0.58            0.02     0.02                0.935               0.032        0.032
+llama31-8b joint niah_single   pl streaming_llm  0.25  0.71             0.25            0.34     0.12                0.352               0.479        0.169
+llama31-8b joint niah_single   sw streaming_llm  0.25  0.64             0.58            0.07    -0.01                0.906               0.109       -0.016
+llama31-8b joint niah_single   vi streaming_llm  0.25  0.68             0.13            0.55     0.00                0.191               0.809        0.000
+llama31-8b joint niah_single   zh streaming_llm  0.25  0.71             0.28            0.24     0.19                0.394               0.338        0.268
+llama31-8b joint niah_single   en streaming_llm  0.50  0.54             0.10            0.32     0.12                0.185               0.593        0.222
+llama31-8b joint niah_single   ja streaming_llm  0.50  0.54             0.05            0.47     0.02                0.093               0.870        0.037
+llama31-8b joint niah_single   ko streaming_llm  0.50  0.45             0.38            0.04     0.03                0.844               0.089        0.067
+llama31-8b joint niah_single   pl streaming_llm  0.50  0.51             0.15            0.31     0.05                0.294               0.608        0.098
+llama31-8b joint niah_single   sw streaming_llm  0.50  0.49             0.46            0.01     0.02                0.939               0.020        0.041
+llama31-8b joint niah_single   vi streaming_llm  0.50  0.48             0.17            0.29     0.02                0.354               0.604        0.042
+llama31-8b joint niah_single   zh streaming_llm  0.50  0.55             0.27            0.06     0.22                0.491               0.109        0.400
+[18:36:14] [llama31-8b__qa__niah_none] failure-mode rates (rows sum to 1):
+     model arm      task lang         press  kept  correct  false_presence_distractor  false_presence_hallucinated  other
+llama31-8b  qa niah_none   en         knorm  0.25     0.64                       0.10                         0.26   0.00
+llama31-8b  qa niah_none   en         knorm  0.50     0.72                       0.18                         0.10   0.00
+llama31-8b  qa niah_none   en          none  1.00     0.63                       0.37                         0.00   0.00
+llama31-8b  qa niah_none   en        snapkv  0.25     0.84                       0.05                         0.11   0.00
+llama31-8b  qa niah_none   en        snapkv  0.50     0.81                       0.14                         0.05   0.00
+llama31-8b  qa niah_none   en streaming_llm  0.25     0.75                       0.18                         0.07   0.00
+llama31-8b  qa niah_none   en streaming_llm  0.50     0.66                       0.27                         0.07   0.00
+llama31-8b  qa niah_none   ja         knorm  0.25     0.42                       0.18                         0.39   0.01
+llama31-8b  qa niah_none   ja         knorm  0.50     0.33                       0.50                         0.17   0.00
+llama31-8b  qa niah_none   ja          none  1.00     0.51                       0.49                         0.00   0.00
+llama31-8b  qa niah_none   ja        snapkv  0.25     0.50                       0.07                         0.42   0.01
+llama31-8b  qa niah_none   ja        snapkv  0.50     0.46                       0.38                         0.15   0.01
+llama31-8b  qa niah_none   ja streaming_llm  0.25     0.87                       0.12                         0.01   0.00
+llama31-8b  qa niah_none   ja streaming_llm  0.50     0.69                       0.31                         0.00   0.00
+llama31-8b  qa niah_none   ko         knorm  0.25     0.34                       0.63                         0.02   0.01
+llama31-8b  qa niah_none   ko         knorm  0.50     0.71                       0.27                         0.00   0.02
+llama31-8b  qa niah_none   ko          none  1.00     0.83                       0.16                         0.00   0.01
+llama31-8b  qa niah_none   ko        snapkv  0.25     0.32                       0.60                         0.03   0.05
+llama31-8b  qa niah_none   ko        snapkv  0.50     0.65                       0.34                         0.00   0.01
+llama31-8b  qa niah_none   ko streaming_llm  0.25     0.38                       0.52                         0.08   0.02
+llama31-8b  qa niah_none   ko streaming_llm  0.50     0.26                       0.72                         0.01   0.01
+llama31-8b  qa niah_none   pl         knorm  0.25     0.91                       0.01                         0.08   0.00
+llama31-8b  qa niah_none   pl         knorm  0.50     0.94                       0.03                         0.03   0.00
+llama31-8b  qa niah_none   pl          none  1.00     0.93                       0.07                         0.00   0.00
+llama31-8b  qa niah_none   pl        snapkv  0.25     0.95                       0.02                         0.03   0.00
+llama31-8b  qa niah_none   pl        snapkv  0.50     0.97                       0.02                         0.01   0.00
+llama31-8b  qa niah_none   pl streaming_llm  0.25     0.39                       0.23                         0.16   0.22
+llama31-8b  qa niah_none   pl streaming_llm  0.50     0.69                       0.22                         0.09   0.00
+llama31-8b  qa niah_none   sw         knorm  0.25     0.00                       0.21                         0.72   0.07
+llama31-8b  qa niah_none   sw         knorm  0.50     0.05                       0.19                         0.18   0.58
+llama31-8b  qa niah_none   sw          none  1.00     0.21                       0.77                         0.01   0.01
+llama31-8b  qa niah_none   sw        snapkv  0.25     0.07                       0.92                         0.01   0.00
+llama31-8b  qa niah_none   sw        snapkv  0.50     0.13                       0.86                         0.01   0.00
+llama31-8b  qa niah_none   sw streaming_llm  0.25     0.06                       0.56                         0.37   0.01
+llama31-8b  qa niah_none   sw streaming_llm  0.50     0.02                       0.91                         0.05   0.02
+llama31-8b  qa niah_none   vi         knorm  0.25     0.17                       0.21                         0.62   0.00
+llama31-8b  qa niah_none   vi         knorm  0.50     0.46                       0.43                         0.11   0.00
+llama31-8b  qa niah_none   vi          none  1.00     0.63                       0.37                         0.00   0.00
+llama31-8b  qa niah_none   vi        snapkv  0.25     0.76                       0.03                         0.21   0.00
+llama31-8b  qa niah_none   vi        snapkv  0.50     0.59                       0.05                         0.34   0.02
+llama31-8b  qa niah_none   vi streaming_llm  0.25     0.68                       0.23                         0.09   0.00
+llama31-8b  qa niah_none   vi streaming_llm  0.50     0.74                       0.24                         0.02   0.00
+llama31-8b  qa niah_none   zh         knorm  0.25     0.38                       0.10                         0.51   0.01
+llama31-8b  qa niah_none   zh         knorm  0.50     0.18                       0.51                         0.28   0.03
+llama31-8b  qa niah_none   zh          none  1.00     0.24                       0.74                         0.00   0.02
+llama31-8b  qa niah_none   zh        snapkv  0.25     0.43                       0.14                         0.30   0.13
+llama31-8b  qa niah_none   zh        snapkv  0.50     0.17                       0.50                         0.29   0.04
+llama31-8b  qa niah_none   zh streaming_llm  0.25     0.64                       0.33                         0.02   0.01
+llama31-8b  qa niah_none   zh streaming_llm  0.50     0.29                       0.70                         0.01   0.00
+[18:36:14] [llama31-8b__qa__niah_none] damage attribution (drop = base_acc - cell_acc):
+     model arm      task lang         press  kept  drop  d_false_presence_distractor  d_false_presence_hallucinated  d_other  share_false_presence_distractor  share_false_presence_hallucinated  share_other
+llama31-8b  qa niah_none   en         knorm  0.25 -0.01                        -0.27                           0.26     0.00                              NaN                                NaN          NaN
+llama31-8b  qa niah_none   ja         knorm  0.25  0.09                        -0.31                           0.39     0.01                           -3.444                              4.333        0.111
+llama31-8b  qa niah_none   ko         knorm  0.25  0.49                         0.47                           0.02     0.00                            0.959                              0.041        0.000
+llama31-8b  qa niah_none   pl         knorm  0.25  0.02                        -0.06                           0.08     0.00                           -3.000                              4.000        0.000
+llama31-8b  qa niah_none   sw         knorm  0.25  0.21                        -0.56                           0.71     0.06                           -2.667                              3.381        0.286
+llama31-8b  qa niah_none   vi         knorm  0.25  0.46                        -0.16                           0.62     0.00                           -0.348                              1.348        0.000
+llama31-8b  qa niah_none   zh         knorm  0.25 -0.14                        -0.64                           0.51    -0.01                              NaN                                NaN          NaN
+llama31-8b  qa niah_none   en         knorm  0.50 -0.09                        -0.19                           0.10     0.00                              NaN                                NaN          NaN
+llama31-8b  qa niah_none   ja         knorm  0.50  0.18                         0.01                           0.17     0.00                            0.056                              0.944        0.000
+llama31-8b  qa niah_none   ko         knorm  0.50  0.12                         0.11                           0.00     0.01                            0.917                              0.000        0.083
+llama31-8b  qa niah_none   pl         knorm  0.50 -0.01                        -0.04                           0.03     0.00                              NaN                                NaN          NaN
+llama31-8b  qa niah_none   sw         knorm  0.50  0.16                        -0.58                           0.17     0.57                           -3.625                              1.062        3.563
+llama31-8b  qa niah_none   vi         knorm  0.50  0.17                         0.06                           0.11     0.00                            0.353                              0.647        0.000
+llama31-8b  qa niah_none   zh         knorm  0.50  0.06                        -0.23                           0.28     0.01                           -3.833                              4.667        0.167
+llama31-8b  qa niah_none   en        snapkv  0.25 -0.21                        -0.32                           0.11     0.00                              NaN                                NaN          NaN
+llama31-8b  qa niah_none   ja        snapkv  0.25  0.01                        -0.42                           0.42     0.01                          -42.000                             42.000        1.000
+llama31-8b  qa niah_none   ko        snapkv  0.25  0.51                         0.44                           0.03     0.04                            0.863                              0.059        0.078
+llama31-8b  qa niah_none   pl        snapkv  0.25 -0.02                        -0.05                           0.03     0.00                              NaN                                NaN          NaN
+llama31-8b  qa niah_none   sw        snapkv  0.25  0.14                         0.15                           0.00    -0.01                            1.071                              0.000       -0.071
+llama31-8b  qa niah_none   vi        snapkv  0.25 -0.13                        -0.34                           0.21     0.00                              NaN                                NaN          NaN
+llama31-8b  qa niah_none   zh        snapkv  0.25 -0.19                        -0.60                           0.30     0.11                              NaN                                NaN          NaN
+llama31-8b  qa niah_none   en        snapkv  0.50 -0.18                        -0.23                           0.05     0.00                              NaN                                NaN          NaN
+llama31-8b  qa niah_none   ja        snapkv  0.50  0.05                        -0.11                           0.15     0.01                           -2.200                              3.000        0.200
+llama31-8b  qa niah_none   ko        snapkv  0.50  0.18                         0.18                           0.00     0.00                            1.000                              0.000        0.000
+llama31-8b  qa niah_none   pl        snapkv  0.50 -0.04                        -0.05                           0.01     0.00                              NaN                                NaN          NaN
+llama31-8b  qa niah_none   sw        snapkv  0.50  0.08                         0.09                           0.00    -0.01                            1.125                              0.000       -0.125
+llama31-8b  qa niah_none   vi        snapkv  0.50  0.04                        -0.32                           0.34     0.02                           -8.000                              8.500        0.500
+llama31-8b  qa niah_none   zh        snapkv  0.50  0.07                        -0.24                           0.29     0.02                           -3.429                              4.143        0.286
+llama31-8b  qa niah_none   en streaming_llm  0.25 -0.12                        -0.19                           0.07     0.00                              NaN                                NaN          NaN
+llama31-8b  qa niah_none   ja streaming_llm  0.25 -0.36                        -0.37                           0.01     0.00                              NaN                                NaN          NaN
+llama31-8b  qa niah_none   ko streaming_llm  0.25  0.45                         0.36                           0.08     0.01                            0.800                              0.178        0.022
+llama31-8b  qa niah_none   pl streaming_llm  0.25  0.54                         0.16                           0.16     0.22                            0.296                              0.296        0.407
+llama31-8b  qa niah_none   sw streaming_llm  0.25  0.15                        -0.21                           0.36     0.00                           -1.400                              2.400        0.000
+llama31-8b  qa niah_none   vi streaming_llm  0.25 -0.05                        -0.14                           0.09     0.00                              NaN                                NaN          NaN
+llama31-8b  qa niah_none   zh streaming_llm  0.25 -0.40                        -0.41                           0.02    -0.01                              NaN                                NaN          NaN
+llama31-8b  qa niah_none   en streaming_llm  0.50 -0.03                        -0.10                           0.07     0.00                              NaN                                NaN          NaN
+llama31-8b  qa niah_none   ja streaming_llm  0.50 -0.18                        -0.18                           0.00     0.00                              NaN                                NaN          NaN
+llama31-8b  qa niah_none   ko streaming_llm  0.50  0.57                         0.56                           0.01     0.00                            0.982                              0.018        0.000
+llama31-8b  qa niah_none   pl streaming_llm  0.50  0.24                         0.15                           0.09     0.00                            0.625                              0.375        0.000
+llama31-8b  qa niah_none   sw streaming_llm  0.50  0.19                         0.14                           0.04     0.01                            0.737                              0.211        0.053
+llama31-8b  qa niah_none   vi streaming_llm  0.50 -0.11                        -0.13                           0.02     0.00                              NaN                                NaN          NaN
+llama31-8b  qa niah_none   zh streaming_llm  0.50 -0.05                        -0.04                           0.01    -0.02                              NaN                                NaN          NaN
+[18:36:15] [llama31-8b__qa__niah_single] failure-mode rates (rows sum to 1):
+     model arm        task lang         press  kept  correct  false_absence  wrong_number  other
+llama31-8b  qa niah_single   en         knorm  0.25     0.17           0.06          0.77   0.00
+llama31-8b  qa niah_single   en         knorm  0.50     0.72           0.00          0.28   0.00
+llama31-8b  qa niah_single   en          none  1.00     1.00           0.00          0.00   0.00
+llama31-8b  qa niah_single   en        snapkv  0.25     0.45           0.36          0.18   0.01
+llama31-8b  qa niah_single   en        snapkv  0.50     0.90           0.05          0.05   0.00
+llama31-8b  qa niah_single   en streaming_llm  0.25     0.27           0.56          0.16   0.01
+llama31-8b  qa niah_single   en streaming_llm  0.50     0.46           0.36          0.18   0.00
+llama31-8b  qa niah_single   ja         knorm  0.25     0.17           0.17          0.66   0.00
+llama31-8b  qa niah_single   ja         knorm  0.50     0.49           0.08          0.43   0.00
+llama31-8b  qa niah_single   ja          none  1.00     0.98           0.02          0.00   0.00
+llama31-8b  qa niah_single   ja        snapkv  0.25     0.21           0.24          0.55   0.00
+llama31-8b  qa niah_single   ja        snapkv  0.50     0.76           0.07          0.17   0.00
+llama31-8b  qa niah_single   ja streaming_llm  0.25     0.25           0.73          0.02   0.00
+llama31-8b  qa niah_single   ja streaming_llm  0.50     0.45           0.50          0.05   0.00
+llama31-8b  qa niah_single   ko         knorm  0.25     0.82           0.15          0.03   0.00
+llama31-8b  qa niah_single   ko         knorm  0.50     0.87           0.12          0.01   0.00
+llama31-8b  qa niah_single   ko          none  1.00     0.77           0.21          0.02   0.00
+llama31-8b  qa niah_single   ko        snapkv  0.25     0.62           0.31          0.07   0.00
+llama31-8b  qa niah_single   ko        snapkv  0.50     0.78           0.16          0.06   0.00
+llama31-8b  qa niah_single   ko streaming_llm  0.25     0.21           0.57          0.21   0.01
+llama31-8b  qa niah_single   ko streaming_llm  0.50     0.38           0.48          0.14   0.00
+llama31-8b  qa niah_single   pl         knorm  0.25     0.04           0.44          0.52   0.00
+llama31-8b  qa niah_single   pl         knorm  0.50     0.30           0.25          0.45   0.00
+llama31-8b  qa niah_single   pl          none  1.00     0.84           0.16          0.00   0.00
+llama31-8b  qa niah_single   pl        snapkv  0.25     0.00           0.80          0.20   0.00
+llama31-8b  qa niah_single   pl        snapkv  0.50     0.30           0.53          0.17   0.00
+llama31-8b  qa niah_single   pl streaming_llm  0.25     0.28           0.00          0.20   0.52
+llama31-8b  qa niah_single   pl streaming_llm  0.50     0.49           0.00          0.49   0.02
+llama31-8b  qa niah_single   sw         knorm  0.25     0.06           0.01          0.84   0.09
+llama31-8b  qa niah_single   sw         knorm  0.50     0.68           0.00          0.27   0.05
+llama31-8b  qa niah_single   sw          none  1.00     0.92           0.01          0.06   0.01
+llama31-8b  qa niah_single   sw        snapkv  0.25     0.90           0.06          0.04   0.00
+llama31-8b  qa niah_single   sw        snapkv  0.50     0.91           0.02          0.07   0.00
+llama31-8b  qa niah_single   sw streaming_llm  0.25     0.27           0.10          0.57   0.06
+llama31-8b  qa niah_single   sw streaming_llm  0.50     0.43           0.03          0.43   0.11
+llama31-8b  qa niah_single   vi         knorm  0.25     0.14           0.00          0.86   0.00
+llama31-8b  qa niah_single   vi         knorm  0.50     0.79           0.02          0.19   0.00
+llama31-8b  qa niah_single   vi          none  1.00     0.90           0.10          0.00   0.00
+llama31-8b  qa niah_single   vi        snapkv  0.25     0.03           0.80          0.17   0.00
+llama31-8b  qa niah_single   vi        snapkv  0.50     0.14           0.59          0.24   0.03
+llama31-8b  qa niah_single   vi streaming_llm  0.25     0.19           0.61          0.20   0.00
+llama31-8b  qa niah_single   vi streaming_llm  0.50     0.40           0.50          0.10   0.00
+llama31-8b  qa niah_single   zh         knorm  0.25     0.05           0.28          0.67   0.00
+llama31-8b  qa niah_single   zh         knorm  0.50     0.36           0.04          0.60   0.00
+llama31-8b  qa niah_single   zh          none  1.00     0.98           0.02          0.00   0.00
+llama31-8b  qa niah_single   zh        snapkv  0.25     0.24           0.55          0.12   0.09
+llama31-8b  qa niah_single   zh        snapkv  0.50     0.63           0.13          0.21   0.03
+llama31-8b  qa niah_single   zh streaming_llm  0.25     0.27           0.65          0.03   0.05
+llama31-8b  qa niah_single   zh streaming_llm  0.50     0.43           0.47          0.10   0.00
+[18:36:15] [llama31-8b__qa__niah_single] damage attribution (drop = base_acc - cell_acc):
+     model arm        task lang         press  kept  drop  d_false_absence  d_wrong_number  d_other  share_false_absence  share_wrong_number  share_other
+llama31-8b  qa niah_single   en         knorm  0.25  0.83             0.06            0.77     0.00                0.072               0.928        0.000
+llama31-8b  qa niah_single   ja         knorm  0.25  0.81             0.15            0.66     0.00                0.185               0.815        0.000
+llama31-8b  qa niah_single   ko         knorm  0.25 -0.05            -0.06            0.01     0.00                  NaN                 NaN          NaN
+llama31-8b  qa niah_single   pl         knorm  0.25  0.80             0.28            0.52     0.00                0.350               0.650        0.000
+llama31-8b  qa niah_single   sw         knorm  0.25  0.86             0.00            0.78     0.08                0.000               0.907        0.093
+llama31-8b  qa niah_single   vi         knorm  0.25  0.76            -0.10            0.86     0.00               -0.132               1.132        0.000
+llama31-8b  qa niah_single   zh         knorm  0.25  0.93             0.26            0.67     0.00                0.280               0.720        0.000
+llama31-8b  qa niah_single   en         knorm  0.50  0.28             0.00            0.28     0.00                0.000               1.000        0.000
+llama31-8b  qa niah_single   ja         knorm  0.50  0.49             0.06            0.43     0.00                0.122               0.878        0.000
+llama31-8b  qa niah_single   ko         knorm  0.50 -0.10            -0.09           -0.01     0.00                  NaN                 NaN          NaN
+llama31-8b  qa niah_single   pl         knorm  0.50  0.54             0.09            0.45     0.00                0.167               0.833        0.000
+llama31-8b  qa niah_single   sw         knorm  0.50  0.24            -0.01            0.21     0.04               -0.042               0.875        0.167
+llama31-8b  qa niah_single   vi         knorm  0.50  0.11            -0.08            0.19     0.00               -0.727               1.727        0.000
+llama31-8b  qa niah_single   zh         knorm  0.50  0.62             0.02            0.60     0.00                0.032               0.968        0.000
+llama31-8b  qa niah_single   en        snapkv  0.25  0.55             0.36            0.18     0.01                0.655               0.327        0.018
+llama31-8b  qa niah_single   ja        snapkv  0.25  0.77             0.22            0.55     0.00                0.286               0.714        0.000
+llama31-8b  qa niah_single   ko        snapkv  0.25  0.15             0.10            0.05     0.00                0.667               0.333        0.000
+llama31-8b  qa niah_single   pl        snapkv  0.25  0.84             0.64            0.20     0.00                0.762               0.238        0.000
+llama31-8b  qa niah_single   sw        snapkv  0.25  0.02             0.05           -0.02    -0.01                2.500              -1.000       -0.500
+llama31-8b  qa niah_single   vi        snapkv  0.25  0.87             0.70            0.17     0.00                0.805               0.195        0.000
+llama31-8b  qa niah_single   zh        snapkv  0.25  0.74             0.53            0.12     0.09                0.716               0.162        0.122
+llama31-8b  qa niah_single   en        snapkv  0.50  0.10             0.05            0.05     0.00                0.500               0.500        0.000
+llama31-8b  qa niah_single   ja        snapkv  0.50  0.22             0.05            0.17     0.00                0.227               0.773        0.000
+llama31-8b  qa niah_single   ko        snapkv  0.50 -0.01            -0.05            0.04     0.00                  NaN                 NaN          NaN
+llama31-8b  qa niah_single   pl        snapkv  0.50  0.54             0.37            0.17     0.00                0.685               0.315        0.000
+llama31-8b  qa niah_single   sw        snapkv  0.50  0.01             0.01            0.01    -0.01                1.000               1.000       -1.000
+llama31-8b  qa niah_single   vi        snapkv  0.50  0.76             0.49            0.24     0.03                0.645               0.316        0.039
+llama31-8b  qa niah_single   zh        snapkv  0.50  0.35             0.11            0.21     0.03                0.314               0.600        0.086
+llama31-8b  qa niah_single   en streaming_llm  0.25  0.73             0.56            0.16     0.01                0.767               0.219        0.014
+llama31-8b  qa niah_single   ja streaming_llm  0.25  0.73             0.71            0.02     0.00                0.973               0.027        0.000
+llama31-8b  qa niah_single   ko streaming_llm  0.25  0.56             0.36            0.19     0.01                0.643               0.339        0.018
+llama31-8b  qa niah_single   pl streaming_llm  0.25  0.56            -0.16            0.20     0.52               -0.286               0.357        0.929
+llama31-8b  qa niah_single   sw streaming_llm  0.25  0.65             0.09            0.51     0.05                0.138               0.785        0.077
+llama31-8b  qa niah_single   vi streaming_llm  0.25  0.71             0.51            0.20     0.00                0.718               0.282        0.000
+llama31-8b  qa niah_single   zh streaming_llm  0.25  0.71             0.63            0.03     0.05                0.887               0.042        0.070
+llama31-8b  qa niah_single   en streaming_llm  0.50  0.54             0.36            0.18     0.00                0.667               0.333        0.000
+llama31-8b  qa niah_single   ja streaming_llm  0.50  0.53             0.48            0.05     0.00                0.906               0.094        0.000
+llama31-8b  qa niah_single   ko streaming_llm  0.50  0.39             0.27            0.12     0.00                0.692               0.308        0.000
+llama31-8b  qa niah_single   pl streaming_llm  0.50  0.35            -0.16            0.49     0.02               -0.457               1.400        0.057
+llama31-8b  qa niah_single   sw streaming_llm  0.50  0.49             0.02            0.37     0.10                0.041               0.755        0.204
+llama31-8b  qa niah_single   vi streaming_llm  0.50  0.50             0.40            0.10     0.00                0.800               0.200        0.000
+llama31-8b  qa niah_single   zh streaming_llm  0.50  0.55             0.45            0.10     0.00                0.818               0.182        0.000
+[18:36:15] [qwen25-7b-1m__joint__niah_single] failure-mode rates (rows sum to 1):
+       model   arm        task lang         press  kept  correct  false_absence  wrong_number  other
+qwen25-7b-1m joint niah_single   en         knorm  0.25     0.01           0.03          0.96   0.00
+qwen25-7b-1m joint niah_single   en         knorm  0.50     0.09           0.02          0.89   0.00
+qwen25-7b-1m joint niah_single   en          none  1.00     0.98           0.02          0.00   0.00
+qwen25-7b-1m joint niah_single   en        snapkv  0.25     0.98           0.02          0.00   0.00
+qwen25-7b-1m joint niah_single   en        snapkv  0.50     0.98           0.02          0.00   0.00
+qwen25-7b-1m joint niah_single   en streaming_llm  0.25     0.27           0.10          0.60   0.03
+qwen25-7b-1m joint niah_single   en streaming_llm  0.50     0.45           0.06          0.42   0.07
+qwen25-7b-1m joint niah_single   ja         knorm  0.25     0.01           0.25          0.64   0.10
+qwen25-7b-1m joint niah_single   ja         knorm  0.50     0.08           0.02          0.90   0.00
+qwen25-7b-1m joint niah_single   ja          none  1.00     0.90           0.10          0.00   0.00
+qwen25-7b-1m joint niah_single   ja        snapkv  0.25     0.92           0.07          0.01   0.00
+qwen25-7b-1m joint niah_single   ja        snapkv  0.50     0.95           0.05          0.00   0.00
+qwen25-7b-1m joint niah_single   ja streaming_llm  0.25     0.28           0.09          0.60   0.03
+qwen25-7b-1m joint niah_single   ja streaming_llm  0.50     0.45           0.15          0.37   0.03
+qwen25-7b-1m joint niah_single   ko         knorm  0.25     0.05           0.03          0.92   0.00
+qwen25-7b-1m joint niah_single   ko         knorm  0.50     0.63           0.00          0.37   0.00
+qwen25-7b-1m joint niah_single   ko          none  1.00     1.00           0.00          0.00   0.00
+qwen25-7b-1m joint niah_single   ko        snapkv  0.25     1.00           0.00          0.00   0.00
+qwen25-7b-1m joint niah_single   ko        snapkv  0.50     0.99           0.01          0.00   0.00
+qwen25-7b-1m joint niah_single   ko streaming_llm  0.25     0.28           0.12          0.56   0.04
+qwen25-7b-1m joint niah_single   ko streaming_llm  0.50     0.49           0.13          0.36   0.02
+qwen25-7b-1m joint niah_single   pl         knorm  0.25     0.01           0.20          0.73   0.06
+qwen25-7b-1m joint niah_single   pl         knorm  0.50     0.07           0.05          0.88   0.00
+qwen25-7b-1m joint niah_single   pl          none  1.00     1.00           0.00          0.00   0.00
+qwen25-7b-1m joint niah_single   pl        snapkv  0.25     1.00           0.00          0.00   0.00
+qwen25-7b-1m joint niah_single   pl        snapkv  0.50     1.00           0.00          0.00   0.00
+qwen25-7b-1m joint niah_single   pl streaming_llm  0.25     0.28           0.04          0.65   0.03
+qwen25-7b-1m joint niah_single   pl streaming_llm  0.50     0.49           0.04          0.41   0.06
+qwen25-7b-1m joint niah_single   sw         knorm  0.25     0.01           0.06          0.54   0.39
+qwen25-7b-1m joint niah_single   sw         knorm  0.50     0.08           0.05          0.76   0.11
+qwen25-7b-1m joint niah_single   sw          none  1.00     0.56           0.44          0.00   0.00
+qwen25-7b-1m joint niah_single   sw        snapkv  0.25     0.48           0.47          0.05   0.00
+qwen25-7b-1m joint niah_single   sw        snapkv  0.50     0.59           0.40          0.01   0.00
+qwen25-7b-1m joint niah_single   sw streaming_llm  0.25     0.14           0.85          0.01   0.00
+qwen25-7b-1m joint niah_single   sw streaming_llm  0.50     0.25           0.73          0.02   0.00
+qwen25-7b-1m joint niah_single   vi         knorm  0.25     0.00           0.03          0.97   0.00
+qwen25-7b-1m joint niah_single   vi         knorm  0.50     0.11           0.01          0.88   0.00
+qwen25-7b-1m joint niah_single   vi          none  1.00     0.96           0.04          0.00   0.00
+qwen25-7b-1m joint niah_single   vi        snapkv  0.25     0.96           0.04          0.00   0.00
+qwen25-7b-1m joint niah_single   vi        snapkv  0.50     0.96           0.04          0.00   0.00
+qwen25-7b-1m joint niah_single   vi streaming_llm  0.25     0.28           0.10          0.49   0.13
+qwen25-7b-1m joint niah_single   vi streaming_llm  0.50     0.49           0.10          0.34   0.07
+qwen25-7b-1m joint niah_single   zh         knorm  0.25     0.00           0.25          0.67   0.08
+qwen25-7b-1m joint niah_single   zh         knorm  0.50     0.09           0.05          0.83   0.03
+qwen25-7b-1m joint niah_single   zh          none  1.00     0.98           0.02          0.00   0.00
+qwen25-7b-1m joint niah_single   zh        snapkv  0.25     0.98           0.02          0.00   0.00
+qwen25-7b-1m joint niah_single   zh        snapkv  0.50     0.98           0.02          0.00   0.00
+qwen25-7b-1m joint niah_single   zh streaming_llm  0.25     0.25           0.56          0.19   0.00
+qwen25-7b-1m joint niah_single   zh streaming_llm  0.50     0.42           0.46          0.12   0.00
+[18:36:15] [qwen25-7b-1m__joint__niah_single] damage attribution (drop = base_acc - cell_acc):
+       model   arm        task lang         press  kept  drop  d_false_absence  d_wrong_number  d_other  share_false_absence  share_wrong_number  share_other
+qwen25-7b-1m joint niah_single   en         knorm  0.25  0.97             0.01            0.96     0.00                0.010               0.990        0.000
+qwen25-7b-1m joint niah_single   ja         knorm  0.25  0.89             0.15            0.64     0.10                0.169               0.719        0.112
+qwen25-7b-1m joint niah_single   ko         knorm  0.25  0.95             0.03            0.92     0.00                0.032               0.968        0.000
+qwen25-7b-1m joint niah_single   pl         knorm  0.25  0.99             0.20            0.73     0.06                0.202               0.737        0.061
+qwen25-7b-1m joint niah_single   sw         knorm  0.25  0.55            -0.38            0.54     0.39               -0.691               0.982        0.709
+qwen25-7b-1m joint niah_single   vi         knorm  0.25  0.96            -0.01            0.97     0.00               -0.010               1.010        0.000
+qwen25-7b-1m joint niah_single   zh         knorm  0.25  0.98             0.23            0.67     0.08                0.235               0.684        0.082
+qwen25-7b-1m joint niah_single   en         knorm  0.50  0.89             0.00            0.89     0.00                0.000               1.000        0.000
+qwen25-7b-1m joint niah_single   ja         knorm  0.50  0.82            -0.08            0.90     0.00               -0.098               1.098        0.000
+qwen25-7b-1m joint niah_single   ko         knorm  0.50  0.37             0.00            0.37     0.00                0.000               1.000        0.000
+qwen25-7b-1m joint niah_single   pl         knorm  0.50  0.93             0.05            0.88     0.00                0.054               0.946        0.000
+qwen25-7b-1m joint niah_single   sw         knorm  0.50  0.48            -0.39            0.76     0.11               -0.812               1.583        0.229
+qwen25-7b-1m joint niah_single   vi         knorm  0.50  0.85            -0.03            0.88     0.00               -0.035               1.035        0.000
+qwen25-7b-1m joint niah_single   zh         knorm  0.50  0.89             0.03            0.83     0.03                0.034               0.933        0.034
+qwen25-7b-1m joint niah_single   en        snapkv  0.25 -0.00             0.00            0.00     0.00                  NaN                 NaN          NaN
+qwen25-7b-1m joint niah_single   ja        snapkv  0.25 -0.02            -0.03            0.01     0.00                  NaN                 NaN          NaN
+qwen25-7b-1m joint niah_single   ko        snapkv  0.25 -0.00             0.00            0.00     0.00                  NaN                 NaN          NaN
+qwen25-7b-1m joint niah_single   pl        snapkv  0.25 -0.00             0.00            0.00     0.00                  NaN                 NaN          NaN
+qwen25-7b-1m joint niah_single   sw        snapkv  0.25  0.08             0.03            0.05     0.00                0.375               0.625        0.000
+qwen25-7b-1m joint niah_single   vi        snapkv  0.25 -0.00             0.00            0.00     0.00                  NaN                 NaN          NaN
+qwen25-7b-1m joint niah_single   zh        snapkv  0.25 -0.00             0.00            0.00     0.00                  NaN                 NaN          NaN
+qwen25-7b-1m joint niah_single   en        snapkv  0.50 -0.00             0.00            0.00     0.00                  NaN                 NaN          NaN
+qwen25-7b-1m joint niah_single   ja        snapkv  0.50 -0.05            -0.05            0.00     0.00                  NaN                 NaN          NaN
+qwen25-7b-1m joint niah_single   ko        snapkv  0.50  0.01             0.01            0.00     0.00                1.000               0.000        0.000
+qwen25-7b-1m joint niah_single   pl        snapkv  0.50 -0.00             0.00            0.00     0.00                  NaN                 NaN          NaN
+qwen25-7b-1m joint niah_single   sw        snapkv  0.50 -0.03            -0.04            0.01     0.00                  NaN                 NaN          NaN
+qwen25-7b-1m joint niah_single   vi        snapkv  0.50 -0.00             0.00            0.00     0.00                  NaN                 NaN          NaN
+qwen25-7b-1m joint niah_single   zh        snapkv  0.50 -0.00             0.00            0.00     0.00                  NaN                 NaN          NaN
+qwen25-7b-1m joint niah_single   en streaming_llm  0.25  0.71             0.08            0.60     0.03                0.113               0.845        0.042
+qwen25-7b-1m joint niah_single   ja streaming_llm  0.25  0.62            -0.01            0.60     0.03               -0.016               0.968        0.048
+qwen25-7b-1m joint niah_single   ko streaming_llm  0.25  0.72             0.12            0.56     0.04                0.167               0.778        0.056
+qwen25-7b-1m joint niah_single   pl streaming_llm  0.25  0.72             0.04            0.65     0.03                0.056               0.903        0.042
+qwen25-7b-1m joint niah_single   sw streaming_llm  0.25  0.42             0.41            0.01     0.00                0.976               0.024        0.000
+qwen25-7b-1m joint niah_single   vi streaming_llm  0.25  0.68             0.06            0.49     0.13                0.088               0.721        0.191
+qwen25-7b-1m joint niah_single   zh streaming_llm  0.25  0.73             0.54            0.19     0.00                0.740               0.260        0.000
+qwen25-7b-1m joint niah_single   en streaming_llm  0.50  0.53             0.04            0.42     0.07                0.075               0.792        0.132
+qwen25-7b-1m joint niah_single   ja streaming_llm  0.50  0.45             0.05            0.37     0.03                0.111               0.822        0.067
+qwen25-7b-1m joint niah_single   ko streaming_llm  0.50  0.51             0.13            0.36     0.02                0.255               0.706        0.039
+qwen25-7b-1m joint niah_single   pl streaming_llm  0.50  0.51             0.04            0.41     0.06                0.078               0.804        0.118
+qwen25-7b-1m joint niah_single   sw streaming_llm  0.50  0.31             0.29            0.02     0.00                0.935               0.065        0.000
+qwen25-7b-1m joint niah_single   vi streaming_llm  0.50  0.47             0.06            0.34     0.07                0.128               0.723        0.149
+qwen25-7b-1m joint niah_single   zh streaming_llm  0.50  0.56             0.44            0.12     0.00                0.786               0.214        0.000
+[18:36:16] [qwen25-7b-1m__qa__niah_none] failure-mode rates (rows sum to 1):
+       model arm      task lang         press  kept  correct  false_presence_distractor  false_presence_hallucinated  other
+qwen25-7b-1m  qa niah_none   en         knorm  0.25     0.98                       0.00                         0.02   0.00
+qwen25-7b-1m  qa niah_none   en         knorm  0.50     0.99                       0.01                         0.00   0.00
+qwen25-7b-1m  qa niah_none   en          none  1.00     0.96                       0.04                         0.00   0.00
+qwen25-7b-1m  qa niah_none   en        snapkv  0.25     0.97                       0.01                         0.02   0.00
+qwen25-7b-1m  qa niah_none   en        snapkv  0.50     0.96                       0.02                         0.02   0.00
+qwen25-7b-1m  qa niah_none   en streaming_llm  0.25     0.95                       0.05                         0.00   0.00
+qwen25-7b-1m  qa niah_none   en streaming_llm  0.50     0.97                       0.03                         0.00   0.00
+qwen25-7b-1m  qa niah_none   ja         knorm  0.25     0.93                       0.00                         0.07   0.00
+qwen25-7b-1m  qa niah_none   ja         knorm  0.50     0.93                       0.01                         0.06   0.00
+qwen25-7b-1m  qa niah_none   ja          none  1.00     0.75                       0.24                         0.00   0.01
+qwen25-7b-1m  qa niah_none   ja        snapkv  0.25     0.92                       0.00                         0.06   0.02
+qwen25-7b-1m  qa niah_none   ja        snapkv  0.50     0.86                       0.02                         0.11   0.01
+qwen25-7b-1m  qa niah_none   ja streaming_llm  0.25     0.78                       0.11                         0.00   0.11
+qwen25-7b-1m  qa niah_none   ja streaming_llm  0.50     0.57                       0.12                         0.01   0.30
+qwen25-7b-1m  qa niah_none   ko         knorm  0.25     0.76                       0.04                         0.20   0.00
+qwen25-7b-1m  qa niah_none   ko         knorm  0.50     0.55                       0.43                         0.01   0.01
+qwen25-7b-1m  qa niah_none   ko          none  1.00     0.37                       0.61                         0.00   0.02
+qwen25-7b-1m  qa niah_none   ko        snapkv  0.25     0.62                       0.29                         0.07   0.02
+qwen25-7b-1m  qa niah_none   ko        snapkv  0.50     0.55                       0.43                         0.00   0.02
+qwen25-7b-1m  qa niah_none   ko streaming_llm  0.25     0.57                       0.42                         0.00   0.01
+qwen25-7b-1m  qa niah_none   ko streaming_llm  0.50     0.41                       0.57                         0.00   0.02
+qwen25-7b-1m  qa niah_none   pl         knorm  0.25     1.00                       0.00                         0.00   0.00
+qwen25-7b-1m  qa niah_none   pl         knorm  0.50     1.00                       0.00                         0.00   0.00
+qwen25-7b-1m  qa niah_none   pl          none  1.00     1.00                       0.00                         0.00   0.00
+qwen25-7b-1m  qa niah_none   pl        snapkv  0.25     1.00                       0.00                         0.00   0.00
+qwen25-7b-1m  qa niah_none   pl        snapkv  0.50     1.00                       0.00                         0.00   0.00
+qwen25-7b-1m  qa niah_none   pl streaming_llm  0.25     1.00                       0.00                         0.00   0.00
+qwen25-7b-1m  qa niah_none   pl streaming_llm  0.50     1.00                       0.00                         0.00   0.00
+qwen25-7b-1m  qa niah_none   sw         knorm  0.25     0.90                       0.01                         0.05   0.04
+qwen25-7b-1m  qa niah_none   sw         knorm  0.50     0.83                       0.01                         0.02   0.14
+qwen25-7b-1m  qa niah_none   sw          none  1.00     0.58                       0.36                         0.06   0.00
+qwen25-7b-1m  qa niah_none   sw        snapkv  0.25     0.95                       0.04                         0.00   0.01
+qwen25-7b-1m  qa niah_none   sw        snapkv  0.50     0.87                       0.11                         0.02   0.00
+qwen25-7b-1m  qa niah_none   sw streaming_llm  0.25     1.00                       0.00                         0.00   0.00
+qwen25-7b-1m  qa niah_none   sw streaming_llm  0.50     0.93                       0.04                         0.00   0.03
+qwen25-7b-1m  qa niah_none   vi         knorm  0.25     0.95                       0.00                         0.05   0.00
+qwen25-7b-1m  qa niah_none   vi         knorm  0.50     0.90                       0.03                         0.07   0.00
+qwen25-7b-1m  qa niah_none   vi          none  1.00     0.90                       0.10                         0.00   0.00
+qwen25-7b-1m  qa niah_none   vi        snapkv  0.25     0.98                       0.01                         0.01   0.00
+qwen25-7b-1m  qa niah_none   vi        snapkv  0.50     0.91                       0.01                         0.07   0.01
+qwen25-7b-1m  qa niah_none   vi streaming_llm  0.25     0.98                       0.02                         0.00   0.00
+qwen25-7b-1m  qa niah_none   vi streaming_llm  0.50     0.96                       0.04                         0.00   0.00
+qwen25-7b-1m  qa niah_none   zh         knorm  0.25     1.00                       0.00                         0.00   0.00
+qwen25-7b-1m  qa niah_none   zh         knorm  0.50     0.99                       0.01                         0.00   0.00
+qwen25-7b-1m  qa niah_none   zh          none  1.00     0.94                       0.06                         0.00   0.00
+qwen25-7b-1m  qa niah_none   zh        snapkv  0.25     0.99                       0.00                         0.01   0.00
+qwen25-7b-1m  qa niah_none   zh        snapkv  0.50     0.97                       0.00                         0.03   0.00
+qwen25-7b-1m  qa niah_none   zh streaming_llm  0.25     0.98                       0.02                         0.00   0.00
+qwen25-7b-1m  qa niah_none   zh streaming_llm  0.50     0.97                       0.03                         0.00   0.00
+[18:36:16] [qwen25-7b-1m__qa__niah_none] damage attribution (drop = base_acc - cell_acc):
+       model arm      task lang         press  kept  drop  d_false_presence_distractor  d_false_presence_hallucinated  d_other  share_false_presence_distractor  share_false_presence_hallucinated  share_other
+qwen25-7b-1m  qa niah_none   en         knorm  0.25 -0.02                        -0.04                           0.02     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   ja         knorm  0.25 -0.18                        -0.24                           0.07    -0.01                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   ko         knorm  0.25 -0.39                        -0.57                           0.20    -0.02                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   pl         knorm  0.25 -0.00                         0.00                           0.00     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   sw         knorm  0.25 -0.32                        -0.35                          -0.01     0.04                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   vi         knorm  0.25 -0.05                        -0.10                           0.05     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   zh         knorm  0.25 -0.06                        -0.06                           0.00     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   en         knorm  0.50 -0.03                        -0.03                           0.00     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   ja         knorm  0.50 -0.18                        -0.23                           0.06    -0.01                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   ko         knorm  0.50 -0.18                        -0.18                           0.01    -0.01                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   pl         knorm  0.50 -0.00                         0.00                           0.00     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   sw         knorm  0.50 -0.25                        -0.35                          -0.04     0.14                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   vi         knorm  0.50 -0.00                        -0.07                           0.07     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   zh         knorm  0.50 -0.05                        -0.05                           0.00     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   en        snapkv  0.25 -0.01                        -0.03                           0.02     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   ja        snapkv  0.25 -0.17                        -0.24                           0.06     0.01                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   ko        snapkv  0.25 -0.25                        -0.32                           0.07     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   pl        snapkv  0.25 -0.00                         0.00                           0.00     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   sw        snapkv  0.25 -0.37                        -0.32                          -0.06     0.01                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   vi        snapkv  0.25 -0.08                        -0.09                           0.01     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   zh        snapkv  0.25 -0.05                        -0.06                           0.01     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   en        snapkv  0.50 -0.00                        -0.02                           0.02     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   ja        snapkv  0.50 -0.11                        -0.22                           0.11     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   ko        snapkv  0.50 -0.18                        -0.18                           0.00     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   pl        snapkv  0.50 -0.00                         0.00                           0.00     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   sw        snapkv  0.50 -0.29                        -0.25                          -0.04     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   vi        snapkv  0.50 -0.01                        -0.09                           0.07     0.01                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   zh        snapkv  0.50 -0.03                        -0.06                           0.03     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   en streaming_llm  0.25  0.01                         0.01                           0.00     0.00                            1.000                              0.000        0.000
+qwen25-7b-1m  qa niah_none   ja streaming_llm  0.25 -0.03                        -0.13                           0.00     0.10                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   ko streaming_llm  0.25 -0.20                        -0.19                           0.00    -0.01                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   pl streaming_llm  0.25 -0.00                         0.00                           0.00     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   sw streaming_llm  0.25 -0.42                        -0.36                          -0.06     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   vi streaming_llm  0.25 -0.08                        -0.08                           0.00     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   zh streaming_llm  0.25 -0.04                        -0.04                           0.00     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   en streaming_llm  0.50 -0.01                        -0.01                           0.00     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   ja streaming_llm  0.50  0.18                        -0.12                           0.01     0.29                           -0.667                              0.056        1.611
+qwen25-7b-1m  qa niah_none   ko streaming_llm  0.50 -0.04                        -0.04                           0.00     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   pl streaming_llm  0.50 -0.00                         0.00                           0.00     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   sw streaming_llm  0.50 -0.35                        -0.32                          -0.06     0.03                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   vi streaming_llm  0.50 -0.06                        -0.06                           0.00     0.00                              NaN                                NaN          NaN
+qwen25-7b-1m  qa niah_none   zh streaming_llm  0.50 -0.03                        -0.03                           0.00     0.00                              NaN                                NaN          NaN
+[18:36:16] [qwen25-7b-1m__qa__niah_single] failure-mode rates (rows sum to 1):
+       model arm        task lang         press  kept  correct  false_absence  wrong_number  other
+qwen25-7b-1m  qa niah_single   en         knorm  0.25     0.02           0.39          0.59   0.00
+qwen25-7b-1m  qa niah_single   en         knorm  0.50     0.04           0.27          0.69   0.00
+qwen25-7b-1m  qa niah_single   en          none  1.00     0.98           0.02          0.00   0.00
+qwen25-7b-1m  qa niah_single   en        snapkv  0.25     0.07           0.17          0.74   0.02
+qwen25-7b-1m  qa niah_single   en        snapkv  0.50     0.37           0.03          0.60   0.00
+qwen25-7b-1m  qa niah_single   en streaming_llm  0.25     0.27           0.71          0.02   0.00
+qwen25-7b-1m  qa niah_single   en streaming_llm  0.50     0.45           0.55          0.00   0.00
+qwen25-7b-1m  qa niah_single   ja         knorm  0.25     0.03           0.62          0.35   0.00
+qwen25-7b-1m  qa niah_single   ja         knorm  0.50     0.07           0.09          0.84   0.00
+qwen25-7b-1m  qa niah_single   ja          none  1.00     0.96           0.04          0.00   0.00
+qwen25-7b-1m  qa niah_single   ja        snapkv  0.25     0.06           0.37          0.55   0.02
+qwen25-7b-1m  qa niah_single   ja        snapkv  0.50     0.16           0.16          0.67   0.01
+qwen25-7b-1m  qa niah_single   ja streaming_llm  0.25     0.28           0.67          0.00   0.05
+qwen25-7b-1m  qa niah_single   ja streaming_llm  0.50     0.46           0.33          0.00   0.21
+qwen25-7b-1m  qa niah_single   ko         knorm  0.25     0.04           0.09          0.87   0.00
+qwen25-7b-1m  qa niah_single   ko         knorm  0.50     0.64           0.00          0.36   0.00
+qwen25-7b-1m  qa niah_single   ko          none  1.00     1.00           0.00          0.00   0.00
+qwen25-7b-1m  qa niah_single   ko        snapkv  0.25     0.73           0.07          0.20   0.00
+qwen25-7b-1m  qa niah_single   ko        snapkv  0.50     0.94           0.01          0.05   0.00
+qwen25-7b-1m  qa niah_single   ko streaming_llm  0.25     0.27           0.73          0.00   0.00
+qwen25-7b-1m  qa niah_single   ko streaming_llm  0.50     0.48           0.51          0.00   0.01
+qwen25-7b-1m  qa niah_single   pl         knorm  0.25     0.01           0.62          0.37   0.00
+qwen25-7b-1m  qa niah_single   pl         knorm  0.50     0.19           0.05          0.76   0.00
+qwen25-7b-1m  qa niah_single   pl          none  1.00     0.99           0.01          0.00   0.00
+qwen25-7b-1m  qa niah_single   pl        snapkv  0.25     0.04           0.69          0.27   0.00
+qwen25-7b-1m  qa niah_single   pl        snapkv  0.50     0.44           0.19          0.37   0.00
+qwen25-7b-1m  qa niah_single   pl streaming_llm  0.25     0.28           0.72          0.00   0.00
+qwen25-7b-1m  qa niah_single   pl streaming_llm  0.50     0.49           0.51          0.00   0.00
+qwen25-7b-1m  qa niah_single   sw         knorm  0.25     0.00           0.90          0.01   0.09
+qwen25-7b-1m  qa niah_single   sw         knorm  0.50     0.00           0.93          0.04   0.03
+qwen25-7b-1m  qa niah_single   sw          none  1.00     0.48           0.52          0.00   0.00
+qwen25-7b-1m  qa niah_single   sw        snapkv  0.25     0.08           0.89          0.01   0.02
+qwen25-7b-1m  qa niah_single   sw        snapkv  0.50     0.23           0.77          0.00   0.00
+qwen25-7b-1m  qa niah_single   sw streaming_llm  0.25     0.07           0.93          0.00   0.00
+qwen25-7b-1m  qa niah_single   sw streaming_llm  0.50     0.11           0.89          0.00   0.00
+qwen25-7b-1m  qa niah_single   vi         knorm  0.25     0.02           0.37          0.61   0.00
+qwen25-7b-1m  qa niah_single   vi         knorm  0.50     0.11           0.04          0.85   0.00
+qwen25-7b-1m  qa niah_single   vi          none  1.00     0.96           0.04          0.00   0.00
+qwen25-7b-1m  qa niah_single   vi        snapkv  0.25     0.00           0.80          0.20   0.00
+qwen25-7b-1m  qa niah_single   vi        snapkv  0.50     0.06           0.28          0.66   0.00
+qwen25-7b-1m  qa niah_single   vi streaming_llm  0.25     0.29           0.71          0.00   0.00
+qwen25-7b-1m  qa niah_single   vi streaming_llm  0.50     0.50           0.50          0.00   0.00
+qwen25-7b-1m  qa niah_single   zh         knorm  0.25     0.00           0.74          0.26   0.00
+qwen25-7b-1m  qa niah_single   zh         knorm  0.50     0.06           0.31          0.63   0.00
+qwen25-7b-1m  qa niah_single   zh          none  1.00     0.98           0.02          0.00   0.00
+qwen25-7b-1m  qa niah_single   zh        snapkv  0.25     0.11           0.49          0.40   0.00
+qwen25-7b-1m  qa niah_single   zh        snapkv  0.50     0.36           0.13          0.51   0.00
+qwen25-7b-1m  qa niah_single   zh streaming_llm  0.25     0.27           0.73          0.00   0.00
+qwen25-7b-1m  qa niah_single   zh streaming_llm  0.50     0.43           0.57          0.00   0.00
+[18:36:16] [qwen25-7b-1m__qa__niah_single] damage attribution (drop = base_acc - cell_acc):
+       model arm        task lang         press  kept  drop  d_false_absence  d_wrong_number  d_other  share_false_absence  share_wrong_number  share_other
+qwen25-7b-1m  qa niah_single   en         knorm  0.25  0.96             0.37            0.59     0.00                0.385               0.615        0.000
+qwen25-7b-1m  qa niah_single   ja         knorm  0.25  0.93             0.58            0.35     0.00                0.624               0.376        0.000
+qwen25-7b-1m  qa niah_single   ko         knorm  0.25  0.96             0.09            0.87     0.00                0.094               0.906        0.000
+qwen25-7b-1m  qa niah_single   pl         knorm  0.25  0.98             0.61            0.37     0.00                0.622               0.378        0.000
+qwen25-7b-1m  qa niah_single   sw         knorm  0.25  0.48             0.38            0.01     0.09                0.792               0.021        0.188
+qwen25-7b-1m  qa niah_single   vi         knorm  0.25  0.94             0.33            0.61     0.00                0.351               0.649        0.000
+qwen25-7b-1m  qa niah_single   zh         knorm  0.25  0.98             0.72            0.26     0.00                0.735               0.265        0.000
+qwen25-7b-1m  qa niah_single   en         knorm  0.50  0.94             0.25            0.69     0.00                0.266               0.734        0.000
+qwen25-7b-1m  qa niah_single   ja         knorm  0.50  0.89             0.05            0.84     0.00                0.056               0.944        0.000
+qwen25-7b-1m  qa niah_single   ko         knorm  0.50  0.36             0.00            0.36     0.00                0.000               1.000        0.000
+qwen25-7b-1m  qa niah_single   pl         knorm  0.50  0.80             0.04            0.76     0.00                0.050               0.950        0.000
+qwen25-7b-1m  qa niah_single   sw         knorm  0.50  0.48             0.41            0.04     0.03                0.854               0.083        0.062
+qwen25-7b-1m  qa niah_single   vi         knorm  0.50  0.85             0.00            0.85     0.00                0.000               1.000        0.000
+qwen25-7b-1m  qa niah_single   zh         knorm  0.50  0.92             0.29            0.63     0.00                0.315               0.685        0.000
+qwen25-7b-1m  qa niah_single   en        snapkv  0.25  0.91             0.15            0.74     0.02                0.165               0.813        0.022
+qwen25-7b-1m  qa niah_single   ja        snapkv  0.25  0.90             0.33            0.55     0.02                0.367               0.611        0.022
+qwen25-7b-1m  qa niah_single   ko        snapkv  0.25  0.27             0.07            0.20     0.00                0.259               0.741        0.000
+qwen25-7b-1m  qa niah_single   pl        snapkv  0.25  0.95             0.68            0.27     0.00                0.716               0.284        0.000
+qwen25-7b-1m  qa niah_single   sw        snapkv  0.25  0.40             0.37            0.01     0.02                0.925               0.025        0.050
+qwen25-7b-1m  qa niah_single   vi        snapkv  0.25  0.96             0.76            0.20     0.00                0.792               0.208        0.000
+qwen25-7b-1m  qa niah_single   zh        snapkv  0.25  0.87             0.47            0.40     0.00                0.540               0.460        0.000
+qwen25-7b-1m  qa niah_single   en        snapkv  0.50  0.61             0.01            0.60     0.00                0.016               0.984        0.000
+qwen25-7b-1m  qa niah_single   ja        snapkv  0.50  0.80             0.12            0.67     0.01                0.150               0.838        0.012
+qwen25-7b-1m  qa niah_single   ko        snapkv  0.50  0.06             0.01            0.05     0.00                0.167               0.833        0.000
+qwen25-7b-1m  qa niah_single   pl        snapkv  0.50  0.55             0.18            0.37     0.00                0.327               0.673        0.000
+qwen25-7b-1m  qa niah_single   sw        snapkv  0.50  0.25             0.25            0.00     0.00                1.000               0.000        0.000
+qwen25-7b-1m  qa niah_single   vi        snapkv  0.50  0.90             0.24            0.66     0.00                0.267               0.733        0.000
+qwen25-7b-1m  qa niah_single   zh        snapkv  0.50  0.62             0.11            0.51     0.00                0.177               0.823        0.000
+qwen25-7b-1m  qa niah_single   en streaming_llm  0.25  0.71             0.69            0.02     0.00                0.972               0.028        0.000
+qwen25-7b-1m  qa niah_single   ja streaming_llm  0.25  0.68             0.63            0.00     0.05                0.926               0.000        0.074
+qwen25-7b-1m  qa niah_single   ko streaming_llm  0.25  0.73             0.73            0.00     0.00                1.000               0.000        0.000
+qwen25-7b-1m  qa niah_single   pl streaming_llm  0.25  0.71             0.71            0.00     0.00                1.000               0.000        0.000
+qwen25-7b-1m  qa niah_single   sw streaming_llm  0.25  0.41             0.41            0.00     0.00                1.000               0.000        0.000
+qwen25-7b-1m  qa niah_single   vi streaming_llm  0.25  0.67             0.67            0.00     0.00                1.000               0.000        0.000
+qwen25-7b-1m  qa niah_single   zh streaming_llm  0.25  0.71             0.71            0.00     0.00                1.000               0.000        0.000
+qwen25-7b-1m  qa niah_single   en streaming_llm  0.50  0.53             0.53            0.00     0.00                1.000               0.000        0.000
+qwen25-7b-1m  qa niah_single   ja streaming_llm  0.50  0.50             0.29            0.00     0.21                0.580               0.000        0.420
+qwen25-7b-1m  qa niah_single   ko streaming_llm  0.50  0.52             0.51            0.00     0.01                0.981               0.000        0.019
+qwen25-7b-1m  qa niah_single   pl streaming_llm  0.50  0.50             0.50            0.00     0.00                1.000               0.000        0.000
+qwen25-7b-1m  qa niah_single   sw streaming_llm  0.50  0.37             0.37            0.00     0.00                1.000               0.000        0.000
+qwen25-7b-1m  qa niah_single   vi streaming_llm  0.50  0.46             0.46            0.00     0.00                1.000               0.000        0.000
+qwen25-7b-1m  qa niah_single   zh streaming_llm  0.50  0.55             0.55            0.00     0.00                1.000               0.000        0.000
+[18:36:19] wrote results/failure_modes.csv, results/failure_mode_deltas.csv, results/scorer_sensitivity.csv, figures/fig4_failure_modes__<facet>.png

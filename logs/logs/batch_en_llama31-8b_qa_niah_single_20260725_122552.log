@@ -1,0 +1,39 @@
+[12:25:52] ===== stage=batch_en_llama31-8b_qa_niah_single ts=20260725_122552 ctx=32768 attn=sdpa seed_default=42 =====
+[12:25:56] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_batch_en_llama31-8b_qa_niah_single_20260725_122552.txt
+[12:26:57] model loaded: llama31-8b (meta-llama/Llama-3.1-8B-Instruct) rev=0e9e39f249a16976918f6564b8830bc894c89659 (51s)
+[12:26:57] en: key-check substring 'led the masts and children counted the boats. ' is common in the haystack (87x) — eyeball split-audit
+[12:26:57] en: key-check substring 'led the masts and children counted the boats. ' is common in the haystack (87x) — eyeball split-audit
+[12:26:57] en: key-check substring 'led the masts and children counted the boats. ' is common in the haystack (87x) — eyeball split-audit
+[12:26:57] en: key-check substring 'led the masts and children counted the boats. ' is common in the haystack (87x) — eyeball split-audit
+[12:26:57] en: key-check substring 'led the masts and children counted the boats. ' is common in the haystack (88x) — eyeball split-audit
+[12:26:57] split[en/niah_single]: marker#42987bae 'xt>\n\n<Question> What special magic numbers associated with "' question chars min/med/max = 2062/2062/2062
+[12:26:57] === cell 1/7 [c7d242d5649f794d] {'model': 'llama31-8b', 'arm': 'qa', 'lang': 'en', 'ctx_len': 4096, 'press': 'none', 'kept': 1.0, 'task': 'niah_single', 'seed': 42, 'toy': True} n=6 | resume: 0 done, 6 to run
+[12:27:05] [########################] 6/6 (100.0%) | ETA   0.0m | sess-acc 1.00 | 1.3s/sample
+[12:27:08] CELL DONE [c7d242d5649f794d] acc=1.000 n=6
+[12:27:09] press check: want kept=0.5 measured=0.500
+[12:27:09] === cell 2/7 [49b7fc2f969760fe] {'model': 'llama31-8b', 'arm': 'qa', 'lang': 'en', 'ctx_len': 4096, 'press': 'snapkv', 'kept': 0.5, 'task': 'niah_single', 'seed': 42, 'toy': True} n=6 | resume: 0 done, 6 to run
+[12:27:10] qa press check: context kept 0.500 (want 0.5)
+[12:27:16] [########################] 6/6 (100.0%) | ETA   0.0m | sess-acc 0.83 | 1.2s/sample
+[12:27:19] CELL DONE [49b7fc2f969760fe] acc=0.833 n=6
+[12:27:19] press check: want kept=0.5 measured=0.500
+[12:27:19] === cell 3/7 [6ffefc86a680f89e] {'model': 'llama31-8b', 'arm': 'qa', 'lang': 'en', 'ctx_len': 4096, 'press': 'knorm', 'kept': 0.5, 'task': 'niah_single', 'seed': 42, 'toy': True} n=6 | resume: 0 done, 6 to run
+[12:27:20] qa press check: context kept 0.500 (want 0.5)
+[12:27:25] [########################] 6/6 (100.0%) | ETA   0.0m | sess-acc 0.83 | 1.0s/sample
+[12:27:28] CELL DONE [6ffefc86a680f89e] acc=0.833 n=6
+[12:27:28] === cell 4/7 [bda9b4dcf0543f79] {'model': 'llama31-8b', 'arm': 'joint', 'lang': 'en', 'ctx_len': 4096, 'press': 'none', 'kept': 1.0, 'task': 'niah_single', 'seed': 42, 'toy': True} n=6 | resume: 0 done, 6 to run
+[12:27:35] [########################] 6/6 (100.0%) | ETA   0.0m | sess-acc 1.00 | 1.1s/sample
+[12:27:37] CELL DONE [bda9b4dcf0543f79] acc=1.000 n=6
+[12:27:37] press check: want kept=0.5 measured=0.500
+[12:27:37] === cell 5/7 [a24e44c12c6b7b0e] {'model': 'llama31-8b', 'arm': 'joint', 'lang': 'en', 'ctx_len': 4096, 'press': 'snapkv', 'kept': 0.5, 'task': 'niah_single', 'seed': 42, 'toy': True} n=6 | resume: 0 done, 6 to run
+[12:27:38] joint press check: prompt kept 0.500 (want 0.5)
+[12:27:44] [########################] 6/6 (100.0%) | ETA   0.0m | sess-acc 1.00 | 1.0s/sample
+[12:27:46] CELL DONE [a24e44c12c6b7b0e] acc=1.000 n=6
+[12:27:47] press check: want kept=0.5 measured=0.500
+[12:27:47] === cell 6/7 [e94fb41df713baee] {'model': 'llama31-8b', 'arm': 'joint', 'lang': 'en', 'ctx_len': 4096, 'press': 'knorm', 'kept': 0.5, 'task': 'niah_single', 'seed': 42, 'toy': True} n=6 | resume: 0 done, 6 to run
+[12:27:47] joint press check: prompt kept 0.500 (want 0.5)
+[12:27:53] [########################] 6/6 (100.0%) | ETA   0.0m | sess-acc 1.00 | 1.1s/sample
+[12:27:56] CELL DONE [e94fb41df713baee] acc=1.000 n=6
+[12:27:57] split[en/niah_none]: marker#42987bae 'xt>\n\n<Question> What special magic numbers associated with "' question chars min/med/max = 2061/2061/2062
+[12:27:57] === cell 7/7 [c3cbde15c248c10c] {'model': 'llama31-8b', 'arm': 'qa', 'lang': 'en', 'ctx_len': 4096, 'press': 'none', 'kept': 1.0, 'task': 'niah_none', 'seed': 42, 'toy': True} n=6 | resume: 0 done, 6 to run
+[12:28:02] [########################] 6/6 (100.0%) | ETA   0.0m | sess-acc 1.00 | 0.9s/sample
+[12:28:05] CELL DONE [c3cbde15c248c10c] acc=1.000 n=6

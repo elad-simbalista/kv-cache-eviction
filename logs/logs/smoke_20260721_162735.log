@@ -1,0 +1,11 @@
+[16:27:35] ===== stage=smoke ts=20260721_162735 model=meta-llama/Llama-3.1-8B-Instruct task=niah_single ctx=32768 attn=sdpa seed_default=42 =====
+[16:27:37] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_smoke_20260721_162735.txt
+[16:28:56] model loaded: meta-llama/Llama-3.1-8B-Instruct rev=0e9e39f249a16976918f6564b8830bc894c89659 (75s)
+[16:28:58] full-cache answer: '<Answer> 2867825 </Answer>' | official-score=True
+[16:29:00] snapkv: requested kept=0.50 measured kept=0.500
+[16:29:00] snapkv kept=0.5 answer: '<Answer> 2867825 </Answer>'
+[16:29:01] streaming_llm: requested kept=0.50 measured kept=0.500
+[16:29:01] streaming_llm kept=0.5 answer: '<Answer> 1 </Answer>'
+[16:29:02] knorm: requested kept=0.50 measured kept=0.500
+[16:29:02] knorm kept=0.5 answer: '<Answer> 2867825 </Answer>'
+[16:29:06] SMOKE PASS — record semantics + env pins + date in DECISIONS.md

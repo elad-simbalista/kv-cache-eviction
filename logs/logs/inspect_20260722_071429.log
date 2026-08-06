@@ -1,0 +1,20 @@
+[07:14:29] ===== stage=inspect ts=20260722_071429 model=meta-llama/Llama-3.1-8B-Instruct task=niah_single ctx=32768 attn=sdpa seed_default=42 =====
+[07:14:33] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_inspect_20260722_071429.txt
+[07:14:33] cell 1ba5064cf9018472 | sw press=none kept=1.0 | acc=0.940 n=100 | pred_chars min/mean/max = 32/44/69
+[07:14:33] ----------------------------------------------------------------------
+[07:14:33]   gold=['2867825'] | correct=True | depth=0.0301 | pred_chars=41 | input_tokens=33082
+[07:14:33]   pred='Jibu\nOrodhesha nambari zote hapa: 2867825'
+[07:14:33] ----------------------------------------------------------------------
+[07:14:33]   gold=['4744854'] | correct=True | depth=0.1878 | pred_chars=42 | input_tokens=33080
+[07:14:33]   pred='Jibu\nOrodhesha nambari zote hapa: 4744854.'
+[07:14:33] ----------------------------------------------------------------------
+[07:14:33]   gold=['2458591'] | correct=True | depth=0.9324 | pred_chars=40 | input_tokens=33082
+[07:14:33]   pred='Jibu\nOrodhesha nambari zote hapa\n2458591'
+[07:14:33] ----------------------------------------------------------------------
+[07:14:33]   gold=['1499914'] | correct=True | depth=0.1222 | pred_chars=42 | input_tokens=33082
+[07:14:33]   pred='Jibu\nOrodhesha nambari zote hapa: 1499914.'
+[07:14:33] ----------------------------------------------------------------------
+[07:14:33]   gold=['9478454'] | correct=True | depth=0.9521 | pred_chars=44 | input_tokens=33082
+[07:14:33]   pred='Jibu ni: Orodhesha nambari zote hapa\n9478454'
+[07:14:33] ----------------------------------------------------------------------
+[07:14:33] truncation check: if pred_chars sits at the cap and text ends mid-thought with no digits, raise MAX_NEW_TOKENS (and wipe results/raw before re-running — MAX_NEW_TOKENS is not in the cell hash).

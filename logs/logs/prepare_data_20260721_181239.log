@@ -1,0 +1,5 @@
+[18:12:39] ===== stage=prepare_data ts=20260721_181239 model=meta-llama/Llama-3.1-8B-Instruct task=niah_single ctx=32768 attn=sdpa seed_default=42 =====
+[18:12:43] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_prepare_data_20260721_181239.txt
+[18:12:43] cloning https://github.com/mungg/OneRuler.git -> /vol/oneruler_repo
+[18:12:53] clone OK
+[18:12:58] next: --stage gen-data --langs <codes> --ctx-len <len> --n <N>

@@ -1,0 +1,12 @@
+[07:01:49] ===== stage=batch_zh_llama31-8b_qa_niah_none ts=20260729_070149 ctx=32768 attn=sdpa seed_default=42 =====
+[07:01:53] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_batch_zh_llama31-8b_qa_niah_none_20260729_070149.txt
+[07:02:06] model loaded: llama31-8b (meta-llama/Llama-3.1-8B-Instruct) rev=0e9e39f249a16976918f6564b8830bc894c89659 (8s)
+[07:02:07] split[zh/niah_none]: marker#3add590c '</文本>\n\n<问题> 在所提供的文本中，与“' question chars min/med/max = 104/105/106
+[07:02:07] === cell 1/7 [7035f8bdbd4fae94] {'model': 'llama31-8b', 'arm': 'qa', 'lang': 'zh', 'ctx_len': 32768, 'press': 'none', 'kept': 1.0, 'task': 'niah_none', 'seed': 42, 'toy': False} n=100 | resume: 0 done, 100 to run
+[07:03:03] [##......................] 10/100 (10.0%) | ETA   8.4m | sess-acc 0.20 | 5.6s/sample
+[07:04:02] [####....................] 20/100 (20.0%) | ETA   7.7m | sess-acc 0.20 | 5.7s/sample
+[07:05:01] [#######.................] 30/100 (30.0%) | ETA   6.8m | sess-acc 0.23 | 5.8s/sample
+[07:06:00] [#########...............] 40/100 (40.0%) | ETA   5.8m | sess-acc 0.23 | 5.8s/sample
+[07:06:57] [############............] 50/100 (50.0%) | ETA   4.8m | sess-acc 0.20 | 5.8s/sample
+[07:08:01] [##############..........] 60/100 (60.0%) | ETA   3.9m | sess-acc 0.17 | 5.9s/sample
+[07:09:00] [################........] 70/100 (70.0%) | ETA   3.0m | sess-acc 0.17 | 5.9s/sample

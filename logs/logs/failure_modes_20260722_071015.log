@@ -1,0 +1,15 @@
+[07:10:15] ===== stage=failure_modes ts=20260722_071015 model=meta-llama/Llama-3.1-8B-Instruct task=niah_single ctx=32768 attn=sdpa seed_default=42 =====
+[07:10:18] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_failure_modes_20260722_071015.txt
+[07:10:19] failure-mode rates per cell (fractions, rows sum to 1):
+lang press  kept  correct  false_absence  wrong_number  other
+  en  none   1.0    0.980           0.02           0.0  0.000
+  hi  none   1.0    0.000           1.00           0.0  0.000
+  ja  none   1.0    0.990           0.01           0.0  0.000
+  ko  none   1.0    0.860           0.14           0.0  0.000
+  pl  none   1.0    0.840           0.16           0.0  0.000
+  ru  none   1.0    0.300           0.70           0.0  0.000
+  sw  none   1.0    0.940           0.00           0.0  0.060
+  ta  none   1.0    0.533           0.00           0.0  0.467
+  vi  none   1.0    0.800           0.20           0.0  0.000
+  zh  none   1.0    1.000           0.00           0.0  0.000
+[07:10:19] no compressed cells yet — rate table above is baseline-only (this is the expected output when validating before the sweep)

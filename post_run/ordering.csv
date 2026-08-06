@@ -1,0 +1,67 @@
+contrast,arm,task,press,kept,k_langs,langs,rho,exact_p,rho_boot_lo,rho_boot_hi,frac_boot_below_crit,rho_floor_gated,p_floor_gated,k_floor_gated,leave_one_out,model,note,q_bh
+cross_model,joint,niah_single,knorm,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.7769,0.0571,0.112,0.926,0.745,0.7715,0.1,6.0,"{""en"": 0.772, ""ja"": 0.772, ""ko"": 0.621, ""pl"": 0.926, ""sw"": 0.772, ""vi"": 0.676, ""zh"": 0.845}",,,0.25695
+cross_model,joint,niah_single,knorm,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.0546,0.9238,-0.609,0.649,0.995,0.1739,0.7556,6.0,"{""en"": 0.058, ""ja"": 0.174, ""ko"": 0.147, ""pl"": -0.53, ""sw"": 0.174, ""vi"": 0.235, ""zh"": 0.116}",,,0.9238
+cross_model,joint,niah_single,snapkv,0.25,7,"en,ja,ko,pl,sw,vi,zh",-0.3762,0.4103,-0.655,-0.108,1.0,-0.5822,0.2333,6.0,"{""en"": -0.529, ""ja"": -0.441, ""ko"": -0.015, ""pl"": -0.015, ""sw"": -0.582, ""vi"": -0.493, ""zh"": -0.464}",,,0.6889846153846153
+cross_model,joint,niah_single,snapkv,0.5,7,"en,ja,ko,pl,sw,vi,zh",-0.3545,0.4302,-0.636,0.138,1.0,-0.5441,0.2611,6.0,"{""en"": -0.493, ""ja"": -0.406, ""ko"": -0.015, ""pl"": -0.015, ""sw"": -0.544, ""vi"": -0.456, ""zh"": -0.429}",,,0.6889846153846153
+cross_model,joint,niah_single,streaming_llm,0.25,7,"en,ja,ko,pl,sw,vi,zh",-0.835,0.0333,-0.716,0.703,0.985,-0.7775,0.1333,6.0,"{""en"": -0.845, ""ja"": -0.832, ""ko"": -0.832, ""pl"": -0.832, ""sw"": -0.778, ""vi"": -0.832, ""zh"": -0.823}",,,0.25695
+cross_model,joint,niah_single,streaming_llm,0.5,7,"en,ja,ko,pl,sw,vi,zh",-0.2572,0.569,-0.667,0.667,0.992,-0.4227,0.35,6.0,"{""en"": -0.25, ""ja"": -0.308, ""ko"": 0.061, ""pl"": 0.061, ""sw"": -0.423, ""vi"": -0.478, ""zh"": -0.423}",,,0.7137600000000001
+cross_model,qa,niah_none,knorm,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.6307,0.1437,0.282,0.823,0.881,,,3.0,"{""en"": 0.551, ""ja"": 0.725, ""ko"": 0.638, ""pl"": 0.486, ""sw"": 0.522, ""vi"": 0.696, ""zh"": 0.714}",,,0.5001
+cross_model,qa,niah_none,knorm,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.4324,0.327,0.126,0.523,1.0,,,3.0,"{""en"": 0.2, ""ja"": 0.522, ""ko"": 0.696, ""pl"": 0.087, ""sw"": 0.319, ""vi"": 0.522, ""zh"": 0.6}",,,0.6889846153846153
+cross_model,qa,niah_none,snapkv,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.6071,0.1667,0.252,0.873,0.826,,,3.0,"{""en"": 0.6, ""ja"": 0.714, ""ko"": 0.486, ""pl"": 0.371, ""sw"": 0.6, ""vi"": 0.6, ""zh"": 0.771}",,,0.5001
+cross_model,qa,niah_none,snapkv,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.3214,0.4976,0.143,0.577,1.0,,,3.0,"{""en"": 0.143, ""ja"": 0.429, ""ko"": 0.543, ""pl"": -0.086, ""sw"": 0.257, ""vi"": 0.314, ""zh"": 0.6}",,,0.6889846153846153
+cross_model,qa,niah_none,streaming_llm,0.25,7,"en,ja,ko,pl,sw,vi,zh",-0.4183,0.3524,-0.631,-0.222,1.0,,,3.0,"{""en"": -0.353, ""ja"": -0.353, ""ko"": -0.971, ""pl"": -0.406, ""sw"": -0.116, ""vi"": -0.377, ""zh"": -0.377}",,,0.6889846153846153
+cross_model,qa,niah_none,streaming_llm,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.3273,0.475,-0.126,0.714,0.982,,,3.0,"{""en"": 0.377, ""ja"": 0.58, ""ko"": 0.029, ""pl"": 0.232, ""sw"": 0.235, ""vi"": 0.412, ""zh"": 0.377}",,,0.6889846153846153
+cross_model,qa,niah_single,knorm,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.8532,0.0206,0.209,0.954,0.553,0.8971,0.0222,6.0,"{""en"": 0.812, ""ja"": 0.794, ""ko"": 0.761, ""pl"": 0.94, ""sw"": 0.897, ""vi"": 0.794, ""zh"": 0.897}",,,0.25695
+cross_model,qa,niah_single,knorm,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.1786,0.7131,-0.091,0.429,1.0,0.2571,0.6583,6.0,"{""en"": 0.257, ""ja"": 0.257, ""ko"": -0.314, ""pl"": 0.543, ""sw"": 0.257, ""vi"": -0.029, ""zh"": 0.257}",,,0.8022374999999999
+cross_model,qa,niah_single,snapkv,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.7857,0.048,0.216,0.893,0.733,0.8857,0.0333,6.0,"{""en"": 0.771, ""ja"": 0.657, ""ko"": 0.771, ""pl"": 0.714, ""sw"": 0.886, ""vi"": 0.714, ""zh"": 0.886}",,,0.25695
+cross_model,qa,niah_single,snapkv,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.25,0.5948,-0.036,0.45,1.0,0.4857,0.3556,6.0,"{""en"": 0.314, ""ja"": 0.143, ""ko"": 0.143, ""pl"": 0.486, ""sw"": 0.486, ""vi"": -0.2, ""zh"": 0.314}",,,0.7137600000000001
+cross_model,qa,niah_single,streaming_llm,0.25,7,"en,ja,ko,pl,sw,vi,zh",-0.3495,0.4524,-0.419,0.846,0.919,-0.3131,0.5833,6.0,"{""en"": -0.373, ""ja"": -0.226, ""ko"": -0.469, ""pl"": -0.742, ""sw"": -0.313, ""vi"": 0.098, ""zh"": -0.373}",,,0.6889846153846153
+cross_model,qa,niah_single,streaming_llm,0.5,7,"en,ja,ko,pl,sw,vi,zh",-0.0901,0.8587,-0.355,0.883,0.883,-0.1429,0.8028,6.0,"{""en"": -0.116, ""ja"": -0.116, ""ko"": 0.058, ""pl"": -0.464, ""sw"": -0.143, ""vi"": 0.348, ""zh"": -0.143}",,,0.9092117647058824
+baseline_to_compressed,joint,niah_single,knorm,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.0364,0.9556,,,,,,,,llama31-8b,,
+baseline_to_compressed,joint,niah_single,knorm,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.5455,0.219,,,,,,,,llama31-8b,,
+baseline_to_compressed,joint,niah_single,snapkv,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.9909,0.0008,,,,,,,,llama31-8b,,
+baseline_to_compressed,joint,niah_single,snapkv,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.9909,0.0008,,,,,,,,llama31-8b,,
+baseline_to_compressed,joint,niah_single,streaming_llm,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.7432,0.0667,,,,,,,,llama31-8b,,
+baseline_to_compressed,joint,niah_single,streaming_llm,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.8519,0.019,,,,,,,,llama31-8b,,
+baseline_to_compressed,qa,niah_none,knorm,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.5406,0.2206,,,,,,,,llama31-8b,,
+baseline_to_compressed,qa,niah_none,knorm,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.937,0.0048,,,,,,,,llama31-8b,,
+baseline_to_compressed,qa,niah_none,snapkv,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.6307,0.1413,,,,,,,,llama31-8b,,
+baseline_to_compressed,qa,niah_none,snapkv,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.937,0.0048,,,,,,,,llama31-8b,,
+baseline_to_compressed,qa,niah_none,streaming_llm,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.018,0.9857,,,,,,,,llama31-8b,,
+baseline_to_compressed,qa,niah_none,streaming_llm,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.4182,0.3508,,,,,,,,llama31-8b,,
+baseline_to_compressed,qa,niah_single,knorm,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.0273,0.9698,,,,,,,,llama31-8b,,
+baseline_to_compressed,qa,niah_single,knorm,0.5,7,"en,ja,ko,pl,sw,vi,zh",-0.2342,0.623,,,,,,,,llama31-8b,,
+baseline_to_compressed,qa,niah_single,snapkv,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.1261,0.8,,,,,,,,llama31-8b,,
+baseline_to_compressed,qa,niah_single,snapkv,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.3063,0.5119,,,,,,,,llama31-8b,,
+baseline_to_compressed,qa,niah_single,streaming_llm,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.2244,0.6476,,,,,,,,llama31-8b,,
+baseline_to_compressed,qa,niah_single,streaming_llm,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.4273,0.3397,,,,,,,,llama31-8b,,
+baseline_to_compressed,joint,niah_single,knorm,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.3144,0.5524,,,,,,,,qwen25-7b-1m,,
+baseline_to_compressed,joint,niah_single,knorm,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.2222,0.6389,,,,,,,,qwen25-7b-1m,,
+baseline_to_compressed,joint,niah_single,snapkv,0.25,7,"en,ja,ko,pl,sw,vi,zh",1.0,0.0008,,,,,,,,qwen25-7b-1m,,
+baseline_to_compressed,joint,niah_single,snapkv,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.9909,0.0008,,,,,,,,qwen25-7b-1m,,
+baseline_to_compressed,joint,niah_single,streaming_llm,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.4214,0.3429,,,,,,,,qwen25-7b-1m,,
+baseline_to_compressed,joint,niah_single,streaming_llm,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.6384,0.1238,,,,,,,,qwen25-7b-1m,,
+baseline_to_compressed,qa,niah_none,knorm,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.937,0.0048,,,,,,,,qwen25-7b-1m,,
+baseline_to_compressed,qa,niah_none,knorm,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.955,0.0032,,,,,,,,qwen25-7b-1m,,
+baseline_to_compressed,qa,niah_none,snapkv,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.8571,0.0238,,,,,,,,qwen25-7b-1m,,
+baseline_to_compressed,qa,niah_none,snapkv,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.9286,0.0067,,,,,,,,qwen25-7b-1m,,
+baseline_to_compressed,qa,niah_none,streaming_llm,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.4364,0.3302,,,,,,,,qwen25-7b-1m,,
+baseline_to_compressed,qa,niah_none,streaming_llm,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.955,0.0032,,,,,,,,qwen25-7b-1m,,
+baseline_to_compressed,qa,niah_single,knorm,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.3611,0.4135,,,,,,,,qwen25-7b-1m,,
+baseline_to_compressed,qa,niah_single,knorm,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.691,0.0952,,,,,,,,qwen25-7b-1m,,
+baseline_to_compressed,qa,niah_single,snapkv,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.3273,0.4778,,,,,,,,qwen25-7b-1m,,
+baseline_to_compressed,qa,niah_single,snapkv,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.8729,0.0159,,,,,,,,qwen25-7b-1m,,
+baseline_to_compressed,qa,niah_single,streaming_llm,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.0476,0.9262,,,,,,,,qwen25-7b-1m,,
+baseline_to_compressed,qa,niah_single,streaming_llm,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.3637,0.4286,,,,,,,,qwen25-7b-1m,,
+cross_press,joint,niah_single,,0.25,7,"en,ja,ko,pl,sw,vi,zh",-0.018,0.9889,,,,,,,,llama31-8b,,
+cross_press,joint,niah_single,,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.4685,0.2897,,,,,,,,llama31-8b,,
+cross_press,qa,niah_none,,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.7857,0.048,,,,,,,,llama31-8b,,
+cross_press,qa,niah_none,,0.5,7,"en,ja,ko,pl,sw,vi,zh",1.0,0.0004,,,,,,,,llama31-8b,,
+cross_press,qa,niah_single,,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.4324,0.327,,,,,,,,llama31-8b,,
+cross_press,qa,niah_single,,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.25,0.5948,,,,,,,,llama31-8b,,
+cross_press,joint,niah_single,,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.3144,0.5524,,,,,,,,qwen25-7b-1m,,
+cross_press,joint,niah_single,,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.1101,0.8214,,,,,,,,qwen25-7b-1m,,
+cross_press,qa,niah_none,,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.919,0.0071,,,,,,,,qwen25-7b-1m,,
+cross_press,qa,niah_none,,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.8829,0.0151,,,,,,,,qwen25-7b-1m,,
+cross_press,qa,niah_single,,0.25,7,"en,ja,ko,pl,sw,vi,zh",0.0,1.0,,,,,,,,qwen25-7b-1m,,
+cross_press,qa,niah_single,,0.5,7,"en,ja,ko,pl,sw,vi,zh",0.3929,0.3956,,,,,,,,qwen25-7b-1m,,

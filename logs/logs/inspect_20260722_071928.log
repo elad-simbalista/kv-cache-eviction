@@ -1,0 +1,24 @@
+[07:19:28] ===== stage=inspect ts=20260722_071928 model=meta-llama/Llama-3.1-8B-Instruct task=niah_single ctx=32768 attn=sdpa seed_default=42 =====
+[07:19:33] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_inspect_20260722_071928.txt
+[07:19:33] cell 1ba5064cf9018472 | sw press=none kept=1.0 | acc=0.940 n=100 | pred_chars min/mean/max = 32/44/69
+[07:19:33] showing up to 15 of 6 INCORRECT samples
+[07:19:33] ----------------------------------------------------------------------
+[07:19:33]   gold=['3608513'] | correct=False | depth=0.2922 | pred_chars=69 | input_tokens=33084
+[07:19:33]   pred='Jibu ni: Orodhesha nambari zote hapa\n\nNambari maalum za maajabu zinaz'
+[07:19:33] ----------------------------------------------------------------------
+[07:19:33]   gold=['7273233'] | correct=False | depth=0.2325 | pred_chars=69 | input_tokens=33082
+[07:19:33]   pred='Jibu ni: Orodhesha nambari zote hapa\n\nNambari maalum za maajabu zinaz'
+[07:19:33] ----------------------------------------------------------------------
+[07:19:33]   gold=['9143903'] | correct=False | depth=0.2922 | pred_chars=69 | input_tokens=33084
+[07:19:33]   pred='Jibu ni: Orodhesha nambari zote hapa\n\nNambari maalum za maajabu zinaz'
+[07:19:33] ----------------------------------------------------------------------
+[07:19:33]   gold=['4652414'] | correct=False | depth=0.082 | pred_chars=69 | input_tokens=33082
+[07:19:33]   pred='Jibu ni: Orodhesha nambari zote hapa\n\nNambari maalum za maajabu zinaz'
+[07:19:33] ----------------------------------------------------------------------
+[07:19:33]   gold=['2737893'] | correct=False | depth=0.1878 | pred_chars=69 | input_tokens=33082
+[07:19:33]   pred='Jibu ni: Orodhesha nambari zote hapa\n\nNambari maalum za maajabu zinaz'
+[07:19:33] ----------------------------------------------------------------------
+[07:19:33]   gold=['6752576'] | correct=False | depth=0.2922 | pred_chars=69 | input_tokens=33084
+[07:19:33]   pred='Jibu ni: Orodhesha nambari zote hapa\n\nNambari maalum za maajabu zinaz'
+[07:19:33] ----------------------------------------------------------------------
+[07:19:33] truncation check: if pred_chars sits at the cap and text ends mid-thought with no digits, raise MAX_NEW_TOKENS (and wipe results/raw before re-running — MAX_NEW_TOKENS is not in the cell hash).

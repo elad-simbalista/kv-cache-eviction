@@ -1,0 +1,57 @@
+[16:57:36] ===== stage=batch_zh_llama31-8b_joint_niah_single ts=20260728_165736 ctx=32768 attn=sdpa seed_default=42 =====
+[16:57:39] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_batch_zh_llama31-8b_joint_niah_single_20260728_165736.txt
+[16:57:48] model loaded: llama31-8b (meta-llama/Llama-3.1-8B-Instruct) rev=0e9e39f249a16976918f6564b8830bc894c89659 (7s)
+[16:57:48] zh: depth recovered for 100 samples (0 with multiple gold occurrences — first used)
+[16:57:48] === cell 1/7 [ad626c940119553b] {'model': 'llama31-8b', 'arm': 'joint', 'lang': 'zh', 'ctx_len': 32768, 'press': 'none', 'kept': 1.0, 'task': 'niah_single', 'seed': 42, 'toy': False} n=100 | resume: 0 done, 100 to run
+[16:58:39] [##......................] 10/100 (10.0%) | ETA   7.7m | sess-acc 1.00 | 5.1s/sample
+[16:59:31] [####....................] 20/100 (20.0%) | ETA   6.9m | sess-acc 1.00 | 5.2s/sample
+[17:00:22] [#######.................] 30/100 (30.0%) | ETA   6.0m | sess-acc 1.00 | 5.1s/sample
+[17:01:13] [#########...............] 40/100 (40.0%) | ETA   5.1m | sess-acc 1.00 | 5.1s/sample
+[17:02:04] [############............] 50/100 (50.0%) | ETA   4.3m | sess-acc 1.00 | 5.1s/sample
+[17:02:57] [##############..........] 60/100 (60.0%) | ETA   3.4m | sess-acc 0.98 | 5.2s/sample
+[17:03:48] [################........] 70/100 (70.0%) | ETA   2.6m | sess-acc 0.99 | 5.1s/sample
+[17:04:39] [###################.....] 80/100 (80.0%) | ETA   1.7m | sess-acc 0.99 | 5.1s/sample
+[17:05:30] [#####################...] 90/100 (90.0%) | ETA   0.9m | sess-acc 0.99 | 5.1s/sample
+[17:06:21] [########################] 100/100 (100.0%) | ETA   0.0m | sess-acc 0.98 | 5.1s/sample
+[17:06:24] CELL DONE [ad626c940119553b] acc=0.980 n=100
+[17:06:24] zh: depth recovered for 100 samples (0 with multiple gold occurrences — first used)
+[17:06:26] press check: want kept=0.5 measured=0.500
+[17:06:26] === cell 2/7 [89dfbc9be15bb749] {'model': 'llama31-8b', 'arm': 'joint', 'lang': 'zh', 'ctx_len': 32768, 'press': 'snapkv', 'kept': 0.5, 'task': 'niah_single', 'seed': 42, 'toy': False} n=100 | resume: 0 done, 100 to run
+[17:06:31] joint press check: prompt kept 0.500 (want 0.5)
+[17:07:17] [##......................] 10/100 (10.0%) | ETA   7.7m | sess-acc 1.00 | 5.1s/sample
+[17:08:11] [####....................] 20/100 (20.0%) | ETA   7.0m | sess-acc 1.00 | 5.3s/sample
+[17:09:03] [#######.................] 30/100 (30.0%) | ETA   6.1m | sess-acc 1.00 | 5.3s/sample
+[17:09:54] [#########...............] 40/100 (40.0%) | ETA   5.2m | sess-acc 1.00 | 5.2s/sample
+[17:10:45] [############............] 50/100 (50.0%) | ETA   4.3m | sess-acc 1.00 | 5.2s/sample
+[17:11:37] [##############..........] 60/100 (60.0%) | ETA   3.5m | sess-acc 0.98 | 5.2s/sample
+[17:12:28] [################........] 70/100 (70.0%) | ETA   2.6m | sess-acc 0.99 | 5.2s/sample
+[17:13:19] [###################.....] 80/100 (80.0%) | ETA   1.7m | sess-acc 0.99 | 5.2s/sample
+[17:14:10] [#####################...] 90/100 (90.0%) | ETA   0.9m | sess-acc 0.99 | 5.2s/sample
+[17:15:01] [########################] 100/100 (100.0%) | ETA   0.0m | sess-acc 0.98 | 5.2s/sample
+[17:15:02] CELL DONE [89dfbc9be15bb749] acc=0.980 n=100
+[17:15:02] zh: depth recovered for 100 samples (0 with multiple gold occurrences — first used)
+[17:15:02] press check: want kept=0.25 measured=0.250
+[17:15:02] === cell 3/7 [03100a13c1548114] {'model': 'llama31-8b', 'arm': 'joint', 'lang': 'zh', 'ctx_len': 32768, 'press': 'snapkv', 'kept': 0.25, 'task': 'niah_single', 'seed': 42, 'toy': False} n=100 | resume: 0 done, 100 to run
+[17:15:07] joint press check: prompt kept 0.250 (want 0.25)
+[17:15:53] [##......................] 10/100 (10.0%) | ETA   7.6m | sess-acc 1.00 | 5.1s/sample
+[17:16:44] [####....................] 20/100 (20.0%) | ETA   6.8m | sess-acc 1.00 | 5.1s/sample
+[17:17:35] [#######.................] 30/100 (30.0%) | ETA   5.9m | sess-acc 1.00 | 5.1s/sample
+[17:18:26] [#########...............] 40/100 (40.0%) | ETA   5.1m | sess-acc 1.00 | 5.1s/sample
+[17:19:17] [############............] 50/100 (50.0%) | ETA   4.2m | sess-acc 1.00 | 5.1s/sample
+[17:20:09] [##############..........] 60/100 (60.0%) | ETA   3.4m | sess-acc 0.98 | 5.1s/sample
+[17:21:00] [################........] 70/100 (70.0%) | ETA   2.6m | sess-acc 0.99 | 5.1s/sample
+[17:21:51] [###################.....] 80/100 (80.0%) | ETA   1.7m | sess-acc 0.99 | 5.1s/sample
+[17:22:42] [#####################...] 90/100 (90.0%) | ETA   0.9m | sess-acc 0.99 | 5.1s/sample
+[17:23:33] [########################] 100/100 (100.0%) | ETA   0.0m | sess-acc 0.98 | 5.1s/sample
+[17:23:34] CELL DONE [03100a13c1548114] acc=0.980 n=100
+[17:23:34] zh: depth recovered for 100 samples (0 with multiple gold occurrences — first used)
+[17:23:34] press check: want kept=0.5 measured=0.500
+[17:23:34] === cell 4/7 [4483178e9db36bf0] {'model': 'llama31-8b', 'arm': 'joint', 'lang': 'zh', 'ctx_len': 32768, 'press': 'streaming_llm', 'kept': 0.5, 'task': 'niah_single', 'seed': 42, 'toy': False} n=100 | resume: 0 done, 100 to run
+[17:23:39] joint press check: prompt kept 0.500 (want 0.5)
+[17:24:24] [##......................] 10/100 (10.0%) | ETA   7.5m | sess-acc 0.60 | 5.0s/sample
+[17:25:16] [####....................] 20/100 (20.0%) | ETA   6.8m | sess-acc 0.55 | 5.1s/sample
+[17:26:10] [#######.................] 30/100 (30.0%) | ETA   6.1m | sess-acc 0.53 | 5.2s/sample
+[17:27:00] [#########...............] 40/100 (40.0%) | ETA   5.1m | sess-acc 0.57 | 5.1s/sample
+[17:27:50] [############............] 50/100 (50.0%) | ETA   4.3m | sess-acc 0.56 | 5.1s/sample
+[17:28:43] [##############..........] 60/100 (60.0%) | ETA   3.4m | sess-acc 0.48 | 5.1s/sample
+[17:29:37] [################........] 70/100 (70.0%) | ETA   2.6m | sess-acc 0.46 | 5.2s/sample

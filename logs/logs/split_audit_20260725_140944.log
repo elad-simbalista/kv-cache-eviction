@@ -1,0 +1,39 @@
+[14:09:44] ===== stage=split_audit ts=20260725_140944 ctx=32768 attn=sdpa seed_default=42 =====
+[14:09:48] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_split_audit_20260725_140944.txt
+[14:09:51] split[en/niah_none]: marker#455ed472 'xt>\n\n<Question> What special magic numbers associated with "' question chars min/med/max = 288/290/294
+[14:09:51] --- en/niah_none PASS
+[14:09:51]     marker(repr, last 80): '\n</text>\n\n<Question> What special magic numbers associated with "'
+[14:09:51]     example question (first 300 chars): '\n</text>\n\n<Question> What special magic numbers associated with "bridge" are mentioned in the provided text? Please list all that apply. If no such numbers exist, please answer "none".</Question>\n\n\nPlease provide your answer in the following format:\n <Answer> List all numbers here </Answer>'
+[14:09:51]     example context tail (last 120): ', but the sharp-eyed demoiselles discovered that Mr. Davis was quite benignant in the afternoon, also unusually nervous.'
+[14:09:52] split[pl/niah_none]: marker#bd43028a 'ytanie> Jakie specjalne magiczne liczby powiązane z hasłem „' question chars min/med/max = 338/341/345
+[14:09:52] --- pl/niah_none PASS
+[14:09:52]     marker(repr, last 80): '\n</tekst>\n\n<pytanie> Jakie specjalne magiczne liczby powiązane z hasłem „'
+[14:09:52]     example question (first 300 chars): '\n</tekst>\n\n<pytanie> Jakie specjalne magiczne liczby powiązane z hasłem „most” są wspomniane w podanym tekście? Wymień wszystkie, które się pojawiają. Jeśli takie liczby nie istnieją, odpowiedz „brak”.</pytanie>\n\n\nPodaj swoją odpowiedź w następującej formie:\n <odpowiedź> Wszystkie prawidłowe liczby '
+[14:09:52]     example context tail (last 120): 'dziła, by mu wszystko podano gorące i świeże. Czekała na niego, gdyż łaknęła jakiegoś udziału w toczących się wypadkach.'
+[14:09:53] split[zh/niah_none]: marker#125de5eb '于和他讲话的女人，也时常留心听，然而伊又并不提起关于什么勾当的话来。哦，这也是女人可恶之一节：伊们全都要装“假正经”的。' question chars min/med/max = 1417/1418/1437
+[14:09:53] --- zh/niah_none PASS
+[14:09:53]     marker(repr, last 80): '女人，时常留心看，然而伊并不对他笑。他对于和他讲话的女人，也时常留心听，然而伊又并不提起关于什么勾当的话来。哦，这也是女人可恶之一节：伊们全都要装“假正经”的。'
+[14:09:53]     example question (first 300 chars): '。阿Q更得意，而且为满足那些赏鉴家起见，再用力的一拧，才放手。他这一战，早忘却了王胡，也忘却了假洋鬼子，似乎对于今天的一切“晦气”都报了仇；而且奇怪，又仿佛全身比拍拍的响了之后更轻松，飘飘然的似乎要飞去了。“这断子绝孙的阿Q！”远远地听得小尼姑的带哭的声音。“哈哈哈！”阿Q十分得意的笑。“哈哈哈！”酒店里的人也九分得意的笑。第四章 恋爱的悲剧 有人说：有些胜利者，愿意敌手如虎，如鹰，他才感得胜利的欢喜；假使如羊，如小鸡，他便反觉得胜利的无聊。又有些胜利者，当克服一切之后，看见死的死了，降的降了，“臣诚惶诚恐死罪死罪”，他于是没有了敌人，没有了对手，没有了朋友，只有自己在上，一个，孤另另，凄凉，'
+[14:09:53]     example context tail (last 120): '着伊新剃的头皮，呆笑着，说： “秃儿！快回去，和尚等着你……” “你怎么动手动脚……”尼姑满脸通红的说，一面赶快走。酒店里的人大笑了。阿Q看见自己的勋业得了赏识，便愈加兴高采烈起来： “和尚动得，我动不得？”他扭住伊的面颊。酒店里的人大笑了'
+[14:09:54] split[ja/niah_none]: marker#4cefaa9c 'んだから、そのつもりでいて下さい。適当の時機が来なくっちゃ話さないんだから」 私は下宿へ帰ってからも一種の圧迫を感じた。' question chars min/med/max = 1313/1314/1340
+[14:09:54] --- ja/niah_none PASS
+[14:09:54]     marker(repr, last 80): '知れませんよ。それから、――今は話せないんだから、そのつもりでいて下さい。適当の時機が来なくっちゃ話さないんだから」 私は下宿へ帰ってからも一種の圧迫を感じた。'
+[14:09:54]     example question (first 300 chars): '。私は思想上の問題について、大いなる利益を先生から受けた事を自白する。しかし同じ問題について、利益を受けようとしても、受けられない事が間々ままあったといわなければならない。先生の談話は時として不得要領ふとくようりょうに終った。その日二人の間に起った郊外の談話も、この不得要領の一例として私の胸の裏うちに残った。無遠慮な私は、ある時ついにそれを先生の前に打ち明けた。先生は笑っていた。私はこういった。「頭が鈍くて要領を得ないのは構いませんが、ちゃんと解わかってるくせに、はっきりいってくれないのは困ります」 「私は何にも隠してやしません」 「隠していらっしゃいます」 「あなたは私の思想とか意見とかいう'
+[14:09:54]     example context tail (last 120): '気楽かも知れない。精出して遊びたまえ」といった。私は笑って帽子を脱とった。その時私は先生の顔を見て、先生ははたして心のどこで、一般の人間を憎んでいるのだろうかと疑うたぐった。その眼、その口、どこにも厭世的えんせいてきの影は射さしていなかった'
+[14:09:56] split[ko/niah_none]: marker#6f791aa1 '면 회집한 일동은 갑자기 희색이 나고 몸이 들먹거려 혹, " 어디까지 왔더냐? " " 저 고개턱까지 왔더냐?' question chars min/med/max = 1900/1901/1932
+[14:09:56] --- ko/niah_none PASS
+[14:09:56]     marker(repr, last 80): ' 너머 오더라는 소식을 전한다. 그러면 회집한 일동은 갑자기 희색이 나고 몸이 들먹거려 혹, " 어디까지 왔더냐? " " 저 고개턱까지 왔더냐?'
+[14:09:56]     example question (first 300 chars): '. 문호는 방에 들어가 이전 앉던 자리에 앉았다. 그러고 처녀들도 이전 모양으로 문호를 중심으로 하고 문호를 중심으로 하고 둘러앉는다. 그 어머니는 여전히 닭을 잡고 떡을 만들어 문호와 문해와 들러앉은 처녀들을 먹인다. 그러나 삼 년 전에 있던 즐거움은 영원히 스러지고말았다. 문호는 울고 싶었다. 그러나 삼 년 전과 같이 눈물이 흐르지 아니한다. 문호는 마주 앉은 문해의 까맣게 난 수염을 본다. 그러고 손으로 자기의 턱을 쓸며, " 문해야, 우리 턱에도 수염이 났구나. " 하며 턱 아래 한치나 자란 외대 수명을 툭툭 잡아채며 웃는다'
+[14:09:56]     example context tail (last 120): '이 없고 대문 밖에는 웃고 맞아 주던 자매들이 보인다. 문호가 동경 갈 때에 십여 세 되던 자매들이 지금은 십이삼 세의 커다란 처녀가 되어 역시 반갑게 문호를 맞는다. 그러나 그 처녀들은 결코 문호의 친구가 아니리라'
+[14:09:57] split[vi/niah_none]: marker#02a94e8f '<Câu hỏi> Những con số ma thuật đặc biệt nào liên quan đến "' question chars min/med/max = 327/332/334
+[14:09:57] --- vi/niah_none PASS
+[14:09:57]     marker(repr, last 80): '\n</Văn bản>\n\n<Câu hỏi> Những con số ma thuật đặc biệt nào liên quan đến "'
+[14:09:57]     example question (first 300 chars): '\n</Văn bản>\n\n<Câu hỏi> Những con số ma thuật đặc biệt nào liên quan đến "cầu" được đề cập trong văn bản được cung cấp? Hãy liệt kê tất cả các phương án đúng. Nếu không có con số nào như vậy, hãy trả lời "Không có".</Câu hỏi>\n\n\nHãy cho câu trả lời theo hình thức như sau:\n <Câu trả lời> Liệt kê tất cả'
+[14:09:57]     example context tail (last 120): ' họ tinh quái nghịch ngợm lắm, anh ạ. Các cô cứ lấy những chăn màn gối đệm mới mà giễu cợt em; các cô lấy thế làm thích.'
+[14:09:59] split[sw/niah_none]: marker#40832bee '<Swali> Ni nambari gani maalum za maajabu zinazohusiana na "' question chars min/med/max = 319/322/325
+[14:09:59] --- sw/niah_none PASS
+[14:09:59]     marker(repr, last 80): '\n</Maandishi>\n\n<Swali> Ni nambari gani maalum za maajabu zinazohusiana na "'
+[14:09:59]     example question (first 300 chars): '\n</Maandishi>\n\n<Swali> Ni nambari gani maalum za maajabu zinazohusiana na "daraja" zilizotajwa katika maandishi yaliyotolewa? Tafadhali orodhesha yote yanayohusika. Ikiwa hakuna nambari kama hizo, tafadhali jibu "hakuna".</Swali>\n\n\nTafadhali toa jibu lako katika muundo ufuatao:\n <Jibu> Orodhesha nam'
+[14:09:59]     example context tail (last 120): 'faida katika miaka mitano ilikuwa Shilingi 800/- kwa kitabu kilichofikia thamani ya Shilingi zaidi ya 61- katika maduka!'
+[14:09:59] split-audit: PASS=['en', 'pl', 'zh', 'ja', 'ko', 'vi', 'sw'] FAIL=[]
+[14:09:59] EYEBALL the printed question sections (they must contain the interrogative + queried key + answer-format tail) before sweeping.

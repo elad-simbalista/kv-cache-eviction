@@ -1,0 +1,441 @@
+{
+  "ctx_len": 32768,
+  "n_boot": 2000,
+  "boot_seed": 42,
+  "floor_acc": 0.6,
+  "facets": {
+    "llama31-8b__joint__niah_single": {
+      "paired_n_per_lang": {
+        "en": 100,
+        "ja": 100,
+        "ko": 100,
+        "pl": 100,
+        "sw": 100,
+        "vi": 100,
+        "zh": 100
+      },
+      "spearman_delta25_vs_fertility": {
+        "snapkv": {
+          "rho": 0.4926,
+          "p_perm": 0.2857,
+          "exact_perm": true,
+          "n": 7,
+          "fertility_source": "eval_texts",
+          "leave_one_out": {
+            "en": 0.395,
+            "ja": 0.395,
+            "ko": 0.676,
+            "pl": 0.507,
+            "sw": 0.698,
+            "vi": 0.135,
+            "zh": 0.577
+          }
+        },
+        "streaming_llm": {
+          "rho": -0.3273,
+          "p_perm": 0.4746,
+          "exact_perm": true,
+          "n": 7,
+          "fertility_source": "eval_texts",
+          "leave_one_out": {
+            "en": -0.174,
+            "ja": -0.174,
+            "ko": -0.383,
+            "pl": -0.406,
+            "sw": -0.088,
+            "vi": -0.618,
+            "zh": -0.406
+          }
+        },
+        "knorm": {
+          "rho": -0.0541,
+          "p_perm": 0.9167,
+          "exact_perm": true,
+          "n": 7,
+          "fertility_source": "eval_texts",
+          "leave_one_out": {
+            "en": 0.0,
+            "ja": -0.086,
+            "ko": -0.145,
+            "pl": 0.086,
+            "sw": -0.232,
+            "vi": 0.29,
+            "zh": -0.319
+          }
+        }
+      }
+    },
+    "llama31-8b__qa__niah_none": {
+      "paired_n_per_lang": {
+        "en": 100,
+        "ja": 100,
+        "ko": 100,
+        "pl": 100,
+        "sw": 100,
+        "vi": 100,
+        "zh": 100
+      },
+      "spearman_delta25_vs_fertility": {
+        "snapkv": {
+          "rho": 0.4286,
+          "p_perm": 0.3536,
+          "exact_perm": true,
+          "n": 7,
+          "fertility_source": "eval_texts",
+          "leave_one_out": {
+            "en": 0.2,
+            "ja": 0.429,
+            "ko": 0.6,
+            "pl": 0.429,
+            "sw": 0.257,
+            "vi": 0.371,
+            "zh": 0.657
+          }
+        },
+        "streaming_llm": {
+          "rho": 0.3571,
+          "p_perm": 0.4444,
+          "exact_perm": true,
+          "n": 7,
+          "fertility_source": "eval_texts",
+          "leave_one_out": {
+            "en": 0.371,
+            "ja": 0.371,
+            "ko": 0.371,
+            "pl": 0.086,
+            "sw": 0.2,
+            "vi": 0.371,
+            "zh": 0.6
+          }
+        },
+        "knorm": {
+          "rho": -0.1429,
+          "p_perm": 0.7825,
+          "exact_perm": true,
+          "n": 7,
+          "fertility_source": "eval_texts",
+          "leave_one_out": {
+            "en": -0.371,
+            "ja": -0.2,
+            "ko": -0.143,
+            "pl": -0.143,
+            "sw": -0.314,
+            "vi": 0.2,
+            "zh": 0.029
+          }
+        }
+      }
+    },
+    "llama31-8b__qa__niah_single": {
+      "paired_n_per_lang": {
+        "en": 100,
+        "ja": 100,
+        "ko": 100,
+        "pl": 100,
+        "sw": 100,
+        "vi": 100,
+        "zh": 100
+      },
+      "spearman_delta25_vs_fertility": {
+        "snapkv": {
+          "rho": -0.4643,
+          "p_perm": 0.3024,
+          "exact_perm": true,
+          "n": 7,
+          "fertility_source": "eval_texts",
+          "leave_one_out": {
+            "en": -0.6,
+            "ja": -0.486,
+            "ko": -0.486,
+            "pl": -0.714,
+            "sw": -0.143,
+            "vi": -0.143,
+            "zh": -0.6
+          }
+        },
+        "streaming_llm": {
+          "rho": -0.6057,
+          "p_perm": 0.1683,
+          "exact_perm": true,
+          "n": 7,
+          "fertility_source": "eval_texts",
+          "leave_one_out": {
+            "en": -0.53,
+            "ja": -0.53,
+            "ko": -0.677,
+            "pl": -0.53,
+            "sw": -0.598,
+            "vi": -0.647,
+            "zh": -0.618
+          }
+        },
+        "knorm": {
+          "rho": 0.3929,
+          "p_perm": 0.3956,
+          "exact_perm": true,
+          "n": 7,
+          "fertility_source": "eval_texts",
+          "leave_one_out": {
+            "en": 0.486,
+            "ja": 0.486,
+            "ko": 0.486,
+            "pl": 0.543,
+            "sw": 0.143,
+            "vi": 0.2,
+            "zh": 0.314
+          }
+        }
+      }
+    },
+    "qwen25-7b-1m__joint__niah_single": {
+      "paired_n_per_lang": {
+        "en": 100,
+        "ja": 100,
+        "ko": 100,
+        "pl": 100,
+        "sw": 100,
+        "vi": 100,
+        "zh": 100
+      },
+      "spearman_delta25_vs_fertility": {
+        "snapkv": {
+          "rho": 0.8018,
+          "p_perm": 0.0476,
+          "exact_perm": true,
+          "n": 7,
+          "fertility_source": "eval_texts",
+          "leave_one_out": {
+            "en": 0.845,
+            "ja": 0.655,
+            "ko": 0.845,
+            "pl": 0.845,
+            "sw": 0.655,
+            "vi": 0.845,
+            "zh": 0.845
+          }
+        },
+        "streaming_llm": {
+          "rho": 0.1261,
+          "p_perm": 0.8,
+          "exact_perm": true,
+          "n": 7,
+          "fertility_source": "eval_texts",
+          "leave_one_out": {
+            "en": -0.058,
+            "ja": -0.058,
+            "ko": 0.086,
+            "pl": 0.086,
+            "sw": 0.812,
+            "vi": -0.058,
+            "zh": 0.116
+          }
+        },
+        "knorm": {
+          "rho": 0.0357,
+          "p_perm": 0.9635,
+          "exact_perm": true,
+          "n": 7,
+          "fertility_source": "eval_texts",
+          "leave_one_out": {
+            "en": -0.029,
+            "ja": -0.2,
+            "ko": 0.143,
+            "pl": -0.2,
+            "sw": 0.657,
+            "vi": -0.029,
+            "zh": -0.029
+          }
+        }
+      }
+    },
+    "qwen25-7b-1m__qa__niah_none": {
+      "paired_n_per_lang": {
+        "en": 100,
+        "ja": 100,
+        "ko": 100,
+        "pl": 100,
+        "sw": 100,
+        "vi": 100,
+        "zh": 100
+      },
+      "spearman_delta25_vs_fertility": {
+        "snapkv": {
+          "rho": -0.1429,
+          "p_perm": 0.7825,
+          "exact_perm": true,
+          "n": 7,
+          "fertility_source": "eval_texts",
+          "leave_one_out": {
+            "en": -0.2,
+            "ja": -0.257,
+            "ko": 0.086,
+            "pl": -0.486,
+            "sw": 0.371,
+            "vi": -0.257,
+            "zh": -0.2
+          }
+        },
+        "streaming_llm": {
+          "rho": -0.3929,
+          "p_perm": 0.3956,
+          "exact_perm": true,
+          "n": 7,
+          "fertility_source": "eval_texts",
+          "leave_one_out": {
+            "en": -0.371,
+            "ja": -0.429,
+            "ko": -0.257,
+            "pl": -0.714,
+            "sw": -0.029,
+            "vi": -0.543,
+            "zh": -0.371
+          }
+        },
+        "knorm": {
+          "rho": -0.1429,
+          "p_perm": 0.7825,
+          "exact_perm": true,
+          "n": 7,
+          "fertility_source": "eval_texts",
+          "leave_one_out": {
+            "en": -0.143,
+            "ja": -0.257,
+            "ko": -0.029,
+            "pl": -0.543,
+            "sw": 0.257,
+            "vi": -0.143,
+            "zh": -0.086
+          }
+        }
+      }
+    },
+    "qwen25-7b-1m__qa__niah_single": {
+      "paired_n_per_lang": {
+        "en": 100,
+        "ja": 100,
+        "ko": 100,
+        "pl": 100,
+        "sw": 100,
+        "vi": 100,
+        "zh": 100
+      },
+      "spearman_delta25_vs_fertility": {
+        "snapkv": {
+          "rho": -0.4286,
+          "p_perm": 0.3536,
+          "exact_perm": true,
+          "n": 7,
+          "fertility_source": "eval_texts",
+          "leave_one_out": {
+            "en": -0.429,
+            "ja": -0.543,
+            "ko": -0.429,
+            "pl": -0.771,
+            "sw": -0.2,
+            "vi": -0.257,
+            "zh": -0.314
+          }
+        },
+        "streaming_llm": {
+          "rho": 0.0741,
+          "p_perm": 0.8952,
+          "exact_perm": true,
+          "n": 7,
+          "fertility_source": "eval_texts",
+          "leave_one_out": {
+            "en": -0.029,
+            "ja": -0.091,
+            "ko": -0.03,
+            "pl": 0.058,
+            "sw": 0.759,
+            "vi": -0.091,
+            "zh": -0.029
+          }
+        },
+        "knorm": {
+          "rho": 0.1455,
+          "p_perm": 0.7571,
+          "exact_perm": true,
+          "n": 7,
+          "fertility_source": "eval_texts",
+          "leave_one_out": {
+            "en": 0.029,
+            "ja": -0.029,
+            "ko": 0.116,
+            "pl": 0.029,
+            "sw": 0.853,
+            "vi": -0.029,
+            "zh": 0.116
+          }
+        }
+      }
+    }
+  },
+  "depth_balance": {
+    "en": {
+      "n": 100,
+      "depth_mean": 0.505,
+      "depth_p10": 0.102,
+      "depth_p50": 0.462,
+      "depth_p90": 0.935,
+      "ks_vs_en": 0.0,
+      "mean_diff_vs_en": 0.0
+    },
+    "ja": {
+      "n": 100,
+      "depth_mean": 0.501,
+      "depth_p10": 0.104,
+      "depth_p50": 0.463,
+      "depth_p90": 0.956,
+      "ks_vs_en": 0.07,
+      "mean_diff_vs_en": -0.004
+    },
+    "ko": {
+      "n": 100,
+      "depth_mean": 0.513,
+      "depth_p10": 0.119,
+      "depth_p50": 0.487,
+      "depth_p90": 0.945,
+      "ks_vs_en": 0.07,
+      "mean_diff_vs_en": 0.008
+    },
+    "pl": {
+      "n": 100,
+      "depth_mean": 0.491,
+      "depth_p10": 0.118,
+      "depth_p50": 0.485,
+      "depth_p90": 0.916,
+      "ks_vs_en": 0.11,
+      "mean_diff_vs_en": -0.014
+    },
+    "sw": {
+      "n": 100,
+      "depth_mean": 0.475,
+      "depth_p10": 0.098,
+      "depth_p50": 0.445,
+      "depth_p90": 0.932,
+      "ks_vs_en": 0.11,
+      "mean_diff_vs_en": -0.03
+    },
+    "vi": {
+      "n": 100,
+      "depth_mean": 0.54,
+      "depth_p10": 0.147,
+      "depth_p50": 0.522,
+      "depth_p90": 0.965,
+      "ks_vs_en": 0.11,
+      "mean_diff_vs_en": 0.035
+    },
+    "zh": {
+      "n": 100,
+      "depth_mean": 0.477,
+      "depth_p10": 0.08,
+      "depth_p50": 0.436,
+      "depth_p90": 0.943,
+      "ks_vs_en": 0.11,
+      "mean_diff_vs_en": -0.028
+    }
+  },
+  "arm_contrast": "results/arm_contrast.csv",
+  "gap_table": "results/gap_table.csv"
+}

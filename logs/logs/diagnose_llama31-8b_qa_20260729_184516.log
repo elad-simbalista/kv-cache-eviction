@@ -1,0 +1,13 @@
+[18:45:16] ===== stage=diagnose_llama31-8b_qa ts=20260729_184516 ctx=32768 attn=sdpa seed_default=42 =====
+[18:45:19] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_diagnose_llama31-8b_qa_20260729_184516.txt
+[18:45:30] model loaded: llama31-8b (meta-llama/Llama-3.1-8B-Instruct) rev=0e9e39f249a16976918f6564b8830bc894c89659 (8s)
+[18:45:30] vi: depth recovered for 24 samples (0 with multiple gold occurrences — first used)
+[18:45:30] split[vi/niah_single]: marker#3ee0b36a '<Câu hỏi> Những con số ma thuật đặc biệt nào liên quan đến "' question chars min/med/max = 327/330/334
+[18:47:32] vi: keep-rate value=0.927 window=0.652 question=1.000 haystack=0.500 | frac(value fully evicted per head)=0.021
+[18:47:32] ko: depth recovered for 24 samples (0 with multiple gold occurrences — first used)
+[18:47:32] split[ko/niah_single]: marker#f11c534b '</글>\n\n<질문> 주어진 글에서 언급된 "' question chars min/med/max = 160/161/161
+[18:49:35] ko: keep-rate value=0.958 window=0.603 question=1.000 haystack=0.500 | frac(value fully evicted per head)=0.016
+[18:49:35] en: depth recovered for 24 samples (0 with multiple gold occurrences — first used)
+[18:49:35] split[en/niah_single]: marker#893a79b9 'xt>\n\n<Question> What special magic numbers associated with "' question chars min/med/max = 287/289/290
+[18:51:39] en: keep-rate value=0.947 window=0.677 question=1.000 haystack=0.500 | frac(value fully evicted per head)=0.016
+[18:51:42] wrote /vol/results/diagnosis_knorm_llama31-8b_qa_niah_single_kept0.5.csv + fig7. Reading (qa: question protected by construction, keep_question=1.0): the informative signal is frac_value_evicted and keep_value/keep_window vs the uniform line — ~1 full-eviction rate with a flat haystack = needle loss explains the collapse; if NOT, the qa collapse is not about knorm's selection and needs another mechanism.

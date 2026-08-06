@@ -1,0 +1,20 @@
+[21:57:27] ===== stage=inspect ts=20260721_215727 model=meta-llama/Llama-3.1-8B-Instruct task=niah_single ctx=32768 attn=sdpa seed_default=42 =====
+[21:57:30] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_inspect_20260721_215727.txt
+[21:57:30] cell 47220a0a03065fb2 | hi press=none kept=1.0 | acc=0.000 n=30 | pred_chars min/mean/max = 8/8/8
+[21:57:30] ----------------------------------------------------------------------
+[21:57:30]   gold=['2867825'] | correct=False | depth=0.0447 | pred_chars=8 | input_tokens=32894
+[21:57:30]   pred='कोई नहीं'
+[21:57:30] ----------------------------------------------------------------------
+[21:57:30]   gold=['4744854'] | correct=False | depth=0.2334 | pred_chars=8 | input_tokens=32894
+[21:57:30]   pred='कोई नहीं'
+[21:57:30] ----------------------------------------------------------------------
+[21:57:30]   gold=['2458591'] | correct=False | depth=0.952 | pred_chars=8 | input_tokens=32896
+[21:57:30]   pred='कोई नहीं'
+[21:57:30] ----------------------------------------------------------------------
+[21:57:30]   gold=['1499914'] | correct=False | depth=0.1499 | pred_chars=8 | input_tokens=32894
+[21:57:30]   pred='कोई नहीं'
+[21:57:30] ----------------------------------------------------------------------
+[21:57:30]   gold=['9478454'] | correct=False | depth=0.9623 | pred_chars=8 | input_tokens=32894
+[21:57:30]   pred='कोई नहीं'
+[21:57:30] ----------------------------------------------------------------------
+[21:57:30] truncation check: if pred_chars sits at the cap and text ends mid-thought with no digits, raise MAX_NEW_TOKENS (and wipe results/raw before re-running — MAX_NEW_TOKENS is not in the cell hash).

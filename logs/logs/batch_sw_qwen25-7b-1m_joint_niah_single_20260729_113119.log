@@ -1,0 +1,6 @@
+[11:31:19] ===== stage=batch_sw_qwen25-7b-1m_joint_niah_single ts=20260729_113119 ctx=32768 attn=sdpa seed_default=42 =====
+[11:31:24] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_batch_sw_qwen25-7b-1m_joint_niah_single_20260729_113119.txt
+[11:31:41] model loaded: qwen25-7b-1m (Qwen/Qwen2.5-7B-Instruct-1M) rev=e28526f7bb80e2a9c8af03b831a9af3812f18fba (12s)
+[11:31:41] sw: depth recovered for 100 samples (0 with multiple gold occurrences — first used)
+[11:31:41] === cell 1/7 [eb75f2f1c2219807] {'model': 'qwen25-7b-1m', 'arm': 'joint', 'lang': 'sw', 'ctx_len': 32768, 'press': 'none', 'kept': 1.0, 'task': 'niah_single', 'seed': 42, 'toy': False} n=100 | resume: 0 done, 100 to run
+[11:32:38] [##......................] 10/100 (10.0%) | ETA   8.6m | sess-acc 0.70 | 5.7s/sample

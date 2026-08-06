@@ -1,0 +1,20 @@
+[21:58:17] ===== stage=inspect ts=20260721_215817 model=meta-llama/Llama-3.1-8B-Instruct task=niah_single ctx=32768 attn=sdpa seed_default=42 =====
+[21:58:20] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_inspect_20260721_215817.txt
+[21:58:20] cell 675760ba086a3672 | en press=none kept=1.0 | acc=1.000 n=30 | pred_chars min/mean/max = 26/26/26
+[21:58:20] ----------------------------------------------------------------------
+[21:58:20]   gold=['2867825'] | correct=True | depth=0.0309 | pred_chars=26 | input_tokens=33090
+[21:58:20]   pred='<Answer> 2867825 </Answer>'
+[21:58:20] ----------------------------------------------------------------------
+[21:58:20]   gold=['4744854'] | correct=True | depth=0.2223 | pred_chars=26 | input_tokens=33090
+[21:58:20]   pred='<Answer> 4744854 </Answer>'
+[21:58:20] ----------------------------------------------------------------------
+[21:58:20]   gold=['2458591'] | correct=True | depth=0.9346 | pred_chars=26 | input_tokens=33092
+[21:58:20]   pred='<Answer> 2458591 </Answer>'
+[21:58:20] ----------------------------------------------------------------------
+[21:58:20]   gold=['1499914'] | correct=True | depth=0.1399 | pred_chars=26 | input_tokens=33090
+[21:58:20]   pred='<Answer> 1499914 </Answer>'
+[21:58:20] ----------------------------------------------------------------------
+[21:58:20]   gold=['9478454'] | correct=True | depth=0.9597 | pred_chars=26 | input_tokens=33090
+[21:58:20]   pred='<Answer> 9478454 </Answer>'
+[21:58:20] ----------------------------------------------------------------------
+[21:58:20] truncation check: if pred_chars sits at the cap and text ends mid-thought with no digits, raise MAX_NEW_TOKENS (and wipe results/raw before re-running — MAX_NEW_TOKENS is not in the cell hash).

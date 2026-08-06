@@ -1,0 +1,33 @@
+[09:58:04] ===== stage=fertility ts=20260722_095804 model=meta-llama/Llama-3.1-8B-Instruct task=niah_single ctx=32768 attn=sdpa seed_default=42 =====
+[09:58:09] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_fertility_20260722_095804.txt
+[09:58:20] en: facebook/flores failed (Dataset 'facebook/flores' is a gated dataset on the Hub. Visit the dataset page at https://huggingface.co/datasets/faceb)
+[09:58:20] en: Muennighoff/flores200 failed (Dataset scripts are no longer supported, but found flores200.py)
+[09:58:20] en: SKIPPED — no FLORES source loaded; find another mirror and rerun fertility for this language
+[09:58:21] pl: facebook/flores failed (Dataset 'facebook/flores' is a gated dataset on the Hub. Visit the dataset page at https://huggingface.co/datasets/faceb)
+[09:58:21] pl: Muennighoff/flores200 failed (Dataset scripts are no longer supported, but found flores200.py)
+[09:58:21] pl: SKIPPED — no FLORES source loaded; find another mirror and rerun fertility for this language
+[09:58:21] zh: facebook/flores failed (Dataset 'facebook/flores' is a gated dataset on the Hub. Visit the dataset page at https://huggingface.co/datasets/faceb)
+[09:58:21] zh: Muennighoff/flores200 failed (Dataset scripts are no longer supported, but found flores200.py)
+[09:58:21] zh: SKIPPED — no FLORES source loaded; find another mirror and rerun fertility for this language
+[09:58:21] ja: facebook/flores failed (Dataset 'facebook/flores' is a gated dataset on the Hub. Visit the dataset page at https://huggingface.co/datasets/faceb)
+[09:58:21] ja: Muennighoff/flores200 failed (Dataset scripts are no longer supported, but found flores200.py)
+[09:58:21] ja: SKIPPED — no FLORES source loaded; find another mirror and rerun fertility for this language
+[09:58:21] ko: facebook/flores failed (Dataset 'facebook/flores' is a gated dataset on the Hub. Visit the dataset page at https://huggingface.co/datasets/faceb)
+[09:58:21] ko: Muennighoff/flores200 failed (Dataset scripts are no longer supported, but found flores200.py)
+[09:58:21] ko: SKIPPED — no FLORES source loaded; find another mirror and rerun fertility for this language
+[09:58:21] vi: facebook/flores failed (Dataset 'facebook/flores' is a gated dataset on the Hub. Visit the dataset page at https://huggingface.co/datasets/faceb)
+[09:58:22] vi: Muennighoff/flores200 failed (Dataset scripts are no longer supported, but found flores200.py)
+[09:58:22] vi: SKIPPED — no FLORES source loaded; find another mirror and rerun fertility for this language
+[09:58:22] sw: facebook/flores failed (Dataset 'facebook/flores' is a gated dataset on the Hub. Visit the dataset page at https://huggingface.co/datasets/faceb)
+[09:58:22] sw: Muennighoff/flores200 failed (Dataset scripts are no longer supported, but found flores200.py)
+[09:58:22] sw: SKIPPED — no FLORES source loaded; find another mirror and rerun fertility for this language
+[09:58:22] ta: facebook/flores failed (Dataset 'facebook/flores' is a gated dataset on the Hub. Visit the dataset page at https://huggingface.co/datasets/faceb)
+[09:58:22] ta: Muennighoff/flores200 failed (Dataset scripts are no longer supported, but found flores200.py)
+[09:58:22] ta: SKIPPED — no FLORES source loaded; find another mirror and rerun fertility for this language
+[09:58:22] ru: facebook/flores failed (Dataset 'facebook/flores' is a gated dataset on the Hub. Visit the dataset page at https://huggingface.co/datasets/faceb)
+[09:58:22] ru: Muennighoff/flores200 failed (Dataset scripts are no longer supported, but found flores200.py)
+[09:58:22] ru: SKIPPED — no FLORES source loaded; find another mirror and rerun fertility for this language
+[09:58:22] hi: facebook/flores failed (Dataset 'facebook/flores' is a gated dataset on the Hub. Visit the dataset page at https://huggingface.co/datasets/faceb)
+[09:58:22] hi: Muennighoff/flores200 failed (Dataset scripts are no longer supported, but found flores200.py)
+[09:58:22] hi: SKIPPED — no FLORES source loaded; find another mirror and rerun fertility for this language
+[09:58:23] wrote /vol/results/fertility.csv

@@ -1,0 +1,603 @@
+[18:35:09] ===== stage=analyze ts=20260729_183509 ctx=32768 attn=sdpa seed_default=42 =====
+[18:35:14] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_analyze_20260729_183509.txt
+[18:35:16] needle-depth balance across languages (niah_single, per-sample, deduped):
+lang   n  depth_mean  depth_p10  depth_p50  depth_p90  ks_vs_en  mean_diff_vs_en
+  en 100       0.505      0.102      0.462      0.935      0.00            0.000
+  ja 100       0.501      0.104      0.463      0.956      0.07           -0.004
+  ko 100       0.513      0.119      0.487      0.945      0.07            0.008
+  pl 100       0.491      0.118      0.485      0.916      0.11           -0.014
+  sw 100       0.475      0.098      0.445      0.932      0.11           -0.030
+  vi 100       0.540      0.147      0.522      0.965      0.11            0.035
+  zh 100       0.477      0.080      0.436      0.943      0.11           -0.028
+[18:35:16] streaming_llm accuracy by needle depth (sanity: should be ~monotone in depth and language-flat GIVEN depth):
+depth_bin                     0-.25  .25-.5  .5-.75  .75-1
+model        arm   kept lang                              
+llama31-8b   joint 0.25 en      0.0   0.000   0.000  1.000
+                        ja      0.0   0.000   0.000  0.929
+                        ko      0.0   0.000   0.000  0.536
+                        pl      0.0   0.000   0.000  0.464
+                        sw      0.0   0.000   0.000  1.000
+                        vi      0.0   0.000   0.000  0.774
+                        zh      0.0   0.000   0.000  0.964
+                   0.50 en      0.0   0.000   1.000  1.000
+                        ja      0.0   0.000   1.000  0.929
+                        ko      0.0   0.000   0.810  0.536
+                        pl      0.0   0.136   1.000  0.429
+                        sw      0.0   0.000   0.938  1.000
+                        vi      0.0   0.000   1.000  0.742
+                        zh      0.0   0.000   1.000  0.964
+             qa    0.25 en      0.0   0.000   0.000  0.964
+                        ja      0.0   0.000   0.000  0.893
+                        ko      0.0   0.000   0.000  0.750
+                        pl      0.0   0.000   0.000  1.000
+                        sw      0.0   0.000   0.000  0.964
+                        vi      0.0   0.000   0.000  0.613
+                        zh      0.0   0.000   0.000  0.964
+                   0.50 en      0.0   0.000   1.000  1.000
+                        ja      0.0   0.000   1.000  0.964
+                        ko      0.0   0.000   0.762  0.786
+                        pl      0.0   0.136   1.000  1.000
+                        sw      0.0   0.000   1.000  0.964
+                        vi      0.0   0.000   1.000  0.613
+                        zh      0.0   0.000   1.000  0.964
+qwen25-7b-1m joint 0.25 en      0.0   0.000   0.000  0.964
+                        ja      0.0   0.000   0.000  1.000
+                        ko      0.0   0.000   0.000  1.000
+                        pl      0.0   0.000   0.000  1.000
+                        sw      0.0   0.000   0.000  0.500
+                        vi      0.0   0.000   0.000  0.903
+                        zh      0.0   0.000   0.000  0.893
+                   0.50 en      0.0   0.000   1.000  0.964
+                        ja      0.0   0.000   1.000  0.964
+                        ko      0.0   0.000   1.000  1.000
+                        pl      0.0   0.136   1.000  1.000
+                        sw      0.0   0.000   0.625  0.536
+                        vi      0.0   0.000   1.000  0.903
+                        zh      0.0   0.000   1.000  0.929
+             qa    0.25 en      0.0   0.000   0.000  0.964
+                        ja      0.0   0.000   0.000  1.000
+                        ko      0.0   0.000   0.000  0.964
+                        pl      0.0   0.000   0.000  1.000
+                        sw      0.0   0.000   0.000  0.250
+                        vi      0.0   0.000   0.000  0.935
+                        zh      0.0   0.000   0.000  0.964
+                   0.50 en      0.0   0.000   1.000  0.964
+                        ja      0.0   0.000   1.000  1.000
+                        ko      0.0   0.000   1.000  0.964
+                        pl      0.0   0.136   1.000  1.000
+                        sw      0.0   0.042   0.250  0.214
+                        vi      0.0   0.000   1.000  0.935
+                        zh      0.0   0.000   1.000  0.964
+[18:35:16] [llama31-8b__joint__niah_single] en: 100 paired samples x 7 settings
+[18:35:16] [llama31-8b__joint__niah_single] ja: 100 paired samples x 7 settings
+[18:35:16] [llama31-8b__joint__niah_single] ko: 100 paired samples x 7 settings
+[18:35:16] [llama31-8b__joint__niah_single] pl: 100 paired samples x 7 settings
+[18:35:16] [llama31-8b__joint__niah_single] sw: 100 paired samples x 7 settings
+[18:35:16] [llama31-8b__joint__niah_single] vi: 100 paired samples x 7 settings
+[18:35:16] [llama31-8b__joint__niah_single] zh: 100 paired samples x 7 settings
+[18:35:16] [llama31-8b__joint__niah_single] gap table (paired bootstrap, B=2000):
+     model   arm        task lang         press  kept  base_acc  base_floor  delta  delta_ci_low  delta_ci_high  gap_amp  ga_ci_low  ga_ci_high  ga_sig  ga_p  gap_amp_logodds  ga_lo_ci_low  ga_lo_ci_high  ga_lo_sig  ga_lo_p     ga_q  ga_lo_q  ga_sig_bh  ga_lo_sig_bh
+llama31-8b joint niah_single   en        snapkv  0.50      1.00       False   0.00        0.0000         0.0000     0.00       0.00      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+llama31-8b joint niah_single   en        snapkv  0.25      1.00       False   0.00        0.0000         0.0000     0.00       0.00      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+llama31-8b joint niah_single   en streaming_llm  0.50      1.00       False   0.54        0.4400         0.6400     0.00       0.00      0.0000   False 1.000           0.0000       -0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+llama31-8b joint niah_single   en streaming_llm  0.25      1.00       False   0.72        0.6300         0.8000     0.00       0.00      0.0000   False 1.000           0.0000       -0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+llama31-8b joint niah_single   en         knorm  0.50      1.00       False   0.30        0.2100         0.3900     0.00       0.00      0.0000   False 1.000           0.0000       -0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+llama31-8b joint niah_single   en         knorm  0.25      1.00       False   0.84        0.7600         0.9100     0.00       0.00      0.0000   False 1.000           0.0000       -0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+llama31-8b joint niah_single   ja        snapkv  0.50      0.98       False   0.00        0.0000         0.0000     0.00       0.00      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+llama31-8b joint niah_single   ja        snapkv  0.25      0.98       False   0.00        0.0000         0.0000     0.00       0.00      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+llama31-8b joint niah_single   ja streaming_llm  0.50      0.98       False   0.54        0.4400         0.6400     0.00      -0.14      0.1400   False 1.000          -1.5495       -2.5000         0.3207      False    0.155 1.000000 0.320211      False         False
+llama31-8b joint niah_single   ja streaming_llm  0.25      0.98       False   0.72        0.6300         0.8100     0.00      -0.12      0.1300   False 1.000          -1.5296       -2.5722         0.3932      False    0.165 1.000000 0.320211      False         False
+llama31-8b joint niah_single   ja         knorm  0.50      0.98       False   0.46        0.3698         0.5600     0.16       0.03      0.2900    True 0.024          -0.8709       -1.8241         1.0458      False    0.334 0.172800 0.546545      False         False
+llama31-8b joint niah_single   ja         knorm  0.25      0.98       False   0.81        0.7300         0.8800    -0.03      -0.14      0.0700   False 0.625          -1.7003       -2.8736         0.2236      False    0.103 1.000000 0.231750      False         False
+llama31-8b joint niah_single   ko        snapkv  0.50      0.77       False   0.01        0.0000         0.0300     0.01       0.00      0.0300   False 0.737           0.0547        0.0000         0.1873      False    0.737 1.000000 0.940800      False         False
+llama31-8b joint niah_single   ko        snapkv  0.25      0.77       False   0.02        0.0000         0.0500     0.02       0.00      0.0500   False 0.259           0.1078        0.0000         0.2824      False    0.259 0.854182 0.444000      False         False
+llama31-8b joint niah_single   ko streaming_llm  0.50      0.77       False   0.45        0.3400         0.5500    -0.09      -0.25      0.0500   False 0.253          -3.5232       -4.2135        -2.8405       True    0.001 0.854182 0.003000      False          True
+llama31-8b joint niah_single   ko streaming_llm  0.25      0.77       False   0.62        0.5100         0.7200    -0.10      -0.24      0.0300   False 0.165          -3.3360       -4.1130        -2.4820       True    0.001 0.848571 0.003000      False          True
+llama31-8b joint niah_single   ko         knorm  0.50      0.77       False   0.28        0.1900         0.3700    -0.02      -0.14      0.1100   False 0.810          -3.2325       -3.7959        -2.5495       True    0.001 1.000000 0.003000      False          True
+llama31-8b joint niah_single   ko         knorm  0.25      0.77       False   0.42        0.3200         0.5200    -0.42      -0.54     -0.3000    True 0.001          -5.1309       -5.8845        -4.4344       True    0.001 0.011994 0.003000       True          True
+llama31-8b joint niah_single   pl        snapkv  0.50      0.84       False   0.01        0.0000         0.0300     0.01       0.00      0.0300   False 0.742           0.0707        0.0000         0.2454      False    0.742 1.000000 0.940800      False         False
+llama31-8b joint niah_single   pl        snapkv  0.25      0.84       False   0.01        0.0000         0.0300     0.01       0.00      0.0300   False 0.742           0.0707        0.0000         0.2454      False    0.742 1.000000 0.940800      False         False
+llama31-8b joint niah_single   pl streaming_llm  0.50      0.84       False   0.51        0.4000         0.6100    -0.03      -0.18      0.1100   False 0.694          -3.1281       -3.8078        -2.3530       True    0.001 1.000000 0.003000      False          True
+llama31-8b joint niah_single   pl streaming_llm  0.25      0.84       False   0.71        0.6100         0.8000    -0.01      -0.15      0.1200   False 0.917          -2.7346       -3.6136        -1.7733       True    0.001 1.000000 0.003000      False          True
+llama31-8b joint niah_single   pl         knorm  0.50      0.84       False   0.50        0.4100         0.6000     0.20       0.07      0.3300    True 0.002          -2.1758       -2.7969        -1.3746       True    0.001 0.018000 0.003000       True          True
+llama31-8b joint niah_single   pl         knorm  0.25      0.84       False   0.81        0.7300         0.8800    -0.03      -0.14      0.0800   False 0.554          -1.9762       -3.0654        -0.1953       True    0.028 1.000000 0.067200      False         False
+llama31-8b joint niah_single   sw        snapkv  0.50      0.92       False   0.00       -0.0300         0.0300     0.00      -0.03      0.0300   False 1.000           0.0000       -0.4299         0.3889      False    1.000 1.000000 1.000000      False         False
+llama31-8b joint niah_single   sw        snapkv  0.25      0.92       False   0.00       -0.0300         0.0300     0.00      -0.03      0.0300   False 1.000           0.0000       -0.3965         0.3887      False    1.000 1.000000 1.000000      False         False
+llama31-8b joint niah_single   sw streaming_llm  0.50      0.92       False   0.49        0.3900         0.5900    -0.05      -0.19      0.0900   False 0.496          -2.7959       -3.5173        -1.7368       True    0.001 1.000000 0.003000      False          True
+llama31-8b joint niah_single   sw streaming_llm  0.25      0.92       False   0.64        0.5400         0.7300    -0.08      -0.21      0.0500   False 0.261          -2.9162       -3.7194        -1.8737       True    0.001 0.854182 0.003000      False          True
+llama31-8b joint niah_single   sw         knorm  0.50      0.92       False   0.30        0.1900         0.4002     0.00      -0.14      0.1400   False 1.000          -2.5628       -3.3460        -1.4579       True    0.001 1.000000 0.003000      False          True
+llama31-8b joint niah_single   sw         knorm  0.25      0.92       False   0.85        0.7700         0.9200     0.01      -0.10      0.1100   False 0.855          -2.0265       -3.0965        -0.5765       True    0.010 1.000000 0.025714      False          True
+llama31-8b joint niah_single   vi        snapkv  0.50      0.92       False  -0.01       -0.0300         0.0000    -0.01      -0.03      0.0000   False 0.784          -0.1359       -0.5424         0.0000      False    0.784 1.000000 0.940800      False         False
+llama31-8b joint niah_single   vi        snapkv  0.25      0.92       False  -0.01       -0.0300         0.0000    -0.01      -0.03      0.0000   False 0.784          -0.1359       -0.5424         0.0000      False    0.784 1.000000 0.940800      False         False
+llama31-8b joint niah_single   vi streaming_llm  0.50      0.92       False   0.48        0.3800         0.5800    -0.06      -0.20      0.0900   False 0.473          -2.8362       -3.5901        -1.8161       True    0.001 1.000000 0.003000      False          True
+llama31-8b joint niah_single   vi streaming_llm  0.25      0.92       False   0.68        0.5900         0.7800    -0.04      -0.17      0.0902   False 0.602          -2.7112       -3.5465        -1.5976       True    0.001 1.000000 0.003000      False          True
+llama31-8b joint niah_single   vi         knorm  0.50      0.92       False   0.56        0.4600         0.6502     0.26       0.13      0.4000    True 0.001          -1.5089       -2.2215        -0.4781       True    0.009 0.011994 0.024923       True          True
+llama31-8b joint niah_single   vi         knorm  0.25      0.92       False   0.90        0.8400         0.9600     0.06      -0.03      0.1500   False 0.241          -0.8758       -2.0304         1.1479      False    0.397 0.854182 0.621391      False         False
+llama31-8b joint niah_single   zh        snapkv  0.50      0.98       False   0.00        0.0000         0.0000     0.00       0.00      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+llama31-8b joint niah_single   zh        snapkv  0.25      0.98       False   0.00        0.0000         0.0000     0.00       0.00      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+llama31-8b joint niah_single   zh streaming_llm  0.50      0.98       False   0.55        0.4500         0.6500     0.01      -0.12      0.1500   False 0.917          -1.5093       -2.4892         0.3603      False    0.189 1.000000 0.340200      False         False
+llama31-8b joint niah_single   zh streaming_llm  0.25      0.98       False   0.71        0.6200         0.7900    -0.01      -0.13      0.1100   False 0.966          -1.5801       -2.6235         0.3643      False    0.169 1.000000 0.320211      False         False
+llama31-8b joint niah_single   zh         knorm  0.50      0.98       False   0.58        0.4800         0.6800     0.28       0.15      0.4200    True 0.001          -0.3903       -1.3931         1.5186      False    0.699 0.011994 0.940800       True         False
+llama31-8b joint niah_single   zh         knorm  0.25      0.98       False   0.92        0.8600         0.9700     0.08      -0.01      0.1702   False 0.104          -0.5861       -1.8112         1.5704      False    0.625 0.624000 0.937500      False         False
+[18:35:16] [llama31-8b__joint__niah_single] BH(q<.05) survivors: lang         press  kept  gap_amp     ga_q  gap_amp_logodds  ga_lo_q
+  ko streaming_llm  0.50    -0.09 0.854182          -3.5232 0.003000
+  ko streaming_llm  0.25    -0.10 0.848571          -3.3360 0.003000
+  ko         knorm  0.50    -0.02 1.000000          -3.2325 0.003000
+  ko         knorm  0.25    -0.42 0.011994          -5.1309 0.003000
+  pl streaming_llm  0.50    -0.03 1.000000          -3.1281 0.003000
+  pl streaming_llm  0.25    -0.01 1.000000          -2.7346 0.003000
+  pl         knorm  0.50     0.20 0.018000          -2.1758 0.003000
+  sw streaming_llm  0.50    -0.05 1.000000          -2.7959 0.003000
+  sw streaming_llm  0.25    -0.08 0.854182          -2.9162 0.003000
+  sw         knorm  0.50     0.00 1.000000          -2.5628 0.003000
+  sw         knorm  0.25     0.01 1.000000          -2.0265 0.025714
+  vi streaming_llm  0.50    -0.06 1.000000          -2.8362 0.003000
+  vi streaming_llm  0.25    -0.04 1.000000          -2.7112 0.003000
+  vi         knorm  0.50     0.26 0.011994          -1.5089 0.024923
+  zh         knorm  0.50     0.28 0.011994          -0.3903 0.940800
+[18:35:19] [llama31-8b__joint__niah_single] Spearman(delta@0.25 vs tokens/byte): {"snapkv": {"rho": 0.4926, "p_perm": 0.2857, "exact_perm": true, "n": 7, "fertility_source": "eval_texts", "leave_one_out": {"en": 0.395, "ja": 0.395, "ko": 0.676, "pl": 0.507, "sw": 0.698, "vi": 0.135, "zh": 0.577}}, "streaming_llm": {"rho": -0.3273, "p_perm": 0.4746, "exact_perm": true, "n": 7, "fertility_source": "eval_texts", "leave_one_out": {"en": -0.174, "ja": -0.174, "ko": -0.383, "pl": -0.406, "sw": -0.088, "vi": -0.618, "zh": -0.406}}, "knorm": {"rho": -0.0541, "p_perm": 0.9167, "exact_perm": true, "n": 7, "fertility_source": "eval_texts", "leave_one_out": {"en": 0.0, "ja": -0.086, "ko": -0.145, "pl": 0.086, "sw": -0.232, "vi": 0.29, "zh": -0.319}}}
+[18:35:19] [llama31-8b__qa__niah_none] en: 100 paired samples x 7 settings
+[18:35:19] [llama31-8b__qa__niah_none] ja: 100 paired samples x 7 settings
+[18:35:19] [llama31-8b__qa__niah_none] ko: 100 paired samples x 7 settings
+[18:35:19] [llama31-8b__qa__niah_none] pl: 100 paired samples x 7 settings
+[18:35:19] [llama31-8b__qa__niah_none] sw: 100 paired samples x 7 settings
+[18:35:19] [llama31-8b__qa__niah_none] vi: 100 paired samples x 7 settings
+[18:35:19] [llama31-8b__qa__niah_none] zh: 100 paired samples x 7 settings
+[18:35:19] [llama31-8b__qa__niah_none] gap table (paired bootstrap, B=2000):
+     model arm      task lang         press  kept  base_acc  base_floor  delta  delta_ci_low  delta_ci_high  gap_amp  ga_ci_low  ga_ci_high  ga_sig  ga_p  gap_amp_logodds  ga_lo_ci_low  ga_lo_ci_high  ga_lo_sig  ga_lo_p     ga_q  ga_lo_q  ga_sig_bh  ga_lo_sig_bh
+llama31-8b  qa niah_none   en        snapkv  0.50      0.63       False  -0.18       -0.2500        -0.1100     0.00     0.0000      0.0000   False 1.000           0.0000       -0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+llama31-8b  qa niah_none   en        snapkv  0.25      0.63       False  -0.21       -0.3000        -0.1200     0.00     0.0000      0.0000   False 1.000           0.0000       -0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+llama31-8b  qa niah_none   en streaming_llm  0.50      0.63       False  -0.03       -0.1000         0.0400     0.00     0.0000      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+llama31-8b  qa niah_none   en streaming_llm  0.25      0.63       False  -0.12       -0.2100        -0.0200     0.00     0.0000      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+llama31-8b  qa niah_none   en         knorm  0.50      0.63       False  -0.09       -0.1600        -0.0200     0.00     0.0000      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+llama31-8b  qa niah_none   en         knorm  0.25      0.63       False  -0.01       -0.1000         0.0800     0.00     0.0000      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+llama31-8b  qa niah_none   ja        snapkv  0.50      0.51        True   0.05       -0.0300         0.1400     0.23     0.1200      0.3500    True 0.001           1.1018        0.6096         1.6593       True    0.001 0.001636 0.001636       True          True
+llama31-8b  qa niah_none   ja        snapkv  0.25      0.51        True   0.01       -0.0900         0.1100     0.22     0.0900      0.3500    True 0.001           1.1463        0.5370         1.8621       True    0.001 0.001636 0.001636       True          True
+llama31-8b  qa niah_none   ja streaming_llm  0.50      0.51        True  -0.18       -0.2800        -0.0800    -0.15    -0.2700     -0.0300    True 0.019          -0.6222       -1.1720        -0.0959       True    0.021 0.025333 0.030240       True          True
+llama31-8b  qa niah_none   ja streaming_llm  0.25      0.51        True  -0.36       -0.4700        -0.2600    -0.24    -0.4000     -0.1000    True 0.003          -1.2706       -2.1633        -0.5585       True    0.001 0.004320 0.001636       True          True
+llama31-8b  qa niah_none   ja         knorm  0.50      0.51        True   0.18        0.0800         0.2800     0.27     0.1500      0.3902    True 0.001           1.1472        0.6198         1.7278       True    0.001 0.001636 0.001636       True          True
+llama31-8b  qa niah_none   ja         knorm  0.25      0.51        True   0.09       -0.0200         0.2000     0.10    -0.0403      0.2500   False 0.184           0.4018       -0.2008         1.0226      False    0.184 0.220800 0.225600      False         False
+llama31-8b  qa niah_none   ko        snapkv  0.50      0.83       False   0.18        0.0900         0.2700     0.36     0.2500      0.4800    True 0.001           1.8536        1.2853         2.5603       True    0.001 0.001636 0.001636       True          True
+llama31-8b  qa niah_none   ko        snapkv  0.25      0.83       False   0.51        0.3900         0.6300     0.72     0.5800      0.8700    True 0.001           3.4149        2.6729         4.3389       True    0.001 0.001636 0.001636       True          True
+llama31-8b  qa niah_none   ko streaming_llm  0.50      0.83       False   0.57        0.4500         0.6900     0.60     0.4600      0.7300    True 0.001           2.7258        2.0297         3.5943       True    0.001 0.001636 0.001636       True          True
+llama31-8b  qa niah_none   ko streaming_llm  0.25      0.83       False   0.45        0.3300         0.5600     0.57     0.4100      0.7200    True 0.001           2.6059        1.8338         3.4650       True    0.001 0.001636 0.001636       True          True
+llama31-8b  qa niah_none   ko         knorm  0.50      0.83       False   0.12        0.0297         0.2100     0.21     0.0900      0.3200    True 0.002           1.0843        0.4613         1.7256       True    0.003 0.003000 0.004696       True          True
+llama31-8b  qa niah_none   ko         knorm  0.25      0.83       False   0.49        0.3900         0.6000     0.50     0.3600      0.6300    True 0.001           2.2615        1.6086         3.0199       True    0.001 0.001636 0.001636       True          True
+llama31-8b  qa niah_none   pl        snapkv  0.50      0.93       False  -0.04       -0.0900         0.0100     0.14     0.0500      0.2200    True 0.002           0.0995       -1.6101         1.1693      False    0.885 0.003000 0.885000       True         False
+llama31-8b  qa niah_none   pl        snapkv  0.25      0.93       False  -0.02       -0.0800         0.0300     0.19     0.0900      0.2900    True 0.001           0.7754       -0.3997         1.8508      False    0.167 0.001636 0.214714       True         False
+llama31-8b  qa niah_none   pl streaming_llm  0.50      0.93       False   0.24        0.1400         0.3400     0.27     0.1500      0.3900    True 0.001           1.8613        1.0520         2.9279       True    0.001 0.001636 0.001636       True          True
+llama31-8b  qa niah_none   pl streaming_llm  0.25      0.93       False   0.54        0.4400         0.6400     0.66     0.5200      0.8000    True 0.001           3.5246        2.7162         4.6693       True    0.001 0.001636 0.001636       True          True
+llama31-8b  qa niah_none   pl         knorm  0.50      0.93       False  -0.01       -0.0700         0.0400     0.08    -0.0100      0.1700   False 0.101           0.2532       -0.8002         1.2477      False    0.606 0.125379 0.641647      False         False
+llama31-8b  qa niah_none   pl         knorm  0.25      0.93       False   0.02       -0.0400         0.0800     0.03    -0.0900      0.1400   False 0.666           0.3007       -0.7207         1.3246      False    0.527 0.705176 0.574909      False         False
+llama31-8b  qa niah_none   sw        snapkv  0.50      0.21        True   0.08        0.0100         0.1600     0.26     0.1600      0.3600    True 0.001           1.4647        0.8884         2.1976       True    0.001 0.001636 0.001636       True          True
+llama31-8b  qa niah_none   sw        snapkv  0.25      0.21        True   0.14        0.0700         0.2200     0.35     0.2400      0.4600    True 0.001           2.3220        1.5835         3.3419       True    0.001 0.001636 0.001636       True          True
+llama31-8b  qa niah_none   sw streaming_llm  0.50      0.21        True   0.19        0.1100         0.2800     0.22     0.1100      0.3300    True 0.001           2.4956        1.5027         4.3496       True    0.001 0.001636 0.001636       True          True
+llama31-8b  qa niah_none   sw streaming_llm  0.25      0.21        True   0.15        0.0600         0.2400     0.27     0.1300      0.4000    True 0.001           1.9278        1.0318         3.1577       True    0.001 0.001636 0.001636       True          True
+llama31-8b  qa niah_none   sw         knorm  0.50      0.21        True   0.16        0.0700         0.2600     0.25     0.1300      0.3700    True 0.001           1.9537        1.0237         3.3626       True    0.001 0.001636 0.001636       True          True
+llama31-8b  qa niah_none   sw         knorm  0.25      0.21        True   0.21        0.1300         0.3000     0.22     0.1000      0.3400    True 0.001           4.0383        3.3460         4.6140       True    0.001 0.001636 0.001636       True          True
+llama31-8b  qa niah_none   vi        snapkv  0.50      0.63       False   0.04       -0.0600         0.1400     0.22     0.1000      0.3400    True 0.001           1.0699        0.5376         1.6583       True    0.001 0.001636 0.001636       True          True
+llama31-8b  qa niah_none   vi        snapkv  0.25      0.63       False  -0.13       -0.2200        -0.0400     0.08    -0.0500      0.2000   False 0.231           0.4948       -0.1532         1.2102      False    0.140 0.259875 0.186667      False         False
+llama31-8b  qa niah_none   vi streaming_llm  0.50      0.63       False  -0.11       -0.2100        -0.0100    -0.08    -0.2100      0.0400   False 0.222          -0.3774       -0.9702         0.1788      False    0.188 0.257806 0.225600      False         False
+llama31-8b  qa niah_none   vi streaming_llm  0.25      0.63       False  -0.05       -0.1600         0.0600     0.07    -0.0800      0.2100   False 0.367           0.3399       -0.3616         1.0052      False    0.326 0.400364 0.378581      False         False
+llama31-8b  qa niah_none   vi         knorm  0.50      0.63       False   0.17        0.0800         0.2700     0.26     0.1300      0.3800    True 0.001           1.0924        0.5640         1.6231       True    0.001 0.001636 0.001636       True          True
+llama31-8b  qa niah_none   vi         knorm  0.25      0.63       False   0.46        0.3500         0.5602     0.47     0.3200      0.6100    True 0.001           2.1320        1.4441         2.9127       True    0.001 0.001636 0.001636       True          True
+llama31-8b  qa niah_none   zh        snapkv  0.50      0.24        True   0.07       -0.0200         0.1600     0.25     0.1300      0.3700    True 0.001           1.3275        0.6772         2.0378       True    0.001 0.001636 0.001636       True          True
+llama31-8b  qa niah_none   zh        snapkv  0.25      0.24        True  -0.19       -0.3000        -0.0700     0.02    -0.1200      0.1700   False 0.777           0.2471       -0.4759         1.0271      False    0.489 0.777000 0.550125      False         False
+llama31-8b  qa niah_none   zh streaming_llm  0.50      0.24        True  -0.05       -0.1400         0.0500    -0.02    -0.1303      0.1000   False 0.748          -0.1238       -0.6905         0.4479      False    0.678 0.769371 0.697371      False         False
+llama31-8b  qa niah_none   zh streaming_llm  0.25      0.24        True  -0.40       -0.5100        -0.2800    -0.28    -0.4400     -0.1398    True 0.001          -1.1492       -1.9234        -0.4751       True    0.001 0.001636 0.001636       True          True
+llama31-8b  qa niah_none   zh         knorm  0.50      0.24        True   0.06       -0.0200         0.1400     0.15     0.0400      0.2600    True 0.013           0.7634        0.1740         1.3954       True    0.014 0.018000 0.021000       True          True
+llama31-8b  qa niah_none   zh         knorm  0.25      0.24        True  -0.14       -0.2300        -0.0500    -0.13    -0.2600     -0.0000    True 0.049          -0.6115       -1.2440        -0.0422       True    0.039 0.063000 0.054000      False         False
+[18:35:19] [llama31-8b__qa__niah_none] BH(q<.05) survivors: lang         press  kept  gap_amp     ga_q  gap_amp_logodds  ga_lo_q
+  ja        snapkv  0.50     0.23 0.001636           1.1018 0.001636
+  ja        snapkv  0.25     0.22 0.001636           1.1463 0.001636
+  ja streaming_llm  0.50    -0.15 0.025333          -0.6222 0.030240
+  ja streaming_llm  0.25    -0.24 0.004320          -1.2706 0.001636
+  ja         knorm  0.50     0.27 0.001636           1.1472 0.001636
+  ko        snapkv  0.50     0.36 0.001636           1.8536 0.001636
+  ko        snapkv  0.25     0.72 0.001636           3.4149 0.001636
+  ko streaming_llm  0.50     0.60 0.001636           2.7258 0.001636
+  ko streaming_llm  0.25     0.57 0.001636           2.6059 0.001636
+  ko         knorm  0.50     0.21 0.003000           1.0843 0.004696
+  ko         knorm  0.25     0.50 0.001636           2.2615 0.001636
+  pl        snapkv  0.50     0.14 0.003000           0.0995 0.885000
+  pl        snapkv  0.25     0.19 0.001636           0.7754 0.214714
+  pl streaming_llm  0.50     0.27 0.001636           1.8613 0.001636
+  pl streaming_llm  0.25     0.66 0.001636           3.5246 0.001636
+  sw        snapkv  0.50     0.26 0.001636           1.4647 0.001636
+  sw        snapkv  0.25     0.35 0.001636           2.3220 0.001636
+  sw streaming_llm  0.50     0.22 0.001636           2.4956 0.001636
+  sw streaming_llm  0.25     0.27 0.001636           1.9278 0.001636
+  sw         knorm  0.50     0.25 0.001636           1.9537 0.001636
+  sw         knorm  0.25     0.22 0.001636           4.0383 0.001636
+  vi        snapkv  0.50     0.22 0.001636           1.0699 0.001636
+  vi         knorm  0.50     0.26 0.001636           1.0924 0.001636
+  vi         knorm  0.25     0.47 0.001636           2.1320 0.001636
+  zh        snapkv  0.50     0.25 0.001636           1.3275 0.001636
+  zh streaming_llm  0.25    -0.28 0.001636          -1.1492 0.001636
+  zh         knorm  0.50     0.15 0.018000           0.7634 0.021000
+[18:35:19] [llama31-8b__qa__niah_none] WARNING base_acc<0.6 (interpret GA with care, cells flagged base_floor): ['ja', 'sw', 'zh']
+[18:35:21] [llama31-8b__qa__niah_none] Spearman(delta@0.25 vs tokens/byte): {"snapkv": {"rho": 0.4286, "p_perm": 0.3536, "exact_perm": true, "n": 7, "fertility_source": "eval_texts", "leave_one_out": {"en": 0.2, "ja": 0.429, "ko": 0.6, "pl": 0.429, "sw": 0.257, "vi": 0.371, "zh": 0.657}}, "streaming_llm": {"rho": 0.3571, "p_perm": 0.4444, "exact_perm": true, "n": 7, "fertility_source": "eval_texts", "leave_one_out": {"en": 0.371, "ja": 0.371, "ko": 0.371, "pl": 0.086, "sw": 0.2, "vi": 0.371, "zh": 0.6}}, "knorm": {"rho": -0.1429, "p_perm": 0.7825, "exact_perm": true, "n": 7, "fertility_source": "eval_texts", "leave_one_out": {"en": -0.371, "ja": -0.2, "ko": -0.143, "pl": -0.143, "sw": -0.314, "vi": 0.2, "zh": 0.029}}}
+[18:35:21] [llama31-8b__qa__niah_single] en: 100 paired samples x 7 settings
+[18:35:21] [llama31-8b__qa__niah_single] ja: 100 paired samples x 7 settings
+[18:35:21] [llama31-8b__qa__niah_single] ko: 100 paired samples x 7 settings
+[18:35:21] [llama31-8b__qa__niah_single] pl: 100 paired samples x 7 settings
+[18:35:21] [llama31-8b__qa__niah_single] sw: 100 paired samples x 7 settings
+[18:35:21] [llama31-8b__qa__niah_single] vi: 100 paired samples x 7 settings
+[18:35:21] [llama31-8b__qa__niah_single] zh: 100 paired samples x 7 settings
+[18:35:21] [llama31-8b__qa__niah_single] gap table (paired bootstrap, B=2000):
+     model arm        task lang         press  kept  base_acc  base_floor  delta  delta_ci_low  delta_ci_high  gap_amp  ga_ci_low  ga_ci_high  ga_sig  ga_p  gap_amp_logodds  ga_lo_ci_low  ga_lo_ci_high  ga_lo_sig  ga_lo_p     ga_q  ga_lo_q  ga_sig_bh  ga_lo_sig_bh
+llama31-8b  qa niah_single   en        snapkv  0.50      1.00       False   0.10        0.0400         0.1600     0.00     0.0000        0.00   False 1.000           0.0000       -0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+llama31-8b  qa niah_single   en        snapkv  0.25      1.00       False   0.55        0.4500         0.6400     0.00     0.0000        0.00   False 1.000           0.0000       -0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+llama31-8b  qa niah_single   en streaming_llm  0.50      1.00       False   0.54        0.4400         0.6400     0.00     0.0000        0.00   False 1.000           0.0000       -0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+llama31-8b  qa niah_single   en streaming_llm  0.25      1.00       False   0.73        0.6400         0.8100     0.00     0.0000        0.00   False 1.000           0.0000       -0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+llama31-8b  qa niah_single   en         knorm  0.50      1.00       False   0.28        0.1900         0.3700     0.00     0.0000        0.00   False 1.000           0.0000       -0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+llama31-8b  qa niah_single   en         knorm  0.25      1.00       False   0.83        0.7600         0.9000     0.00     0.0000        0.00   False 1.000           0.0000       -0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+llama31-8b  qa niah_single   ja        snapkv  0.50      0.98       False   0.22        0.1400         0.3100     0.12     0.0200        0.22    True 0.027          -0.6142       -1.5588         1.3691      False    0.516 0.051158 0.599226      False         False
+llama31-8b  qa niah_single   ja        snapkv  0.25      0.98       False   0.77        0.6800         0.8500     0.22     0.0900        0.35    True 0.003          -0.5205       -1.5523         1.4158      False    0.571 0.008308 0.642375       True         False
+llama31-8b  qa niah_single   ja streaming_llm  0.50      0.98       False   0.53        0.4300         0.6300    -0.01    -0.1500        0.13   False 0.934          -1.5896       -2.5996         0.3207      False    0.154 0.960686 0.224640      False         False
+llama31-8b  qa niah_single   ja streaming_llm  0.25      0.98       False   0.73        0.6400         0.8200     0.00    -0.1200        0.13   False 1.000          -1.5272       -2.5686         0.3776      False    0.168 1.000000 0.232615      False         False
+llama31-8b  qa niah_single   ja         knorm  0.50      0.98       False   0.49        0.3900         0.5900     0.21     0.0800        0.34    True 0.002          -0.6562       -1.6453         1.2682      False    0.462 0.006000 0.573517       True         False
+llama31-8b  qa niah_single   ja         knorm  0.25      0.98       False   0.81        0.7300         0.8800    -0.02    -0.1300        0.08   False 0.781          -1.6295       -2.7390         0.3246      False    0.148 0.906968 0.224640      False         False
+llama31-8b  qa niah_single   ko        snapkv  0.50      0.77       False  -0.01       -0.0800         0.0700    -0.11    -0.2100       -0.01    True 0.025          -3.2056       -3.9011        -2.2706       True    0.001 0.050000 0.001895      False          True
+llama31-8b  qa niah_single   ko        snapkv  0.25      0.77       False   0.15        0.0500         0.2500    -0.40    -0.5400       -0.26    True 0.001          -4.7932       -5.3969        -4.1734       True    0.001 0.003271 0.001895       True          True
+llama31-8b  qa niah_single   ko streaming_llm  0.50      0.77       False   0.39        0.2500         0.5200    -0.15    -0.3200        0.01   False 0.067          -3.7843       -4.5434        -3.0160       True    0.001 0.104870 0.001895      False          True
+llama31-8b  qa niah_single   ko streaming_llm  0.25      0.77       False   0.56        0.4297         0.6900    -0.17    -0.3300       -0.02    True 0.023          -3.7854       -4.6420        -2.8919       True    0.001 0.048706 0.001895       True          True
+llama31-8b  qa niah_single   ko         knorm  0.50      0.77       False  -0.10       -0.1800        -0.0300    -0.38    -0.5000       -0.26    True 0.001          -5.0453       -5.7493        -4.3628       True    0.001 0.003271 0.001895       True          True
+llama31-8b  qa niah_single   ko         knorm  0.25      0.77       False  -0.05       -0.1400         0.0400    -0.88    -1.0000       -0.75    True 0.001          -7.1677       -8.0057        -6.3950       True    0.001 0.003271 0.001895       True          True
+llama31-8b  qa niah_single   pl        snapkv  0.50      0.84       False   0.54        0.4400         0.6400     0.44     0.3200        0.55    True 0.001          -0.6781       -1.4445         0.3654      False    0.204 0.003271 0.262286       True         False
+llama31-8b  qa niah_single   pl        snapkv  0.25      0.84       False   0.84        0.7600         0.9100     0.29     0.1700        0.41    True 0.001           1.4347        0.8174         2.1559       True    0.001 0.003271 0.001895       True          True
+llama31-8b  qa niah_single   pl streaming_llm  0.50      0.84       False   0.35        0.2000         0.4900    -0.19    -0.3800       -0.02    True 0.033          -3.7891       -4.6690        -2.8651       True    0.001 0.059400 0.001895      False          True
+llama31-8b  qa niah_single   pl streaming_llm  0.25      0.84       False   0.56        0.4000         0.7000    -0.17    -0.3500       -0.01    True 0.048          -3.7193       -4.6767        -2.6628       True    0.001 0.078545 0.001895      False          True
+llama31-8b  qa niah_single   pl         knorm  0.50      0.84       False   0.54        0.4400         0.6400     0.26     0.1300        0.39    True 0.001          -1.8983       -2.5396        -1.0608       True    0.001 0.003271 0.001895       True          True
+llama31-8b  qa niah_single   pl         knorm  0.25      0.84       False   0.80        0.7200         0.8700    -0.03    -0.1300        0.08   False 0.618          -2.1671       -3.1749        -0.6699       True    0.010 0.775862 0.018000      False          True
+llama31-8b  qa niah_single   sw        snapkv  0.50      0.92       False   0.01       -0.0200         0.0500    -0.09    -0.1600       -0.02    True 0.011          -3.0272       -3.7203        -2.0598       True    0.001 0.026400 0.001895       True          True
+llama31-8b  qa niah_single   sw        snapkv  0.25      0.92       False   0.02       -0.0500         0.0900    -0.53    -0.6500       -0.41    True 0.001          -5.2688       -6.2275        -4.2471       True    0.001 0.003271 0.001895       True          True
+llama31-8b  qa niah_single   sw streaming_llm  0.50      0.92       False   0.49        0.4000         0.5900    -0.05    -0.1800        0.09   False 0.505          -2.7959       -3.4856        -1.7932       True    0.001 0.699231 0.001895      False          True
+llama31-8b  qa niah_single   sw streaming_llm  0.25      0.92       False   0.65        0.5600         0.7400    -0.08    -0.2000        0.04   False 0.236          -2.9162       -3.6864        -1.9209       True    0.001 0.339840 0.001895      False          True
+llama31-8b  qa niah_single   sw         knorm  0.50      0.92       False   0.24        0.1300         0.3500    -0.04    -0.1703        0.10   False 0.625          -2.7281       -3.5633        -1.6138       True    0.001 0.775862 0.001895      False          True
+llama31-8b  qa niah_single   sw         knorm  0.25      0.92       False   0.86        0.7800         0.9300     0.03    -0.0700        0.14   False 0.575          -1.8020       -2.8554        -0.2444       True    0.029 0.766667 0.049714      False          True
+llama31-8b  qa niah_single   vi        snapkv  0.50      0.90       False   0.76        0.6700         0.8500     0.66     0.5500        0.77    True 0.001           0.7906       -0.0977         2.1301      False    0.077 0.003271 0.126000       True         False
+llama31-8b  qa niah_single   vi        snapkv  0.25      0.90       False   0.87        0.8000         0.9300     0.32     0.2000        0.44    True 0.001          -0.0209       -1.0512         1.9052      False    0.872 0.003271 0.896914       True         False
+llama31-8b  qa niah_single   vi streaming_llm  0.50      0.90       False   0.50        0.3900         0.6100    -0.04    -0.1800        0.11   False 0.658          -2.9067       -3.6384        -1.8862       True    0.001 0.789600 0.001895      False          True
+llama31-8b  qa niah_single   vi streaming_llm  0.25      0.90       False   0.71        0.6100         0.8100    -0.02    -0.1500        0.12   False 0.843          -2.7022       -3.5422        -1.5648       True    0.001 0.919636 0.001895      False          True
+llama31-8b  qa niah_single   vi         knorm  0.50      0.90       False   0.11        0.0100         0.2100    -0.17    -0.3000       -0.03    True 0.020          -3.5234       -4.3716        -2.4106       True    0.001 0.045000 0.001895       True          True
+llama31-8b  qa niah_single   vi         knorm  0.25      0.90       False   0.76        0.6700         0.8402    -0.07    -0.1800        0.04   False 0.233          -2.9260       -3.8291        -1.8266       True    0.001 0.339840 0.001895      False          True
+llama31-8b  qa niah_single   zh        snapkv  0.50      0.98       False   0.35        0.2500         0.4500     0.25     0.1400        0.37    True 0.001          -0.0023       -1.1016         2.1081      False    0.846 0.003271 0.895765       True         False
+llama31-8b  qa niah_single   zh        snapkv  0.25      0.98       False   0.74        0.6400         0.8300     0.19     0.0600        0.32    True 0.006          -0.6896       -1.8022         1.3282      False    0.483 0.015429 0.579600       True         False
+llama31-8b  qa niah_single   zh streaming_llm  0.50      0.98       False   0.55        0.4500         0.6500     0.01    -0.1200        0.15   False 0.917          -1.5093       -2.4892         0.3603      False    0.189 0.960686 0.252000      False         False
+llama31-8b  qa niah_single   zh streaming_llm  0.25      0.98       False   0.71        0.6200         0.7900    -0.02    -0.1400        0.10   False 0.840          -1.6295       -2.6591         0.3081      False    0.156 0.919636 0.224640      False         False
+llama31-8b  qa niah_single   zh         knorm  0.50      0.98       False   0.62        0.5200         0.7200     0.34     0.2100        0.48    True 0.001          -0.1265       -1.1840         1.8495      False    0.986 0.003271 0.986000       True         False
+llama31-8b  qa niah_single   zh         knorm  0.25      0.98       False   0.93        0.8800         0.9800     0.10     0.0100        0.19    True 0.039          -0.3378       -1.5801         1.8929      False    0.817 0.066857 0.891273      False         False
+[18:35:21] [llama31-8b__qa__niah_single] BH(q<.05) survivors: lang         press  kept  gap_amp     ga_q  gap_amp_logodds  ga_lo_q
+  ja        snapkv  0.25     0.22 0.008308          -0.5205 0.642375
+  ja         knorm  0.50     0.21 0.006000          -0.6562 0.573517
+  ko        snapkv  0.50    -0.11 0.050000          -3.2056 0.001895
+  ko        snapkv  0.25    -0.40 0.003271          -4.7932 0.001895
+  ko streaming_llm  0.50    -0.15 0.104870          -3.7843 0.001895
+  ko streaming_llm  0.25    -0.17 0.048706          -3.7854 0.001895
+  ko         knorm  0.50    -0.38 0.003271          -5.0453 0.001895
+  ko         knorm  0.25    -0.88 0.003271          -7.1677 0.001895
+  pl        snapkv  0.50     0.44 0.003271          -0.6781 0.262286
+  pl        snapkv  0.25     0.29 0.003271           1.4347 0.001895
+  pl streaming_llm  0.50    -0.19 0.059400          -3.7891 0.001895
+  pl streaming_llm  0.25    -0.17 0.078545          -3.7193 0.001895
+  pl         knorm  0.50     0.26 0.003271          -1.8983 0.001895
+  pl         knorm  0.25    -0.03 0.775862          -2.1671 0.018000
+  sw        snapkv  0.50    -0.09 0.026400          -3.0272 0.001895
+  sw        snapkv  0.25    -0.53 0.003271          -5.2688 0.001895
+  sw streaming_llm  0.50    -0.05 0.699231          -2.7959 0.001895
+  sw streaming_llm  0.25    -0.08 0.339840          -2.9162 0.001895
+  sw         knorm  0.50    -0.04 0.775862          -2.7281 0.001895
+  sw         knorm  0.25     0.03 0.766667          -1.8020 0.049714
+  vi        snapkv  0.50     0.66 0.003271           0.7906 0.126000
+  vi        snapkv  0.25     0.32 0.003271          -0.0209 0.896914
+  vi streaming_llm  0.50    -0.04 0.789600          -2.9067 0.001895
+  vi streaming_llm  0.25    -0.02 0.919636          -2.7022 0.001895
+  vi         knorm  0.50    -0.17 0.045000          -3.5234 0.001895
+  vi         knorm  0.25    -0.07 0.339840          -2.9260 0.001895
+  zh        snapkv  0.50     0.25 0.003271          -0.0023 0.895765
+  zh        snapkv  0.25     0.19 0.015429          -0.6896 0.579600
+  zh         knorm  0.50     0.34 0.003271          -0.1265 0.986000
+[18:35:24] [llama31-8b__qa__niah_single] Spearman(delta@0.25 vs tokens/byte): {"snapkv": {"rho": -0.4643, "p_perm": 0.3024, "exact_perm": true, "n": 7, "fertility_source": "eval_texts", "leave_one_out": {"en": -0.6, "ja": -0.486, "ko": -0.486, "pl": -0.714, "sw": -0.143, "vi": -0.143, "zh": -0.6}}, "streaming_llm": {"rho": -0.6057, "p_perm": 0.1683, "exact_perm": true, "n": 7, "fertility_source": "eval_texts", "leave_one_out": {"en": -0.53, "ja": -0.53, "ko": -0.677, "pl": -0.53, "sw": -0.598, "vi": -0.647, "zh": -0.618}}, "knorm": {"rho": 0.3929, "p_perm": 0.3956, "exact_perm": true, "n": 7, "fertility_source": "eval_texts", "leave_one_out": {"en": 0.486, "ja": 0.486, "ko": 0.486, "pl": 0.543, "sw": 0.143, "vi": 0.2, "zh": 0.314}}}
+[18:35:24] [qwen25-7b-1m__joint__niah_single] en: 100 paired samples x 7 settings
+[18:35:24] [qwen25-7b-1m__joint__niah_single] ja: 100 paired samples x 7 settings
+[18:35:24] [qwen25-7b-1m__joint__niah_single] ko: 100 paired samples x 7 settings
+[18:35:24] [qwen25-7b-1m__joint__niah_single] pl: 100 paired samples x 7 settings
+[18:35:24] [qwen25-7b-1m__joint__niah_single] sw: 100 paired samples x 7 settings
+[18:35:24] [qwen25-7b-1m__joint__niah_single] vi: 100 paired samples x 7 settings
+[18:35:24] [qwen25-7b-1m__joint__niah_single] zh: 100 paired samples x 7 settings
+[18:35:24] [qwen25-7b-1m__joint__niah_single] gap table (paired bootstrap, B=2000):
+       model   arm        task lang         press  kept  base_acc  base_floor  delta  delta_ci_low  delta_ci_high  gap_amp  ga_ci_low  ga_ci_high  ga_sig  ga_p  gap_amp_logodds  ga_lo_ci_low  ga_lo_ci_high  ga_lo_sig  ga_lo_p     ga_q  ga_lo_q  ga_sig_bh  ga_lo_sig_bh
+qwen25-7b-1m joint niah_single   en        snapkv  0.50      0.98       False   0.00          0.00         0.0000     0.00     0.0000      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m joint niah_single   en        snapkv  0.25      0.98       False   0.00          0.00         0.0000     0.00     0.0000      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m joint niah_single   en streaming_llm  0.50      0.98       False   0.53          0.42         0.6300     0.00     0.0000      0.0000   False 1.000           0.0000       -0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m joint niah_single   en streaming_llm  0.25      0.98       False   0.71          0.61         0.7900     0.00     0.0000      0.0000   False 1.000           0.0000       -0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m joint niah_single   en         knorm  0.50      0.98       False   0.89          0.82         0.9500     0.00     0.0000      0.0000   False 1.000           0.0000       -0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m joint niah_single   en         knorm  0.25      0.98       False   0.97          0.93         1.0000     0.00     0.0000      0.0000   False 1.000           0.0000       -0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m joint niah_single   ja        snapkv  0.50      0.90       False  -0.05         -0.11         0.0000    -0.05    -0.1100      0.0000   False 0.108          -0.7004       -1.8321         0.0000      False    0.108 0.486000 0.353455      False         False
+qwen25-7b-1m joint niah_single   ja        snapkv  0.25      0.90       False  -0.02         -0.08         0.0400    -0.02    -0.0800      0.0400   False 0.623          -0.2332       -1.0137         0.4791      False    0.623 1.000000 0.975130      False         False
+qwen25-7b-1m joint niah_single   ja streaming_llm  0.50      0.90       False   0.45          0.34         0.5600    -0.08    -0.2200      0.0700   False 0.335          -1.5198       -3.4943        -0.2778       True    0.017 1.000000 0.122400      False         False
+qwen25-7b-1m joint niah_single   ja streaming_llm  0.25      0.90       False   0.62          0.51         0.7300    -0.09    -0.2300      0.0500   False 0.255          -1.5692       -3.6192        -0.2029       True    0.022 0.918000 0.132000      False         False
+qwen25-7b-1m joint niah_single   ja         knorm  0.50      0.90       False   0.82          0.74         0.8900    -0.07    -0.1600      0.0300   False 0.193          -1.3977       -3.5162         0.1325      False    0.069 0.772000 0.276000      False         False
+qwen25-7b-1m joint niah_single   ja         knorm  0.25      0.90       False   0.89          0.83         0.9500    -0.08    -0.1500     -0.0100    True 0.033          -1.5198       -4.1469         0.5787      False    0.196 0.174857 0.441000      False         False
+qwen25-7b-1m joint niah_single   ko        snapkv  0.50      1.00       False   0.01          0.00         0.0300     0.01     0.0000      0.0300   False 0.765           1.1086        0.0000         1.9762      False    0.765 1.000000 1.000000      False         False
+qwen25-7b-1m joint niah_single   ko        snapkv  0.25      1.00       False   0.00          0.00         0.0000     0.00     0.0000      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m joint niah_single   ko streaming_llm  0.50      1.00       False   0.51          0.41         0.6000    -0.02    -0.1603      0.1200   False 0.860           1.4705       -0.3999         2.5204      False    0.173 1.000000 0.441000      False         False
+qwen25-7b-1m joint niah_single   ko streaming_llm  0.25      1.00       False   0.72          0.63         0.8100     0.01    -0.1200      0.1400   False 0.931           1.5801       -0.3007         2.6797      False    0.142 1.000000 0.423692      False         False
+qwen25-7b-1m joint niah_single   ko         knorm  0.50      1.00       False   0.37          0.28         0.4700    -0.52    -0.6300     -0.4100    True 0.001          -1.1622       -3.2035        -0.0776       True    0.037 0.008996 0.166500       True         False
+qwen25-7b-1m joint niah_single   ko         knorm  0.25      1.00       False   0.95          0.90         0.9900    -0.02    -0.0800      0.0300   False 0.600           0.2892       -2.2378         1.9773      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m joint niah_single   pl        snapkv  0.50      1.00       False   0.00          0.00         0.0000     0.00     0.0000      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m joint niah_single   pl        snapkv  0.25      1.00       False   0.00          0.00         0.0000     0.00     0.0000      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m joint niah_single   pl streaming_llm  0.50      1.00       False   0.51          0.41         0.6002    -0.02    -0.1603      0.1200   False 0.816           1.4705       -0.4378         2.5460      False    0.187 1.000000 0.441000      False         False
+qwen25-7b-1m joint niah_single   pl streaming_llm  0.25      1.00       False   0.72          0.63         0.8000     0.01    -0.1300      0.1400   False 0.945           1.5801       -0.3643         2.7176      False    0.153 1.000000 0.423692      False         False
+qwen25-7b-1m joint niah_single   pl         knorm  0.50      1.00       False   0.93          0.88         0.9800     0.04    -0.0400      0.1200   False 0.365           1.8876       -0.1776         3.3228      False    0.082 1.000000 0.295200      False         False
+qwen25-7b-1m joint niah_single   pl         knorm  0.25      1.00       False   0.99          0.97         1.0000     0.02    -0.0200      0.0600   False 0.422           1.6295       -0.8676         3.6058      False    0.288 1.000000 0.609882      False         False
+qwen25-7b-1m joint niah_single   sw        snapkv  0.50      0.56        True  -0.03         -0.09         0.0300    -0.03    -0.0900      0.0300   False 0.440          -0.1215       -0.3952         0.1266      False    0.440 1.000000 0.768000      False         False
+qwen25-7b-1m joint niah_single   sw        snapkv  0.25      0.56        True   0.08          0.01         0.1500     0.08     0.0100      0.1500    True 0.034           0.3180        0.0398         0.6035       True    0.034 0.174857 0.166500      False         False
+qwen25-7b-1m joint niah_single   sw streaming_llm  0.50      0.56        True   0.31          0.20         0.4200    -0.22    -0.3703     -0.0600    True 0.007          -2.5482       -4.4845        -1.4181       True    0.001 0.050400 0.008996      False          True
+qwen25-7b-1m joint niah_single   sw streaming_llm  0.25      0.56        True   0.42          0.30         0.5300    -0.29    -0.4400     -0.1400    True 0.001          -2.6321       -4.6472        -1.4150       True    0.001 0.008996 0.008996       True          True
+qwen25-7b-1m joint niah_single   sw         knorm  0.50      0.56        True   0.48          0.36         0.5900    -0.41    -0.5400     -0.2800    True 0.001          -3.3129       -5.3898        -1.9511       True    0.001 0.008996 0.008996       True          True
+qwen25-7b-1m joint niah_single   sw         knorm  0.25      0.56        True   0.55          0.45         0.6500    -0.42    -0.5300     -0.3100    True 0.001          -3.4350       -6.0106        -1.2960       True    0.001 0.008996 0.008996       True          True
+qwen25-7b-1m joint niah_single   vi        snapkv  0.50      0.96       False   0.00          0.00         0.0000     0.00     0.0000      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m joint niah_single   vi        snapkv  0.25      0.96       False   0.00          0.00         0.0000     0.00     0.0000      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m joint niah_single   vi streaming_llm  0.50      0.96       False   0.47          0.37         0.5700    -0.06    -0.1900      0.0900   False 0.470          -0.7674       -2.7569         0.9081      False    0.348 1.000000 0.696000      False         False
+qwen25-7b-1m joint niah_single   vi streaming_llm  0.25      0.96       False   0.68          0.59         0.7700    -0.03    -0.1600      0.1100   False 0.720          -0.6577       -2.7063         1.1294      False    0.448 1.000000 0.768000      False         False
+qwen25-7b-1m joint niah_single   vi         knorm  0.50      0.96       False   0.85          0.77         0.9200    -0.04    -0.1400      0.0600   False 0.469          -0.8215       -3.0067         1.1302      False    0.373 1.000000 0.706737      False         False
+qwen25-7b-1m joint niah_single   vi         knorm  0.25      0.96       False   0.96          0.92         0.9900    -0.01    -0.0600      0.0400   False 0.877           0.5003       -1.9762         2.3229      False    0.901 1.000000 1.000000      False         False
+qwen25-7b-1m joint niah_single   zh        snapkv  0.50      0.98       False   0.00          0.00         0.0000     0.00     0.0000      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m joint niah_single   zh        snapkv  0.25      0.98       False   0.00          0.00         0.0000     0.00     0.0000      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m joint niah_single   zh streaming_llm  0.50      0.98       False   0.56          0.47         0.6600     0.03    -0.1000      0.1800   False 0.689           0.1209       -1.8775         2.1231      False    0.855 1.000000 1.000000      False         False
+qwen25-7b-1m joint niah_single   zh streaming_llm  0.25      0.98       False   0.73          0.64         0.8100     0.02    -0.1000      0.1402   False 0.805           0.1024       -1.9200         2.2091      False    0.865 1.000000 1.000000      False         False
+qwen25-7b-1m joint niah_single   zh         knorm  0.50      0.98       False   0.89          0.82         0.9500     0.00    -0.0900      0.0900   False 1.000           0.0000       -2.2843         2.2186      False    0.980 1.000000 1.000000      False         False
+qwen25-7b-1m joint niah_single   zh         knorm  0.25      0.98       False   0.98          0.95         1.0000     0.01    -0.0300      0.0500   False 0.781           1.1086       -1.1292         3.2591      False    0.497 1.000000 0.813273      False         False
+[18:35:24] [qwen25-7b-1m__joint__niah_single] BH(q<.05) survivors: lang         press  kept  gap_amp     ga_q  gap_amp_logodds  ga_lo_q
+  ko         knorm  0.50    -0.52 0.008996          -1.1622 0.166500
+  sw streaming_llm  0.50    -0.22 0.050400          -2.5482 0.008996
+  sw streaming_llm  0.25    -0.29 0.008996          -2.6321 0.008996
+  sw         knorm  0.50    -0.41 0.008996          -3.3129 0.008996
+  sw         knorm  0.25    -0.42 0.008996          -3.4350 0.008996
+[18:35:24] [qwen25-7b-1m__joint__niah_single] WARNING base_acc<0.6 (interpret GA with care, cells flagged base_floor): ['sw']
+[18:35:27] [qwen25-7b-1m__joint__niah_single] Spearman(delta@0.25 vs tokens/byte): {"snapkv": {"rho": 0.8018, "p_perm": 0.0476, "exact_perm": true, "n": 7, "fertility_source": "eval_texts", "leave_one_out": {"en": 0.845, "ja": 0.655, "ko": 0.845, "pl": 0.845, "sw": 0.655, "vi": 0.845, "zh": 0.845}}, "streaming_llm": {"rho": 0.1261, "p_perm": 0.8, "exact_perm": true, "n": 7, "fertility_source": "eval_texts", "leave_one_out": {"en": -0.058, "ja": -0.058, "ko": 0.086, "pl": 0.086, "sw": 0.812, "vi": -0.058, "zh": 0.116}}, "knorm": {"rho": 0.0357, "p_perm": 0.9635, "exact_perm": true, "n": 7, "fertility_source": "eval_texts", "leave_one_out": {"en": -0.029, "ja": -0.2, "ko": 0.143, "pl": -0.2, "sw": 0.657, "vi": -0.029, "zh": -0.029}}}
+[18:35:27] [qwen25-7b-1m__qa__niah_none] en: 100 paired samples x 7 settings
+[18:35:27] [qwen25-7b-1m__qa__niah_none] ja: 100 paired samples x 7 settings
+[18:35:27] [qwen25-7b-1m__qa__niah_none] ko: 100 paired samples x 7 settings
+[18:35:27] [qwen25-7b-1m__qa__niah_none] pl: 100 paired samples x 7 settings
+[18:35:27] [qwen25-7b-1m__qa__niah_none] sw: 100 paired samples x 7 settings
+[18:35:27] [qwen25-7b-1m__qa__niah_none] vi: 100 paired samples x 7 settings
+[18:35:27] [qwen25-7b-1m__qa__niah_none] zh: 100 paired samples x 7 settings
+[18:35:27] [qwen25-7b-1m__qa__niah_none] gap table (paired bootstrap, B=2000):
+       model arm      task lang         press  kept  base_acc  base_floor  delta  delta_ci_low  delta_ci_high  gap_amp  ga_ci_low  ga_ci_high  ga_sig  ga_p  gap_amp_logodds  ga_lo_ci_low  ga_lo_ci_high  ga_lo_sig  ga_lo_p     ga_q  ga_lo_q  ga_sig_bh  ga_lo_sig_bh
+qwen25-7b-1m  qa niah_none   en        snapkv  0.50      0.96       False   0.00         -0.03         0.0300     0.00     0.0000      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m  qa niah_none   en        snapkv  0.25      0.96       False  -0.01         -0.05         0.0300     0.00     0.0000      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m  qa niah_none   en streaming_llm  0.50      0.96       False  -0.01         -0.04         0.0200     0.00     0.0000      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m  qa niah_none   en streaming_llm  0.25      0.96       False   0.01         -0.04         0.0600     0.00     0.0000      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m  qa niah_none   en         knorm  0.50      0.96       False  -0.03         -0.07         0.0000     0.00     0.0000      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m  qa niah_none   en         knorm  0.25      0.96       False  -0.02         -0.05         0.0000     0.00     0.0000      0.0000   False 1.000           0.0000        0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m  qa niah_none   ja        snapkv  0.50      0.75       False  -0.11         -0.20        -0.0300    -0.11    -0.2000     -0.0300    True 0.012          -0.7005       -1.7318         0.2160      False    0.116 0.027000 0.300857       True         False
+qwen25-7b-1m  qa niah_none   ja        snapkv  0.25      0.75       False  -0.17         -0.26        -0.0800    -0.16    -0.2600     -0.0600    True 0.001          -1.0401       -2.8033         0.6100      False    0.171 0.002400 0.348000       True         False
+qwen25-7b-1m  qa niah_none   ja streaming_llm  0.50      0.75       False   0.18          0.07         0.2900     0.19     0.0700      0.3000    True 0.001           1.0681       -0.1141         2.5731      False    0.067 0.002400 0.300857       True         False
+qwen25-7b-1m  qa niah_none   ja streaming_llm  0.25      0.75       False  -0.03         -0.14         0.0800    -0.04    -0.1500      0.0800   False 0.523          -0.3752       -1.9613         0.9409      False    0.545 0.672429 0.784800      False         False
+qwen25-7b-1m  qa niah_none   ja         knorm  0.50      0.75       False  -0.18         -0.26        -0.1000    -0.15    -0.2302     -0.0700    True 0.001          -0.3084       -1.7431         1.2310      False    0.709 0.002400 0.929250       True         False
+qwen25-7b-1m  qa niah_none   ja         knorm  0.25      0.75       False  -0.18         -0.27        -0.0900    -0.16    -0.2600     -0.0600    True 0.001          -0.8293       -2.1285         0.6674      False    0.227 0.002400 0.408600       True         False
+qwen25-7b-1m  qa niah_none   ko        snapkv  0.50      0.37        True  -0.18         -0.27        -0.0900    -0.18    -0.2700     -0.0800    True 0.001          -0.7254       -1.6857         0.1340      False    0.090 0.002400 0.300857       True         False
+qwen25-7b-1m  qa niah_none   ko        snapkv  0.25      0.37        True  -0.25         -0.34        -0.1500    -0.24    -0.3400     -0.1400    True 0.001          -0.7496       -2.2686         0.8792      False    0.283 0.002400 0.463091       True         False
+qwen25-7b-1m  qa niah_none   ko streaming_llm  0.50      0.37        True  -0.04         -0.13         0.0400    -0.03    -0.1200      0.0600   False 0.572           0.0952       -1.0643         1.5839      False    0.880 0.681677 0.948343      False         False
+qwen25-7b-1m  qa niah_none   ko streaming_llm  0.25      0.37        True  -0.20         -0.30        -0.1000    -0.21    -0.3200     -0.1000    True 0.001          -1.0168       -2.6196         0.2429      False    0.107 0.002400 0.300857       True         False
+qwen25-7b-1m  qa niah_none   ko         knorm  0.50      0.37        True  -0.18         -0.27        -0.0900    -0.15    -0.2403     -0.0600    True 0.001           0.4039       -0.7636         1.9183      False    0.499 0.002400 0.748500       True         False
+qwen25-7b-1m  qa niah_none   ko         knorm  0.25      0.37        True  -0.39         -0.49        -0.3000    -0.37    -0.4700     -0.2700    True 0.001          -1.0570       -1.9796         0.3930      False    0.117 0.002400 0.300857       True         False
+qwen25-7b-1m  qa niah_none   pl        snapkv  0.50      1.00       False   0.00          0.00         0.0000     0.00    -0.0300      0.0300   False 1.000           0.0000       -0.8676         0.8194      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m  qa niah_none   pl        snapkv  0.25      1.00       False   0.00          0.00         0.0000     0.01    -0.0300      0.0500   False 0.826           0.2616       -1.1292         1.9296      False    0.826 0.849600 0.929250      False         False
+qwen25-7b-1m  qa niah_none   pl streaming_llm  0.50      1.00       False   0.00          0.00         0.0000     0.01    -0.0200      0.0400   False 0.810           0.2616       -0.8676         1.6295      False    0.810 0.849600 0.929250      False         False
+qwen25-7b-1m  qa niah_none   pl streaming_llm  0.25      1.00       False   0.00          0.00         0.0000    -0.01    -0.0600      0.0400   False 0.821          -0.2111       -1.6716         0.9970      False    0.821 0.849600 0.929250      False         False
+qwen25-7b-1m  qa niah_none   pl         knorm  0.50      1.00       False   0.00          0.00         0.0000     0.03     0.0000      0.0700   False 0.104           1.1292        0.0000         2.6265      False    0.104 0.200842 0.300857      False         False
+qwen25-7b-1m  qa niah_none   pl         knorm  0.25      1.00       False   0.00          0.00         0.0000     0.02     0.0000      0.0500   False 0.282           0.6083        0.0000         1.9762      False    0.282 0.406080 0.463091      False         False
+qwen25-7b-1m  qa niah_none   sw        snapkv  0.50      0.58        True  -0.29         -0.39        -0.2000    -0.29    -0.3900     -0.1900    True 0.001          -1.5494       -2.6320        -0.6640       True    0.006 0.002400 0.108000       True         False
+qwen25-7b-1m  qa niah_none   sw        snapkv  0.25      0.58        True  -0.37         -0.48        -0.2700    -0.36    -0.4800     -0.2500    True 0.001          -2.2732       -4.2284        -0.6024       True    0.011 0.002400 0.132000       True         False
+qwen25-7b-1m  qa niah_none   sw streaming_llm  0.50      0.58        True  -0.35         -0.46        -0.2400    -0.34    -0.4600     -0.2300    True 0.001          -1.9419       -3.4641        -0.4182       True    0.021 0.002400 0.189000       True         False
+qwen25-7b-1m  qa niah_none   sw streaming_llm  0.25      0.58        True  -0.42         -0.52        -0.3298    -0.43    -0.5400     -0.3300    True 0.001          -5.1949       -6.7428        -3.9145       True    0.001 0.002400 0.035982       True          True
+qwen25-7b-1m  qa niah_none   sw         knorm  0.50      0.58        True  -0.25         -0.37        -0.1300    -0.22    -0.3400     -0.1000    True 0.001          -0.1139       -1.3471         1.4395      False    0.922 0.002400 0.948343       True         False
+qwen25-7b-1m  qa niah_none   sw         knorm  0.25      0.58        True  -0.32         -0.43        -0.2200    -0.30    -0.4100     -0.2000    True 0.001          -1.2262       -2.3573         0.2654      False    0.091 0.002400 0.300857       True         False
+qwen25-7b-1m  qa niah_none   vi        snapkv  0.50      0.90       False  -0.01         -0.05         0.0300    -0.01    -0.0600      0.0400   False 0.796          -0.1111       -1.1300         0.8041      False    0.783 0.849600 0.929250      False         False
+qwen25-7b-1m  qa niah_none   vi        snapkv  0.25      0.90       False  -0.08         -0.15        -0.0100    -0.07    -0.1500      0.0100   False 0.106          -1.2582       -3.5956         0.7415      False    0.174 0.200842 0.348000      False         False
+qwen25-7b-1m  qa niah_none   vi streaming_llm  0.50      0.90       False  -0.06         -0.12         0.0000    -0.05    -0.1200      0.0200   False 0.196          -0.6499       -2.3029         0.9512      False    0.374 0.319304 0.585391      False         False
+qwen25-7b-1m  qa niah_none   vi streaming_llm  0.25      0.90       False  -0.08         -0.14        -0.0200    -0.09    -0.1700     -0.0100    True 0.028          -1.7309       -4.1190        -0.1537       True    0.031 0.059294 0.223200      False         False
+qwen25-7b-1m  qa niah_none   vi         knorm  0.50      0.90       False   0.00         -0.05         0.0500     0.03    -0.0300      0.0900   False 0.422           1.1292       -0.0884         2.7214      False    0.080 0.568000 0.300857      False         False
+qwen25-7b-1m  qa niah_none   vi         knorm  0.25      0.90       False  -0.05         -0.11         0.0100    -0.03    -0.0900      0.0302   False 0.426          -0.0921       -1.3708         1.4520      False    0.898 0.568000 0.948343      False         False
+qwen25-7b-1m  qa niah_none   zh        snapkv  0.50      0.94       False  -0.03         -0.06         0.0000    -0.03    -0.0700      0.0100   False 0.226          -0.6503       -2.1266         0.2897      False    0.208 0.339000 0.394105      False         False
+qwen25-7b-1m  qa niah_none   zh        snapkv  0.25      0.94       False  -0.05         -0.10        -0.0100    -0.04    -0.1000      0.0200   False 0.204          -1.2563       -3.4110         0.5209      False    0.150 0.319304 0.348000      False         False
+qwen25-7b-1m  qa niah_none   zh streaming_llm  0.50      0.94       False  -0.03         -0.08         0.0200    -0.02    -0.0800      0.0400   False 0.587          -0.3887       -2.3025         1.2862      False    0.627 0.681677 0.868154      False         False
+qwen25-7b-1m  qa niah_none   zh streaming_llm  0.25      0.94       False  -0.04         -0.10         0.0100    -0.05    -0.1202      0.0200   False 0.201          -1.2081       -3.6221         0.5588      False    0.171 0.319304 0.348000      False         False
+qwen25-7b-1m  qa niah_none   zh         knorm  0.50      0.94       False  -0.05         -0.09        -0.0100    -0.02    -0.0700      0.0300   False 0.586          -0.3887       -2.2378         1.5092      False    0.724 0.681677 0.929250      False         False
+qwen25-7b-1m  qa niah_none   zh         knorm  0.25      0.94       False  -0.06         -0.11        -0.0200    -0.04    -0.1000      0.0100   False 0.175          -2.0182       -2.9900        -0.2111       True    0.038 0.315000 0.228000      False         False
+[18:35:27] [qwen25-7b-1m__qa__niah_none] BH(q<.05) survivors: lang         press  kept  gap_amp   ga_q  gap_amp_logodds  ga_lo_q
+  ja        snapkv  0.50    -0.11 0.0270          -0.7005 0.300857
+  ja        snapkv  0.25    -0.16 0.0024          -1.0401 0.348000
+  ja streaming_llm  0.50     0.19 0.0024           1.0681 0.300857
+  ja         knorm  0.50    -0.15 0.0024          -0.3084 0.929250
+  ja         knorm  0.25    -0.16 0.0024          -0.8293 0.408600
+  ko        snapkv  0.50    -0.18 0.0024          -0.7254 0.300857
+  ko        snapkv  0.25    -0.24 0.0024          -0.7496 0.463091
+  ko streaming_llm  0.25    -0.21 0.0024          -1.0168 0.300857
+  ko         knorm  0.50    -0.15 0.0024           0.4039 0.748500
+  ko         knorm  0.25    -0.37 0.0024          -1.0570 0.300857
+  sw        snapkv  0.50    -0.29 0.0024          -1.5494 0.108000
+  sw        snapkv  0.25    -0.36 0.0024          -2.2732 0.132000
+  sw streaming_llm  0.50    -0.34 0.0024          -1.9419 0.189000
+  sw streaming_llm  0.25    -0.43 0.0024          -5.1949 0.035982
+  sw         knorm  0.50    -0.22 0.0024          -0.1139 0.948343
+  sw         knorm  0.25    -0.30 0.0024          -1.2262 0.300857
+[18:35:27] [qwen25-7b-1m__qa__niah_none] WARNING base_acc<0.6 (interpret GA with care, cells flagged base_floor): ['ko', 'sw']
+[18:35:30] [qwen25-7b-1m__qa__niah_none] Spearman(delta@0.25 vs tokens/byte): {"snapkv": {"rho": -0.1429, "p_perm": 0.7825, "exact_perm": true, "n": 7, "fertility_source": "eval_texts", "leave_one_out": {"en": -0.2, "ja": -0.257, "ko": 0.086, "pl": -0.486, "sw": 0.371, "vi": -0.257, "zh": -0.2}}, "streaming_llm": {"rho": -0.3929, "p_perm": 0.3956, "exact_perm": true, "n": 7, "fertility_source": "eval_texts", "leave_one_out": {"en": -0.371, "ja": -0.429, "ko": -0.257, "pl": -0.714, "sw": -0.029, "vi": -0.543, "zh": -0.371}}, "knorm": {"rho": -0.1429, "p_perm": 0.7825, "exact_perm": true, "n": 7, "fertility_source": "eval_texts", "leave_one_out": {"en": -0.143, "ja": -0.257, "ko": -0.029, "pl": -0.543, "sw": 0.257, "vi": -0.143, "zh": -0.086}}}
+[18:35:30] [qwen25-7b-1m__qa__niah_single] en: 100 paired samples x 7 settings
+[18:35:30] [qwen25-7b-1m__qa__niah_single] ja: 100 paired samples x 7 settings
+[18:35:30] [qwen25-7b-1m__qa__niah_single] ko: 100 paired samples x 7 settings
+[18:35:30] [qwen25-7b-1m__qa__niah_single] pl: 100 paired samples x 7 settings
+[18:35:30] [qwen25-7b-1m__qa__niah_single] sw: 100 paired samples x 7 settings
+[18:35:30] [qwen25-7b-1m__qa__niah_single] vi: 100 paired samples x 7 settings
+[18:35:30] [qwen25-7b-1m__qa__niah_single] zh: 100 paired samples x 7 settings
+[18:35:30] [qwen25-7b-1m__qa__niah_single] gap table (paired bootstrap, B=2000):
+       model arm        task lang         press  kept  base_acc  base_floor  delta  delta_ci_low  delta_ci_high  gap_amp  ga_ci_low  ga_ci_high  ga_sig  ga_p  gap_amp_logodds  ga_lo_ci_low  ga_lo_ci_high  ga_lo_sig  ga_lo_p     ga_q  ga_lo_q  ga_sig_bh  ga_lo_sig_bh
+qwen25-7b-1m  qa niah_single   en        snapkv  0.50      0.98       False   0.61        0.5100         0.7000     0.00     0.0000      0.0000   False 1.000           0.0000       -0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m  qa niah_single   en        snapkv  0.25      0.98       False   0.91        0.8500         0.9600     0.00     0.0000      0.0000   False 1.000           0.0000       -0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m  qa niah_single   en streaming_llm  0.50      0.98       False   0.53        0.4200         0.6300     0.00     0.0000      0.0000   False 1.000           0.0000       -0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m  qa niah_single   en streaming_llm  0.25      0.98       False   0.71        0.6100         0.7900     0.00     0.0000      0.0000   False 1.000           0.0000       -0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m  qa niah_single   en         knorm  0.50      0.98       False   0.94        0.8900         0.9800     0.00     0.0000      0.0000   False 1.000           0.0000       -0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m  qa niah_single   en         knorm  0.25      0.98       False   0.96        0.9200         0.9900     0.00     0.0000      0.0000   False 1.000           0.0000       -0.0000         0.0000      False    1.000 1.000000 1.000000      False         False
+qwen25-7b-1m  qa niah_single   ja        snapkv  0.50      0.96       False   0.80        0.7200         0.8800     0.19     0.0700      0.3100    True 0.001           0.4984       -1.4511         2.2555      False    0.578 0.003600 0.774000       True         False
+qwen25-7b-1m  qa niah_single   ja        snapkv  0.25      0.96       False   0.90        0.8400         0.9500    -0.01    -0.0803      0.0800   False 0.856          -0.4546       -2.5047         1.5866      False    0.604 0.991125 0.774000      False         False
+qwen25-7b-1m  qa niah_single   ja streaming_llm  0.50      0.96       False   0.50        0.4000         0.6000    -0.03    -0.1700      0.1200   False 0.727          -0.6482       -2.7060         1.0489      False    0.412 0.934714 0.682364      False         False
+qwen25-7b-1m  qa niah_single   ja streaming_llm  0.25      0.96       False   0.68        0.5800         0.7800    -0.03    -0.1600      0.1100   False 0.708          -0.6577       -2.7316         1.1684      False    0.438 0.934714 0.684000      False         False
+qwen25-7b-1m  qa niah_single   ja         knorm  0.50      0.96       False   0.89        0.8200         0.9500    -0.05    -0.1300      0.0200   False 0.240          -1.1507       -3.7347         0.8677      False    0.220 0.576000 0.528000      False         False
+qwen25-7b-1m  qa niah_single   ja         knorm  0.25      0.96       False   0.93        0.8800         0.9700    -0.03    -0.0900      0.0300   False 0.441          -0.9550       -3.5578         1.4553      False    0.398 0.811800 0.682364      False         False
+qwen25-7b-1m  qa niah_single   ko        snapkv  0.50      1.00       False   0.06        0.0200         0.1100    -0.55    -0.6600     -0.4400    True 0.001          -1.5740       -3.7867        -0.4656       True    0.003 0.003600 0.018000       True          True
+qwen25-7b-1m  qa niah_single   ko        snapkv  0.25      1.00       False   0.27        0.1900         0.3600    -0.64    -0.7400     -0.5400    True 0.001          -1.8766       -3.9401        -0.7498       True    0.001 0.003600 0.009000       True          True
+qwen25-7b-1m  qa niah_single   ko streaming_llm  0.50      1.00       False   0.52        0.4200         0.6100    -0.01    -0.1502      0.1300   False 0.973           1.5101       -0.3574         2.5555      False    0.156 1.000000 0.401143      False         False
+qwen25-7b-1m  qa niah_single   ko streaming_llm  0.25      1.00       False   0.73        0.6400         0.8200     0.02    -0.1100      0.1400   False 0.814           1.6295       -0.2535         2.7305      False    0.118 0.976800 0.354000      False         False
+qwen25-7b-1m  qa niah_single   ko         knorm  0.50      1.00       False   0.36        0.2700         0.4600    -0.58    -0.6900     -0.4800    True 0.001          -2.0053       -4.3311        -0.9071       True    0.002 0.003600 0.014400       True          True
+qwen25-7b-1m  qa niah_single   ko         knorm  0.25      1.00       False   0.96        0.9200         0.9900     0.00    -0.0500      0.0500   False 1.000           1.0212       -1.5179         2.7588      False    0.533 1.000000 0.767520      False         False
+qwen25-7b-1m  qa niah_single   pl        snapkv  0.50      0.99       False   0.55        0.4500         0.6400    -0.06    -0.2000      0.0800   False 0.451           0.2330       -1.7994         2.0729      False    0.793 0.811800 0.865091      False         False
+qwen25-7b-1m  qa niah_single   pl        snapkv  0.25      0.99       False   0.95        0.9000         0.9900     0.04    -0.0300      0.1100   False 0.303           1.0633       -1.2629         3.4114      False    0.325 0.681750 0.623368      False         False
+qwen25-7b-1m  qa niah_single   pl streaming_llm  0.50      0.99       False   0.50        0.4000         0.5902    -0.03    -0.1800      0.1100   False 0.715           0.3619       -1.6667         2.2942      False    0.722 0.934714 0.837000      False         False
+qwen25-7b-1m  qa niah_single   pl streaming_llm  0.25      0.99       False   0.71        0.6197         0.7900     0.00    -0.1303      0.1300   False 1.000           0.4715       -1.6295         2.3975      False    0.623 1.000000 0.774000      False         False
+qwen25-7b-1m  qa niah_single   pl         knorm  0.50      0.99       False   0.80        0.7200         0.8700    -0.14    -0.2300     -0.0500    True 0.002          -1.1144       -3.5891         0.8271      False    0.317 0.006545 0.623368       True         False
+qwen25-7b-1m  qa niah_single   pl         knorm  0.25      0.99       False   0.98        0.9500         1.0000     0.02    -0.0300      0.0700   False 0.527           1.0419       -1.6295         3.8674      False    0.456 0.862364 0.684000      False         False
+qwen25-7b-1m  qa niah_single   sw        snapkv  0.50      0.48        True   0.25        0.1400         0.3600    -0.36    -0.5100     -0.2100    True 0.001          -3.0864       -4.9725        -1.9809       True    0.001 0.003600 0.009000       True          True
+qwen25-7b-1m  qa niah_single   sw        snapkv  0.25      0.48        True   0.40        0.2900         0.5100    -0.51    -0.6300     -0.3900    True 0.001          -3.8889       -6.0133        -2.4976       True    0.001 0.003600 0.009000       True          True
+qwen25-7b-1m  qa niah_single   sw streaming_llm  0.50      0.48        True   0.37        0.2598         0.4800    -0.16    -0.3100     -0.0100    True 0.045          -1.8998       -3.8829        -0.5850       True    0.004 0.135000 0.020571      False          True
+qwen25-7b-1m  qa niah_single   sw streaming_llm  0.25      0.48        True   0.41        0.3000         0.5100    -0.30    -0.4500     -0.1500    True 0.001          -2.2131       -4.3248        -0.7821       True    0.007 0.003600 0.031500       True          True
+qwen25-7b-1m  qa niah_single   sw         knorm  0.50      0.48        True   0.48        0.3800         0.5800    -0.46    -0.5700     -0.3500    True 0.001          -1.5152       -3.8968        -0.3658       True    0.008 0.003600 0.032000       True          True
+qwen25-7b-1m  qa niah_single   sw         knorm  0.25      0.48        True   0.48        0.3800         0.5800    -0.48    -0.5900     -0.3800    True 0.001          -2.1235       -4.4747        -0.8883       True    0.001 0.003600 0.009000       True          True
+qwen25-7b-1m  qa niah_single   vi        snapkv  0.50      0.96       False   0.90        0.8400         0.9600     0.29     0.1700      0.4000    True 0.001           1.5418       -0.5466         3.7079      False    0.150 0.003600 0.401143       True         False
+qwen25-7b-1m  qa niah_single   vi        snapkv  0.25      0.96       False   0.96        0.9200         0.9900     0.05    -0.0100      0.1200   False 0.149           2.1719        0.0000         3.9694      False    0.052 0.383143 0.187200      False         False
+qwen25-7b-1m  qa niah_single   vi streaming_llm  0.50      0.96       False   0.46        0.3598         0.5700    -0.07    -0.2100      0.0800   False 0.397          -0.8070       -2.7917         0.9047      False    0.329 0.811800 0.623368      False         False
+qwen25-7b-1m  qa niah_single   vi streaming_llm  0.25      0.96       False   0.67        0.5700         0.7700    -0.04    -0.1800      0.1000   False 0.620          -0.7061       -2.7690         1.1294      False    0.417 0.934714 0.682364      False         False
+qwen25-7b-1m  qa niah_single   vi         knorm  0.50      0.96       False   0.85        0.7700         0.9102    -0.09    -0.1800     -0.0100    True 0.049          -1.6219       -4.0684         0.2333      False    0.097 0.135692 0.317455      False         False
+qwen25-7b-1m  qa niah_single   vi         knorm  0.25      0.96       False   0.94        0.8900         0.9800    -0.02    -0.0800      0.0400   False 0.640          -0.6083       -3.2355         1.9762      False    0.629 0.934714 0.774000      False         False
+qwen25-7b-1m  qa niah_single   zh        snapkv  0.50      0.98       False   0.62        0.5300         0.7200     0.01    -0.1200      0.1400   False 0.881           0.0427       -1.9762         2.0473      False    0.930 0.991125 0.956571      False         False
+qwen25-7b-1m  qa niah_single   zh        snapkv  0.25      0.98       False   0.87        0.8000         0.9300    -0.04    -0.1300      0.0402   False 0.414          -0.4712       -2.5900         1.6368      False    0.645 0.811800 0.774000      False         False
+qwen25-7b-1m  qa niah_single   zh streaming_llm  0.50      0.98       False   0.55        0.4500         0.6500     0.02    -0.1200      0.1700   False 0.796           0.0804       -1.9476         2.1231      False    0.902 0.976800 0.955059      False         False
+qwen25-7b-1m  qa niah_single   zh streaming_llm  0.25      0.98       False   0.71        0.6200         0.8000     0.00    -0.1300      0.1300   False 1.000           0.0000       -2.0315         2.1280      False    0.957 1.000000 0.957000      False         False
+qwen25-7b-1m  qa niah_single   zh         knorm  0.50      0.98       False   0.92        0.8600         0.9700    -0.02    -0.1000      0.0500   False 0.679          -0.3887       -2.9162         1.9130      False    0.744 0.934714 0.837000      False         False
+qwen25-7b-1m  qa niah_single   zh         knorm  0.25      0.98       False   0.98        0.9500         1.0000     0.02    -0.0200      0.0700   False 0.507           1.6295       -0.8676         3.6058      False    0.265 0.862364 0.596250      False         False
+[18:35:30] [qwen25-7b-1m__qa__niah_single] BH(q<.05) survivors: lang         press  kept  gap_amp     ga_q  gap_amp_logodds  ga_lo_q
+  ja        snapkv  0.50     0.19 0.003600           0.4984 0.774000
+  ko        snapkv  0.50    -0.55 0.003600          -1.5740 0.018000
+  ko        snapkv  0.25    -0.64 0.003600          -1.8766 0.009000
+  ko         knorm  0.50    -0.58 0.003600          -2.0053 0.014400
+  pl         knorm  0.50    -0.14 0.006545          -1.1144 0.623368
+  sw        snapkv  0.50    -0.36 0.003600          -3.0864 0.009000
+  sw        snapkv  0.25    -0.51 0.003600          -3.8889 0.009000
+  sw streaming_llm  0.50    -0.16 0.135000          -1.8998 0.020571
+  sw streaming_llm  0.25    -0.30 0.003600          -2.2131 0.031500
+  sw         knorm  0.50    -0.46 0.003600          -1.5152 0.032000
+  sw         knorm  0.25    -0.48 0.003600          -2.1235 0.009000
+  vi        snapkv  0.50     0.29 0.003600           1.5418 0.401143
+[18:35:30] [qwen25-7b-1m__qa__niah_single] WARNING base_acc<0.6 (interpret GA with care, cells flagged base_floor): ['sw']
+[18:35:32] [qwen25-7b-1m__qa__niah_single] Spearman(delta@0.25 vs tokens/byte): {"snapkv": {"rho": -0.4286, "p_perm": 0.3536, "exact_perm": true, "n": 7, "fertility_source": "eval_texts", "leave_one_out": {"en": -0.429, "ja": -0.543, "ko": -0.429, "pl": -0.771, "sw": -0.2, "vi": -0.257, "zh": -0.314}}, "streaming_llm": {"rho": 0.0741, "p_perm": 0.8952, "exact_perm": true, "n": 7, "fertility_source": "eval_texts", "leave_one_out": {"en": -0.029, "ja": -0.091, "ko": -0.03, "pl": 0.058, "sw": 0.759, "vi": -0.091, "zh": -0.029}}, "knorm": {"rho": 0.1455, "p_perm": 0.7571, "exact_perm": true, "n": 7, "fertility_source": "eval_texts", "leave_one_out": {"en": 0.029, "ja": -0.029, "ko": 0.116, "pl": 0.029, "sw": 0.853, "vi": -0.029, "zh": 0.116}}}
+[18:35:32] WARNING [llama31-8b/pl] joint vs qa BASELINE disagree on 2 samples — arms should be identical at press=none; investigate before trusting the contrast
+[18:35:32] WARNING [llama31-8b/sw] joint vs qa BASELINE disagree on 2 samples — arms should be identical at press=none; investigate before trusting the contrast
+[18:35:32] WARNING [llama31-8b/vi] joint vs qa BASELINE disagree on 4 samples — arms should be identical at press=none; investigate before trusting the contrast
+[18:35:32] WARNING [qwen25-7b-1m/ja] joint vs qa BASELINE disagree on 6 samples — arms should be identical at press=none; investigate before trusting the contrast
+[18:35:32] WARNING [qwen25-7b-1m/pl] joint vs qa BASELINE disagree on 1 samples — arms should be identical at press=none; investigate before trusting the contrast
+[18:35:32] WARNING [qwen25-7b-1m/sw] joint vs qa BASELINE disagree on 14 samples — arms should be identical at press=none; investigate before trusting the contrast
+[18:35:32] arm contrast (joint - qa; positive = query-awareness helps):
+       model lang         press  kept  acc_joint  acc_qa  d_joint_minus_qa  ci_low  ci_high   sig     p   n        q  sig_bh
+  llama31-8b   en          none  1.00       1.00    1.00              0.00    0.00   0.0000 False 1.000 100 1.000000   False
+  llama31-8b   en        snapkv  0.50       1.00    0.90              0.10    0.04   0.1600  True 0.001 100 0.002625    True
+  llama31-8b   en        snapkv  0.25       1.00    0.45              0.55    0.45   0.6400  True 0.001 100 0.002625    True
+  llama31-8b   en streaming_llm  0.50       0.46    0.46              0.00    0.00   0.0000 False 1.000 100 1.000000   False
+  llama31-8b   en streaming_llm  0.25       0.28    0.27              0.01    0.00   0.0300 False 0.765 100 0.969500   False
+  llama31-8b   en         knorm  0.50       0.70    0.72             -0.02   -0.05   0.0000 False 0.289 100 0.485520   False
+  llama31-8b   en         knorm  0.25       0.16    0.17             -0.01   -0.07   0.0500 False 0.863 100 0.979622   False
+  llama31-8b   ja          none  1.00       0.98    0.98              0.00    0.00   0.0000 False 1.000 100 1.000000   False
+  llama31-8b   ja        snapkv  0.50       0.98    0.76              0.22    0.14   0.3100  True 0.001 100 0.002625    True
+  llama31-8b   ja        snapkv  0.25       0.98    0.21              0.77    0.68   0.8500  True 0.001 100 0.002625    True
+  llama31-8b   ja streaming_llm  0.50       0.44    0.45             -0.01   -0.03   0.0000 False 0.741 100 0.969500   False
+  llama31-8b   ja streaming_llm  0.25       0.26    0.25              0.01    0.00   0.0300 False 0.761 100 0.969500   False
+  llama31-8b   ja         knorm  0.50       0.52    0.49              0.03   -0.02   0.0800 False 0.351 100 0.567000   False
+  llama31-8b   ja         knorm  0.25       0.17    0.17              0.00    0.00   0.0000 False 1.000 100 1.000000   False
+  llama31-8b   ko          none  1.00       0.77    0.77              0.00    0.00   0.0000 False 1.000 100 1.000000   False
+  llama31-8b   ko        snapkv  0.50       0.76    0.78             -0.02   -0.09   0.0600 False 0.743 100 0.969500   False
+  llama31-8b   ko        snapkv  0.25       0.75    0.62              0.13    0.03   0.2300  True 0.016 100 0.037333    True
+  llama31-8b   ko streaming_llm  0.50       0.32    0.38             -0.06   -0.13   0.0000 False 0.096 100 0.201600   False
+  llama31-8b   ko streaming_llm  0.25       0.15    0.21             -0.06   -0.12  -0.0100  True 0.045 100 0.099474   False
+  llama31-8b   ko         knorm  0.50       0.49    0.87             -0.38   -0.48  -0.2800  True 0.001 100 0.002625    True
+  llama31-8b   ko         knorm  0.25       0.35    0.82             -0.47   -0.58  -0.3500  True 0.001 100 0.002625    True
+  llama31-8b   pl          none  1.00       0.84    0.84              0.00   -0.03   0.0300 False 1.000 100 1.000000   False
+  llama31-8b   pl        snapkv  0.50       0.83    0.30              0.53    0.43   0.6300  True 0.001 100 0.002625    True
+  llama31-8b   pl        snapkv  0.25       0.83    0.00              0.83    0.75   0.9000  True 0.001 100 0.002625    True
+  llama31-8b   pl streaming_llm  0.50       0.33    0.49             -0.16   -0.24  -0.0900  True 0.001 100 0.002625    True
+  llama31-8b   pl streaming_llm  0.25       0.13    0.28             -0.15   -0.22  -0.0800  True 0.001 100 0.002625    True
+  llama31-8b   pl         knorm  0.50       0.34    0.30              0.04   -0.02   0.1000 False 0.270 100 0.472500   False
+  llama31-8b   pl         knorm  0.25       0.03    0.04             -0.01   -0.05   0.0200 False 0.814 100 0.969500   False
+  llama31-8b   sw          none  1.00       0.92    0.92              0.00   -0.03   0.0300 False 1.000 100 1.000000   False
+  llama31-8b   sw        snapkv  0.50       0.92    0.91              0.01   -0.02   0.0500 False 0.791 100 0.969500   False
+  llama31-8b   sw        snapkv  0.25       0.92    0.90              0.02   -0.05   0.1000 False 0.682 100 0.969500   False
+  llama31-8b   sw streaming_llm  0.50       0.43    0.43              0.00   -0.03   0.0300 False 1.000 100 1.000000   False
+  llama31-8b   sw streaming_llm  0.25       0.28    0.27              0.01    0.00   0.0300 False 0.736 100 0.969500   False
+  llama31-8b   sw         knorm  0.50       0.62    0.68             -0.06   -0.13   0.0100 False 0.106 100 0.212000   False
+  llama31-8b   sw         knorm  0.25       0.07    0.06              0.01   -0.03   0.0500 False 0.831 100 0.969500   False
+  llama31-8b   vi          none  1.00       0.92    0.90              0.02   -0.02   0.0600 False 0.459 100 1.000000   False
+  llama31-8b   vi        snapkv  0.50       0.93    0.14              0.79    0.71   0.8700  True 0.001 100 0.002625    True
+  llama31-8b   vi        snapkv  0.25       0.93    0.03              0.90    0.84   0.9600  True 0.001 100 0.002625    True
+  llama31-8b   vi streaming_llm  0.50       0.44    0.40              0.04    0.00   0.0900 False 0.129 100 0.241043   False
+  llama31-8b   vi streaming_llm  0.25       0.24    0.19              0.05    0.01   0.1000  True 0.013 100 0.032118    True
+  llama31-8b   vi         knorm  0.50       0.36    0.79             -0.43   -0.54  -0.3300  True 0.001 100 0.002625    True
+  llama31-8b   vi         knorm  0.25       0.02    0.14             -0.12   -0.19  -0.0600  True 0.001 100 0.002625    True
+  llama31-8b   zh          none  1.00       0.98    0.98              0.00    0.00   0.0000 False 1.000 100 1.000000   False
+  llama31-8b   zh        snapkv  0.50       0.98    0.63              0.35    0.25   0.4500  True 0.001 100 0.002625    True
+  llama31-8b   zh        snapkv  0.25       0.98    0.24              0.74    0.64   0.8300  True 0.001 100 0.002625    True
+  llama31-8b   zh streaming_llm  0.50       0.43    0.43              0.00    0.00   0.0000 False 1.000 100 1.000000   False
+  llama31-8b   zh streaming_llm  0.25       0.27    0.27              0.00    0.00   0.0000 False 1.000 100 1.000000   False
+  llama31-8b   zh         knorm  0.50       0.40    0.36              0.04    0.00   0.0900 False 0.132 100 0.241043   False
+  llama31-8b   zh         knorm  0.25       0.06    0.05              0.01    0.00   0.0300 False 0.725 100 0.969500   False
+qwen25-7b-1m   en          none  1.00       0.98    0.98              0.00    0.00   0.0000 False 1.000 100 1.000000   False
+qwen25-7b-1m   en        snapkv  0.50       0.98    0.37              0.61    0.52   0.7002  True 0.001 100 0.002625    True
+qwen25-7b-1m   en        snapkv  0.25       0.98    0.07              0.91    0.85   0.9600  True 0.001 100 0.002625    True
+qwen25-7b-1m   en streaming_llm  0.50       0.45    0.45              0.00    0.00   0.0000 False 1.000 100 1.000000   False
+qwen25-7b-1m   en streaming_llm  0.25       0.27    0.27              0.00    0.00   0.0000 False 1.000 100 1.000000   False
+qwen25-7b-1m   en         knorm  0.50       0.09    0.04              0.05    0.00   0.1000 False 0.076 100 0.168000   False
+qwen25-7b-1m   en         knorm  0.25       0.01    0.02             -0.01   -0.04   0.0200 False 0.816 100 1.000000   False
+qwen25-7b-1m   ja          none  1.00       0.90    0.96             -0.06   -0.11  -0.0200  True 0.008 100 1.000000   False
+qwen25-7b-1m   ja        snapkv  0.50       0.95    0.16              0.79    0.71   0.8700  True 0.001 100 0.002625    True
+qwen25-7b-1m   ja        snapkv  0.25       0.92    0.06              0.86    0.79   0.9200  True 0.001 100 0.002625    True
+qwen25-7b-1m   ja streaming_llm  0.50       0.45    0.46             -0.01   -0.03   0.0000 False 0.732 100 1.000000   False
+qwen25-7b-1m   ja streaming_llm  0.25       0.28    0.28              0.00    0.00   0.0000 False 1.000 100 1.000000   False
+qwen25-7b-1m   ja         knorm  0.50       0.08    0.07              0.01   -0.04   0.0600 False 0.847 100 1.000000   False
+qwen25-7b-1m   ja         knorm  0.25       0.01    0.03             -0.02   -0.05   0.0000 False 0.288 100 0.549818   False
+qwen25-7b-1m   ko          none  1.00       1.00    1.00              0.00    0.00   0.0000 False 1.000 100 1.000000   False
+qwen25-7b-1m   ko        snapkv  0.50       0.99    0.94              0.05    0.00   0.1000 False 0.068 100 0.158667   False
+qwen25-7b-1m   ko        snapkv  0.25       1.00    0.73              0.27    0.18   0.3500  True 0.001 100 0.002625    True
+qwen25-7b-1m   ko streaming_llm  0.50       0.49    0.48              0.01    0.00   0.0300 False 0.758 100 1.000000   False
+qwen25-7b-1m   ko streaming_llm  0.25       0.28    0.27              0.01    0.00   0.0300 False 0.758 100 1.000000   False
+qwen25-7b-1m   ko         knorm  0.50       0.63    0.64             -0.01   -0.05   0.0300 False 0.768 100 1.000000   False
+qwen25-7b-1m   ko         knorm  0.25       0.05    0.04              0.01   -0.03   0.0600 False 0.796 100 1.000000   False
+qwen25-7b-1m   pl          none  1.00       1.00    0.99              0.01    0.00   0.0300 False 0.723 100 1.000000   False
+qwen25-7b-1m   pl        snapkv  0.50       1.00    0.44              0.56    0.47   0.6502  True 0.001 100 0.002625    True
+qwen25-7b-1m   pl        snapkv  0.25       1.00    0.04              0.96    0.92   0.9900  True 0.001 100 0.002625    True
+qwen25-7b-1m   pl streaming_llm  0.50       0.49    0.49              0.00    0.00   0.0000 False 1.000 100 1.000000   False
+qwen25-7b-1m   pl streaming_llm  0.25       0.28    0.28              0.00    0.00   0.0000 False 1.000 100 1.000000   False
+qwen25-7b-1m   pl         knorm  0.50       0.07    0.19             -0.12   -0.19  -0.0600  True 0.001 100 0.002625    True
+qwen25-7b-1m   pl         knorm  0.25       0.01    0.01              0.00   -0.03   0.0300 False 1.000 100 1.000000   False
+qwen25-7b-1m   sw          none  1.00       0.56    0.48              0.08    0.01   0.1500  True 0.036 100 1.000000   False
+qwen25-7b-1m   sw        snapkv  0.50       0.59    0.23              0.36    0.26   0.4700  True 0.001 100 0.002625    True
+qwen25-7b-1m   sw        snapkv  0.25       0.48    0.08              0.40    0.30   0.5000  True 0.001 100 0.002625    True
+qwen25-7b-1m   sw streaming_llm  0.50       0.25    0.11              0.14    0.06   0.2200  True 0.001 100 0.002625    True
+qwen25-7b-1m   sw streaming_llm  0.25       0.14    0.07              0.07    0.00   0.1400 False 0.061 100 0.150706   False
+qwen25-7b-1m   sw         knorm  0.50       0.08    0.00              0.08    0.03   0.1400  True 0.001 100 0.002625    True
+qwen25-7b-1m   sw         knorm  0.25       0.01    0.00              0.01    0.00   0.0300 False 0.712 100 1.000000   False
+qwen25-7b-1m   vi          none  1.00       0.96    0.96              0.00    0.00   0.0000 False 1.000 100 1.000000   False
+qwen25-7b-1m   vi        snapkv  0.50       0.96    0.06              0.90    0.84   0.9500  True 0.001 100 0.002625    True
+qwen25-7b-1m   vi        snapkv  0.25       0.96    0.00              0.96    0.92   0.9900  True 0.001 100 0.002625    True
+qwen25-7b-1m   vi streaming_llm  0.50       0.49    0.50             -0.01   -0.03   0.0000 False 0.737 100 1.000000   False
+qwen25-7b-1m   vi streaming_llm  0.25       0.28    0.29             -0.01   -0.03   0.0000 False 0.737 100 1.000000   False
+qwen25-7b-1m   vi         knorm  0.50       0.11    0.11              0.00   -0.04   0.0400 False 1.000 100 1.000000   False
+qwen25-7b-1m   vi         knorm  0.25       0.00    0.02             -0.02   -0.05   0.0000 False 0.236 100 0.495600   False
+qwen25-7b-1m   zh          none  1.00       0.98    0.98              0.00    0.00   0.0000 False 1.000 100 1.000000   False
+qwen25-7b-1m   zh        snapkv  0.50       0.98    0.36              0.62    0.53   0.7100  True 0.001 100 0.002625    True
+qwen25-7b-1m   zh        snapkv  0.25       0.98    0.11              0.87    0.80   0.9300  True 0.001 100 0.002625    True
+qwen25-7b-1m   zh streaming_llm  0.50       0.42    0.43             -0.01   -0.03   0.0000 False 0.750 100 1.000000   False
+qwen25-7b-1m   zh streaming_llm  0.25       0.25    0.27             -0.02   -0.05   0.0000 False 0.274 100 0.548000   False
+qwen25-7b-1m   zh         knorm  0.50       0.09    0.06              0.03   -0.03   0.0900 False 0.421 100 0.768783   False
+qwen25-7b-1m   zh         knorm  0.25       0.00    0.00              0.00    0.00   0.0000 False 1.000 100 1.000000   False
+[18:35:37] figures -> /vol/figures ; gap_table.csv + arm_contrast.csv + summary_stats.json -> /vol/results

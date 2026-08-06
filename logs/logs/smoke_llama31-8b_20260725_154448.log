@@ -1,0 +1,26 @@
+[15:44:48] ===== stage=smoke_llama31-8b ts=20260725_154448 ctx=32768 attn=sdpa seed_default=42 =====
+[15:44:51] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_smoke_llama31-8b_20260725_154448.txt
+[15:46:31] model loaded: llama31-8b (meta-llama/Llama-3.1-8B-Instruct) rev=0e9e39f249a16976918f6564b8830bc894c89659 (97s)
+[15:46:34] [1] snapkv: requested kept=0.50 measured kept=0.500
+[15:46:34] [1] streaming_llm: requested kept=0.50 measured kept=0.500
+[15:46:35] [1] knorm: requested kept=0.50 measured kept=0.500
+[15:46:36] [2] joint full-cache answer: '<Answer> 4744854 </Answer>' | score=True
+[15:46:36] split[en/niah_single]: marker#893a79b9 'xt>\n\n<Question> What special magic numbers associated with "' question chars min/med/max = 289/289/289
+[15:46:36] split[en/niah_none]: marker#893a79b9 'xt>\n\n<Question> What special magic numbers associated with "' question chars min/med/max = 288/288/289
+[15:46:36] [3] toy markers OK: ' special magic numbers associated with "' / ' special magic numbers associated with "'
+[15:46:36] [4] qa(None) == joint EXACTLY (k=2657 q=66)
+[15:46:39] [5] chunked == stepwise under streaming@0.5 (c=1328/2657)
+[15:46:39] [6] qa streaming@0.5 depth=0.9: pred='<Answer> 8078673 </Answer>' correct=True (expect True)
+[15:46:40] [6] qa streaming@0.5 depth=0.1: pred='<Answer> none </Answer>' correct=False (expect False)
+[15:46:41] [7] qa snapkv@0.5 answer: '<Answer> 47484854. 47484854. 47484854. 47484854. 47484854. 47484854. 4' | score=False
+[15:46:42] [8] niah_none baseline joint='<Answer> none </Answer>' qa='<Answer> none </Answer>'
+[15:46:43] [9] diagnose toy (qa replay): keep ctx=0.500 value=0.973 question=1.000 haystack=0.496
+[15:46:43] [10] tokcheck en: 33095 tokens under llama31-8b (limit 131072)
+[15:46:43] [10] tokcheck pl: 32866 tokens under llama31-8b (limit 131072)
+[15:46:43] [10] tokcheck zh: 32562 tokens under llama31-8b (limit 131072)
+[15:46:43] [11] joint decode continues at original position 2723 under compression (cache_position carried incrementally)
+[15:46:44] joint press check: prompt kept 0.500 (want 0.5)
+[15:46:44] [12] joint streaming@0.5 depth=0.9: pred='<Answer> 8078673 </Answer>' correct=True (expect True)
+[15:46:44] joint press check: prompt kept 0.500 (want 0.5)
+[15:46:44] [12] joint streaming@0.5 depth=0.1: pred='<Answer> 1 </Answer>' correct=False (expect False)
+[15:46:46] SMOKE PASS (llama31-8b) — if this model was unpinned, paste the logged revision into MODELS and record in DECISIONS.md

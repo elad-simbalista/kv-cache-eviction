@@ -1,0 +1,15 @@
+model,task,lang,arm_a,arm_b,n_paired,acc_a,acc_b,n_discordant,b_a0b1,b_a1b0,exact_p,violates
+llama31-8b,niah_single,en,joint,qa,100,1.0,1.0,0,0,0,,False
+llama31-8b,niah_single,ja,joint,qa,100,0.98,0.98,0,0,0,,False
+llama31-8b,niah_single,ko,joint,qa,100,0.77,0.77,0,0,0,,False
+llama31-8b,niah_single,pl,joint,qa,100,0.84,0.84,2,1,1,1.0,True
+llama31-8b,niah_single,sw,joint,qa,100,0.92,0.92,2,1,1,1.0,True
+llama31-8b,niah_single,vi,joint,qa,100,0.92,0.9,4,1,3,0.625,True
+llama31-8b,niah_single,zh,joint,qa,100,0.98,0.98,0,0,0,,False
+qwen25-7b-1m,niah_single,en,joint,qa,100,0.98,0.98,0,0,0,,False
+qwen25-7b-1m,niah_single,ja,joint,qa,100,0.9,0.96,6,6,0,0.0312,True
+qwen25-7b-1m,niah_single,ko,joint,qa,100,1.0,1.0,0,0,0,,False
+qwen25-7b-1m,niah_single,pl,joint,qa,100,1.0,0.99,1,0,1,1.0,True
+qwen25-7b-1m,niah_single,sw,joint,qa,100,0.56,0.48,14,3,11,0.0574,True
+qwen25-7b-1m,niah_single,vi,joint,qa,100,0.96,0.96,0,0,0,,False
+qwen25-7b-1m,niah_single,zh,joint,qa,100,0.98,0.98,0,0,0,,False

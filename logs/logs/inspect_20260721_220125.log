@@ -1,0 +1,20 @@
+[22:01:25] ===== stage=inspect ts=20260721_220125 model=meta-llama/Llama-3.1-8B-Instruct task=niah_single ctx=32768 attn=sdpa seed_default=42 =====
+[22:01:29] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_inspect_20260721_220125.txt
+[22:01:29] cell 708cf25121c16230 | vi press=none kept=1.0 | acc=0.733 n=30 | pred_chars min/mean/max = 22/37/79
+[22:01:29] ----------------------------------------------------------------------
+[22:01:29]   gold=['2867825'] | correct=False | depth=0.0408 | pred_chars=37 | input_tokens=32752
+[22:01:29]   pred='<Câu trả lời> Không có </Câu trả lời>'
+[22:01:29] ----------------------------------------------------------------------
+[22:01:29]   gold=['4744854'] | correct=True | depth=0.2484 | pred_chars=36 | input_tokens=32748
+[22:01:29]   pred='<Câu trả lời> 4744854 </Câu trả lời>'
+[22:01:29] ----------------------------------------------------------------------
+[22:01:29]   gold=['2458591'] | correct=False | depth=0.9648 | pred_chars=37 | input_tokens=32752
+[22:01:29]   pred='<Câu trả lời> Không có </Câu trả lời>'
+[22:01:29] ----------------------------------------------------------------------
+[22:01:29]   gold=['1499914'] | correct=True | depth=0.1691 | pred_chars=36 | input_tokens=32750
+[22:01:29]   pred='<Câu trả lời> 1499914 </Câu trả lời>'
+[22:01:29] ----------------------------------------------------------------------
+[22:01:29]   gold=['9478454'] | correct=False | depth=0.9767 | pred_chars=37 | input_tokens=32750
+[22:01:29]   pred='<Câu trả lời> Không có </Câu trả lời>'
+[22:01:29] ----------------------------------------------------------------------
+[22:01:29] truncation check: if pred_chars sits at the cap and text ends mid-thought with no digits, raise MAX_NEW_TOKENS (and wipe results/raw before re-running — MAX_NEW_TOKENS is not in the cell hash).

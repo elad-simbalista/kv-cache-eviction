@@ -1,0 +1,64 @@
+[09:57:37] ===== stage=aggregate ts=20260722_095737 model=meta-llama/Llama-3.1-8B-Instruct task=niah_single ctx=32768 attn=sdpa seed_default=42 =====
+[09:57:40] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_aggregate_20260722_095737.txt
+[09:57:41] per-cell table (with 95% bootstrap CIs):
+lang  ctx_len         press  kept        task  seed   toy  acc  ci_low  ci_high   n  mean_wall_s
+  en    32768         knorm  0.25 niah_single    42 False 0.24    0.16     0.33 100         5.40
+  ja    32768         knorm  0.25 niah_single    42 False 0.40    0.31     0.51 100         4.84
+  ko    32768         knorm  0.25 niah_single    42 False 0.78    0.70     0.86 100         5.29
+  pl    32768         knorm  0.25 niah_single    42 False 0.08    0.03     0.14 100         5.57
+  sw    32768         knorm  0.25 niah_single    42 False 0.16    0.09     0.23 100         6.65
+  vi    32768         knorm  0.25 niah_single    42 False 0.06    0.02     0.11 100         5.52
+  zh    32768         knorm  0.25 niah_single    42 False 0.15    0.08     0.22 100         5.19
+  en    32768         knorm  0.50 niah_single    42 False 0.82    0.74     0.89 100         5.09
+  ja    32768         knorm  0.50 niah_single    42 False 0.75    0.66     0.83 100         4.75
+  ko    32768         knorm  0.50 niah_single    42 False 0.67    0.58     0.76 100         5.20
+  pl    32768         knorm  0.50 niah_single    42 False 0.57    0.47     0.66 100         5.23
+  sw    32768         knorm  0.50 niah_single    42 False 0.65    0.56     0.74 100         5.65
+  vi    32768         knorm  0.50 niah_single    42 False 0.09    0.04     0.14 100         5.20
+  zh    32768         knorm  0.50 niah_single    42 False 0.61    0.51     0.70 100         4.96
+  en    32768          none  1.00 niah_single    42 False 0.98    0.95     1.00 100         5.21
+  ja    32768          none  1.00 niah_single    42 False 0.99    0.97     1.00 100         4.81
+  ko    32768          none  1.00 niah_single    42 False 0.86    0.79     0.92 100         5.05
+  pl    32768          none  1.00 niah_single    42 False 0.85    0.77     0.91 100         5.34
+  sw    32768          none  1.00 niah_single    42 False 1.00    1.00     1.00 100         5.56
+  vi    32768          none  1.00 niah_single    42 False 0.80    0.71     0.88 100         5.35
+  zh    32768          none  1.00 niah_single    42 False 1.00    1.00     1.00 100         4.96
+  en    32768        snapkv  0.25 niah_single    42 False 0.98    0.95     1.00 100         5.09
+  ja    32768        snapkv  0.25 niah_single    42 False 0.99    0.97     1.00 100         4.84
+  ko    32768        snapkv  0.25 niah_single    42 False 0.84    0.77     0.91 100         5.33
+  pl    32768        snapkv  0.25 niah_single    42 False 0.86    0.79     0.93 100         5.17
+  sw    32768        snapkv  0.25 niah_single    42 False 0.99    0.97     1.00 100         5.48
+  vi    32768        snapkv  0.25 niah_single    42 False 0.79    0.71     0.86 100         5.27
+  zh    32768        snapkv  0.25 niah_single    42 False 1.00    1.00     1.00 100         4.89
+  en    32768        snapkv  0.50 niah_single    42 False 0.98    0.95     1.00 100         5.10
+  ja    32768        snapkv  0.50 niah_single    42 False 0.99    0.96     1.00 100         4.82
+  ko    32768        snapkv  0.50 niah_single    42 False 0.85    0.78     0.92 100         5.33
+  pl    32768        snapkv  0.50 niah_single    42 False 0.86    0.78     0.93 100         5.22
+  sw    32768        snapkv  0.50 niah_single    42 False 1.00    1.00     1.00 100         5.47
+  vi    32768        snapkv  0.50 niah_single    42 False 0.80    0.72     0.87 100         5.36
+  zh    32768        snapkv  0.50 niah_single    42 False 1.00    1.00     1.00 100         4.94
+  en    32768 streaming_llm  0.25 niah_single    42 False 0.27    0.19     0.36 100         5.29
+  ja    32768 streaming_llm  0.25 niah_single    42 False 0.27    0.19     0.36 100         4.70
+  ko    32768 streaming_llm  0.25 niah_single    42 False 0.16    0.09     0.23 100         5.31
+  pl    32768 streaming_llm  0.25 niah_single    42 False 0.16    0.09     0.23 100         5.46
+  sw    32768 streaming_llm  0.25 niah_single    42 False 0.28    0.19     0.37 100         6.21
+  vi    32768 streaming_llm  0.25 niah_single    42 False 0.14    0.07     0.21 100         5.93
+  zh    32768 streaming_llm  0.25 niah_single    42 False 0.28    0.20     0.36 100         4.88
+  en    32768 streaming_llm  0.50 niah_single    42 False 0.45    0.36     0.55 100         5.28
+  ja    32768 streaming_llm  0.50 niah_single    42 False 0.45    0.35     0.54 100         4.71
+  ko    32768 streaming_llm  0.50 niah_single    42 False 0.34    0.25     0.43 100         5.42
+  pl    32768 streaming_llm  0.50 niah_single    42 False 0.38    0.29     0.47 100         5.47
+  sw    32768 streaming_llm  0.50 niah_single    42 False 0.44    0.34     0.54 100         6.14
+  vi    32768 streaming_llm  0.50 niah_single    42 False 0.35    0.26     0.45 100         5.63
+  zh    32768 streaming_llm  0.50 niah_single    42 False 0.44    0.35     0.55 100         4.89
+[09:57:41] accuracy pivot (rows=press,kept | cols=lang):
+lang                  en    ja    ko    pl    sw    vi    zh
+press         kept                                          
+knorm         0.25  0.24  0.40  0.78  0.08  0.16  0.06  0.15
+              0.50  0.82  0.75  0.67  0.57  0.65  0.09  0.61
+none          1.00  0.98  0.99  0.86  0.85  1.00  0.80  1.00
+snapkv        0.25  0.98  0.99  0.84  0.86  0.99  0.79  1.00
+              0.50  0.98  0.99  0.85  0.86  1.00  0.80  1.00
+streaming_llm 0.25  0.27  0.27  0.16  0.16  0.28  0.14  0.28
+              0.50  0.45  0.45  0.34  0.38  0.44  0.35  0.44
+[09:57:41] rows=4900 cells=49 -> results.parquet, cell_table.csv

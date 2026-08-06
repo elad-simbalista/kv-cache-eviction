@@ -1,0 +1,20 @@
+[19:00:52] ===== stage=aggregate ts=20260721_190052 model=meta-llama/Llama-3.1-8B-Instruct task=niah_single ctx=32768 attn=sdpa seed_default=42 =====
+[19:00:55] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_aggregate_20260721_190052.txt
+[19:00:55] excluding 70 toy selftest rows from aggregation
+[19:00:55] per-cell table (with 95% bootstrap CIs):
+lang  ctx_len press  kept        task  seed   toy   acc  ci_low  ci_high  n  mean_wall_s
+  en    32768  none   1.0 niah_single    42 False 1.000   1.000    1.000 30         5.12
+  hi    32768  none   1.0 niah_single    42 False 0.000   0.000    0.000 30         5.03
+  ja    32768  none   1.0 niah_single    42 False 0.967   0.900    1.000 30         4.87
+  ko    32768  none   1.0 niah_single    42 False 0.833   0.700    0.967 30         5.10
+  pl    32768  none   1.0 niah_single    42 False 0.833   0.700    0.967 30         5.40
+  ru    32768  none   1.0 niah_single    42 False 0.300   0.133    0.467 30         4.97
+  sw    32768  none   1.0 niah_single    42 False 0.967   0.900    1.000 30         5.63
+  ta    32768  none   1.0 niah_single    42 False 0.533   0.367    0.700 30         5.82
+  vi    32768  none   1.0 niah_single    42 False 0.733   0.567    0.900 30         5.26
+  zh    32768  none   1.0 niah_single    42 False 1.000   1.000    1.000 30         4.96
+[19:00:55] accuracy pivot (rows=press,kept | cols=lang):
+lang         en   hi     ja     ko     pl   ru     sw     ta     vi   zh
+press kept                                                              
+none  1.0   1.0  0.0  0.967  0.833  0.833  0.3  0.967  0.533  0.733  1.0
+[19:00:55] rows=300 cells=10 -> results.parquet, cell_table.csv

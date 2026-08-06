@@ -1,0 +1,4 @@
+[15:51:52] ===== stage=prepare_data ts=20260725_155152 ctx=32768 attn=sdpa seed_default=42 =====
+[15:51:56] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_prepare_data_20260725_155152.txt
+[15:51:56] repo already present at /vol/oneruler_repo
+[15:51:57] next: --stage gen-data --task <task> --langs <codes> --n <N>

@@ -1,0 +1,13 @@
+[18:52:40] ===== stage=diagnose_qwen25-7b-1m_qa ts=20260729_185240 ctx=32768 attn=sdpa seed_default=42 =====
+[18:52:42] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_diagnose_qwen25-7b-1m_qa_20260729_185240.txt
+[18:52:54] model loaded: qwen25-7b-1m (Qwen/Qwen2.5-7B-Instruct-1M) rev=e28526f7bb80e2a9c8af03b831a9af3812f18fba (8s)
+[18:52:54] ko: depth recovered for 24 samples (0 with multiple gold occurrences — first used)
+[18:52:54] split[ko/niah_single]: marker#f11c534b '</글>\n\n<질문> 주어진 글에서 언급된 "' question chars min/med/max = 160/161/161
+[18:54:54] ko: keep-rate value=0.890 window=0.599 question=1.000 haystack=0.500 | frac(value fully evicted per head)=0.037
+[18:54:54] en: depth recovered for 24 samples (0 with multiple gold occurrences — first used)
+[18:54:54] split[en/niah_single]: marker#893a79b9 'xt>\n\n<Question> What special magic numbers associated with "' question chars min/med/max = 287/289/290
+[18:56:42] en: keep-rate value=0.892 window=0.721 question=1.000 haystack=0.500 | frac(value fully evicted per head)=0.034
+[18:56:42] zh: depth recovered for 24 samples (0 with multiple gold occurrences — first used)
+[18:56:42] split[zh/niah_single]: marker#3add590c '</文本>\n\n<问题> 在所提供的文本中，与“' question chars min/med/max = 104/105/105
+[18:58:08] zh: keep-rate value=0.815 window=0.547 question=1.000 haystack=0.500 | frac(value fully evicted per head)=0.048
+[18:58:11] wrote /vol/results/diagnosis_knorm_qwen25-7b-1m_qa_niah_single_kept0.5.csv + fig7. Reading (qa: question protected by construction, keep_question=1.0): the informative signal is frac_value_evicted and keep_value/keep_window vs the uniform line — ~1 full-eviction rate with a flat haystack = needle loss explains the collapse; if NOT, the qa collapse is not about knorm's selection and needs another mechanism.

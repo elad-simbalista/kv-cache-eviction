@@ -1,0 +1,26 @@
+[14:36:13] ===== stage=split_audit ts=20260725_143613 ctx=32768 attn=sdpa seed_default=42 =====
+[14:36:17] env: datasets==5.0.0 | kvpress==0.5.4 | torch==2.13.0 | transformers==5.2.0 -> /vol/logs/env_split_audit_20260725_143613.txt
+[14:36:19] split[en/niah_none]: marker#455ed472 'xt>\n\n<Question> What special magic numbers associated with "' question chars min/med/max = 288/290/294
+[14:36:19] --- en/niah_none PASS
+[14:36:19]     marker(repr, last 80): '\n</text>\n\n<Question> What special magic numbers associated with "'
+[14:36:19]     example question (first 291 chars): '\n</text>\n\n<Question> What special magic numbers associated with "bridge" are mentioned in the provided text? Please list all that apply. If no such numbers exist, please answer "none".</Question>\n\n\nPlease provide your answer in the following format:\n <Answer> List all numbers here </Answer>'
+[14:36:19]     example context tail (last 120): ', but the sharp-eyed demoiselles discovered that Mr. Davis was quite benignant in the afternoon, also unusually nervous.'
+[14:36:21] split[pl/niah_none]: marker#bd43028a 'ytanie> Jakie specjalne magiczne liczby powiązane z hasłem „' question chars min/med/max = 338/341/345
+[14:36:21] --- pl/niah_none PASS
+[14:36:21]     marker(repr, last 80): '\n</tekst>\n\n<pytanie> Jakie specjalne magiczne liczby powiązane z hasłem „'
+[14:36:21]     example question (first 339 chars): '\n</tekst>\n\n<pytanie> Jakie specjalne magiczne liczby powiązane z hasłem „most” są wspomniane w podanym tekście? Wymień wszystkie, które się pojawiają. Jeśli takie liczby nie istnieją, odpowiedz „brak”.</pytanie>\n\n\nPodaj swoją odpowiedź w następującej formie:\n <odpowiedź> Wszystkie prawidłowe liczby powinny się znaleźć tutaj. </odpowiedź>'
+[14:36:21]     example context tail (last 120): 'dziła, by mu wszystko podano gorące i świeże. Czekała na niego, gdyż łaknęła jakiegoś udziału w toczących się wypadkach.'
+[14:36:21] --- zh/niah_none FAIL: derived marker hit the 200-char cap (200 chars) — every real template header seen so far is 60-75 chars, so this is almost certainly duplicated haystack prose (a small or ordered book pool letting several derivation samples share a long passage) rather than the true template boundary. Re-run --stage split-audit; if it recurs, the haystack pool for this (lang, task) needs more diversity across samples, not a code fix here.
+[14:36:22] --- ja/niah_none FAIL: derived marker hit the 200-char cap (200 chars) — every real template header seen so far is 60-75 chars, so this is almost certainly duplicated haystack prose (a small or ordered book pool letting several derivation samples share a long passage) rather than the true template boundary. Re-run --stage split-audit; if it recurs, the haystack pool for this (lang, task) needs more diversity across samples, not a code fix here.
+[14:36:23] --- ko/niah_none FAIL: derived marker hit the 200-char cap (200 chars) — every real template header seen so far is 60-75 chars, so this is almost certainly duplicated haystack prose (a small or ordered book pool letting several derivation samples share a long passage) rather than the true template boundary. Re-run --stage split-audit; if it recurs, the haystack pool for this (lang, task) needs more diversity across samples, not a code fix here.
+[14:36:24] split[vi/niah_none]: marker#02a94e8f '<Câu hỏi> Những con số ma thuật đặc biệt nào liên quan đến "' question chars min/med/max = 327/332/334
+[14:36:24] --- vi/niah_none PASS
+[14:36:24]     marker(repr, last 80): '\n</Văn bản>\n\n<Câu hỏi> Những con số ma thuật đặc biệt nào liên quan đến "'
+[14:36:24]     example question (first 328 chars): '\n</Văn bản>\n\n<Câu hỏi> Những con số ma thuật đặc biệt nào liên quan đến "cầu" được đề cập trong văn bản được cung cấp? Hãy liệt kê tất cả các phương án đúng. Nếu không có con số nào như vậy, hãy trả lời "Không có".</Câu hỏi>\n\n\nHãy cho câu trả lời theo hình thức như sau:\n <Câu trả lời> Liệt kê tất cả các số ở đây </Câu trả lời>'
+[14:36:24]     example context tail (last 120): ' họ tinh quái nghịch ngợm lắm, anh ạ. Các cô cứ lấy những chăn màn gối đệm mới mà giễu cợt em; các cô lấy thế làm thích.'
+[14:36:25] split[sw/niah_none]: marker#40832bee '<Swali> Ni nambari gani maalum za maajabu zinazohusiana na "' question chars min/med/max = 319/322/325
+[14:36:25] --- sw/niah_none PASS
+[14:36:25]     marker(repr, last 80): '\n</Maandishi>\n\n<Swali> Ni nambari gani maalum za maajabu zinazohusiana na "'
+[14:36:25]     example question (first 322 chars): '\n</Maandishi>\n\n<Swali> Ni nambari gani maalum za maajabu zinazohusiana na "daraja" zilizotajwa katika maandishi yaliyotolewa? Tafadhali orodhesha yote yanayohusika. Ikiwa hakuna nambari kama hizo, tafadhali jibu "hakuna".</Swali>\n\n\nTafadhali toa jibu lako katika muundo ufuatao:\n <Jibu> Orodhesha nambari zote hapa </Jibu>'
+[14:36:25]     example context tail (last 120): 'faida katika miaka mitano ilikuwa Shilingi 800/- kwa kitabu kilichofikia thamani ya Shilingi zaidi ya 61- katika maduka!'
+[14:36:25] split-audit: PASS=['en', 'pl', 'vi', 'sw'] FAIL=['zh', 'ja', 'ko']
