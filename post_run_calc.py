@@ -40,6 +40,28 @@ WHAT IT PRODUCES
   power.csv                power of the ordering test vs (k, n)
   post_run_report.md       a written summary with the numbers filled in
 
+  --- v2 additions (the two computations the v1 paper edits depend on) ---
+  value_origin_trials.csv  per-cell value-origin taxonomy at TRIAL level:
+                           exact copy / near copy / entirely novel, with
+                           Wilson CIs and raw numerators.  REPLACES the
+                           draft's "a majority are fabricated values that
+                           appear nowhere in the input", which is false:
+                           almost every non-exact-copy value is a corrupted
+                           near-copy of a value that IS in the input.
+  value_origin_cands.csv   the same taxonomy at CANDIDATE level (a single
+                           output can emit several numbers)
+  value_origin_chance.csv  Monte-Carlo false-positive rate of the near-copy
+                           rule, so the near-copy tier is defensible
+  protocol_contrast.csv    query-agnostic (arm=qa) vs query-aware
+                           (arm=joint) present-trial operating points:
+                           present-task accuracy, coverage (= answer rate
+                           H), precision-given-answer, per condition, with
+                           a PAIRED item bootstrap on the difference.  The
+                           joint arm was swept for niah_single at every
+                           press and budget on both models, so this needs
+                           no new GPU time.
+  protocol_by_lang.csv     the same contrast per language
+
 USAGE
 =====
   # everything that needs only predictions (free, ~2 min):
@@ -58,6 +80,10 @@ USAGE
 
   # verify the machinery on fabricated data with known answers:
   python post_run_calc.py --selftest
+
+  # ONLY the two v2 stages (skips everything else; seconds, no --data-dir
+  # needed, though --data-dir makes the value-origin check exact):
+  python post_run_calc.py --v4-dir ./results --out ./post_run --only v2
 
 COST
 ====
@@ -107,6 +133,98 @@ def _nums(pred):
 def _has_none_word(lang, pred, none_words):
     low = unicodedata.normalize("NFKC", str(pred)).lower()
     return any(w.lower() in low for w in none_words.get(lang, []))
+
+
+# ---------------------------------------------------------------------------
+# v2: detection coding and value-origin machinery
+# ---------------------------------------------------------------------------
+VALUE_MIN_DIGITS = 6      # ONERULER values are 7-digit; 6 excludes years
+NEAR_MAX_LEV = 2          # documented near-copy threshold
+
+
+def candidate_values(pred):
+    """The paper's response coding, made explicit and reusable: NFKC, then
+    every digit run of length >= VALUE_MIN_DIGITS.  A trial is `answered`
+    iff this returns anything."""
+    proc = unicodedata.normalize("NFKC", str(pred))
+    return re.findall(r"\d{%d,}" % VALUE_MIN_DIGITS, proc)
+
+
+def answered(pred):
+    return bool(candidate_values(pred))
+
+
+def candidate_values_sep(pred):
+    """Sensitivity variant: also accepts separator-formatted values such as
+    '1,234,567' or '1 234 567'.  Reported as a robustness column, never as
+    the headline coding."""
+    proc = unicodedata.normalize("NFKC", str(pred))
+    got = list(candidate_values(proc))
+    for m in re.finditer(r"\d{1,3}(?:[,.\u00a0\s]\d{3}){1,4}", proc):
+        digits = re.sub(r"\D", "", m.group())
+        if len(digits) >= VALUE_MIN_DIGITS:
+            got.append(digits)
+    return list(dict.fromkeys(got))
+
+
+def canon_num(x):
+    """Canonicalize a numeric string (strips leading zeros, normalizes
+    native-script digits already handled by NFKC upstream)."""
+    try:
+        return str(int(x))
+    except (TypeError, ValueError):
+        return str(x)
+
+
+def lev(a, b, max_d=NEAR_MAX_LEV):
+    """Levenshtein distance with an early exit once it exceeds max_d."""
+    if abs(len(a) - len(b)) > max_d:
+        return max_d + 1
+    m, n = len(a), len(b)
+    prev = list(range(n + 1))
+    for i in range(1, m + 1):
+        cur = [i] + [0] * n
+        for j in range(1, n + 1):
+            cur[j] = min(prev[j] + 1, cur[j - 1] + 1,
+                         prev[j - 1] + (a[i - 1] != b[j - 1]))
+        if min(cur) > max_d:
+            return max_d + 1
+        prev = cur
+    return prev[n]
+
+
+def is_near_copy(v, pool, max_d=NEAR_MAX_LEV, min_share=VALUE_MIN_DIGITS):
+    """NEAR-COPY RULE (documented; report this verbatim in the paper).
+
+    v is a near copy of some value in `pool` iff EITHER
+      (a) Levenshtein(v, p) <= max_d for some p in pool -- this covers a
+          one-digit substitution, a dropped digit, a repeated digit and a
+          transposition; OR
+      (b) one of v, p is a prefix or suffix of the other and the shorter
+          string is at least min_share digits long -- a truncated copy.
+
+    Rule (a) alone is enough for almost every case in this data; (b) is
+    kept because a truncated 7-digit value read out of the context is
+    plainly not a fabrication."""
+    for p in pool:
+        if lev(v, p, max_d) <= max_d:
+            return True
+        s, t = (v, p) if len(v) <= len(p) else (p, v)
+        if len(s) >= min_share and (t.startswith(s) or t.endswith(s)):
+            return True
+    return False
+
+
+def wilson(k, n, z=1.96):
+    """Wilson score interval -- correct at the small denominators this
+    analysis has (some cells have n=13 answered trials)."""
+    if n <= 0:
+        return (np.nan, np.nan, np.nan)
+    p = k / n
+    d = 1 + z * z / n
+    c = (p + z * z / (2 * n)) / d
+    h = z * np.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / d
+    return (p, max(0.0, c - h), min(1.0, c + h))
 
 
 class Scorers:
@@ -419,7 +537,10 @@ def text_stats_for_file(path, max_samples=24):
 # ---------------------------------------------------------------------------
 # loading
 # ---------------------------------------------------------------------------
-def load_raw(v4_dir):
+ITEM_KEYS = ["model", "arm", "task", "lang", "press", "kept", "sample_id"]
+
+
+def load_raw(v4_dir, dedup=True):
     v4 = Path(v4_dir)
     pq = v4 / "results.parquet"
     if pq.exists():
@@ -442,6 +563,20 @@ def load_raw(v4_dir):
         src = f"{len(files)} raw jsonl files"
     if "toy" in df.columns:
         df = df[~df["toy"].astype(bool)]
+    if dedup:
+        # GUARD, not a fix: on the current results.parquet this drops
+        # NOTHING (all 294 real cells are exactly n=100).  It exists because
+        # cells were topped up in place during the campaign (30 -> 100
+        # baselines), so a re-run or a merged volume could reintroduce
+        # duplicate (cell, sample_id) rows, which would silently reweight a
+        # language.  Note the toy smoke-test rows reuse the same sample_ids
+        # as real rows -- so this MUST run after the toy filter above, or it
+        # would delete real data.  --no-dedup disables it.
+        before = len(df)
+        df = df.drop_duplicates(subset=ITEM_KEYS, keep="first")
+        if before != len(df):
+            print(f"  dedup: dropped {before - len(df)} duplicate "
+                  f"(cell, sample_id) rows [--no-dedup to disable]")
     df["correct"] = df["correct"].astype(int)
     for c in ("kept", "depth"):
         if c in df.columns:
@@ -735,6 +870,282 @@ def stage_errors(df, sc, out, numerals_by_lang=None):
                   f"wrong numbers ARE haystack numerals)")
     print(f"  errors.csv: {tab['mode'].nunique()} modes x {len(tab)} rows")
     return tab
+
+
+def load_item_numerals(data_dir, ctx_len=32768, min_digits=VALUE_MIN_DIGITS):
+    """{(lang, task, sample_id): set of every >= min_digits digit run in the
+    ENTIRE serialized input} -- prompt, instructions, question and haystack.
+
+    This is what makes the "appears nowhere in the input" claim checkable at
+    the item level.  Requires the generated data (--data-dir).  Without it
+    the value-origin stage falls back to per-item distractors plus the
+    language-level numeral union from haystack_numerals.json, which is an
+    approximation and is labelled as such in the output."""
+    if not data_dir:
+        return {}
+    idx = {}
+    for lang in LANGS:
+        for task in ("niah_single", "niah_none"):
+            hits = list(Path(data_dir).glob(
+                f"**/oneruler/{lang}/{ctx_len}/{task}/validation.jsonl"))
+            if not hits:
+                continue
+            with open(hits[0], encoding="utf-8") as f:
+                for line in f:
+                    if not line.strip():
+                        continue
+                    try:
+                        rec = json.loads(line)
+                    except json.JSONDecodeError:
+                        continue          # tolerate a truncated final line
+                    proc = unicodedata.normalize("NFKC", rec["input"])
+                    idx[(lang, task, rec["index"])] = {
+                        canon_num(x) for x in
+                        re.findall(r"\d{%d,}" % min_digits, proc)}
+    if idx:
+        print(f"    per-item full-input numerals loaded for {len(idx)} items")
+    return idx
+
+
+ORIGIN_ORDER = ["TARGET_EXACT", "DISTRACTOR_EXACT", "OTHER_INPUT_EXACT",
+                "TARGET_NEAR_COPY", "DISTRACTOR_NEAR_COPY",
+                "OTHER_INPUT_NEAR_COPY", "ENTIRELY_NOVEL"]
+
+
+def _classify_candidate(v, gold, distr, other):
+    """Most-grounded-wins classification of one candidate value."""
+    if v in gold:
+        return "TARGET_EXACT"
+    if v in distr:
+        return "DISTRACTOR_EXACT"
+    if v in other:
+        return "OTHER_INPUT_EXACT"
+    if gold and is_near_copy(v, gold):
+        return "TARGET_NEAR_COPY"
+    if distr and is_near_copy(v, distr):
+        return "DISTRACTOR_NEAR_COPY"
+    if other and is_near_copy(v, other):
+        return "OTHER_INPUT_NEAR_COPY"
+    return "ENTIRELY_NOVEL"
+
+
+def stage_value_origin(df, out, numerals=None, item_numerals=None,
+                       chance_draws=20000, seed=SEED):
+    """THE v1-blocking computation.
+
+    The draft says that under KNorm at 25% "a majority [of wrong answers]
+    are fabricated values that appear nowhere in the input".  The existing
+    pipeline only ever asked "is this value an EXACT match to something in
+    the input?" -- so every corrupted copy (one dropped digit, one
+    substituted digit) was filed as a fabrication.  This stage adds the
+    near-copy tier and reports exact / near / novel with Wilson CIs and raw
+    numerators, at trial level (what the paper quotes) and candidate level.
+
+    A Monte-Carlo chance rate is also computed: the fraction of RANDOM
+    7-digit values that the near-copy rule would misfile as grounded.  If
+    that rate is ~0.1% and the observed near-copy rate is ~50%, the tier is
+    measuring something real."""
+    rng = np.random.default_rng(seed)
+    numerals = numerals or {}
+    item_numerals = item_numerals or {}
+    exact_mode = "per-item full input" if item_numerals else (
+        "per-item distractors + language-level haystack union"
+        if numerals else "per-item distractors ONLY")
+    print(f"    other-input reference: {exact_mode}")
+
+    trial_rows, cand_rows = [], []
+    for r in df.itertuples(index=False):
+        vals = [canon_num(v) for v in candidate_values(r.pred)]
+        if not vals:
+            continue                       # abstention: not an answered trial
+        gold = {canon_num(g) for g in (list(r.gold)
+                                       if r.gold is not None else [])}
+        d = getattr(r, "distractors", None)
+        try:
+            distr = {canon_num(x) for x in list(d)} if d is not None else set()
+        except TypeError:
+            distr = set()
+        key = (r.lang, str(r.task), r.sample_id)
+        if key in item_numerals:
+            other = item_numerals[key] - gold - distr
+        else:
+            other = {canon_num(x) for x in numerals.get(r.lang, set())
+                     if len(str(x)) >= VALUE_MIN_DIGITS} - gold - distr
+        labs = []
+        for v in dict.fromkeys(vals):
+            lab = _classify_candidate(v, gold, distr, other)
+            labs.append(lab)
+            cand_rows.append(dict(model=r.model, arm=r.arm, task=r.task,
+                                  lang=r.lang, press=r.press, kept=r.kept,
+                                  sample_id=r.sample_id, value=v, origin=lab))
+        # trial label = the most grounded of its candidates
+        trial = min(labs, key=ORIGIN_ORDER.index)
+        trial_rows.append(dict(model=r.model, arm=r.arm, task=r.task,
+                               lang=r.lang, press=r.press, kept=r.kept,
+                               sample_id=r.sample_id, origin=trial,
+                               n_candidates=len(labs)))
+    if not trial_rows:
+        print("  value_origin: no answered trials found")
+        return None, None, None
+    tr = pd.DataFrame(trial_rows)
+    cn = pd.DataFrame(cand_rows)
+    cn.to_csv(out / "value_origin_cands.csv", index=False)
+
+    def _summarize(g):
+        n = len(g)
+        exact = int(g.origin.isin(ORIGIN_ORDER[:3]).sum())
+        near = int(g.origin.isin(ORIGIN_ORDER[3:6]).sum())
+        novel = int((g.origin == "ENTIRELY_NOVEL").sum())
+        d_ex = int((g.origin == "DISTRACTOR_EXACT").sum())
+        p, lo, hi = wilson(novel, n)
+        pn, nlo, nhi = wilson(near, n)
+        return pd.Series(dict(
+            n_answered=n,
+            n_exact_copy=exact, n_near_copy=near, n_novel=novel,
+            n_distractor_exact=d_ex,
+            exact_rate=round(exact / n, 4),
+            near_rate=round(pn, 4), near_ci_low=round(nlo, 4),
+            near_ci_high=round(nhi, 4),
+            novel_rate=round(p, 4), novel_ci_low=round(lo, 4),
+            novel_ci_high=round(hi, 4)))
+
+    keys = ["model", "arm", "task", "press", "kept"]
+    summ = tr.groupby(keys, observed=True).apply(
+        _summarize, include_groups=False).reset_index()
+    summ["other_input_reference"] = exact_mode
+    summ.to_csv(out / "value_origin_trials.csv", index=False)
+
+    bylang = tr.groupby(keys + ["lang"], observed=True).apply(
+        _summarize, include_groups=False).reset_index()
+    bylang.to_csv(out / "value_origin_by_lang.csv", index=False)
+
+    # ---- chance rate of the near-copy rule ---------------------------------
+    pools = []
+    for r in df.itertuples(index=False):
+        d = getattr(r, "distractors", None)
+        try:
+            p = {canon_num(x) for x in list(d)} if d is not None else set()
+        except TypeError:
+            p = set()
+        if p:
+            pools.append(p)
+    ch_rows = []
+    if pools:
+        widths = sorted({len(x) for p in pools for x in p}) or [7]
+        for w in widths:
+            hit = 0
+            for _ in range(chance_draws):
+                pool = pools[rng.integers(0, len(pools))]
+                v = str(rng.integers(10 ** (w - 1), 10 ** w))
+                if v in pool or is_near_copy(v, pool):
+                    hit += 1
+            p, lo, hi = wilson(hit, chance_draws)
+            ch_rows.append(dict(value_width=w, draws=chance_draws, hits=hit,
+                                chance_grounded_rate=round(p, 6),
+                                ci_low=round(lo, 6), ci_high=round(hi, 6)))
+        pd.DataFrame(ch_rows).to_csv(out / "value_origin_chance.csv",
+                                     index=False)
+    print(f"  value_origin_trials.csv: {len(summ)} cells "
+          f"({len(tr):,} answered trials, {len(cn):,} candidate values)")
+    if ch_rows:
+        print(f"    near-copy rule chance false-positive rate: "
+              f"{ch_rows[-1]['chance_grounded_rate']:.4%}")
+    return summ, bylang, (pd.DataFrame(ch_rows) if ch_rows else None)
+
+
+def stage_protocol(df, out, B=N_BOOT, seed=SEED):
+    """Query-agnostic (arm=qa) vs query-aware (arm=joint) present-trial
+    operating points.  No new GPU time: the joint arm was swept for
+    niah_single at every press and budget on both models.
+
+    Reports, per (model, press, budget, arm): present-task accuracy
+    (macro-averaged over languages, the leaderboard statistic), coverage
+    (= the answer rate H under the scorer-independent coding) and
+    precision-given-answer (pooled), plus the joint-minus-qa difference
+    with a PAIRED item bootstrap -- the two arms share sample_ids within
+    each language, so the same resampled indices are applied to both."""
+    d = df[df.task == "niah_single"].copy()
+    if d.empty or d.arm.nunique() < 2:
+        print("  protocol: SKIPPED -- need both arms on niah_single")
+        return None, None
+    d["ans"] = d.pred.map(answered).astype(int)
+    rng = np.random.default_rng(seed)
+
+    def _vecs(model, arm, press, kept):
+        s = d[(d.model == model) & (d.arm == arm) & (d.press == press)
+              & (d.kept == kept)]
+        return {l: g.sort_values("sample_id")[["correct", "ans"]].to_numpy()
+                for l, g in s.groupby("lang")}
+
+    def _point(v):
+        """(macro accuracy, macro coverage, pooled precision, n_answered)."""
+        if not v:
+            return (np.nan,) * 3 + (0,)
+        acc = float(np.mean([a[:, 0].mean() for a in v.values()]))
+        cov = float(np.mean([a[:, 1].mean() for a in v.values()]))
+        allv = np.concatenate(list(v.values()))
+        na = int(allv[:, 1].sum())
+        prec = float(allv[allv[:, 1] == 1][:, 0].mean()) if na else np.nan
+        return acc, cov, prec, na
+
+    rows, lang_rows = [], []
+    for (m, p, k), _ in d.groupby(["model", "press", "kept"]):
+        vq, vj = _vecs(m, "qa", p, k), _vecs(m, "joint", p, k)
+        if not vq or not vj:
+            continue
+        aq, cq, pq, nq = _point(vq)
+        aj, cj, pj, nj = _point(vj)
+        # paired item bootstrap on the joint-minus-qa differences
+        langs = sorted(set(vq) & set(vj))
+        da, dc, dp = np.empty(B), np.empty(B), np.empty(B)
+        for b in range(B):
+            sq, sj = {}, {}
+            for l in langs:
+                n = min(len(vq[l]), len(vj[l]))
+                s = rng.integers(0, n, n)
+                sq[l] = vq[l][:n][s]
+                sj[l] = vj[l][:n][s]
+            a1, c1, p1, _ = _point(sq)
+            a2, c2, p2, _ = _point(sj)
+            da[b], dc[b], dp[b] = a2 - a1, c2 - c1, p2 - p1
+
+        def _ci(x):
+            x = x[np.isfinite(x)]
+            return (round(float(np.percentile(x, 2.5)), 4),
+                    round(float(np.percentile(x, 97.5)), 4)) \
+                if len(x) else (np.nan, np.nan)
+
+        alo, ahi = _ci(da)
+        clo, chi = _ci(dc)
+        plo, phi_ = _ci(dp)
+        rows.append(dict(
+            model=m, press=p, kept=k,
+            acc_qa=round(aq, 4), acc_joint=round(aj, 4),
+            d_acc=round(aj - aq, 4), d_acc_lo=alo, d_acc_hi=ahi,
+            acc_sig=bool(alo > 0 or ahi < 0),
+            coverage_qa=round(cq, 4), coverage_joint=round(cj, 4),
+            d_coverage=round(cj - cq, 4), d_cov_lo=clo, d_cov_hi=chi,
+            cov_sig=bool(clo > 0 or chi < 0),
+            prec_qa=round(pq, 4), prec_joint=round(pj, 4),
+            d_prec=round(pj - pq, 4), d_prec_lo=plo, d_prec_hi=phi_,
+            prec_sig=bool(plo > 0 or phi_ < 0),
+            n_answered_qa=nq, n_answered_joint=nj))
+        for l in langs:
+            gq, gj = vq[l], vj[l]
+            lang_rows.append(dict(
+                model=m, press=p, kept=k, lang=l,
+                acc_qa=round(float(gq[:, 0].mean()), 4),
+                acc_joint=round(float(gj[:, 0].mean()), 4),
+                coverage_qa=round(float(gq[:, 1].mean()), 4),
+                coverage_joint=round(float(gj[:, 1].mean()), 4),
+                n=int(min(len(gq), len(gj)))))
+    pr = pd.DataFrame(rows).sort_values(["model", "press", "kept"])
+    pr.to_csv(out / "protocol_contrast.csv", index=False)
+    pl = pd.DataFrame(lang_rows)
+    pl.to_csv(out / "protocol_by_lang.csv", index=False)
+    print(f"  protocol_contrast.csv: {len(pr)} conditions "
+          f"(paired bootstrap B={B}), protocol_by_lang.csv: {len(pl)} rows")
+    return pr, pl
 
 
 def stage_depth(df, out):
@@ -1126,8 +1537,71 @@ def _md(df, index=False):
 
 
 # ---------------------------------------------------------------------------
+def _v2_lines(vo, vch, prot):
+    """Shared body of the v2 report, so the standalone and the appended
+    version can never drift apart."""
+    L = []
+    A = L.append
+    A("\n## 7. Value origin: exact copy / near copy / entirely novel\n")
+    if vo is not None and len(vo):
+        cols = ["model", "press", "kept", "n_answered", "n_exact_copy",
+                "n_near_copy", "n_novel", "near_rate", "novel_rate",
+                "novel_ci_low", "novel_ci_high"]
+        n = vo[(vo.arm == "qa") & (vo.task == "niah_none")]
+        if len(n):
+            A("**Answered ABSENT trials** (the population behind the "
+              "draft's distractor-copy / fabrication numbers):\n")
+            A(_md(n[[c for c in cols if c in n.columns]]))
+        s = vo[(vo.arm == "qa") & (vo.task == "niah_single")]
+        if len(s):
+            A("\n**Answered PRESENT trials** (`TARGET_EXACT` = correct "
+              "retrieval; near-copies here are corrupted values):\n")
+            A(_md(s[[c for c in cols if c in s.columns]]))
+        A("\nA value is a NEAR COPY iff it is within Levenshtein distance 2 "
+          "of some value present in the input, or is a prefix/suffix of one "
+          "sharing at least 6 digits. `ENTIRELY_NOVEL` is the only category "
+          "for which the phrase \"appears nowhere in the input\" is "
+          "defensible.\n")
+        if vch is not None and len(vch):
+            r = float(vch.chance_grounded_rate.iloc[-1])
+            A(f"\nChance check: a RANDOM value of the same width is "
+              f"misfiled as grounded {r:.3%} of the time "
+              f"(`value_origin_chance.csv`), so the near-copy tier is not "
+              f"an artefact of a loose rule.\n")
+        if vo is not None and "other_input_reference" in vo.columns:
+            A(f"\nOther-input reference used: "
+              f"**{vo.other_input_reference.iloc[0]}**. Pass `--data-dir` "
+              f"for per-item full-input matching.\n")
+    else:
+        A("_Not run._\n")
+    A("\n## 8. Query-agnostic vs query-aware (present trials)\n")
+    if prot is not None and len(prot):
+        A(_md(prot[["model", "press", "kept", "acc_qa", "acc_joint", "d_acc",
+                    "d_acc_lo", "d_acc_hi", "coverage_qa", "coverage_joint",
+                    "prec_qa", "prec_joint", "d_prec", "prec_sig"]]))
+        A("\n`qa` compresses the context only (question prefilled "
+          "afterwards, kvpress-leaderboard semantics); `joint` compresses "
+          "the whole templated prompt, which puts SnapKV's observation "
+          "window on the question -- a query-AWARE variant, though not the "
+          "canonical one (KNorm can evict question tokens there, and the "
+          "budget denominator is the prompt rather than the context, a "
+          "difference of ~0.4%). Differences carry a paired item bootstrap; "
+          "the two arms share sample_ids within each language.\n")
+    else:
+        A("_Not run: needs both arms on niah_single._\n")
+    return L
+
+
+def write_v2_report(out, vo, vch, prot):
+    L = ["# post_run_calc v2 — value origin and protocol contrast\n",
+         "Both stages run on the EXISTING per-item records. No new "
+         "generations.\n"]
+    L += _v2_lines(vo, vch, prot)
+    (out / "post_run_v2_report.md").write_text("\n".join(L), encoding="utf-8")
+
+
 def write_report(out, cells, disp, amp, order, scor, red, link, law, arms,
-                 fert, power, det):
+                 fert, power, det, vo=None, vch=None, prot=None):
     L = []
     A = L.append
     A("# post_run_calc — recomputed results\n")
@@ -1205,6 +1679,8 @@ def write_report(out, cells, disp, amp, order, scor, red, link, law, arms,
                           columns="rho_true", values="power"), index=True))
         A("\nEqual GPU cost across rows. Power scales with the number of "
           "languages, not items per language.\n")
+    if vo is not None or prot is not None:
+        L += _v2_lines(vo, vch, prot)
     (out / "post_run_report.md").write_text("\n".join(L), encoding="utf-8")
 
 
@@ -1255,6 +1731,34 @@ def selftest():
     # bh monotone
     q = bh_q([0.001, 0.02, 0.04, 0.5])
     ok &= all(q[i] <= q[i + 1] + 1e-12 for i in range(3))
+
+    # ---- v2: detection coding, Levenshtein, near-copy, Wilson -------------
+    ok &= candidate_values("<answer> 2867825 </answer>") == ["2867825"]
+    ok &= candidate_values("in 1998 he wrote 12345") == []      # year floor
+    ok &= answered("value is 4744854") and not answered("없음")
+    ok &= candidate_values("\uff12\uff18\uff16\uff17\uff18\uff12\uff15") == \
+        ["2867825"]                                             # NFKC digits
+    ok &= candidate_values_sep("1,234,567") == ["1234567"]
+    ok &= candidate_values("1,234,567") == []                   # headline
+    print(f"  response coding: digit-run floor, NFKC, separator variant")
+    ok &= lev("2867825", "2867825") == 0
+    ok &= lev("286782", "2867825") == 1                          # dropped
+    ok &= lev("2867815", "2867825") == 1                         # substituted
+    ok &= lev("2868725", "2867825") == 2                         # transposed
+    ok &= lev("9999999", "2867825") > NEAR_MAX_LEV
+    pool = {"2867825", "4744854"}
+    ok &= is_near_copy("286782", pool) and is_near_copy("2867815", pool)
+    ok &= not is_near_copy("1111111", pool)
+    print(f"  near-copy rule: drop/substitute/transpose in, random out")
+    ok &= _classify_candidate("7", {"7"}, set(), set()) == "TARGET_EXACT"
+    ok &= _classify_candidate("2867815", set(), {"2867825"}, set()) == \
+        "DISTRACTOR_NEAR_COPY"
+    ok &= _classify_candidate("1111111", set(), {"2867825"}, set()) == \
+        "ENTIRELY_NOVEL"
+    p, lo, hi = wilson(8, 13)
+    ok &= lo < p < hi and 0.35 < lo < 0.40 and 0.82 < hi < 0.88
+    print(f"  wilson(8/13) = {p:.2f} [{lo:.2f}, {hi:.2f}] "
+          f"(small-n interval stays wide)")
     print(f"\n  SELFTEST {'PASS' if ok else 'FAIL'}")
     return 0 if ok else 1
 
@@ -1326,6 +1830,13 @@ def main():
     ap.add_argument("--out", default="./post_run")
     ap.add_argument("--boot", type=int, default=N_BOOT)
     ap.add_argument("--selftest", action="store_true")
+    ap.add_argument("--only", default="all", choices=["all", "v2"],
+                    help="'v2' runs ONLY the two new stages "
+                         "(value origin + protocol contrast)")
+    ap.add_argument("--no-dedup", action="store_true",
+                    help="keep duplicate (cell, sample_id) rows")
+    ap.add_argument("--ctx-len", type=int, default=32768,
+                    help="context length of the generated data (--data-dir)")
     a = ap.parse_args()
     if a.selftest:
         raise SystemExit(selftest())
@@ -1334,9 +1845,29 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     print(f"post_run_calc -> {out.resolve()}\n")
     print("[load]")
-    df = load_raw(a.v4_dir)
+    df = load_raw(a.v4_dir, dedup=not a.no_dedup)
     sc = Scorers(a.v4_script)
     print(f"  scorers: {sc.source}")
+
+    if a.only == "v2":
+        numerals = {}
+        if a.remote_text:
+            p = Path(a.remote_text)
+            nf = (sorted(p.rglob("haystack_numerals.json")) if p.is_dir()
+                  else list(p.parent.glob("haystack_numerals.json")))
+            if nf:
+                numerals = {k: set(v) for k, v in json.loads(
+                    nf[0].read_text(encoding="utf-8")).items()}
+                print(f"  read {nf[0]} ({len(numerals)} languages)")
+        print("\n[v2-a] value-origin taxonomy (exact / near copy / novel)")
+        item_nums = load_item_numerals(a.data_dir, a.ctx_len)
+        vo, vol_, vch = stage_value_origin(df, out, numerals, item_nums)
+        print("\n[v2-b] query-agnostic vs query-aware present-trial contrast")
+        prot, protl = stage_protocol(df, out, B=a.boot)
+        write_v2_report(out, vo, vch, prot)
+        print(f"\nDONE (v2 stages only). "
+              f"Read {out / 'post_run_v2_report.md'}.")
+        return
 
     print("\n[1] per-cell accuracies with item-bootstrap CIs")
     cells = stage_cells(df, out)
@@ -1360,10 +1891,17 @@ def main():
     fert = stage_fertility(df, a.v4_dir, out)
     print("\n[11] power simulation")
     power = stage_power(out)
+    print("\n[12] value-origin taxonomy (exact / near copy / novel)  [v2]")
+    item_nums = load_item_numerals(a.data_dir, a.ctx_len)
+    vo, vol_, vch = stage_value_origin(df, out, numerals, item_nums)
+    print("\n[13] query-agnostic vs query-aware contrast  [v2]")
+    prot, protl = stage_protocol(df, out, B=a.boot)
 
     write_report(out, cells, disp, amp, order, scor, red, link, law, arms,
-                 fert, power, det)
-    print(f"\nDONE. Read {out / 'post_run_report.md'} first.")
+                 fert, power, det, vo, vch, prot)
+    write_v2_report(out, vo, vch, prot)
+    print(f"\nDONE. Read {out / 'post_run_report.md'} first, then "
+          f"{out / 'post_run_v2_report.md'}.")
 
 
 if __name__ == "__main__":
