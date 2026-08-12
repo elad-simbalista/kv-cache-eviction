@@ -145,7 +145,7 @@ modal run modal_kv_audit_v4.py --stage <stage> [--model ...] [--arm ...] [--task
 | `analyze` | Gap tables with paired bootstrap + BH correction, depth balance, arm contrast; figs 1, 1b, 2, 3, 5, 6 |
 | `failure-modes` | `failure_modes.csv`, `failure_mode_deltas.csv`, `scorer_sensitivity.csv`; fig 4 |
 | `diagnose` | Replays KNorm's keep-lowest-norm selection offline from k_proj hooks; keep rates for needle-value / needle-window / question / haystack spans; fig 7 |
-| `fertility` | Tokenizer fertility per language, measured on FLORES and on the eval texts |
+| `fertility` | Tokenizer fertility per language, measured on FLORES+ and on the eval texts |
 | `status` | Which cells are done for a given (model, arm, task) |
 | `inspect` | Print predictions for one cell (`--only-wrong` to filter) |
 | `wipe-results` | Clear results; keeps generated data, the ONERULER clone, and the HF cache. Needs `--confirm` |
@@ -168,26 +168,32 @@ Models are pinned by revision in the `MODELS` registry; presses, budgets, and th
 ### Full campaign
 
 ```bash
+# sanity
 modal run modal_kv_audit_v4.py --stage smoke --model llama31-8b
 modal run modal_kv_audit_v4.py --stage smoke --model qwen25-7b-1m
 modal run modal_kv_audit_v4.py --stage selftest
 modal run modal_kv_audit_v4.py --stage prepare-data
 
+# data
 modal run --detach modal_kv_audit_v4.py --stage gen-data --task niah_single --n 100
-modal run --detach modal_kv_audit_v4.py --stage gen-data --task niah_none   --n 100
+modal run --detach modal_kv_audit_v4.py --stage gen-data --task niah_none --n 100
 modal run modal_kv_audit_v4.py --stage split-audit --task niah_single
 modal run modal_kv_audit_v4.py --stage split-audit --task niah_none
 
-for m in llama31-8b qwen25-7b-1m; do
-  modal run --detach modal_kv_audit_v4.py --stage sweep --model $m --arm qa    --task niah_single --n 100
-  modal run --detach modal_kv_audit_v4.py --stage sweep --model $m --arm joint --task niah_single --n 100
-  modal run --detach modal_kv_audit_v4.py --stage sweep --model $m --arm qa    --task niah_none   --n 100
-done
+# sweep — Llama
+modal run --detach modal_kv_audit_v4.py --stage sweep --model llama31-8b --arm qa --task niah_single --n 100
+modal run --detach modal_kv_audit_v4.py --stage sweep --model llama31-8b --arm joint --task niah_single --n 100
+modal run --detach modal_kv_audit_v4.py --stage sweep --model llama31-8b --arm qa --task niah_none --n 100
 
+# sweep — Qwen
+modal run --detach modal_kv_audit_v4.py --stage sweep --model qwen25-7b-1m --arm qa --task niah_single --n 100
+modal run --detach modal_kv_audit_v4.py --stage sweep --model qwen25-7b-1m --arm joint --task niah_single --n 100
+modal run --detach modal_kv_audit_v4.py --stage sweep --model qwen25-7b-1m --arm qa --task niah_none --n 100
+
+# aggregate and pull down
 modal run modal_kv_audit_v4.py --stage aggregate
 modal run modal_kv_audit_v4.py --stage analyze
 modal run modal_kv_audit_v4.py --stage failure-modes
-
 modal volume get kv-audit-vol results ./results
 modal volume get kv-audit-vol figures ./figures
 ```
@@ -216,6 +222,8 @@ That row is the paper's truncation signature in miniature: the model emits the f
 
 Cells are fully crossed and the same 100 items are reused across conditions within each language×task, which is what makes the paired bootstrap valid (B=3000, resampled within language, indices shared across paired conditions).
 
+Records contain model outputs and metadata only — no haystack text. Contexts are regenerable with the official ONERULER generator at seed 42.
+
 ---
 
 ## Notes and gotchas
@@ -243,11 +251,17 @@ Cells are fully crossed and the same 100 items are reused across conditions with
 }
 ```
 
-Built on [ONERULER](https://github.com/mungg/OneRuler) (Kim et al., COLM 2025) and [kvpress](https://github.com/NVIDIA/kvpress) (NVIDIA). Policies as published: StreamingLLM (Xiao et al., 2023), SnapKV (Li et al., 2024), KNorm (Devoto et al., 2024).
+## Acknowledgements
+
+Built on [ONERULER](https://github.com/mungg/OneRuler) (Kim, Russell, Karpinska, Iyyer — COLM 2025, [arXiv:2503.01996](https://arxiv.org/abs/2503.01996)), whose generator produces every context used here and whose official scorers this repo ports as its reference scoring. Eviction policies come from [kvpress](https://github.com/NVIDIA/kvpress) (NVIDIA): StreamingLLM (Xiao et al., 2023), SnapKV (Li et al., 2024), KNorm (Devoto et al., 2024).
+
+Sections 5.1 and 5.2 of the paper document defects in the ONERULER generator and absent-needle scorer at the settings used here. They are reported as findings about a benchmark this work depends on and benefits from, and the checks are cheap to rerun on other seeds and splits.
 
 ## License
 
-TODO — add a `LICENSE` file. (MIT or Apache-2.0 for the code; generated ONERULER data inherits that project's terms.)
+MIT — see [LICENSE](LICENSE).
+
+Third-party components keep their own terms; see [NOTICE](NOTICE) for the full list. In short: ONERULER is MIT and portions of its evaluation code are ported into `modal_kv_audit_v4.py`; kvpress is Apache-2.0 and is a pinned pip dependency, not vendored; model weights are downloaded at run time under their own licenses and are not redistributed here. `results/` holds model outputs only — no haystack text is redistributed.
 
 ## Contact
 

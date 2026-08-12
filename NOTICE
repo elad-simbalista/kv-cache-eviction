@@ -1,0 +1,92 @@
+kv-cache-eviction
+Copyright (c) 2026 Elad Simbalista
+Licensed under the MIT License. See LICENSE for the full text.
+
+This project builds on the third-party work listed below. Each component
+remains under its own license and copyright; nothing here alters those terms.
+
+
+================================================================================
+ONERULER — MIT License
+https://github.com/mungg/OneRuler
+
+Yekyung Kim, Jenna Russell, Marzena Karpinska, Mohit Iyyer.
+"One ruler to measure them all: Benchmarking multilingual long-context
+language models." COLM 2025. arXiv:2503.01996
+
+How it is used here:
+
+  * `modal_kv_audit_v4.py --stage prepare-data` clones the ONERULER
+    repository at run time and invokes its official generator to produce the
+    niah_single and niah_none contexts. No ONERULER source or data is
+    redistributed in this repository.
+
+  * Portions of `modal_kv_audit_v4.py` are ported from ONERULER's evaluation
+    code and per-language prompt data:
+
+        compare_numbers()   official present-needle scorer
+        compare_none()      official absent-needle scorer
+        NONE_DICT           per-language "none" words
+
+    These are ported to match the official scoring behavior and are used as
+    the reference scorer. The strict and lenient variants defined alongside
+    them (compare_none_strict, compare_numbers_lenient) are our own additions
+    and are reported separately.
+
+For the full MIT text and the copyright line, see the LICENSE file in the
+ONERULER repository.
+
+ONERULER is itself derived from RULER (NVIDIA, Apache License 2.0),
+https://github.com/NVIDIA/RULER
+
+
+================================================================================
+kvpress — Apache License 2.0
+https://github.com/NVIDIA/kvpress
+SPDX-FileCopyrightText: Copyright (c) NVIDIA CORPORATION & AFFILIATES.
+All rights reserved.
+
+Installed as a pinned pip dependency (0.5.4). Provides the KNorm, SnapKV and
+StreamingLLM implementations used in the sweep. Not vendored and not modified.
+
+
+================================================================================
+Model weights — downloaded at run time from the Hugging Face Hub,
+not redistributed here
+
+  meta-llama/Llama-3.1-8B-Instruct    Llama 3.1 Community License
+  Qwen/Qwen2.5-7B-Instruct-1M         see the model card
+
+Each is governed by the license published on its model card. Anyone rerunning
+the sweep must accept those terms themselves.
+
+
+================================================================================
+FLORES+ (openlanguagedata/flores_plus)
+https://huggingface.co/datasets/openlanguagedata/flores_plus
+
+Loaded at run time by the `fertility` stage to measure per-language tokenizer
+fertility. Not redistributed. See the dataset card for terms.
+
+
+================================================================================
+Data in this repository
+
+`results/` contains model outputs only: predictions, gold values, and per-item
+metadata produced by running the models above over ONERULER-generated
+contexts. It contains no haystack text. The contexts are regenerable with the
+official ONERULER generator at its released defaults for these tasks
+(book haystacks, 7-digit numeric values, seed 42, 32768 tokens).
+
+The ONERULER haystacks are built from per-language books distributed with that
+project; none of that text is redistributed here.
+
+
+================================================================================
+Python dependencies
+
+torch, transformers, datasets, kvpress, accelerate, pandas, numpy, pyarrow,
+matplotlib, modal, sentencepiece, protobuf, hf_transfer, stanza, nltk,
+wonderwords, tenacity, tiktoken, tqdm, pyyaml — each under its own license.
+Pinned versions are in the image specification at the top of
+`modal_kv_audit_v4.py`.
