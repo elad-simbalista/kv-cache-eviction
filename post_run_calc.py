@@ -215,6 +215,28 @@ def is_near_copy(v, pool, max_d=NEAR_MAX_LEV, min_share=VALUE_MIN_DIGITS):
     return False
 
 
+def near_copy_kind(v, pool, max_d=NEAR_MAX_LEV, min_share=VALUE_MIN_DIGITS):
+    """As is_near_copy, but reports WHICH clause fired.
+
+    v1.1: the paper quotes "262 of those are truncations -- the model emits
+    the first six digits of the 7-digit needle and stops".  That number is
+    not recoverable from a boolean near-copy flag, so the taxonomy has to
+    carry the match type.  Returns one of
+    "prefix" | "suffix" | "levenshtein" | None, preferring the truncation
+    reading when both clauses fire (a 6-digit prefix of a 7-digit value is
+    also at Levenshtein distance 1)."""
+    best = None
+    for p in pool:
+        s_, t_ = (v, p) if len(v) <= len(p) else (p, v)
+        if len(s_) >= min_share and t_.startswith(s_):
+            return "prefix"
+        if len(s_) >= min_share and t_.endswith(s_):
+            best = best or "suffix"
+        if lev(v, p, max_d) <= max_d:
+            best = best or "levenshtein"
+    return best
+
+
 def wilson(k, n, z=1.96):
     """Wilson score interval -- correct at the small denominators this
     analysis has (some cells have n=13 answered trials)."""
@@ -540,7 +562,7 @@ def text_stats_for_file(path, max_samples=24):
 ITEM_KEYS = ["model", "arm", "task", "lang", "press", "kept", "sample_id"]
 
 
-def load_raw(v4_dir, dedup=True):
+def load_raw(v4_dir, dedup=True, expect_n=None):
     v4 = Path(v4_dir)
     pq = v4 / "results.parquet"
     if pq.exists():
@@ -561,8 +583,19 @@ def load_raw(v4_dir, dedup=True):
                 frames.append(pd.DataFrame(rs))
         df = pd.concat(frames, ignore_index=True)
         src = f"{len(files)} raw jsonl files"
+    n_raw = len(df)
+    n_toy = 0
     if "toy" in df.columns:
+        n_toy = int(df["toy"].astype(bool).sum())
         df = df[~df["toy"].astype(bool)]
+        if n_toy:
+            # v1.1: report this explicitly.  The parquet ships 29,442 rows of
+            # which 42 are toy smoke-test rows -- NOT re-runs.  They reuse
+            # real sample_ids, so this filter MUST precede the dedup below;
+            # any dedup that runs first (including a timestamp-based one) can
+            # substitute smoke-test outputs for real data.
+            print(f"  toy filter: dropped {n_toy} smoke-test rows "
+                  f"({n_raw} -> {len(df)})")
     if dedup:
         # GUARD, not a fix: on the current results.parquet this drops
         # NOTHING (all 294 real cells are exactly n=100).  It exists because
@@ -584,6 +617,11 @@ def load_raw(v4_dir, dedup=True):
     print(f"  loaded {len(df):,} rows from {src}  "
           f"({df.groupby(['model', 'arm', 'task']).ngroups} facets, "
           f"{df.config_hash.nunique()} cells)")
+    if expect_n is not None and len(df) != expect_n:
+        raise SystemExit(
+            f"FATAL: expected {expect_n:,} real rows after the toy filter and "
+            f"dedup, got {len(df):,}.  Do not proceed -- the corpus is not the "
+            f"one the paper reports.  (--expect-n 0 disables this check.)")
     return df
 
 
@@ -794,18 +832,55 @@ def stage_scorers(df, sc, out):
           + ("  <-- investigate" if mismatch else "  (exact match)"))
     rows = []
     for keys, g in d.groupby(CELL_KEYS):
+        is_none = "niah_none" in str(dict(zip(CELL_KEYS, keys))["task"])
         rows.append(dict(zip(CELL_KEYS, keys), n=len(g),
                          acc_official=round(g.correct.mean(), 4),
                          acc_recomputed=round(g["official"].mean(), 4),
                          acc_robust=round(g["robust"].mean(), 4),
                          delta_robust=round(g.correct.mean()
-                                            - g["robust"].mean(), 4)))
+                                            - g["robust"].mean(), 4),
+                         # v1.1: name WHICH robustness scorer produced the
+                         # delta.  Scorers.robust() dispatches to two
+                         # different rules by task -- strict_none on
+                         # niah_none (official AND no >=6-digit value: the
+                         # none-word substring defect of paper section 5.2)
+                         # and lenient_single on niah_single (number match
+                         # WITHOUT the none-word veto: a different question
+                         # entirely).  v1 summed the two into one count.
+                         robust_scorer=("strict_none" if is_none
+                                        else "lenient_single"),
+                         delta_strict_none=(round(g.correct.mean()
+                                                  - g["robust"].mean(), 4)
+                                            if is_none else float("nan")),
+                         delta_lenient_single=(float("nan") if is_none
+                                               else round(g.correct.mean()
+                                                          - g["robust"].mean(),
+                                                          4))))
     s = pd.DataFrame(rows).sort_values("delta_robust",
                                        key=lambda c: -c.abs())
     s.to_csv(out / "scorers.csv", index=False)
-    big = s[s.delta_robust.abs() >= 0.05]
-    print(f"  scorers.csv: {len(big)} cells with |delta| >= 0.05 "
-          f"(largest {s.delta_robust.abs().max():.3f})")
+
+    # ---- v1.1: the section 5.2 statistic, with the right denominator ------
+    # The none-word substring defect can only fire on absent-needle cells.
+    # v1 reported "23 of 294 cells" -- 294 counts 98 qa-absent + 98 qa-present
+    # + 98 aware-present, and 11 of the 23 were present cells moved by the
+    # OTHER scorer.  Report the two populations separately, always.
+    strict = s[s.robust_scorer == "strict_none"]
+    lenient = s[s.robust_scorer == "lenient_single"]
+    for tag, sub, col in (("strict_none  (niah_none cells)", strict,
+                           "delta_strict_none"),
+                          ("lenient_single (niah_single cells)", lenient,
+                           "delta_lenient_single")):
+        if not len(sub):
+            continue
+        b5 = sub[sub[col].abs() >= 0.05]
+        b10 = sub[sub[col].abs() >= 0.10]
+        by_model = b5.groupby("model").size().to_dict()
+        print(f"  {tag}: {len(b5)}/{len(sub)} cells shift >= 0.05 "
+              f"({len(b10)} >= 0.10); by model {by_model}; "
+              f"largest {sub[col].abs().max():.3f}")
+    strict.to_csv(out / "scorers_strict_none.csv", index=False)
+    lenient.to_csv(out / "scorers_lenient_single.csv", index=False)
     return s, d
 
 
@@ -971,25 +1046,63 @@ def stage_value_origin(df, out, numerals=None, item_numerals=None,
         else:
             other = {canon_num(x) for x in numerals.get(r.lang, set())
                      if len(str(x)) >= VALUE_MIN_DIGITS} - gold - distr
-        labs = []
+        labs, kinds = [], []
         for v in dict.fromkeys(vals):
             lab = _classify_candidate(v, gold, distr, other)
             labs.append(lab)
+            # v1.1: which near-copy clause fired, so truncations are countable
+            if lab.endswith("NEAR_COPY"):
+                pool = (gold if lab.startswith("TARGET") else
+                        distr if lab.startswith("DISTRACTOR") else other)
+                kind = near_copy_kind(v, pool) or "levenshtein"
+            elif lab.endswith("EXACT"):
+                kind = "exact"
+            else:
+                kind = "none"
+            kinds.append((lab, kind))
             cand_rows.append(dict(model=r.model, arm=r.arm, task=r.task,
                                   lang=r.lang, press=r.press, kept=r.kept,
-                                  sample_id=r.sample_id, value=v, origin=lab))
+                                  sample_id=r.sample_id, value=v, origin=lab,
+                                  match_type=kind))
         # trial label = the most grounded of its candidates
         trial = min(labs, key=ORIGIN_ORDER.index)
-        trial_rows.append(dict(model=r.model, arm=r.arm, task=r.task,
-                               lang=r.lang, press=r.press, kept=r.kept,
-                               sample_id=r.sample_id, origin=trial,
-                               n_candidates=len(labs)))
+        # ---- v1.1: the SECOND metric -------------------------------------
+        # `origin` above is MOST-GROUNDED-WINS: a trial that emits the true
+        # value AND an invented one is filed as TARGET_EXACT.  That is the
+        # right label for a composition table, but it is NOT what the
+        # sentence "contains a value appearing nowhere in the input" means.
+        # The claim needs an existential over the trial's candidates, so we
+        # record it separately.  Never report one metric with the other's
+        # wording.
+        labset = set(labs)
+        trial_rows.append(dict(
+            model=r.model, arm=r.arm, task=r.task, lang=r.lang,
+            press=r.press, kept=r.kept, sample_id=r.sample_id,
+            origin=trial, n_candidates=len(labs),
+            contains_any_exact=bool(labset & set(ORIGIN_ORDER[:3])),
+            contains_any_near=bool(labset & set(ORIGIN_ORDER[3:6])),
+            contains_any_novel=("ENTIRELY_NOVEL" in labset),
+            # target-specific flags: these drive the present-trial outcome
+            # composition (Figure 2), where the categories are defined
+            # relative to the TRUE value, not to any input value.
+            contains_target_exact=("TARGET_EXACT" in labset),
+            contains_target_near=("TARGET_NEAR_COPY" in labset),
+            target_near_is_truncation=any(
+                l == "TARGET_NEAR_COPY" and k in ("prefix", "suffix")
+                for l, k in kinds),
+            target_near_is_prefix=any(
+                l == "TARGET_NEAR_COPY" and k == "prefix" for l, k in kinds),
+            official_correct=int(getattr(r, "correct", 0))))
     if not trial_rows:
         print("  value_origin: no answered trials found")
         return None, None, None
     tr = pd.DataFrame(trial_rows)
     cn = pd.DataFrame(cand_rows)
     cn.to_csv(out / "value_origin_cands.csv", index=False)
+    # v1.1: persist the per-trial rows (one line per answered trial, with the
+    # contains_any_* indicators).  stage_figure2 consumes this, and it is the
+    # artifact a reviewer needs to recheck either metric.
+    tr.to_csv(out / "value_origin_trials_items.csv", index=False)
 
     def _summarize(g):
         n = len(g)
@@ -999,6 +1112,11 @@ def stage_value_origin(df, out, numerals=None, item_numerals=None,
         d_ex = int((g.origin == "DISTRACTOR_EXACT").sum())
         p, lo, hi = wilson(novel, n)
         pn, nlo, nhi = wilson(near, n)
+        # v1.1: the existential metric, reported alongside, never instead
+        any_nov = int(g.contains_any_novel.sum())
+        any_near = int(g.contains_any_near.sum())
+        any_ex = int(g.contains_any_exact.sum())
+        ap_, alo, ahi = wilson(any_nov, n)
         return pd.Series(dict(
             n_answered=n,
             n_exact_copy=exact, n_near_copy=near, n_novel=novel,
@@ -1007,7 +1125,15 @@ def stage_value_origin(df, out, numerals=None, item_numerals=None,
             near_rate=round(pn, 4), near_ci_low=round(nlo, 4),
             near_ci_high=round(nhi, 4),
             novel_rate=round(p, 4), novel_ci_low=round(lo, 4),
-            novel_ci_high=round(hi, 4)))
+            novel_ci_high=round(hi, 4),
+            n_target_near_truncation=int(g.target_near_is_truncation.sum())
+            if "target_near_is_truncation" in g else 0,
+            n_target_near_prefix=int(g.target_near_is_prefix.sum())
+            if "target_near_is_prefix" in g else 0,
+            n_any_exact=any_ex, n_any_near=any_near, n_any_novel=any_nov,
+            any_novel_rate=round(ap_, 4),
+            any_novel_ci_low=round(alo, 4),
+            any_novel_ci_high=round(ahi, 4)))
 
     keys = ["model", "arm", "task", "press", "kept"]
     summ = tr.groupby(keys, observed=True).apply(
@@ -1051,6 +1177,170 @@ def stage_value_origin(df, out, numerals=None, item_numerals=None,
         print(f"    near-copy rule chance false-positive rate: "
               f"{ch_rows[-1]['chance_grounded_rate']:.4%}")
     return summ, bylang, (pd.DataFrame(ch_rows) if ch_rows else None)
+
+
+def stage_figure2(df, tr, out):
+    """Present-trial outcome composition, with the categories spelled out.
+
+    Figure 2 of v1 stacks four bands: correct / wrong-but-near-copy-of-the-
+    true-value / wrong-and-not-a-near-copy / abstention.  Those do not
+    reconstruct from the records, because a fifth population exists and the
+    caption never says where it goes: trials that DO contain the true value
+    but are scored incorrect by the official scorer (formatting, or the
+    none-word veto).  There are 5 such trials in Llama KNorm-25% and 23 in
+    Llama SnapKV-25%.  We emit all five bands; the caption must state which
+    band absorbs `answered_contains_target_not_credited`."""
+    keys = ["model", "arm", "task", "press", "kept"]
+    tr_idx = tr.set_index(["model", "arm", "task", "lang", "press", "kept",
+                           "sample_id"])
+    rows = []
+    for k, g in df[df.task == "niah_single"].groupby(keys, observed=True):
+        n = len(g)
+        idx = pd.MultiIndex.from_arrays(
+            [g.model, g.arm, g.task, g.lang, g.press, g.kept, g.sample_id])
+        sub = tr_idx.reindex(idx)
+        answered = sub.origin.notna()
+        correct = g.correct.to_numpy().astype(bool)
+        tgt_ex = sub.contains_target_exact.fillna(False).to_numpy().astype(bool)
+        tgt_nr = sub.contains_target_near.fillna(False).to_numpy().astype(bool)
+        ans = answered.to_numpy()
+        band_correct = int(correct.sum())
+        band_uncredited = int((ans & ~correct & tgt_ex).sum())
+        band_near = int((ans & ~correct & ~tgt_ex & tgt_nr).sum())
+        band_other = int((ans & ~correct & ~tgt_ex & ~tgt_nr).sum())
+        band_abstain = int((~ans).sum())
+        rows.append(dict(zip(keys, k), n_trials=n,
+                         correct=band_correct,
+                         answered_contains_target_not_credited=band_uncredited,
+                         wrong_near_copy_of_target=band_near,
+                         wrong_not_near_copy=band_other,
+                         abstention=band_abstain,
+                         frac_correct=round(band_correct / n, 4),
+                         frac_uncredited=round(band_uncredited / n, 4),
+                         frac_near=round(band_near / n, 4),
+                         frac_other=round(band_other / n, 4),
+                         frac_abstain=round(band_abstain / n, 4),
+                         bands_sum=band_correct + band_uncredited + band_near
+                         + band_other + band_abstain))
+    f2 = pd.DataFrame(rows)
+    bad = f2[f2.bands_sum != f2.n_trials]
+    if len(bad):
+        print(f"  WARNING: {len(bad)} cells whose bands do not sum to n")
+    f2.to_csv(out / "figure2_composition.csv", index=False)
+    print(f"  figure2_composition.csv: {len(f2)} present-trial cells "
+          f"(5 bands, incl. the uncredited-but-contains-target band)")
+    return f2
+
+
+# v1 printed claims, transcribed from the manuscript, for the diff report.
+# (paper_location, description, printed_value)
+V1_PRINTED = [
+    ("Abstract / sec 4.2", "Llama KNorm-25% absent: answers containing a "
+     "value appearing nowhere in the input", "1.4% [0.6, 3.3]  (n=5/348)"),
+    ("Abstract / sec 4.2", "Llama KNorm-25% absent: near-copies of a "
+     "distractor", "176/348 (51%)"),
+    ("Sec 4.2", "Llama KNorm-25% present: answers lacking the true value "
+     "that are near-copies of it", "272 of 282"),
+    ("Sec 4.2", "...of which truncations", "262"),
+    ("Sec 4.2", "entirely novel values, every Llama condition",
+     "<= 4% of answered trials"),
+    ("Sec 4.2", "Qwen KNorm-25% present novel", "26% [18, 36]"),
+    ("Sec 4.2", "Qwen SnapKV-25% present novel", "28% [23, 33]"),
+    ("Sec 5.2", "cells shifting >= 0.05 under strict scoring",
+     "23 of 294 (19 involve Llama)"),
+    ("Table 2", "Llama Streaming-50% absent exact/near/novel", "355 / 0 / 10"),
+    ("Table 2", "Qwen SnapKV-25% absent exact/near/novel", "37 / 3 / 4"),
+    ("Fig 2", "Llama KNorm-25% present bands "
+     "(correct / near / not-near / abstain)", "0.21 / 0.40 / <0.05 / 0.38"),
+    ("Fig 2", "Llama SnapKV-25% present bands",
+     "0.35 / 0.06 / - / 0.57"),
+]
+
+
+def stage_v11_claims(out, vo, scor, f2):
+    """The v1.1 numeric diff: every paper-facing number this release changes,
+    printed old -> new, so the manuscript edit is a checklist."""
+    L = ["# v1.1 numeric diff\n",
+         "Every number below is recomputed from the per-item records by "
+         "`post_run_calc.py`. The `v1 printed` column is transcribed from "
+         "the manuscript. Edit the paper from this table; do not hand-copy "
+         "from anywhere else.\n"]
+    A = L.append
+
+    def cell(task, model, press, kept):
+        if vo is None:
+            return None
+        m = vo[(vo.arm == "qa") & (vo.task == task) & (vo.model == model)
+               & (vo.press == press) & (vo.kept == kept)]
+        return m.iloc[0] if len(m) else None
+
+    A("\n## 1. The two value-origin metrics\n")
+    A("`most-grounded` = v1's mutually exclusive trial label (precedence "
+      "exact > near > novel). `any-novel` = the trial emitted at least one "
+      "value matching nothing in the input. **Only `any-novel` supports the "
+      "phrase \"appears nowhere in the input\".**\n")
+    if vo is not None and len(vo):
+        cols = ["model", "task", "press", "kept", "n_answered",
+                "n_exact_copy", "n_near_copy", "n_novel", "novel_rate",
+                "n_any_novel", "any_novel_rate", "any_novel_ci_low",
+                "any_novel_ci_high"]
+        q = vo[vo.arm == "qa"]
+        A(_md(q[[c for c in cols if c in q.columns]]))
+        c = cell("niah_none", "llama31-8b", "knorm", 0.25)
+        if c is not None:
+            A(f"\n**Abstract sentence.** Llama KNorm-25%, answered absent "
+              f"trials: most-grounded-novel {int(c.n_novel)}/"
+              f"{int(c.n_answered)} = {c.novel_rate:.1%}; "
+              f"**any-novel {int(c.n_any_novel)}/{int(c.n_answered)} = "
+              f"{c.any_novel_rate:.1%} "
+              f"[{c.any_novel_ci_low:.1%}, {c.any_novel_ci_high:.1%}]**. "
+              f"v1 printed the first number with the second number's "
+              f"wording.\n")
+        lla = q[(q.model == "llama31-8b")]
+        if len(lla):
+            A(f"\n**\"<= 4% in every Llama condition\".** Under most-grounded "
+              f"the max is {lla.novel_rate.max():.1%}; under any-novel it is "
+              f"{lla.any_novel_rate.max():.1%}. Scope the sentence to the "
+              f"taxonomy or replace the number.\n")
+
+    A("\n## 2. Strict scoring, by scorer and task\n")
+    if scor is not None and "robust_scorer" in scor.columns:
+        for tag, col in (("strict_none", "delta_strict_none"),
+                         ("lenient_single", "delta_lenient_single")):
+            sub = scor[scor.robust_scorer == tag]
+            if not len(sub):
+                continue
+            b5 = sub[sub[col].abs() >= 0.05]
+            b10 = sub[sub[col].abs() >= 0.10]
+            bym = ", ".join(f"{k}: {v}" for k, v in
+                            sorted(b5.groupby("model").size().items()))
+            A(f"- **{tag}** — {len(b5)} of {len(sub)} cells shift >= 0.05 "
+              f"({len(b10)} >= 0.10). By model: {bym or 'none'}.\n")
+        A("\nSection 5.2 must quote the `strict_none` row only. The "
+          "`lenient_single` row answers a different question and was summed "
+          "into v1's count of 23.\n")
+
+    A("\n## 3. Present-trial outcome composition (Figure 2)\n")
+    if f2 is not None and len(f2):
+        sel = f2[(f2.arm == "qa") & (f2.kept.isin([0.25, 1.0]))]
+        A(_md(sel[["model", "press", "kept", "n_trials", "correct",
+                   "answered_contains_target_not_credited",
+                   "wrong_near_copy_of_target", "wrong_not_near_copy",
+                   "abstention"]]))
+        A("\n`answered_contains_target_not_credited` is the band v1's caption "
+          "does not name: the output contains the true value but the official "
+          "scorer rejects it. Decide where it belongs and say so in the "
+          "caption.\n")
+
+    A("\n## 4. v1 printed claims to re-check\n")
+    A("| paper location | claim | v1 printed |")
+    A("|---|---|---|")
+    for loc, desc, val in V1_PRINTED:
+        A(f"| {loc} | {desc} | {val} |")
+    A("\nCompare each against sections 1-3 above before editing.\n")
+
+    (out / "v11_numeric_diff.md").write_text("\n".join(L), encoding="utf-8")
+    print(f"  v11_numeric_diff.md written")
 
 
 def stage_protocol(df, out, B=N_BOOT, seed=SEED):
@@ -1830,11 +2120,14 @@ def main():
     ap.add_argument("--out", default="./post_run")
     ap.add_argument("--boot", type=int, default=N_BOOT)
     ap.add_argument("--selftest", action="store_true")
-    ap.add_argument("--only", default="all", choices=["all", "v2"],
+    ap.add_argument("--only", default="all", choices=["all", "v2", "v11"],
                     help="'v2' runs ONLY the two new stages "
                          "(value origin + protocol contrast)")
     ap.add_argument("--no-dedup", action="store_true",
                     help="keep duplicate (cell, sample_id) rows")
+    ap.add_argument("--expect-n", type=int, default=29400,
+                    help="abort unless this many real rows survive the toy "
+                         "filter and dedup (0 disables)")
     ap.add_argument("--ctx-len", type=int, default=32768,
                     help="context length of the generated data (--data-dir)")
     a = ap.parse_args()
@@ -1845,9 +2138,39 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     print(f"post_run_calc -> {out.resolve()}\n")
     print("[load]")
-    df = load_raw(a.v4_dir, dedup=not a.no_dedup)
+    df = load_raw(a.v4_dir, dedup=not a.no_dedup,
+                  expect_n=(a.expect_n or None))
     sc = Scorers(a.v4_script)
     print(f"  scorers: {sc.source}")
+
+    if a.only == "v11":
+        # ---- v1.1: the CPU-only release ----------------------------------
+        # A2 value-origin (adds contains_any_novel), A3 scorer split,
+        # Figure 2 composition, and the numeric diff.  No GPU, no new data.
+        numerals = {}
+        if a.remote_text:
+            p = Path(a.remote_text)
+            nf = (sorted(p.rglob("haystack_numerals.json")) if p.is_dir()
+                  else list(p.parent.glob("haystack_numerals.json")))
+            if nf:
+                numerals = {k: set(v) for k, v in json.loads(
+                    nf[0].read_text(encoding="utf-8")).items()}
+                print(f"  read {nf[0]} ({len(numerals)} languages)")
+        print("\n[v11-a] value origin: most-grounded AND contains-any-novel")
+        item_nums = load_item_numerals(a.data_dir, a.ctx_len)
+        if not item_nums:
+            print("    NOTE: no --data-dir; using the language-level "
+                  "approximation.  The Table 2 caption must say so.")
+        vo, vol_, vch = stage_value_origin(df, out, numerals, item_nums)
+        tr = pd.read_csv(out / "value_origin_trials_items.csv")
+        print("\n[v11-b] scorer sensitivity, split by robustness scorer")
+        scor, _ = stage_scorers(df, sc, out)
+        print("\n[v11-c] present-trial outcome composition (Figure 2)")
+        f2 = stage_figure2(df, tr, out)
+        print("\n[v11-d] numeric diff for the manuscript edit")
+        stage_v11_claims(out, vo, scor, f2)
+        print(f"\nDONE (v1.1 stages). Read {out / 'v11_numeric_diff.md'}.")
+        return
 
     if a.only == "v2":
         numerals = {}
