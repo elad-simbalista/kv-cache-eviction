@@ -1,6 +1,14 @@
-# kv-cache-eviction
+# Similar Accuracy, Opposite Failure
 
-Code and per-item records for **"Similar Accuracy, Opposite Failure: A Failure-Mode Decomposition of KV-Cache Eviction in Multilingual Long-Context Retrieval."**
+### A Failure-Mode Decomposition of KV-Cache Eviction in Multilingual Long-Context Retrieval
+
+**[📄 Read the paper (PDF)](paper.pdf)** · [Quickstart](#quickstart) · [29,400 per-item records](results/)
+
+Elad Simbalista · preprint, 2026 · <eladsimba@gmail.com>
+
+---
+
+Code and per-item records for the paper above.
 
 Two scripts:
 
@@ -8,8 +16,6 @@ Two scripts:
 - **`post_run_calc.py`** — all analysis. Recomputes every number in the paper from those records. CPU only, ~2 minutes, no Modal account needed.
 
 The records are committed, so **you can reproduce every table and figure without touching a GPU.** Start at [Quickstart](#quickstart).
-
-📄 Paper: preprint coming soon (link TBD).
 
 ---
 
